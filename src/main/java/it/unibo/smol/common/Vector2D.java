@@ -1,40 +1,48 @@
 package it.unibo.smol.common;
-//preso spunto da game-as-a-lab
+//preso spunto da game-as-a-lab.
 
 /**
- * Class that saves the velocity of the Objects
+ * Class that saves the velocity of the Objects.
  */
 public class Vector2D {
-    
+
     /**
-     * inizialize the coordinates
+     * inizialize the coordinates.
      */
-    private double x;
-    private double y;
-    
+    private final double x;
+    private final double y;
+
     /**
-     * Constructor
+     * Constructor.
      * @param x
      * @param y
      */
-    public Vector2D(double x, double y) {
-        this.x=x;
-        this.y=y;
+    public Vector2D(final double x, final double y) {
+        this.x = x;
+        this.y = y;
     }
 
     /**
-     * sum up the velocity
+     * sum up the velocity.
      * @param v
-     * @return
+     * @return the new velocity
      */
-    public Vector2D sum(Vector2D v) {
-        return new Vector2D(x+v.x, y+v.x);
+    public Vector2D sum(final Vector2D v) {
+        return new Vector2D(x + v.x, y + v.x);
     }
 
+    /**
+     * gets x.
+     * @return x
+     */
     public double getX() {
         return this.x;
     }
 
+    /**
+     * gets y.
+     * @return y
+     */
     public double getY() {
         return this.y;
     }
