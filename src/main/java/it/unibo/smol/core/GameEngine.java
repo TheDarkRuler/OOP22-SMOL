@@ -22,7 +22,8 @@ public class GameEngine {
         if (this.isRunning()) {
             throw new IllegalStateException("GameLoop is already running");
         }
-        gameLoop.notify();
+        gameLoop.notifyAll();
+        state = true;
     }
 
     /**
@@ -35,7 +36,10 @@ public class GameEngine {
         if (!this.isRunning()) {
             throw new IllegalStateException("GameLoop is alredy stopped");
         }
-        gameLoop.wait();
+        do {
+            gameLoop.wait();
+            state = false;
+        } while (state);
     }
 
     /**

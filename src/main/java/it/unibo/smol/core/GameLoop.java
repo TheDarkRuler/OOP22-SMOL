@@ -6,19 +6,24 @@ package it.unibo.smol.core;
 public class GameLoop extends Thread {
 
     private static final int FPS = 100;
-    private static final double DRAW_INTERVAL = 1000000000 / FPS;
+    private static final double DRAW_INTERVAL = 1_000_000_000 / FPS;
 
-    private long lastTime = 0;
-    private long currentTime = 0;
-    private double delta = 0;
+    private long lastTime;
+    private double delta;
+    private boolean end;
 
+    // ALL commented code is for FPS checking
     /*long timer =0;
     int drawCount=0;*/
 
+    /**
+     * Override of the {@code run()} method in the {@link Thread} class.
+     * This implements the main body of the GameLoop
+     */
     @Override
     public void run() {
          lastTime = System.nanoTime();
-        while (this != null) {
+        while (!end) {
             if (syncFrame()) {
                 //drawCount++;
                 processInput();
@@ -37,7 +42,7 @@ public class GameLoop extends Thread {
      * update.
      */
     public void update() {
-
+        end = false;
     }
 
     /**
@@ -60,7 +65,7 @@ public class GameLoop extends Thread {
      * Otherwise {@code False}.
      */
     private boolean syncFrame() {
-        currentTime = System.nanoTime();
+        final long currentTime = System.nanoTime();
         delta += (currentTime - lastTime) / DRAW_INTERVAL;
         //timer += (currentTime - lastTime);
         lastTime = currentTime;
