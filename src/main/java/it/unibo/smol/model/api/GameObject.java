@@ -55,4 +55,9 @@ public interface GameObject {
      * Update the input component of the object.
      */
     void updateInput();
+
+    /**
+     * Update the health component of the object.
+     */
+    void updateHealth();
 }
