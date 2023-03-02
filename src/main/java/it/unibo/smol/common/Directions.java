@@ -1,4 +1,7 @@
 package it.unibo.smol.common;
+
+import java.awt.event.KeyEvent;
+
 /**
  * Potential directions in which the entity could move.
  */
@@ -8,25 +11,30 @@ public enum Directions {
     /**
      * The player moves up.
      */
-    UP,
+    UP(KeyEvent.VK_W),
 
     /**
      * The player moves down.
      */
-    DOWN,
+    DOWN(KeyEvent.VK_S),
 
     /**
      * The player moves left.
      */
-    LEFT,
+    LEFT(KeyEvent.VK_A),
 
     /**
      * The player moves right.
      */
-    RIGHT,
+    RIGHT(KeyEvent.VK_D);
+
+    private final int direction;
 
     /**
-     * The player satys still.
+     * Constructor for the enum.
+     * @param direction
      */
-    STAY
+    Directions(final int direction) {
+        this.direction = direction;
+    }
 }
