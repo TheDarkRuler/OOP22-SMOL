@@ -37,4 +37,12 @@ public enum Directions {
     Directions(final int direction) {
         this.direction = direction;
     }
+
+    /**
+     * gets the KeyValue of the directions.
+     * @return the the KeyValue of the directions
+     */
+    public int getDirection() {
+        return this.direction;
+    }
 }

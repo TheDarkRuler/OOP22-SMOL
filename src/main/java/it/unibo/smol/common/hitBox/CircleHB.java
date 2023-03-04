@@ -74,14 +74,11 @@ public class CircleHB implements HitBox {
      */
     private double distanceX(final RectangleHB rectangle) {
 
-        if (this.center.getX() < rectangle.getEdge().getX()) {
-            return rectangle.getEdge().getX();
-
-        } else if (this.center.getX() > rectangle.getEdge().getX() + rectangle.getWidth()) {
-            return rectangle.getEdge().getX() + rectangle.getWidth();
-
+        if (this.center.getX() < (rectangle.getEdge().getX() + rectangle.getWidth())) {
+            return this.center.getX() - Math.max(this.center.getX(), rectangle.getEdge().getX());
         } else {
-            return this.getCenter().getX();
+            return this.center.getX() - Math.max(rectangle.getEdge().getX() + rectangle.getWidth(),
+                rectangle.getEdge().getX());
         }
     }
 
@@ -92,12 +89,11 @@ public class CircleHB implements HitBox {
      */
     private double distanceY(final RectangleHB rectangle) {
 
-        if (this.center.getY() < rectangle.getEdge().getY()) {
-            return rectangle.getEdge().getY();
-        } else if (this.center.getY() > rectangle.getEdge().getY() + rectangle.getHeight()) {
-            return rectangle.getEdge().getY() + rectangle.getHeight();
+        if (this.center.getY() < (rectangle.getEdge().getY() + rectangle.getHeight())) {
+            return this.center.getY() - Math.max(this.center.getY(), rectangle.getEdge().getY());
         } else {
-            return this.getCenter().getY();
+            return this.center.getY() - Math.max(rectangle.getEdge().getY() + rectangle.getHeight(),
+                rectangle.getEdge().getY());
         }
     }
 }
