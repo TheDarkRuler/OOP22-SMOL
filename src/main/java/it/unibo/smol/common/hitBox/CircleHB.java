@@ -77,10 +77,9 @@ public class CircleHB implements HitBox {
         if (this.center.getX() < (rectangle.getEdge().getX() + rectangle.getWidth())) {
             return this.center.getX() - Math.max(this.center.getX(), rectangle.getEdge().getX());
         } else {
-            return this.center.getX() - Math.max((rectangle.getEdge().getX() + rectangle.getWidth()),
+            return this.center.getX() - Math.max(rectangle.getEdge().getX() + rectangle.getWidth(),
                 rectangle.getEdge().getX());
         }
-
     }
 
     /**
@@ -93,9 +92,8 @@ public class CircleHB implements HitBox {
         if (this.center.getY() < (rectangle.getEdge().getY() + rectangle.getHeight())) {
             return this.center.getY() - Math.max(this.center.getY(), rectangle.getEdge().getY());
         } else {
-            return this.center.getY() - Math.max((rectangle.getEdge().getY() + rectangle.getHeight()),
+            return this.center.getY() - Math.max(rectangle.getEdge().getY() + rectangle.getHeight(),
                 rectangle.getEdge().getY());
         }
-
     }
 }
