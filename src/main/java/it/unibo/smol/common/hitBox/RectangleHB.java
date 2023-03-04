@@ -46,7 +46,7 @@ public class RectangleHB implements HitBox {
      * @return the edge
      */
     public Point2D getEdge() {
-        return new Point2D(this.center.getX() - this.width / 2, this.center.getY() - this.height / 2);
+        return new Point2D(this.center.getX() - (this.width / 2), this.center.getY() - (this.height / 2));
     }
 
     /**
