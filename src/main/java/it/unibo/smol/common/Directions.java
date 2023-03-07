@@ -1,6 +1,6 @@
 package it.unibo.smol.common;
 
-import java.awt.event.KeyEvent;
+import javafx.scene.input.KeyCode;
 
 /**
  * Potential directions in which the entity could move.
@@ -11,30 +11,30 @@ public enum Directions {
     /**
      * The player moves up.
      */
-    UP(KeyEvent.VK_W),
+    UP(KeyCode.W),
 
     /**
      * The player moves down.
      */
-    DOWN(KeyEvent.VK_S),
+    DOWN(KeyCode.S),
 
     /**
      * The player moves left.
      */
-    LEFT(KeyEvent.VK_A),
+    LEFT(KeyCode.A),
 
     /**
      * The player moves right.
      */
-    RIGHT(KeyEvent.VK_D);
+    RIGHT(KeyCode.D);
 
-    private final int direction;
+    private final KeyCode direction;
 
     /**
      * Constructor for the enum.
      * @param direction
      */
-    Directions(final int direction) {
+    Directions(final KeyCode direction) {
         this.direction = direction;
     }
 
@@ -42,7 +42,7 @@ public enum Directions {
      * gets the KeyValue of the directions.
      * @return the the KeyValue of the directions
      */
-    public int getDirection() {
+    public KeyCode getDirection() {
         return this.direction;
     }
 }
