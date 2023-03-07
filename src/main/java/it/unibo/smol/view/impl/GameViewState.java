@@ -2,25 +2,55 @@ package it.unibo.smol.view.impl;
 
 import java.io.IOException;
 
+import it.unibo.smol.input.KeyInputs;
+import it.unibo.smol.input.MouseInputs;
 import it.unibo.smol.view.api.WindowState;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.text.Font;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
  * Implementation of the main state, it renders the game.
  */
 public class GameViewState implements WindowState {
+
+    private static final double SCREEN_WIDTH = Screen.getPrimary().getBounds().getWidth();
+    private static final double SCREEN_HEIGHT = Screen.getPrimary().getBounds().getHeight();
+    private static final int PROPORTIONS = 2;
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void render(final Stage stage) throws IOException {
-        final Label message = new Label("Hello, JavaFX!"); 
-        message.setFont(new Font(100));
-        stage.setScene(new Scene(message));
-        stage.setTitle("Hello");
+        try {
+            this.start(stage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void start(final Stage stage) {
+
+        final EventHandler<KeyEvent> keyEventHandler = new KeyInputs();
+        final EventHandler<MouseEvent> mouseEventHandler = new MouseInputs();
+        final var root = new Pane();
+        final var scene = new Scene(root, SCREEN_WIDTH / PROPORTIONS,
+            SCREEN_HEIGHT / PROPORTIONS, Color.BLACK);
+
+        scene.setOnKeyPressed(keyEventHandler);
+        scene.setOnKeyReleased(keyEventHandler);
+        scene.setOnMouseMoved(mouseEventHandler);
+        scene.setOnMousePressed(mouseEventHandler);
+        scene.setOnMouseReleased(mouseEventHandler);
+        scene.setOnMouseDragged(mouseEventHandler);
+        scene.setOnMouseEntered(mouseEventHandler);
+        stage.setScene(scene);
         stage.show();
     }
 }
