@@ -22,16 +22,16 @@ public class KeyInputs implements EventHandler<KeyEvent> {
         if (event.getEventType().equals(KeyEvent.KEY_PRESSED) && !MouseInputs.isAnimationGoing()) {
             switch (event.getCode()) {
                 case W:
-                    movement = Directions.UP;
+                    KeyInputs.movement = Directions.UP;
                     break;
                 case A:
-                    movement = Directions.LEFT;
+                    KeyInputs.movement = Directions.LEFT;
                     break;
                 case S:
-                    movement = Directions.DOWN;
+                    KeyInputs.movement = Directions.DOWN;
                     break;
                 case D:
-                    movement = Directions.RIGHT;
+                    KeyInputs.movement = Directions.RIGHT;
                     break;
                 default:
                     break;
@@ -42,11 +42,11 @@ public class KeyInputs implements EventHandler<KeyEvent> {
             switch (event.getCode()) {
                 case W:
                 case S:
-                    movement = Directions.STAY_Y;
+                    KeyInputs.movement = Directions.STAY_Y;
                     break;
                 case A:
                 case D:
-                    movement = Directions.STAY_X;
+                    KeyInputs.movement = Directions.STAY_X;
                     break; 
                 default:
                     break;
