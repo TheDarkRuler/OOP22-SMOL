@@ -13,7 +13,7 @@ public class SmolApplication extends Application {
      */
     @Override
     public void start(final Stage primaryStage) {
-        new WindowImpl(primaryStage).launch();
+        new WindowImpl().launch(primaryStage);
     }
 
 }

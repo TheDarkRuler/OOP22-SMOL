@@ -12,25 +12,20 @@ import javafx.stage.Stage;
  */
 public class WindowImpl implements Window {
     private final WindowState currentState;
-    private final Stage stage;
     private static Logger logger = Logger.getLogger("myLog");
     /**
      * Constructor for WindowImpl to render the first scene {@link MenuState}.
-     * @param primaryStage JavaFX stage passed were we will render the behavior.
      */
-    public WindowImpl(final Stage primaryStage) {
-        this.stage = new Stage(primaryStage.getStyle());
+    public WindowImpl() {
         this.currentState = new MenuState();
     }
 
     /**
      * Constructor for WindowImpl to render any scene.
      * 
-     * @param primaryStage JavaFX stage passed were we will render the behavior.
      * @param state scene that we will render (state to remind the application of the state pattern)
      */
-    public WindowImpl(final Stage primaryStage, final WindowState state) {
-        this.stage = new Stage(primaryStage.getStyle());
+    public WindowImpl(final WindowState state) {
         this.currentState = state;
     }
 
@@ -38,9 +33,9 @@ public class WindowImpl implements Window {
      * {@inheritDoc}
      */
     @Override
-    public void launch() {
+    public void launch(final Stage primaryStage) {
         try {
-            currentState.render(stage);
+            currentState.render(primaryStage);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "WindowImplError::", e);
         }

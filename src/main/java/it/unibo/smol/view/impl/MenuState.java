@@ -43,7 +43,7 @@ public class MenuState implements WindowState {
         final Scene scene = new Scene(root, 1280, 720);
         final Button startGame = (Button) scene.lookup("#start");
         startGame.setOnMouseClicked(e -> {
-            new WindowImpl(primaryStage, new GameViewState()).launch();
+            new WindowImpl(new GameViewState()).launch(primaryStage);
         });
         primaryStage.setTitle("Start Menu :)");
         primaryStage.setScene(scene);
