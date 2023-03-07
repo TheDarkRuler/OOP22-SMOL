@@ -1,7 +1,5 @@
 package it.unibo.smol.common;
 
-import javafx.scene.input.KeyCode;
-
 /**
  * Potential directions in which the entity could move.
  */
@@ -11,38 +9,30 @@ public enum Directions {
     /**
      * The player moves up.
      */
-    UP(KeyCode.W),
+    UP,
 
     /**
      * The player moves down.
      */
-    DOWN(KeyCode.S),
+    DOWN,
 
     /**
      * The player moves left.
      */
-    LEFT(KeyCode.A),
+    LEFT,
 
     /**
      * The player moves right.
      */
-    RIGHT(KeyCode.D);
-
-    private final KeyCode direction;
+    RIGHT,
 
     /**
-     * Constructor for the enum.
-     * @param direction
+     * The player stayes still in the axis x.
      */
-    Directions(final KeyCode direction) {
-        this.direction = direction;
-    }
+    STAY_X,
 
     /**
-     * gets the KeyValue of the directions.
-     * @return the the KeyValue of the directions
+     * The player stayes still in the axis y.
      */
-    public KeyCode getDirection() {
-        return this.direction;
-    }
+    STAY_Y;
 }
