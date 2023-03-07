@@ -1,6 +1,8 @@
 package it.unibo.smol.view.impl;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.unibo.smol.view.api.WindowState;
 import it.unibo.smol.view.api.Window;
@@ -11,13 +13,13 @@ import javafx.stage.Stage;
 public class WindowImpl implements Window {
     private final WindowState currentState;
     private final Stage stage;
-
+    private static Logger logger = Logger.getLogger("myLog");
     /**
      * Constructor for WindowImpl to render the first scene {@link MenuState}.
      * @param primaryStage JavaFX stage passed were we will render the behavior.
      */
     public WindowImpl(final Stage primaryStage) {
-        this.stage = primaryStage;
+        this.stage = new Stage(primaryStage.getStyle());
         this.currentState = new MenuState();
     }
 
@@ -28,7 +30,7 @@ public class WindowImpl implements Window {
      * @param state scene that we will render (state to remind the application of the state pattern)
      */
     public WindowImpl(final Stage primaryStage, final WindowState state) {
-        this.stage = primaryStage;
+        this.stage = new Stage(primaryStage.getStyle());
         this.currentState = state;
     }
 
@@ -40,7 +42,7 @@ public class WindowImpl implements Window {
         try {
             currentState.render(stage);
         } catch (IOException e) {
-            System.out.println("Something went wrong " + e.toString());
+            logger.log(Level.SEVERE, "WindowImplError::", e);
         }
     } 
 }

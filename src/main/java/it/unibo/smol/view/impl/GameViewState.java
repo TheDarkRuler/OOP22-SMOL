@@ -1,6 +1,8 @@
 package it.unibo.smol.view.impl;
 
 import java.io.IOException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import it.unibo.smol.input.KeyInputs;
 import it.unibo.smol.input.MouseInputs;
@@ -18,7 +20,7 @@ import javafx.stage.Stage;
  * Implementation of the main state, it renders the game.
  */
 public class GameViewState implements WindowState {
-
+    private static Logger logger = Logger.getLogger("myLog");
     private static final double SCREEN_WIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double SCREEN_HEIGHT = Screen.getPrimary().getBounds().getHeight();
     private static final int PROPORTIONS = 2;
@@ -30,13 +32,12 @@ public class GameViewState implements WindowState {
     public void render(final Stage stage) throws IOException {
         try {
             this.start(stage);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "GameViewError::", e);
         }
     }
 
-    private void start(final Stage stage) {
-
+    private void start(final Stage stage) throws IOException {
         final EventHandler<KeyEvent> keyEventHandler = new KeyInputs();
         final EventHandler<MouseEvent> mouseEventHandler = new MouseInputs();
         final var root = new Pane();

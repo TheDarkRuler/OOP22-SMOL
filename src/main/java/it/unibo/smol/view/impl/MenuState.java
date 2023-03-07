@@ -2,6 +2,8 @@ package it.unibo.smol.view.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.net.URL;
 
 import it.unibo.smol.view.api.WindowState;
@@ -16,6 +18,7 @@ import javafx.stage.Stage;
  * Implementation of the menu state, it renders the menu.
  */
 public class MenuState implements WindowState {
+    private static Logger logger = Logger.getLogger("myLog");
     /**
      * {@inheritDoc}
      */
@@ -23,18 +26,19 @@ public class MenuState implements WindowState {
     public void render(final Stage primaryStage) throws IOException {
         try {
             this.start(primaryStage);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "MenuStateError::", e);
         }
     }
     /**
      * This method generate the menu from a file FXML.
      * 
      * @param primaryStage stage were menu will be generated.
+     * @throws IOException
      * @throws Exception Exception thrown if there is any problem, in particular usefull to detect problems with the fxml file.
      */
-    private void start(final Stage primaryStage) throws Exception {
-        URL url = new File("src/main/resources/layouts/Menu.fxml").toURI().toURL();
+    private void start(final Stage primaryStage) throws IOException {
+        final URL url = new File("src/main/resources/layouts/Menu.fxml").toURI().toURL();
         final Parent root = FXMLLoader.load(url);
         final Scene scene = new Scene(root, 1280, 720);
         final Button startGame = (Button) scene.lookup("#start");
