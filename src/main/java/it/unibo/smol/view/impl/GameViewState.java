@@ -22,7 +22,8 @@ public class GameViewState implements WindowState {
     private static final double SCREEN_HEIGHT = Screen.getPrimary().getBounds().getHeight();
     private static final int PROPORTIONS = 2;
 
-    private EventHandler EventHandler;
+    private EventHandler<KeyEvent> keyEventHandler;
+    private EventHandler<Event> mouseEventHandler;
     /**
      * {@inheritDoc}
      */
@@ -42,15 +43,29 @@ public class GameViewState implements WindowState {
 
     private void start(final Stage stage) {
 
-        this.keyEventHandler = new Key;
+        this.keyEventHandler = new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent event) {
+            }
+            
+        };
+        this.mouseEventHandler = new EventHandler<Event>() {
+
+            @Override
+            public void handle(Event event) {
+            }
+            
+        };
         final var root = new Pane();
         final var scene = new Scene(root, SCREEN_WIDTH / PROPORTIONS,
             SCREEN_HEIGHT / PROPORTIONS, Color.BLACK);
-        scene.setOnKeyPressed(EventHandler.handle());
-        scene.setOnKeyReleased(EventHandler);
-        scene.setOnMousePressed(EventHandler);
-        scene.setOnMouseMoved(EventHandler);
-        scene.setOnMouseReleased(EventHandler);
+
+        scene.setOnKeyPressed(keyEventHandler);
+        scene.setOnKeyReleased(keyEventHandler);
+        scene.setOnMouseMoved(mouseEventHandler);
+        scene.setOnMousePressed(mouseEventHandler);
+        scene.setOnMouseReleased(mouseEventHandler);
         stage.setScene(scene);
         stage.show();
     }
