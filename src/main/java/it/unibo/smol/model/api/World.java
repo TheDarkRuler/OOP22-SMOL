@@ -19,6 +19,11 @@ public interface World {
     List<Entity> getLifePlants();
 
     /**
+     * @return all entities 
+     */
+    List<Entity> getEntities();
+
+    /**
      * @return a world without that mole
      */
     World removeMole();
@@ -27,6 +32,11 @@ public interface World {
      * @return a world without that plant
      */
     World removeLifePlants();
+
+    /**
+     * @return gmae map
+     */
+    GameMap getMap();
 
     /**
      * @return updated Word
