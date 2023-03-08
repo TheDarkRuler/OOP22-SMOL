@@ -28,12 +28,11 @@ public abstract class PhysicsComponent {
     /**
      * Update the position of the entity and check the collision with the other entity present
      */
-    public boolean checkCollision() {
+    public void checkCollision() {
         this.entity.getWorld().getMoles().stream()
             .map(x -> x.getPhysicsComp())
-            .filter(x -> hitBox.isColliding(x.getHitBox()));
-        //TODO
-        return false;
+            .filter(x -> hitBox.isColliding(x.getHitBox()))
+            .forEach(x -> x.collisonEvent(this.getEntity()));
     }
 
     /**
@@ -134,5 +133,5 @@ public abstract class PhysicsComponent {
         }
     }
 
-    public abstract void collisonEvent(Entity entityCollided);
+    protected abstract void collisonEvent(Entity entityCollided);
 }
