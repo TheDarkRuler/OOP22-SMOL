@@ -53,10 +53,14 @@ public interface Entity {
 
     /**
      * Getter for the HealthComponent.
-     * @return The healthcomponent
+     * @return The healthComponent
      */
     Optional<HealthComponent> getHealthComp();
 
+    /**
+     * Getter for the PhysicsComponent.
+     * @return The PhysicsComponent
+     */
     PhysicsComponent getPhysicsComp();
 
     /**

@@ -109,6 +109,14 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
+    public PhysicsComponent getPhysicsComp() {
+        return physicsComp;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void update() {
         //TODO add the input part
         physicsComp.receiveDirection(null);
@@ -119,9 +127,6 @@ public class EntityImpl implements Entity{
         graphicComp.update();
     }
 
-    @Override
-    public PhysicsComponent getPhysicsComp() {
-        return physicsComp;
-    }
+    
     
 }

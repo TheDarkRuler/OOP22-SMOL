@@ -2,7 +2,6 @@ package it.unibo.smol.model.api;
 
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
-import it.unibo.smol.model.Type;
 
 /**
  * Abstract class rappresenting the template of the Physics component for the {@link Entity}.
@@ -29,10 +28,14 @@ public abstract class PhysicsComponent {
      * Update the position of the entity and check the collision with the other entity present
      */
     public void checkCollision() {
-        this.entity.getWorld().getMoles().stream()
+        this.entity.getWorld().getEntities().stream()
             .map(x -> x.getPhysicsComp())
             .filter(x -> hitBox.isColliding(x.getHitBox()))
-            .forEach(x -> x.collisonEvent(this.getEntity()));
+            .forEach(x -> {
+                    if ( this.isRigid() && x.isRigid() ) {
+                        this.collisonEvent(x.getEntity());
+                    }
+                });
     }
 
     /**

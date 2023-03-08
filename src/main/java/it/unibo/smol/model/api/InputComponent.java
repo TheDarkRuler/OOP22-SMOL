@@ -1,5 +1,5 @@
 package it.unibo.smol.model.api;
 
-public interface InputComponent {
-    //TODO
+public abstract class InputComponent {
+    //TODO had to implement InputController first
 }
