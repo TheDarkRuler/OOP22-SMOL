@@ -1,0 +1,122 @@
+package it.unibo.smol.model.impl;
+
+import java.util.Optional;
+
+import it.unibo.smol.model.Type;
+import it.unibo.smol.model.api.Entity;
+import it.unibo.smol.model.api.GraphicComponent;
+import it.unibo.smol.model.api.InputComponent;
+import it.unibo.smol.model.api.PhysicsComponent;
+import it.unibo.smol.model.api.World;
+
+/**
+ * The implementation that rappresent everything present in the game world.
+ */
+public class EntityImpl implements Entity{
+    
+    private Type type;
+    private InputComponent inputComp;
+    private Optional<HealthComponent> healthComp;
+    private GraphicComponent graphicComp;
+    private PhysicsComponent physicsComp;
+    private int currentX;
+    private int currentY;
+    private World world;
+
+    /**
+     * Constructor for creating entities utilizing the entity factory.
+     * @param type
+     * @param inputComp
+     * @param healthComp
+     * @param graphicComp
+     * @param physicsComp
+     */
+    public EntityImpl(final Type type, final InputComponent inputComp, final Optional<HealthComponent> healthComp,
+           final GraphicComponent graphicComp, final PhysicsComponent physicsComp) {
+        this.type = type;
+        this.inputComp = inputComp;
+        this.healthComp = healthComp;
+        this.graphicComp = graphicComp;
+        this.physicsComp = physicsComp;
+        physicsComp.setEntity(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCurrentX() {
+        return currentX;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCurrentY() {
+        return currentY;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public World getWorld() {
+        return world;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void moveX(int x) {
+        currentX += x;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void moveY(int y) {
+        currentY += y;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setWorld(World w) {
+        this.world = w;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Type getType() {
+        return type;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<HealthComponent> getHealthComp() {
+        return healthComp;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update() {
+        //TODO add the input part
+        physicsComp.receiveDirection(null);
+        this.moveX(physicsComp.getX());
+        this.moveY(physicsComp.getY());
+        physicsComp.checkCollision();
+        //TODO add the health management system
+        graphicComp.update();
+    }
+    
+}
