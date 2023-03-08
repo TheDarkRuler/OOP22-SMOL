@@ -25,6 +25,13 @@ public interface HitBox {
     void setCenter(Point2D newCenter);
 
     /**
+     * generic isColliding to make the others work.
+     * @param hitBox
+     * @return if the shapes are colliding
+     */
+    boolean isColliding(HitBox hitBox);
+
+    /**
      * checks if the shapes are colliding.
      * @param circle
      * @return if the two shapes are colliding

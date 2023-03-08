@@ -87,4 +87,14 @@ public class RectangleHB implements HitBox {
             && Math.abs(this.center.getY() - rectangle.getCenter().getY()) <= (this.height + rectangle.getHeight()) / 2;
     }
 
+    /**
+     * generla Colliding check.
+     * @param hitBox
+     * @return if the given shape collides with this shape
+     */
+    @Override
+    public boolean isColliding(final HitBox hitBox) {
+        return hitBox.isColliding(this);
+    }
+
 }
