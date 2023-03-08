@@ -3,7 +3,8 @@ package it.unibo.smol.model.impl;
 import it.unibo.smol.model.api.Entity;
 
 /**
- * Abstract class rappresenting the template of the health component for the {@link Entity}.
+ * The class rappresenting the health component of the {@link Entity}.
+ * This component is Optional and could be not present if the {@link Entity} doesn't need it
  */
 public class HealthComponent {
 

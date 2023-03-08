@@ -33,22 +33,22 @@ public abstract class PhysicsComponent {
     }
 
     /**
-     * 
-     * @param direction
+     * Translate the command received from the {@link InputComponent} to actual movement.
+     * @param direction : The command received
      */
     public void receiveDirection(final Directions direction) {
         switch (direction) {
             case UP:
-                y += movementSpeed;
+                y = movementSpeed;
                 break;
             case DOWN:
-                y -= movementSpeed;
+                y = -movementSpeed;
                 break;
             case LEFT:
-                x -= movementSpeed; 
+                x = -movementSpeed; 
                 break;
             case RIGHT:
-                x += movementSpeed;
+                x = movementSpeed;
                 break;
             case STAY_X:
                 x = 0;
@@ -61,30 +61,59 @@ public abstract class PhysicsComponent {
         }
     }
 
+    /**
+     * Getter for the entity field.
+     * @return The entity that use this component
+     */
     public Entity getEntity() {
         return entity;
     }
 
+    /**
+     * Set the entity associated with this component.
+     * @param entity : The entity that use this component
+     */
     public void setEntity(Entity entity) {
         this.entity = entity;
     }
 
+    /**
+     * Set a new movement speed of the component.
+     * @param movementSpeed the new Movement soeed to be set
+     */
     public void setMovementSpeed(int movementSpeed) {
         this.movementSpeed = movementSpeed;
     }
 
+    /**
+     * Get the X coordinate.
+     * @return the amount of movement in the X coordinate
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Get the Y coordinate.
+     * @return the amount of movement in the Y coordinate
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Return the state of the {@link #hitBox}.
+     * @return {@code True} if the hitbox can collide with other entities;
+     * {@code False} otherwise
+     */
     public boolean isRigid() {
         return isRigid;
     }
 
+    /**
+     * Change to the other state of the {@link #hitBox};
+     * Check for more infos ( {@link #isRigid()} ).
+     */
     public void setRigid() {
         if (isRigid) {
             isRigid = false;
