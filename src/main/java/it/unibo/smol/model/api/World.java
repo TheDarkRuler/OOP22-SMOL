@@ -7,7 +7,7 @@ public interface World {
     /**
      * @return list of moles
      */
-    Optional<List<Entity>> getMoles();
+    List<Entity> getMoles();
 
     /**
      * @return player
