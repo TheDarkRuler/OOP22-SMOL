@@ -13,13 +13,13 @@ public interface Entity {
      * Get the current x coordinate of the object.
      * @return {@code x}
      */
-    int getCurrentX();
+    double getCurrentX();
 
     /**
      * Get the current x coordinate of the object.
      * @return {@code y}
      */
-    int getCurrentY();
+    double getCurrentY();
 
     /**
      * Getter for the world. 
@@ -31,13 +31,13 @@ public interface Entity {
      * Add the new x coordinate to the current X.
      * @param x : the new x to add in the object
      */
-    void moveX(int x);
+    void moveX(double x);
 
     /**
      * Add the new y coordinate to the current Y.
      * @param y : the new y to add in the object
      */
-    void moveY(int y);
+    void moveY(double y);
 
     /**
      * Set the current world.
@@ -56,6 +56,8 @@ public interface Entity {
      * @return The healthcomponent
      */
     Optional<HealthComponent> getHealthComp();
+
+    PhysicsComponent getPhysicsComp();
 
     /**
      * Update all the component of the object.

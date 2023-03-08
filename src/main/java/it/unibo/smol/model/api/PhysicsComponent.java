@@ -2,13 +2,14 @@ package it.unibo.smol.model.api;
 
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
+import it.unibo.smol.model.Type;
 
 /**
  * Abstract class rappresenting the template of the Physics component for the {@link Entity}.
  */
 public abstract class PhysicsComponent {
-    private int movementSpeed;
-    private int x,y;
+    private double movementSpeed;
+    private double x,y;
     private HitBox hitBox;
     private boolean isRigid;
     private Entity entity;
@@ -18,7 +19,7 @@ public abstract class PhysicsComponent {
      * @param movementSpeed : the value that determine the speed of the entity
      * @param hitBox : the shape that rappresent the logic position of the entity
      */
-    public PhysicsComponent(final int movementSpeed, final HitBox hitBox) {
+    public PhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
         this.movementSpeed = movementSpeed;
         this.hitBox = hitBox;
         this.isRigid = true;
@@ -27,9 +28,12 @@ public abstract class PhysicsComponent {
     /**
      * Update the position of the entity and check the collision with the other entity present
      */
-    public void update() {
-        this.entity.getInputComp()//TODO
-        ;
+    public boolean checkCollision() {
+        this.entity.getWorld().getMoles().stream()
+            .map(x -> x.getPhysicsComp())
+            .filter(x -> hitBox.isColliding(x.getHitBox()));
+        //TODO
+        return false;
     }
 
     /**
@@ -81,7 +85,7 @@ public abstract class PhysicsComponent {
      * Set a new movement speed of the component.
      * @param movementSpeed the new Movement soeed to be set
      */
-    public void setMovementSpeed(int movementSpeed) {
+    public void setMovementSpeed(double movementSpeed) {
         this.movementSpeed = movementSpeed;
     }
 
@@ -89,7 +93,7 @@ public abstract class PhysicsComponent {
      * Get the X coordinate.
      * @return the amount of movement in the X coordinate
      */
-    public int getX() {
+    public double getX() {
         return x;
     }
 
@@ -97,8 +101,16 @@ public abstract class PhysicsComponent {
      * Get the Y coordinate.
      * @return the amount of movement in the Y coordinate
      */
-    public int getY() {
+    public double getY() {
         return y;
+    }
+
+    /**
+     * Get the hitbox shape
+     * @return the hitbox
+     */
+    public HitBox getHitBox() {
+        return hitBox;
     }
 
     /**
@@ -122,5 +134,5 @@ public abstract class PhysicsComponent {
         }
     }
 
-    protected abstract void collisonEvent(Entity entityCollided);
+    public abstract void collisonEvent(Entity entityCollided);
 }

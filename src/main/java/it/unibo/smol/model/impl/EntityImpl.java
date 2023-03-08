@@ -19,8 +19,8 @@ public class EntityImpl implements Entity{
     private Optional<HealthComponent> healthComp;
     private GraphicComponent graphicComp;
     private PhysicsComponent physicsComp;
-    private int currentX;
-    private int currentY;
+    private double currentX;
+    private double currentY;
     private World world;
 
     /**
@@ -45,7 +45,7 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
-    public int getCurrentX() {
+    public double getCurrentX() {
         return currentX;
     }
 
@@ -53,7 +53,7 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
-    public int getCurrentY() {
+    public double getCurrentY() {
         return currentY;
     }
 
@@ -69,7 +69,7 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
-    public void moveX(int x) {
+    public void moveX(final double x) {
         currentX += x;
     }
 
@@ -77,7 +77,7 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
-    public void moveY(int y) {
+    public void moveY(final double y) {
         currentY += y;
     }
 
@@ -117,6 +117,11 @@ public class EntityImpl implements Entity{
         physicsComp.checkCollision();
         //TODO add the health management system
         graphicComp.update();
+    }
+
+    @Override
+    public PhysicsComponent getPhysicsComp() {
+        return physicsComp;
     }
     
 }
