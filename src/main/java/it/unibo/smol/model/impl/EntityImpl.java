@@ -30,14 +30,18 @@ public class EntityImpl implements Entity{
      * @param healthComp
      * @param graphicComp
      * @param physicsComp
+     * @param currentX
+     * @param currentY
      */
     public EntityImpl(final Type type, final InputComponent inputComp, final Optional<HealthComponent> healthComp,
-           final GraphicComponent graphicComp, final PhysicsComponent physicsComp) {
+            final GraphicComponent graphicComp, final PhysicsComponent physicsComp, final double currentX, final double currentY) {
         this.type = type;
         this.inputComp = inputComp;
         this.healthComp = healthComp;
         this.graphicComp = graphicComp;
         this.physicsComp = physicsComp;
+        this.currentX = currentX;
+        this.currentY = currentY;
         physicsComp.setEntity(this);
     }
 
