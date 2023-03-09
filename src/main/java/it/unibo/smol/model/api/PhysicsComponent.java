@@ -136,5 +136,9 @@ public abstract class PhysicsComponent {
         }
     }
 
+    /**
+     * Resolve the effect of a collision that happened.
+     * @param entityCollided : The other entity that collided this one
+     */
     protected abstract void collisonEvent(Entity entityCollided);
 }
