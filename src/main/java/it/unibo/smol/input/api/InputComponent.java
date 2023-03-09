@@ -1,6 +1,8 @@
 package it.unibo.smol.input.api;
 
-public interface inputController {
+import it.unibo.smol.model.api.Entity;
+
+public interface InputComponent {
     /**
      * @return if the entity is moving Up
      */
@@ -17,4 +19,8 @@ public interface inputController {
      * @return if the entity is moving Right
      */
     boolean isMoveRight();
+    /**
+     * @param entity
+     */
+    void update(Entity entity);
 }

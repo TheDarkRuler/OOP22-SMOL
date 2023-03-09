@@ -5,9 +5,9 @@ import java.util.Optional;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.GraphicComponent;
-import it.unibo.smol.model.api.InputComponent;
 import it.unibo.smol.model.api.PhysicsComponent;
 import it.unibo.smol.model.api.World;
+import it.unibo.smol.input.api.InputComponent;
 
 /**
  * The implementation that rappresent everything present in the game world.

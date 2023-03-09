@@ -1,4 +1,4 @@
-package it.unibo.smol.input;
+package it.unibo.smol.input.impl;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
