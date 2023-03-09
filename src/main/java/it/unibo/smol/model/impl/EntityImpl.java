@@ -123,7 +123,7 @@ public class EntityImpl implements Entity{
     @Override
     public void update() {
         //TODO add the input part
-        physicsComp.receiveDirection(null);
+        physicsComp.receiveDirection(inputComp.getDirection());
         this.moveX(physicsComp.getX());
         this.moveY(physicsComp.getY());
         physicsComp.checkCollision();

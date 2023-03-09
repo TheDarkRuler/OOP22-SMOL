@@ -1,26 +1,11 @@
 package it.unibo.smol.input.api;
 
-import it.unibo.smol.model.api.Entity;
+import it.unibo.smol.common.Directions;
 
 public interface InputComponent {
-    /**
-     * @return if the entity is moving Up
-     */
-    boolean isMoveUp();
-    /**
-     * @return if the entity is moving Down
-     */
-    boolean isMoveDown();
-    /**
-     * @return if the entity is moving Left
-     */
-    boolean isMoveLeft();
-    /**
-     * @return if the entity is moving Right
-     */
-    boolean isMoveRight();
+    Directions getDirection();
     /**
      * @param entity
      */
-    void update(Entity entity);
+    InputComponent update();
 }
