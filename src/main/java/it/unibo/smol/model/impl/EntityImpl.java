@@ -12,9 +12,8 @@ import it.unibo.smol.input.api.InputComponent;
 /**
  * The implementation that rappresent everything present in the game world.
  */
-public class EntityImpl implements Entity{
-    
-    private Type type;
+public class EntityImpl implements Entity {
+    private final Type type;
     private InputComponent inputComp;
     private Optional<HealthComponent> healthComp;
     private GraphicComponent graphicComp;
@@ -33,8 +32,10 @@ public class EntityImpl implements Entity{
      * @param currentX
      * @param currentY
      */
-    public EntityImpl(final Type type, final InputComponent inputComp, final Optional<HealthComponent> healthComp,
-            final GraphicComponent graphicComp, final PhysicsComponent physicsComp, final double currentX, final double currentY) {
+    public EntityImpl(final Type type, final InputComponent inputComp,
+            final Optional<HealthComponent> healthComp,
+            final GraphicComponent graphicComp, final PhysicsComponent physicsComp,
+            final double currentX, final double currentY) {
         this.type = type;
         this.inputComp = inputComp;
         this.healthComp = healthComp;
@@ -89,7 +90,7 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
-    public void setWorld(World w) {
+    public void setWorld(final World w) {
         this.world = w;
     }
 
@@ -129,8 +130,5 @@ public class EntityImpl implements Entity{
         physicsComp.checkCollision();
         //TODO add the health management system
         graphicComp.update();
-    }
-
-    
-    
+    } 
 }

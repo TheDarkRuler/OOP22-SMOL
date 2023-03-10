@@ -8,8 +8,8 @@ import it.unibo.smol.common.HitBox;
  */
 public abstract class PhysicsComponent {
     private double movementSpeed;
-    private double x,y;
-    private HitBox hitBox;
+    private double x, y;
+    private final HitBox hitBox;
     private boolean isRigid;
     private Entity entity;
 
@@ -25,14 +25,14 @@ public abstract class PhysicsComponent {
     }
 
     /**
-     * Update the position of the entity and check the collision with the other entity present
+     * Update the position of the entity and check the collision with the other entity present.
      */
     public void checkCollision() {
         this.entity.getWorld().getEntities().stream()
             .map(x -> x.getPhysicsComp())
             .filter(x -> hitBox.isColliding(x.getHitBox()))
             .forEach(x -> {
-                    if ( this.isRigid() && x.isRigid() ) {
+                    if (this.isRigid() && x.isRigid()) {
                         this.collisonEvent(x.getEntity());
                     }
                 });
@@ -79,7 +79,7 @@ public abstract class PhysicsComponent {
      * Set the entity associated with this component.
      * @param entity : The entity that use this component
      */
-    public void setEntity(Entity entity) {
+    public void setEntity(final Entity entity) {
         this.entity = entity;
     }
 
@@ -87,7 +87,7 @@ public abstract class PhysicsComponent {
      * Set a new movement speed of the component.
      * @param movementSpeed the new Movement soeed to be set
      */
-    public void setMovementSpeed(double movementSpeed) {
+    public void setMovementSpeed(final double movementSpeed) {
         this.movementSpeed = movementSpeed;
     }
 
@@ -108,7 +108,7 @@ public abstract class PhysicsComponent {
     }
 
     /**
-     * Get the hitbox shape
+     * Get the hitbox shape.
      * @return the hitbox
      */
     public HitBox getHitBox() {

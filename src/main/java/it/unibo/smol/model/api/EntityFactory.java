@@ -1,6 +1,6 @@
 package it.unibo.smol.model.api;
 /**
- *  A factory to create different instance of Entities
+ *  A factory to create different instance of Entities.
  */
 public interface EntityFactory {
 
@@ -51,5 +51,4 @@ public interface EntityFactory {
      * @return a entities that rappresent the weapon utilize by the player
      */
     Entity createWeapon(double x, double y);
-    
 }
