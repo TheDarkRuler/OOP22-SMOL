@@ -34,7 +34,13 @@ public interface World {
     GameMap getMap();
 
     /**
+     * @return score 
+     */
+    int getScore();
+
+    /**
      * @return updated Word
      */
     World updateWorld();
+
 }

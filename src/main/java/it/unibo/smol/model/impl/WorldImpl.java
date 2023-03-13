@@ -11,8 +11,9 @@ import it.unibo.smol.model.Type;
 public class WorldImpl implements World {
     private List<Entity> entities;
     private GameMap map;
+    private int score;
     
-    public WorldImpl(final int basicMoles, final int elemtMoles, final int angryMoles, final int lifePlants) {
+    public WorldImpl(final int basicMoles, final int elemtMoles, final int angryMoles, final int lifePlants, final int score) {
         //TODO better dry if possible
 
         //moles
@@ -39,6 +40,8 @@ public class WorldImpl implements World {
 
         //gamemap
 
+        //score
+        this.score = score;
     }
     /**
      * {@inheritDoc}
@@ -94,6 +97,14 @@ public class WorldImpl implements World {
     @Override
     public World updateWorld() {
         return this;
+    }
+
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
+    public int getScore() {
+        return this.score;
     }
     
 }
