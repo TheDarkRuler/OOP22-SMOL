@@ -124,7 +124,7 @@ public class EntityImpl implements Entity {
     @Override
     public void update() {
         //TODO add the input part
-        physicsComp.receiveDirection(inputComp.getDirection());
+        physicsComp.receiveMovement(inputComp.getDirection());
         this.moveX(physicsComp.getX());
         this.moveY(physicsComp.getY());
         physicsComp.checkCollision();

@@ -1,17 +1,16 @@
 package it.unibo.smol.model.api;
 
-import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 
 /**
  * Abstract class rappresenting the template of the Physics component for the {@link Entity}.
  */
 public abstract class PhysicsComponent {
-    private double movementSpeed;
-    private double x, y;
-    private final HitBox hitBox;
-    private boolean isRigid;
-    private Entity entity;
+    protected double movementSpeed;
+    protected double x, y;
+    protected final HitBox hitBox;
+    protected boolean isRigid;
+    protected Entity entity;
 
     /**
      * Constructor for the Physics component.
@@ -40,32 +39,10 @@ public abstract class PhysicsComponent {
 
     /**
      * Translate the command received from the {@link InputComponent} to actual movement.
+     * @param <A>
      * @param direction : The command received
      */
-    public void receiveDirection(final Directions direction) {
-        switch (direction) {
-            case UP:
-                y = movementSpeed;
-                break;
-            case DOWN:
-                y = -movementSpeed;
-                break;
-            case LEFT:
-                x = -movementSpeed; 
-                break;
-            case RIGHT:
-                x = movementSpeed;
-                break;
-            case STAY_X:
-                x = 0;
-                break;
-            case STAY_Y:
-                y = 0;
-                break;
-            default:
-                break;
-        }
-    }
+    public abstract <A> void receiveMovement(final A move);
 
     /**
      * Getter for the entity field.
