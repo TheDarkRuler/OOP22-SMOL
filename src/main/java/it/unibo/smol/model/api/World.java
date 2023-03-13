@@ -24,14 +24,9 @@ public interface World {
     List<Entity> getEntities();
 
     /**
-     * @return a world without that mole
+     * removes any entity
      */
-    World removeMole();
-
-    /**
-     * @return a world without that plant
-     */
-    World removeLifePlants();
+    void remove(Entity thisEntity);
 
     /**
      * @return gmae map
