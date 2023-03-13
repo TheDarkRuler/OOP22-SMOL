@@ -6,10 +6,10 @@ import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
 
-public class PlayerPhysicsComponent extends PhysicsComponent {
+public class EnemyPhysicsComponent extends PhysicsComponent {
 
-    public PlayerPhysicsComponent(Double movementSpeed, HitBox hitBox) {
-        super(movementSpeed,hitBox);  
+    public EnemyPhysicsComponent(Double movementSpeed, HitBox hitBox) {
+        super(movementSpeed, hitBox);
     }
 
     @Override
@@ -48,9 +48,8 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 
     @Override
     protected void collisonEvent(Entity entityCollided) {
-        if (entityCollided.getType() == Type.ENEMY) {
-            x = -x;
-            y = -y;
+        if (entityCollided.getType() == Type.WEAPON) {
+            entity.getHealthComp().orElseThrow().setHealth(-1);
         }
     }
     

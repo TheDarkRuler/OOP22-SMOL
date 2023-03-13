@@ -123,12 +123,13 @@ public class EntityImpl implements Entity {
      */
     @Override
     public void update() {
-        //TODO add the input part
         physicsComp.receiveMovement(inputComp.getDirection());
         this.moveX(physicsComp.getX());
         this.moveY(physicsComp.getY());
         physicsComp.checkCollision();
-        //TODO add the health management system
+        if (healthComp.isPresent() && healthComp.get().isDead()) {
+            this.getWorld().removeLifePlants(); //TODO: has to be a general remove
+        }
         graphicComp.update();
     } 
 }

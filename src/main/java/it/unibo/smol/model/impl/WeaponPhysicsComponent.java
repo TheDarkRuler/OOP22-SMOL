@@ -1,7 +1,6 @@
 package it.unibo.smol.model.impl;
 
 import it.unibo.smol.common.HitBox;
-import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
 import javafx.geometry.Point2D;
@@ -12,6 +11,9 @@ public class WeaponPhysicsComponent extends PhysicsComponent{
         super(movementSpeed, hitBox);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public <A> void receiveMovement(A move) {
         Point2D move1;
@@ -27,9 +29,7 @@ public class WeaponPhysicsComponent extends PhysicsComponent{
 
     @Override
     protected void collisonEvent(Entity entityCollided) {
-        if (entityCollided.getType() == Type.ENEMY) {
-            entityCollided.getHealthComp().orElseThrow().setHealth(-1);
-        }
+        //This entity don't have any collisionEffect on himself 
     }
     
 }
