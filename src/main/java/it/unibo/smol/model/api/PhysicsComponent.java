@@ -6,11 +6,14 @@ import it.unibo.smol.common.HitBox;
  * Abstract class rappresenting the template of the Physics component for the {@link Entity}.
  */
 public abstract class PhysicsComponent {
-    protected double movementSpeed;
-    protected double x, y;
-    protected final HitBox hitBox;
-    protected boolean isRigid;
-    protected Entity entity;
+    /**
+     * The field rappresenting the movement speed.
+     */
+    private double movementSpeed;
+    private double x, y;
+    private final HitBox hitBox;
+    private boolean isRigid;
+    private Entity entity;
 
     /**
      * Constructor for the Physics component.
@@ -39,10 +42,10 @@ public abstract class PhysicsComponent {
 
     /**
      * Translate the command received from the {@link InputComponent} to actual movement.
-     * @param <A>
-     * @param direction : The command received
+     * @param <A> : The possible data type of the command
+     * @param move : The command received
      */
-    public abstract <A> void receiveMovement(final A move);
+    public abstract <A> void receiveMovement(A move);
 
     /**
      * Getter for the entity field.
@@ -118,4 +121,36 @@ public abstract class PhysicsComponent {
      * @param entityCollided : The other entity that collided this one
      */
     protected abstract void collisonEvent(Entity entityCollided);
+
+    /**
+     * Getter for the movementSpeed field.
+     * @return the movementSpeed
+     */
+    public double getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    /**
+     * Setter for the x field.
+     * @param x the actual moevement in the X coordinate
+     */
+    public void setX(final double x) {
+        this.x = x;
+    }
+
+    /**
+     * Setter for the y field.
+     * @param y the actual moevement in the Y coordinate
+     */
+    public void setY(final double y) {
+        this.y = y;
+    }
+
+    /**
+     * Setter for the rigidity of the hitbox.
+     * @param isRigid {@code True} if rigid; {@code False} otherwise
+     */
+    public void setRigid(final boolean isRigid) {
+        this.isRigid = isRigid;
+    }
 }

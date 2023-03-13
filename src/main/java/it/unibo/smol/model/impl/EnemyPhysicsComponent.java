@@ -6,14 +6,26 @@ import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
 
+/**
+ * The implementation of the {@link PhysicsComponent} rappresenting the Enemy behaviour.
+ */
 public class EnemyPhysicsComponent extends PhysicsComponent {
 
-    public EnemyPhysicsComponent(Double movementSpeed, HitBox hitBox) {
+    /**
+     * Constructor inherited by the super-class {@link PhysicsComponent}.
+     * @param movementSpeed : See the super-Constructor
+     * @param hitBox : See the super-Constructor
+     */
+    public EnemyPhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
         super(movementSpeed, hitBox);
     }
 
+    /**
+     * This method receive a {@link Directions} and translate it into actual movement.
+     * @param move : the direction given
+     */
     @Override
-    public <A> void receiveMovement(A move) {
+    public <A> void receiveMovement(final A move) {
         Directions move1;
 
         if (move instanceof Directions) {
@@ -24,33 +36,35 @@ public class EnemyPhysicsComponent extends PhysicsComponent {
 
         switch (move1) {
             case UP:
-                y = movementSpeed;
+                super.setY(super.getMovementSpeed());
                 break;
             case DOWN:
-                y = -movementSpeed;
+            super.setY(-super.getMovementSpeed());
                 break;
             case LEFT:
-                x = -movementSpeed; 
+            super.setX(-super.getMovementSpeed());
                 break;
             case RIGHT:
-                x = movementSpeed;
+            super.setY(super.getMovementSpeed());
                 break;
             case STAY_X:
-                x = 0;
+            super.setX(0);
                 break;
             case STAY_Y:
-                y = 0;
+            super.setY(0);
                 break;
             default:
                 break;
         }
     }
 
+    /**
+     * Whenever this entity collide with a Weapon {@link Type} entity, it takes 1 damage.
+     */
     @Override
-    protected void collisonEvent(Entity entityCollided) {
+    protected void collisonEvent(final Entity entityCollided) {
         if (entityCollided.getType() == Type.WEAPON) {
-            entity.getHealthComp().orElseThrow().setHealth(-1);
+            super.getEntity().getHealthComp().orElseThrow().setHealth(-1);
         }
     }
-    
 }

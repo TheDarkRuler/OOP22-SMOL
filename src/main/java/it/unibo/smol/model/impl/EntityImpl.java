@@ -128,7 +128,7 @@ public class EntityImpl implements Entity {
         this.moveY(physicsComp.getY());
         physicsComp.checkCollision();
         if (healthComp.isPresent() && healthComp.get().isDead()) {
-            this.getWorld().removeLifePlants(); //TODO: has to be a general remove
+            this.getWorld().removeLifePlants(); //TODO : has to be a general remove
         }
         graphicComp.update();
     } 

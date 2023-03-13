@@ -5,15 +5,26 @@ import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
-
+/**
+ * The implementation of the {@link PhysicsComponent} rappresenting the Player behaviour.
+ */
 public class PlayerPhysicsComponent extends PhysicsComponent {
 
-    public PlayerPhysicsComponent(Double movementSpeed, HitBox hitBox) {
-        super(movementSpeed,hitBox);  
+    /**
+     * Constructor inherited by the super-class {@link PhysicsComponent}.
+     * @param movementSpeed : See the super-Constructor
+     * @param hitBox : See the super-Constructor
+     */
+    public PlayerPhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
+        super(movementSpeed, hitBox);
     }
 
+    /**
+     * This method receive a {@link Directions} and translate it into actual movement.
+     * @param move : the direction given
+     */
     @Override
-    public <A> void receiveMovement(A move) {
+    public <A> void receiveMovement(final A move) {
         Directions move1;
 
         if (move instanceof Directions) {
@@ -24,34 +35,36 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 
         switch (move1) {
             case UP:
-                y = movementSpeed;
+                super.setY(super.getMovementSpeed());
                 break;
             case DOWN:
-                y = -movementSpeed;
+            super.setY(-super.getMovementSpeed());
                 break;
             case LEFT:
-                x = -movementSpeed; 
+            super.setX(-super.getMovementSpeed());
                 break;
             case RIGHT:
-                x = movementSpeed;
+            super.setY(super.getMovementSpeed());
                 break;
             case STAY_X:
-                x = 0;
+            super.setX(0);
                 break;
             case STAY_Y:
-                y = 0;
+            super.setY(0);
                 break;
             default:
                 break;
         }
     }
 
+    /**
+     * Whenever this entity collide with a Enemy {@link Type} entity, it takes knockBack.
+     */
     @Override
-    protected void collisonEvent(Entity entityCollided) {
+    protected void collisonEvent(final Entity entityCollided) {
         if (entityCollided.getType() == Type.ENEMY) {
-            x = -x;
-            y = -y;
+            super.setX(-getX());
+            super.setY(-getY());
         }
-    }
-    
+    } 
 }
