@@ -1,44 +1,60 @@
 package it.unibo.smol.model.impl;
 
-import java.util.List;
+import java.util.Optional;
 
-import it.unibo.smol.model.api.*;
-
+import it.unibo.smol.model.Type;
+import it.unibo.smol.model.api.Entity;
+import it.unibo.smol.model.api.EntityFactory;
+/**
+ * Implemention of the {@link EntityFactory} interface.
+ */
 public class EntityFactoryImpl implements EntityFactory {
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Entity> Moles() {
-        // TODO Moles
-        throw new UnsupportedOperationException("Unimplemented method 'Moles'");
+    public Entity createBasicMole(final double x, final double y) {
+        return new EntityImpl(Type.ENEMY, null, Optional.of(new HealthComponent(1)), null, null, x, y);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Entity Player() {
-        // TODO Player
-        throw new UnsupportedOperationException("Unimplemented method 'Player'");
+    public Entity createPlayer(final double x, final double y) {
+        return new EntityImpl(Type.PLAYER, null, Optional.empty(), null, null, x, y);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Entity> LifePlants() {
-        // TODO LifePlants
-        throw new UnsupportedOperationException("Unimplemented method 'LifePlants'");
+    public Entity createLifePlants(final double x, final double y) {
+        return new EntityImpl(Type.HEALTH, null, Optional.of(new HealthComponent(1000)), null, null, x, y);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Entity Weapon() {
-        // TODO Weapon
-        throw new UnsupportedOperationException("Unimplemented method 'Weapon'");
+    public Entity createWeapon(final double x, final double y) {
+        return new EntityImpl(Type.WEAPON, null, Optional.empty(), null, null, x, y);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Entity createElmetMole(final double x, final double y) {
+        return new EntityImpl(Type.ENEMY, null, Optional.of(new HealthComponent(2)), null, null, x, y);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Entity createAngryMole(final double x, final double y) {
+        return new EntityImpl(Type.ENEMY, null, Optional.of(new HealthComponent(1)), null, null, x, y);
+    }
 }

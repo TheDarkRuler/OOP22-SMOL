@@ -1,7 +1,7 @@
 package it.unibo.smol.model;
 
 /**
- * This enum define the possible type of entities present in the game
+ * This enum define the possible type of entities present in the game.
  */
 public enum Type {
     /**

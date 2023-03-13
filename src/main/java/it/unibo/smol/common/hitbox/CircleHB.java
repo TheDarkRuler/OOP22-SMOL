@@ -96,4 +96,14 @@ public class CircleHB implements HitBox {
                 rectangle.getEdge().getY());
         }
     }
+
+    /**
+     * generla Colliding check.
+     * @param hitBox
+     * @return if the given shape collides with this shape
+     */
+    @Override
+    public boolean isColliding(final HitBox hitBox) {
+        return hitBox.isColliding(this);
+    }
 }

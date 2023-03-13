@@ -5,22 +5,21 @@ import java.util.Optional;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.GraphicComponent;
-import it.unibo.smol.model.api.InputComponent;
 import it.unibo.smol.model.api.PhysicsComponent;
 import it.unibo.smol.model.api.World;
+import it.unibo.smol.input.api.InputComponent;
 
 /**
  * The implementation that rappresent everything present in the game world.
  */
-public class EntityImpl implements Entity{
-    
-    private Type type;
+public class EntityImpl implements Entity {
+    private final Type type;
     private InputComponent inputComp;
     private Optional<HealthComponent> healthComp;
     private GraphicComponent graphicComp;
     private PhysicsComponent physicsComp;
-    private int currentX;
-    private int currentY;
+    private double currentX;
+    private double currentY;
     private World world;
 
     /**
@@ -30,14 +29,20 @@ public class EntityImpl implements Entity{
      * @param healthComp
      * @param graphicComp
      * @param physicsComp
+     * @param currentX
+     * @param currentY
      */
-    public EntityImpl(final Type type, final InputComponent inputComp, final Optional<HealthComponent> healthComp,
-           final GraphicComponent graphicComp, final PhysicsComponent physicsComp) {
+    public EntityImpl(final Type type, final InputComponent inputComp,
+            final Optional<HealthComponent> healthComp,
+            final GraphicComponent graphicComp, final PhysicsComponent physicsComp,
+            final double currentX, final double currentY) {
         this.type = type;
         this.inputComp = inputComp;
         this.healthComp = healthComp;
         this.graphicComp = graphicComp;
         this.physicsComp = physicsComp;
+        this.currentX = currentX;
+        this.currentY = currentY;
         physicsComp.setEntity(this);
     }
 
@@ -45,7 +50,7 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
-    public int getCurrentX() {
+    public double getCurrentX() {
         return currentX;
     }
 
@@ -53,7 +58,7 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
-    public int getCurrentY() {
+    public double getCurrentY() {
         return currentY;
     }
 
@@ -69,7 +74,7 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
-    public void moveX(int x) {
+    public void moveX(final double x) {
         currentX += x;
     }
 
@@ -77,7 +82,7 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
-    public void moveY(int y) {
+    public void moveY(final double y) {
         currentY += y;
     }
 
@@ -85,7 +90,7 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
-    public void setWorld(World w) {
+    public void setWorld(final World w) {
         this.world = w;
     }
 
@@ -109,14 +114,21 @@ public class EntityImpl implements Entity{
      * {@inheritDoc}
      */
     @Override
+    public PhysicsComponent getPhysicsComp() {
+        return physicsComp;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void update() {
         //TODO add the input part
-        physicsComp.receiveDirection(null);
+        physicsComp.receiveDirection(inputComp.getDirection());
         this.moveX(physicsComp.getX());
         this.moveY(physicsComp.getY());
         physicsComp.checkCollision();
         //TODO add the health management system
         graphicComp.update();
-    }
-    
+    } 
 }
