@@ -9,11 +9,21 @@ import it.unibo.smol.model.api.GameMap;
 import it.unibo.smol.model.api.World;
 import it.unibo.smol.model.Type;
 
+/**
+ * implementation of world interface.
+ */
 public class WorldImpl implements World {
-    private List<Entity> entities;
+    private final List<Entity> entities;
     private GameMap map;
-    private int score;
-    
+    private final int score;
+    /**
+     * constructor for game world.
+     * @param basicMoles
+     * @param elmetMoles 
+     * @param angryMoles
+     * @param lifePlants
+     * @param score
+     */
     public WorldImpl(final int basicMoles, final int elmetMoles, final int angryMoles, final int lifePlants, final int score) {
         //TODO better dry if possible
         this.entities = new ArrayList<>();
@@ -51,7 +61,6 @@ public class WorldImpl implements World {
     public List<Entity> getMoles() {
         return this.entities.stream().filter(entity -> entity.getType() == Type.ENEMY).collect(Collectors.toList());
     }
-
     /**
      * {@inheritDoc}
      */
@@ -59,7 +68,6 @@ public class WorldImpl implements World {
     public Entity getPlayer() {
         return this.entities.stream().filter(entity -> entity.getType() == Type.PLAYER).findFirst().get();
     }
-
     /**
      * {@inheritDoc}
      */
@@ -67,7 +75,6 @@ public class WorldImpl implements World {
     public List<Entity> getLifePlants() {
         return this.entities.stream().filter(entity -> entity.getType() == Type.HEALTH).collect(Collectors.toList());
     }
-
     /**
      * {@inheritDoc}
      */
@@ -75,7 +82,6 @@ public class WorldImpl implements World {
     public List<Entity> getEntities() {
         return new ArrayList<>(this.entities); // no references
     }
-
     /**
      * {@inheritDoc}
      */
@@ -83,7 +89,6 @@ public class WorldImpl implements World {
     public void remove(final Entity thisEntity) {
         entities.remove(thisEntity);
     }
-
     /**
      * {@inheritDoc}
      */
@@ -91,7 +96,6 @@ public class WorldImpl implements World {
     public GameMap getMap() {
         return this.map;
     }
-
     /**
      * {@inheritDoc}
      */
@@ -99,13 +103,11 @@ public class WorldImpl implements World {
     public World updateWorld() {
         return this;
     }
-
     /**
      * {@inheritDoc}}
      */
     @Override
     public int getScore() {
         return this.score;
-    }
-    
+    } 
 }

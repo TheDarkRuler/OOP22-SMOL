@@ -4,13 +4,19 @@ import java.util.Optional;
 
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.controller.api.InputComponent;
-import it.unibo.smol.controller.input.*;
+import it.unibo.smol.controller.input.KeyInputs;
 import javafx.geometry.Point2D;
 
+/**
+ * Implementation of the InputComponent of the player.
+ */
 public class PlayerInputComponent implements InputComponent {
-    private KeyInputs input;
+    private final KeyInputs input;
 
-    public PlayerInputComponent(){
+    /**
+     * constructor to initialize keyboard inputs for player entity.
+     */
+    public PlayerInputComponent() {
         input = new KeyInputs();
     }
 
@@ -37,5 +43,4 @@ public class PlayerInputComponent implements InputComponent {
     public boolean isHittable() {
         return true;
     }
-    
 }

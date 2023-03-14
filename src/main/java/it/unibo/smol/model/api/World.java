@@ -2,44 +2,47 @@ package it.unibo.smol.model.api;
 
 import java.util.List;
 
+/**
+ * Interface for World: a container for entities.
+ */
 public interface World {
     /**
-     * @return list of moles
+     * @return list of moles.
      */
     List<Entity> getMoles();
 
     /**
-     * @return player
+     * @return player.
      */
     Entity getPlayer();
 
     /**
-     * @return lifePlants
+     * @return lifePlants.
      */
     List<Entity> getLifePlants();
 
     /**
-     * @return all entities 
+     * @return all entities.
      */
     List<Entity> getEntities();
 
     /**
-     * removes any entity
+     * @param thisEntity entity to remove from the list of entities.
      */
     void remove(Entity thisEntity);
 
     /**
-     * @return gmae map
+     * @return gmae map.
      */
     GameMap getMap();
 
     /**
-     * @return score 
+     * @return score.
      */
     int getScore();
 
     /**
-     * @return updated Word
+     * @return updated Word.
      */
     World updateWorld();
 

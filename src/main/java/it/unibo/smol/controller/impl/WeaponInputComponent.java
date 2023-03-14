@@ -7,15 +7,21 @@ import it.unibo.smol.controller.api.InputComponent;
 import it.unibo.smol.controller.input.MouseInputs;
 import javafx.geometry.Point2D;
 
+/**
+ * Implementation of the InputComponent of the weapon.
+ */
 public class WeaponInputComponent implements InputComponent {
-    private MouseInputs mouse;
+    private final MouseInputs mouse;
 
-    public WeaponInputComponent(final MouseInputs mouse) {
-        this.mouse = mouse;
+    /**
+     * constructor to initialize mouse inputs for weapon entity.
+     */
+    public WeaponInputComponent() {
+        this.mouse = new MouseInputs();
     }
 
     /**
-     * {@inheritDoc}}
+     * {@inheritDoc}
      */
     @Override
     public Optional<Directions> getDirection() {
@@ -23,7 +29,7 @@ public class WeaponInputComponent implements InputComponent {
     }
 
     /**
-     * {@inheritDoc}}
+     * {@inheritDoc}
      */
     @Override
     public Optional<Point2D> getPosition() {
@@ -31,11 +37,10 @@ public class WeaponInputComponent implements InputComponent {
     }
 
     /**
-     * {@inheritDoc}}
+     * {@inheritDoc}
      */
     @Override
     public boolean isHittable() {
         return mouse.isHammerSmashed();
     }
-    
 }
