@@ -30,7 +30,7 @@ public abstract class PhysicsComponent {
      * Update the position of the entity and check the collision with the other entity present.
      */
     public void checkCollision() {
-        this.entity.getWorld().getEntities().stream()
+        this.entity.getGameState().getWorld().getEntities().stream()
             .map(x -> x.getPhysicsComp())
             .filter(x -> hitBox.isColliding(x.getHitBox()))
             .forEach(x -> {

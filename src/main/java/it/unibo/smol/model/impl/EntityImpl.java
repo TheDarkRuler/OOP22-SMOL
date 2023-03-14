@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
+import it.unibo.smol.model.api.GameState;
 import it.unibo.smol.model.api.GraphicComponent;
 import it.unibo.smol.model.api.PhysicsComponent;
-import it.unibo.smol.model.api.World;
 import it.unibo.smol.input.api.InputComponent;
 
 /**
@@ -14,13 +14,13 @@ import it.unibo.smol.input.api.InputComponent;
  */
 public class EntityImpl implements Entity {
     private final Type type;
-    private InputComponent inputComp;
-    private Optional<HealthComponent> healthComp;
-    private GraphicComponent graphicComp;
-    private PhysicsComponent physicsComp;
+    private final InputComponent inputComp;
+    private final Optional<HealthComponent> healthComp;
+    private final GraphicComponent graphicComp;
+    private final PhysicsComponent physicsComp;
     private double currentX;
     private double currentY;
-    private World world;
+    private GameState gameState;
 
     /**
      * Constructor for creating entities utilizing the entity factory.
@@ -66,8 +66,8 @@ public class EntityImpl implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public World getWorld() {
-        return world;
+    public GameState getGameState() {
+        return gameState;
     }
 
     /**
@@ -90,8 +90,8 @@ public class EntityImpl implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public void setWorld(final World w) {
-        this.world = w;
+    public void setGameState(final GameState gs) {
+        this.gameState = gs;
     }
 
     /**
@@ -128,7 +128,7 @@ public class EntityImpl implements Entity {
         this.moveY(physicsComp.getY());
         physicsComp.checkCollision();
         if (healthComp.isPresent() && healthComp.get().isDead()) {
-            this.getWorld().removeLifePlants(); //TODO : has to be a general remove
+            this.gameState.notifyDeath();
         }
         graphicComp.update();
     } 

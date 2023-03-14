@@ -22,10 +22,10 @@ public interface Entity {
     double getCurrentY();
 
     /**
-     * Getter for the world. 
-     * @return the world
+     * Getter for the GameState. 
+     * @return the GameState
      */
-    World getWorld();
+    GameState getGameState();
 
     /**
      * Add the new x coordinate to the current X.
@@ -40,10 +40,10 @@ public interface Entity {
     void moveY(double y);
 
     /**
-     * Set the current world.
-     * @param w the world to set
+     * Set the current GameState.
+     * @param gs the GameState to set
      */
-    void setWorld(World w);
+    void setGameState(GameState gs);
 
     /**
      * Getter for the field type.
