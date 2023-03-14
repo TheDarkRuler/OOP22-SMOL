@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-import it.unibo.smol.input.impl.KeyInputs;
-import it.unibo.smol.input.impl.MouseInputs;
+import it.unibo.smol.controller.input.KeyInputs;
+import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.view.api.WindowState;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
