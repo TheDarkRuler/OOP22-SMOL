@@ -1,5 +1,6 @@
 package it.unibo.smol.model.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,19 +14,19 @@ public class WorldImpl implements World {
     private GameMap map;
     private int score;
     
-    public WorldImpl(final int basicMoles, final int elemtMoles, final int angryMoles, final int lifePlants, final int score) {
+    public WorldImpl(final int basicMoles, final int elmetMoles, final int angryMoles, final int lifePlants, final int score) {
         //TODO better dry if possible
-
+        this.entities = new ArrayList<>();
         //moles
         for (int i = 0; i < basicMoles; i++) {
             this.entities.add(new EntityFactoryImpl().createBasicMole(i, i));
         }
 
-        for (int i = 0; i < elemtMoles; i++) {
+        for (int i = 0; i < elmetMoles; i++) {
             this.entities.add(new EntityFactoryImpl().createElmetMole(i, i));
         }
 
-        for (int i = 0; i < basicMoles; i++) {
+        for (int i = 0; i < angryMoles; i++) {
             this.entities.add(new EntityFactoryImpl().createAngryMole(i, i));
         }
 
@@ -36,7 +37,7 @@ public class WorldImpl implements World {
 
         //TODO decide place for player
         //player
-        this.entities.add(new EntityFactoryImpl().createPlayer(elemtMoles, angryMoles));
+        this.entities.add(new EntityFactoryImpl().createPlayer(elmetMoles, angryMoles));
 
         //gamemap
 
@@ -72,7 +73,7 @@ public class WorldImpl implements World {
      */
     @Override
     public List<Entity> getEntities() {
-        return this.entities;
+        return new ArrayList<>(this.entities); // no references
     }
 
     /**
