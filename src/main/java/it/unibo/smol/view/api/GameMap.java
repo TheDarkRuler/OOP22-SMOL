@@ -23,4 +23,14 @@ public interface GameMap {
      * 
      */
     double getBorderWidth();
+
+    /**
+     * 
+     */
+    double getMapHeight();
+
+    /**
+     * 
+     */
+    double getMapWidth();
 }
