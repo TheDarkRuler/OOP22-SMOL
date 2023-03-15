@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 public class GameViewState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
 
-    private GameMap map;
+    private final GameMap map;
 
     /**
      * constructor for Game View window state.

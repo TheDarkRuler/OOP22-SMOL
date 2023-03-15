@@ -9,8 +9,8 @@ import javafx.stage.Screen;
 public class GameMapImpl implements GameMap {
     private static final int HEIGHT_PROPORTION = 4;
     private static final int WIDTH_PROPORTION = 8;
-    private double screeHeight;
-    private double screeWidth;
+    private final double screeHeight;
+    private final double screeWidth;
     /**
      * constructor that defines map borders based on screen size.
      */
