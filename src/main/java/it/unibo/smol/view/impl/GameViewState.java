@@ -24,6 +24,9 @@ public class GameViewState implements WindowState {
 
     private GameMap map;
 
+    /**
+     * constructor for Game View window state.
+     */
     public GameViewState() {
         this.map = new GameMapImpl();
     }
