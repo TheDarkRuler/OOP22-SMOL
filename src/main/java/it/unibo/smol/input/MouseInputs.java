@@ -3,7 +3,6 @@ package it.unibo.smol.input;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import it.unibo.smol.common.Directions;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -14,28 +13,28 @@ import javafx.scene.input.MouseEvent;
  */
 public class MouseInputs implements EventHandler<MouseEvent> {
 
-    private static final int HAMMER_INC_RATE = 2;
-    private static final int HAMMER_MAX_RANGE = 100;
+    private static final int WEAPON_INC_RATE = 2;
+    private static final int WEAPON_MAX_RANGE = 100;
     private static final int HOLD_TIME = 300;
-    private static final int HAMMER_SMASH_ANIM = 500;
+    private static final int WEAPON_ATTACK_ANIM = 500;
 
-    private static boolean animationGoing;
-    private boolean hammerSmashed;
-    private boolean hammerIsSmashing;
+    private static boolean playerFreeze;
+    private boolean weaponSmashed;
+    private boolean weaponIsSmashing;
     private boolean cursorOnScreen;
-    private int hammerIncrease;
-    private int hammerRange;
+    private int weaponIncrease;
+    private int weaponRange;
     private final ScheduledExecutorService animationTime;
-    private Point2D hammerLocation;
+    private Point2D weaponLocation;
 
     /**
      * constructor that sets the default values.
      */
     public MouseInputs() {
-        this.hammerSmashed = false;
-        this.hammerIsSmashing = false;
-        this.hammerRange = 0;
-        this.hammerIncrease = 0;
+        this.weaponSmashed = false;
+        this.weaponIsSmashing = false;
+        this.weaponRange = 0;
+        this.weaponIncrease = 0;
         this.cursorOnScreen = false;
         this.animationTime = Executors.newSingleThreadScheduledExecutor();
     }
@@ -45,60 +44,68 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      */
     @Override
     public void handle(final MouseEvent event) {
-        if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED) && !this.hammerIsSmashing) {
-            this.hammerIsSmashing = true;
-            this.animationTime.schedule(hammerExpands(), HOLD_TIME, TimeUnit.MILLISECONDS);
+        if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED) && !this.weaponIsSmashing) {
+            this.weaponIsSmashing = true;
+            this.animationTime.schedule(weaponExpands(), HOLD_TIME, TimeUnit.MILLISECONDS);
 
-        } else if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED) && !this.hammerSmashed) {
+        } else if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED) && !this.weaponSmashed) {
 
-            this.hammerSmashed = true;
-            this.hammerIncrease = 0;
-            this.hammerLocation = new Point2D(event.getX(), event.getY());
-            animationGoing();
-            animationTime.schedule(animation(), HAMMER_SMASH_ANIM, TimeUnit.MILLISECONDS);
+            this.weaponSmashed = true;
+            this.weaponIncrease = 0;
+            this.weaponLocation = new Point2D(event.getX(), event.getY());
+            freezeInputs(WEAPON_ATTACK_ANIM);
 
-        } else if (event.getEventType().equals(MouseEvent.MOUSE_MOVED) && !hammerSmashed && cursorOnScreen) {
+        } else if (event.getEventType().equals(MouseEvent.MOUSE_MOVED) && !weaponSmashed && cursorOnScreen) {
 
-            this.hammerLocation = new Point2D(event.getX(), event.getY());
+            this.weaponLocation = new Point2D(event.getX(), event.getY());
 
         } else if (event.getEventType().equals(MouseEvent.MOUSE_ENTERED)) {
 
             this.cursorOnScreen = true;
 
-        } else if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED) && !hammerSmashed && cursorOnScreen) {
+        } else if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED) && !weaponSmashed && cursorOnScreen) {
 
-            this.hammerLocation = new Point2D(event.getX(), event.getY());
+            this.weaponLocation = new Point2D(event.getX(), event.getY());
 
         }
     }
 
     /**
-     * sets hammerIncrease with the Hammer increase rate so that the hammer range expands.
+     * freezes the player's inputs for a given period of time in milliseconds.
+     * @param freezeTime
+     */
+    public void freezeInputs(final int freezeTime) {
+        playerBlock();
+        animationTime.schedule(releaseInput(), freezeTime, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * sets weaponIncrease with the weapon increase rate so that the weapon range expands.
      * @return a runnable that delays for HOLD_TIME millisec
      */
-    private Runnable hammerExpands() {
+    private Runnable weaponExpands() {
         return new Runnable() {
 
             @Override
             public void run() {
-                if (!hammerSmashed) {
-                    hammerIncrease = HAMMER_INC_RATE;
+                if (!weaponSmashed) {
+                    weaponIncrease = WEAPON_INC_RATE;
                 }
             }
         };
     }
 
     /**
-     * Starts the animation of the hammer.
-     * @return a runnable that delays for HAMMER_SMASH_ANIM millisec
+     * Starts the animation of the weapon.
+     * @return a runnable that delays for WEAPON_ATTACK_ANIM millisec
      */
-    private Runnable animation() {
+    private Runnable releaseInput() {
         return new Runnable() {
 
             @Override
             public void run() {
-                hammerRange = 0;
-                animationDone();
+                weaponRange = 0;
+                playerReleased();
             } 
         };
     }
@@ -106,46 +113,46 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     /**
      * starts the animation blocking player inputs.
      */
-    private void animationGoing() {
+    private void playerBlock() {
         KeyInputs.setMovement(Directions.STAY_X);
         KeyInputs.setMovement(Directions.STAY_Y);
-        MouseInputs.animationGoing = true;
+        MouseInputs.playerFreeze = true;
     }
 
     /**
      * finishing the animation giving back the inputs to the player.
      */
-    private void animationDone() {
+    private void playerReleased() {
         KeyInputs.setMovement(Directions.STAY_X);
         KeyInputs.setMovement(Directions.STAY_Y);
-        MouseInputs.animationGoing = false;
-        this.hammerSmashed = false;
-        this.hammerIsSmashing = false;
+        MouseInputs.playerFreeze = false;
+        this.weaponSmashed = false;
+        this.weaponIsSmashing = false;
     }
 
     /**
-     * checks if the hammer is max range and if not increase the range og hit.
+     * checks if the weapon is max range and if not increase the range og hit.
      */
-    public void setHammerRange() {
-        if (hammerRange <= HAMMER_MAX_RANGE) {
-            hammerRange += hammerIncrease;
+    public void setWeaponRange() {
+        if (weaponRange <= WEAPON_MAX_RANGE) {
+            weaponRange += weaponIncrease;
         }
     }
 
     /**
-     * returns the hammerRange to draw it.
-     * @return hammerRange
+     * returns the weaponRange to draw it.
+     * @return weaponRange
      */
-    public int getHammerRange() {
-        return this.hammerRange;
+    public int getWeaponRange() {
+        return this.weaponRange;
     }
 
     /**
-     * returns the hammer location on the screen.
-     * @return hammerLocation
+     * returns the weapon location on the screen.
+     * @return weaponLocation
      */
-    public Point2D getHammerLocation() {
-        return this.hammerLocation;
+    public Point2D getWeaponLocation() {
+        return this.weaponLocation;
     }
 
     /**
@@ -157,19 +164,19 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     }
 
     /**
-     * returns if the hammer has smashed.
-     * @return hammerSmashed
+     * returns if the weapon has smashed.
+     * @return weaponSmashed
      */
-    public boolean isHammerSmashed() {
-        return this.hammerSmashed;
+    public boolean isWeaponSmashed() {
+        return this.weaponSmashed;
     }
 
     /**
-     * returns if the animation is going to let the two input files can communicate.
-     * @return if the animation is going
+     * returns if the player status is going to let the two input files communicate.
+     * @return if the player is freezed
      */
-    protected static boolean isAnimationGoing() {
-        return MouseInputs.animationGoing;
+    protected static boolean isPlayerFreezed() {
+        return MouseInputs.playerFreeze;
     }
 
 }

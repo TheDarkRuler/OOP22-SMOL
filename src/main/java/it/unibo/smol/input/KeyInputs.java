@@ -19,7 +19,7 @@ public class KeyInputs implements EventHandler<KeyEvent> {
     @Override
     public void handle(final KeyEvent event) {
 
-        if (event.getEventType().equals(KeyEvent.KEY_PRESSED) && !MouseInputs.isAnimationGoing()) {
+        if (event.getEventType().equals(KeyEvent.KEY_PRESSED) && !MouseInputs.isPlayerFreezed()) {
             switch (event.getCode()) {
                 case W:
                     movement = Directions.UP;
@@ -37,7 +37,7 @@ public class KeyInputs implements EventHandler<KeyEvent> {
                     break;
             }
 
-        } else if (event.getEventType().equals(KeyEvent.KEY_RELEASED) && !MouseInputs.isAnimationGoing()) {
+        } else if (event.getEventType().equals(KeyEvent.KEY_RELEASED) && !MouseInputs.isPlayerFreezed()) {
 
             switch (event.getCode()) {
                 case W:
