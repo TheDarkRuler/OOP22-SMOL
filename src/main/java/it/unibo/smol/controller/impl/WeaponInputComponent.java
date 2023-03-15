@@ -33,7 +33,7 @@ public class WeaponInputComponent implements InputComponent {
      */
     @Override
     public Optional<Point2D> getPosition() {
-        return Optional.of(mouse.getHammerLocation());
+        return Optional.of(mouse.getWeaponLocation());
     }
 
     /**
@@ -41,6 +41,6 @@ public class WeaponInputComponent implements InputComponent {
      */
     @Override
     public boolean isHittable() {
-        return mouse.isHammerSmashed();
+        return mouse.isWeaponSmashed();
     }
 }
