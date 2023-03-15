@@ -16,8 +16,8 @@ public class LifePlantsPhysicsComponent extends PhysicsComponent {
      * @param movementSpeed : See the super-Constructor
      * @param hitBox : See the super-Constructor
      */
-    public LifePlantsPhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
-        super(movementSpeed, hitBox);
+    public LifePlantsPhysicsComponent(final HitBox hitBox) {
+        super(0.0, hitBox);
     }
 
     /**

@@ -17,8 +17,8 @@ public class EnemyPhysicsComponent extends PhysicsComponent {
      * @param movementSpeed : See the super-Constructor
      * @param hitBox : See the super-Constructor
      */
-    public EnemyPhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
-        super(movementSpeed, hitBox);
+    public EnemyPhysicsComponent(final HitBox hitBox) {
+        super(5.0, hitBox);
     }
 
     /**
