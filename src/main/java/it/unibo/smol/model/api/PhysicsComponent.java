@@ -32,6 +32,7 @@ public abstract class PhysicsComponent {
     public void checkCollision() {
         this.entity.getGameState().getWorld().getEntities().stream()
             .map(x -> x.getPhysicsComp())
+            .filter(x -> !this.equals(x))
             .filter(x -> hitBox.isColliding(x.getHitBox()))
             .forEach(x -> {
                     if (this.isRigid() && x.isRigid()) {
