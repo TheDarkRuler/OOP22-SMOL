@@ -5,6 +5,7 @@ import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
+import javafx.geometry.Point2D;
 
 /**
  * The implementation of the {@link PhysicsComponent} rappresenting the Enemy behaviour.
@@ -21,44 +22,6 @@ public class EnemyPhysicsComponent extends PhysicsComponent {
     }
 
     /**
-     * This method receive a {@link Directions} and translate it into actual movement.
-     * @param move : the direction given
-     */
-    @Override
-    public <A> void receiveMovement(final A move) {
-        Directions move1;
-
-        if (move instanceof Directions) {
-            move1 = (Directions) move;
-        } else {
-            throw new IllegalArgumentException("Direction type expected");
-        }
-
-        switch (move1) {
-            case UP:
-                super.setY(super.getMovementSpeed());
-                break;
-            case DOWN:
-            super.setY(-super.getMovementSpeed());
-                break;
-            case LEFT:
-            super.setX(-super.getMovementSpeed());
-                break;
-            case RIGHT:
-            super.setY(super.getMovementSpeed());
-                break;
-            case STAY_X:
-            super.setX(0);
-                break;
-            case STAY_Y:
-            super.setY(0);
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
      * Whenever this entity collide with a Weapon {@link Type} entity, it takes 1 damage.
      */
     @Override
@@ -66,5 +29,22 @@ public class EnemyPhysicsComponent extends PhysicsComponent {
         if (entityCollided.getType() == Type.WEAPON) {
             super.getEntity().getHealthComp().orElseThrow().setHealth(-1);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void receiveMovement(final Directions move) {
+        //This component doesn't use this method
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void receiveMovement(final Point2D move) {
+        super.setX(move.getX() - super.getEntity().getCurrentX());
+        super.setY(move.getY() - super.getEntity().getCurrentY());
     }
 }

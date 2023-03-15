@@ -123,7 +123,12 @@ public class EntityImpl implements Entity {
      */
     @Override
     public void update() {
-        physicsComp.receiveMovement(inputComp.getDirection());
+        if (inputComp.getDirection().isPresent()) {
+            physicsComp.receiveMovement(inputComp.getDirection().orElseThrow());
+        }
+        if (inputComp.getPosition().isPresent()) {
+            physicsComp.receiveMovement(inputComp.getPosition().orElseThrow());
+        }
         this.moveX(physicsComp.getX());
         this.moveY(physicsComp.getY());
         physicsComp.checkCollision();

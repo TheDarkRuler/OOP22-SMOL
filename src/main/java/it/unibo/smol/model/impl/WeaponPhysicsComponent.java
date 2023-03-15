@@ -1,5 +1,6 @@
 package it.unibo.smol.model.impl;
 
+import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
@@ -20,27 +21,27 @@ public class WeaponPhysicsComponent extends PhysicsComponent {
     }
 
     /**
-     * This method receive a {@link Point2D} and translate it into actual movement.
-     * @param move : the coordinate given
+     * {@inheritDoc}
      */
     @Override
-    public <A> void receiveMovement(final A move) {
-        Point2D move1;
-        if (move instanceof Point2D) {
-            move1 = (Point2D) move;
-        } else {
-            throw new IllegalArgumentException("Point2D type expected");
-        }
-
-        super.setX(move1.getX() - super.getEntity().getCurrentX());
-        super.setY(move1.getY() - super.getEntity().getCurrentY());
+    protected void collisonEvent(final Entity entityCollided) {
+        //This entity don't have any collisionEffect on himself 
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void collisonEvent(final Entity entityCollided) {
-        //This entity don't have any collisionEffect on himself 
+    public void receiveMovement(final Directions move) {
+        //This component doesn't use this method
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void receiveMovement(final Point2D move) {
+        super.setX(move.getX() - super.getEntity().getCurrentX());
+        super.setY(move.getY() - super.getEntity().getCurrentY());
     }
 }
