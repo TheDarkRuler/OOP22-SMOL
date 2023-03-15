@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import it.unibo.smol.model.api.Entity;
-import it.unibo.smol.model.api.GameMap;
 import it.unibo.smol.model.api.World;
+import it.unibo.smol.view.api.GameMap;
 import it.unibo.smol.model.Type;
 
 /**

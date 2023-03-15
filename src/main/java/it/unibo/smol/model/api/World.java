@@ -2,6 +2,8 @@ package it.unibo.smol.model.api;
 
 import java.util.List;
 
+import it.unibo.smol.view.api.GameMap;
+
 /**
  * Interface for World: a container for entities.
  */

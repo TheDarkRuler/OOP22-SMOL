@@ -6,6 +6,7 @@ import java.util.logging.Level;
 
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
+import it.unibo.smol.view.api.GameMap;
 import it.unibo.smol.view.api.WindowState;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -13,7 +14,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -21,10 +21,12 @@ import javafx.stage.Stage;
  */
 public class GameViewState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
-    private static final double SCREEN_WIDTH = Screen.getPrimary().getBounds().getWidth();
-    private static final double SCREEN_HEIGHT = Screen.getPrimary().getBounds().getHeight();
-    private static final int PROPORTIONS = 2;
 
+    private GameMap map;
+
+    public GameViewState() {
+        this.map = new GameMapImpl();
+    }
     /**
      * {@inheritDoc}
      */
@@ -41,8 +43,8 @@ public class GameViewState implements WindowState {
         final EventHandler<KeyEvent> keyEventHandler = new KeyInputs();
         final EventHandler<MouseEvent> mouseEventHandler = new MouseInputs();
         final var root = new Pane();
-        final var scene = new Scene(root, SCREEN_WIDTH / PROPORTIONS,
-            SCREEN_HEIGHT / PROPORTIONS, Color.BLACK);
+        final var scene = new Scene(root, map.getWidth(),
+            map.getHeight(), Color.BLACK);
 
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
