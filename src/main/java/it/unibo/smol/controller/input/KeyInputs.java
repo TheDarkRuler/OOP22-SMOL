@@ -1,4 +1,4 @@
-package it.unibo.smol.input;
+package it.unibo.smol.controller.input;
 
 import it.unibo.smol.common.Directions;
 import javafx.event.EventHandler;

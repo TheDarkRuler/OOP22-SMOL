@@ -1,15 +1,17 @@
 package it.unibo.smol.model.api;
 
-import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 
 /**
  * Abstract class rappresenting the template of the Physics component for the {@link Entity}.
  */
 public abstract class PhysicsComponent {
-    private int movementSpeed;
-    private int x,y;
-    private HitBox hitBox;
+    /**
+     * The field rappresenting the movement speed.
+     */
+    private double movementSpeed;
+    private double x, y;
+    private final HitBox hitBox;
     private boolean isRigid;
     private Entity entity;
 
@@ -18,48 +20,33 @@ public abstract class PhysicsComponent {
      * @param movementSpeed : the value that determine the speed of the entity
      * @param hitBox : the shape that rappresent the logic position of the entity
      */
-    public PhysicsComponent(final int movementSpeed, final HitBox hitBox) {
+    public PhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
         this.movementSpeed = movementSpeed;
         this.hitBox = hitBox;
         this.isRigid = true;
     }
 
     /**
-     * Update the position of the entity and check the collision with the other entity present
+     * Update the position of the entity and check the collision with the other entity present.
      */
-    public void update() {
-        this.entity.getInputComp()//TODO
-        ;
+    public void checkCollision() {
+        this.entity.getGameState().getWorld().getEntities().stream()
+            .map(x -> x.getPhysicsComp())
+            .filter(x -> !this.equals(x))
+            .filter(x -> hitBox.isColliding(x.getHitBox()))
+            .forEach(x -> {
+                    if (this.isRigid() && x.isRigid()) {
+                        this.collisonEvent(x.getEntity());
+                    }
+                });
     }
 
     /**
      * Translate the command received from the {@link InputComponent} to actual movement.
-     * @param direction : The command received
+     * @param <A> : The possible data type of the command
+     * @param move : The command received
      */
-    public void receiveDirection(final Directions direction) {
-        switch (direction) {
-            case UP:
-                y = movementSpeed;
-                break;
-            case DOWN:
-                y = -movementSpeed;
-                break;
-            case LEFT:
-                x = -movementSpeed; 
-                break;
-            case RIGHT:
-                x = movementSpeed;
-                break;
-            case STAY_X:
-                x = 0;
-                break;
-            case STAY_Y:
-                y = 0;
-                break;
-            default:
-                break;
-        }
-    }
+    public abstract <A> void receiveMovement(A move);
 
     /**
      * Getter for the entity field.
@@ -73,7 +60,7 @@ public abstract class PhysicsComponent {
      * Set the entity associated with this component.
      * @param entity : The entity that use this component
      */
-    public void setEntity(Entity entity) {
+    public void setEntity(final Entity entity) {
         this.entity = entity;
     }
 
@@ -81,7 +68,7 @@ public abstract class PhysicsComponent {
      * Set a new movement speed of the component.
      * @param movementSpeed the new Movement soeed to be set
      */
-    public void setMovementSpeed(int movementSpeed) {
+    public void setMovementSpeed(final double movementSpeed) {
         this.movementSpeed = movementSpeed;
     }
 
@@ -89,7 +76,7 @@ public abstract class PhysicsComponent {
      * Get the X coordinate.
      * @return the amount of movement in the X coordinate
      */
-    public int getX() {
+    public double getX() {
         return x;
     }
 
@@ -97,8 +84,16 @@ public abstract class PhysicsComponent {
      * Get the Y coordinate.
      * @return the amount of movement in the Y coordinate
      */
-    public int getY() {
+    public double getY() {
         return y;
+    }
+
+    /**
+     * Get the hitbox shape.
+     * @return the hitbox
+     */
+    public HitBox getHitBox() {
+        return hitBox;
     }
 
     /**
@@ -122,5 +117,41 @@ public abstract class PhysicsComponent {
         }
     }
 
+    /**
+     * Resolve the effect of a collision that happened.
+     * @param entityCollided : The other entity that collided this one
+     */
     protected abstract void collisonEvent(Entity entityCollided);
+
+    /**
+     * Getter for the movementSpeed field.
+     * @return the movementSpeed
+     */
+    public double getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    /**
+     * Setter for the x field.
+     * @param x the actual moevement in the X coordinate
+     */
+    public void setX(final double x) {
+        this.x = x;
+    }
+
+    /**
+     * Setter for the y field.
+     * @param y the actual moevement in the Y coordinate
+     */
+    public void setY(final double y) {
+        this.y = y;
+    }
+
+    /**
+     * Setter for the rigidity of the hitbox.
+     * @param isRigid {@code True} if rigid; {@code False} otherwise
+     */
+    public void setRigid(final boolean isRigid) {
+        this.isRigid = isRigid;
+    }
 }

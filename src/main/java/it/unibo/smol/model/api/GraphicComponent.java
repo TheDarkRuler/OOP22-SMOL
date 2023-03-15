@@ -1,18 +1,20 @@
 package it.unibo.smol.model.api;
 
-import java.awt.Graphics;
-
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 /**
  * Abstract class rappresenting the template of the graphics component for the {@link GameObject}.
  */
 public abstract class GraphicComponent {
 
-    private Graphics graphic;
+    private GraphicsContext graphic;
     private final double width;
     private final double height;
 
     /**
-     * Basic constructor for the {@link GraphicComponent}
+     * Basic constructor for the {@link GraphicComponent}.
      * @param width
      * @param height
      */
@@ -29,17 +31,16 @@ public abstract class GraphicComponent {
     /**
      * Generate the 2D model from the {@link resources} file.
      * @param g : The object that encapsulate the information for the rendering operations
+     * @param x : The X coordinate on the destination for the upper left of the image
+     * @param y : The Y coordinate on the destination for the upper left of the image
      */
-    public void render(final Graphics g) {
-        g.drawImage(null, (int) width, (int) height, null);
-        //TODO img: have to be changend
-    }
+    public abstract void render(GraphicsContext g, double x, double y); 
 
     /**
      * Setter for the {@link #graphic} field.
-     * @param graphics : The value that's gonna be set
+     * @param g : The value that's gonna be set
      */
-    public void setGraphic(final Graphics g) {
+    public void setGraphic(final GraphicsContext g) {
         this.graphic = g;
     }
 
@@ -47,8 +48,8 @@ public abstract class GraphicComponent {
      * Getter for the {@link #graphic} field.
      * @return {@link #graphic}
      */
-    public Graphics getGraphic() {
-        return graphic;
+    public GraphicsContext getGraphic() {
+        return this.graphic;
     }
 
     /**
@@ -56,7 +57,7 @@ public abstract class GraphicComponent {
      * @return {@link #width}
      */
     public double getWidth() {
-        return width;
+        return this.width;
     }
 
     /**
@@ -64,6 +65,19 @@ public abstract class GraphicComponent {
      * @return {@link #height}
      */
     public double getHeight() {
-        return height;
-    } 
+        return this.height;
+    }
+    /**
+     * Getter for a subImage.
+     * @param img
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @return  the subImage 
+     */
+    public WritableImage getSubImage(final Image img, final int x, final int y, final int width, final int height) {
+        final PixelReader reader = img.getPixelReader();
+        return new WritableImage(reader, x, y, width, height);
+    }
 }

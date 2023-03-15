@@ -1,5 +1,8 @@
 package it.unibo.smol.model.api;
 
+import java.util.Optional;
+
+import it.unibo.smol.model.Type;
 import it.unibo.smol.model.impl.HealthComponent;
 
 /**
@@ -10,41 +13,55 @@ public interface Entity {
      * Get the current x coordinate of the object.
      * @return {@code x}
      */
-    int getCurrentX();
+    double getCurrentX();
 
     /**
      * Get the current x coordinate of the object.
      * @return {@code y}
      */
-    int getCurrentY();
+    double getCurrentY();
 
     /**
-     * Get the world 
-     * @return
+     * Getter for the GameState. 
+     * @return the GameState
      */
-    World getWorld();
+    GameState getGameState();
 
     /**
-     * Set a new x coordinate for the object.
-     * @param x : the new x coordinate of the object
+     * Add the new x coordinate to the current X.
+     * @param x : the new x to add in the object
      */
-    void setX(int x);
+    void moveX(double x);
 
     /**
-     * Set a new y coordinate for the object.
-     * @param y : the new y coordinate of the object
+     * Add the new y coordinate to the current Y.
+     * @param y : the new y to add in the object
      */
-    void setY(int y);
+    void moveY(double y);
 
-    void setWorld(World w);
+    /**
+     * Set the current GameState.
+     * @param gs the GameState to set
+     */
+    void setGameState(GameState gs);
 
-    HealthComponent getHealthComp();
+    /**
+     * Getter for the field type.
+     * @return the {@link Type} of the entity
+     */
+    Type getType();
 
+    /**
+     * Getter for the HealthComponent.
+     * @return The healthComponent
+     */
+    Optional<HealthComponent> getHealthComp();
+
+    /**
+     * Getter for the PhysicsComponent.
+     * @return The PhysicsComponent
+     */
     PhysicsComponent getPhysicsComp();
-
-    GraphicComponent getGraphicComp();
-
-    InputComponent getInputComp();
 
     /**
      * Update all the component of the object.
