@@ -1,4 +1,4 @@
-package it.unibo.smol.model.impl;
+package it.unibo.smol.model.impl.physicsComponent;
 
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;

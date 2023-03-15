@@ -129,6 +129,7 @@ public class EntityImpl implements Entity {
         if (inputComp.getPosition().isPresent()) {
             physicsComp.receiveMovement(inputComp.getPosition().orElseThrow());
         }
+        physicsComp.setRigid(inputComp.isHittable());
         this.moveX(physicsComp.getX());
         this.moveY(physicsComp.getY());
         physicsComp.checkCollision();

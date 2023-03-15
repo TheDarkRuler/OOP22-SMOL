@@ -1,34 +1,31 @@
-package it.unibo.smol.model.impl;
+package it.unibo.smol.model.impl.physicsComponent;
 
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
-import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
 import javafx.geometry.Point2D;
 
 /**
- * The implementation of the {@link PhysicsComponent} rappresenting the Enemy behaviour.
+ * The implementation of the {@link PhysicsComponent} rappresenting the Player behaviour.
  */
-public class EnemyPhysicsComponent extends PhysicsComponent {
+public class WeaponPhysicsComponent extends PhysicsComponent {
 
     /**
      * Constructor inherited by the super-class {@link PhysicsComponent}.
      * @param movementSpeed : See the super-Constructor
      * @param hitBox : See the super-Constructor
      */
-    public EnemyPhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
+    public WeaponPhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
         super(movementSpeed, hitBox);
     }
 
     /**
-     * Whenever this entity collide with a Weapon {@link Type} entity, it takes 1 damage.
+     * {@inheritDoc}
      */
     @Override
     protected void collisonEvent(final Entity entityCollided) {
-        if (entityCollided.getType() == Type.WEAPON) {
-            super.getEntity().getHealthComp().orElseThrow().setHealth(-1);
-        }
+        //This entity don't have any collisionEffect on himself 
     }
 
     /**
