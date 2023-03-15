@@ -7,10 +7,20 @@ public interface GameMap {
     /**
      * @return map height.
      */
-    double getHeight();
+    int getHeight();
 
     /**
      * @return map width.
      */
-    double getWidth();
+    int getWidth();
+
+    /**
+     * 
+     */
+    int getBorderHeight();
+
+    /**
+     * 
+     */
+    int getBorderWidth();
 }
