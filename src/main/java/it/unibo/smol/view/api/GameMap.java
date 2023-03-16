@@ -5,12 +5,12 @@ package it.unibo.smol.view.api;
  */
 public interface GameMap {
     /**
-     * @return map height.
+     * @return screen height.
      */
     double getHeight();
 
     /**
-     * @return map width.
+     * @return screen width.
      */
     double getWidth();
 
@@ -25,12 +25,12 @@ public interface GameMap {
     double getBorderWidth();
 
     /**
-     * 
+     * @return map height
      */
     double getMapHeight();
 
     /**
-     * 
+     * @return map width
      */
     double getMapWidth();
 }

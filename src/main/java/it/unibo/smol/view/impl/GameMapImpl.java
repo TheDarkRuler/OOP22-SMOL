@@ -50,15 +50,21 @@ public class GameMapImpl implements GameMap {
     public double getBorderWidth() {
         return screeHeight / WIDTH_PROPORTION;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getMapHeight() {
-        return screeHeight - (screeHeight / HEIGHT_PROPORTION);
+        return screeHeight - getBorderHeight();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getMapWidth() {
-        return screeHeight - (screeHeight / WIDTH_PROPORTION);
+        return screeHeight - getBorderWidth();
     }
 
 }
