@@ -7,7 +7,7 @@ import it.unibo.smol.view.impl.GameMapImpl;
 
 public class EnemiesManager {
     
-    private List<Enemie> enemies;
+    private List<Enemy> enemies;
     private GameMap mapDimension;
 
     public EnemiesManager() {
@@ -15,12 +15,12 @@ public class EnemiesManager {
         this.enemies = new ArrayList<>();
     }
 
-    public void addEnemie() {
-        this.enemies.add(new Enemie(mapDimension));
+    public void addEnemy() {
+        this.enemies.add(new Enemy(mapDimension));
     }
 
-    public void removeEnemie(final Enemie enemie) {
-        enemies.remove(enemies.indexOf(enemie));
+    public void removeEnemy(final Enemy enemy) {
+        enemies.remove(enemies.indexOf(enemy));
     }
 
 }
