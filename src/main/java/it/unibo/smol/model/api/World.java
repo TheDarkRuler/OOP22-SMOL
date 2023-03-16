@@ -48,4 +48,16 @@ public interface World {
      */
     World updateWorld();
 
+    /**
+     * @return difficulty increment
+     */
+    int diffIncrement();
+    /**
+     * 
+     */
+    void addEntity(Entity thisEntity);
+    /**
+     * 
+     */
+    void incScore();
 }
