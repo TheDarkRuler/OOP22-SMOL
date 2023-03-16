@@ -1,15 +1,10 @@
 package it.unibo.smol.controller.input;
 
 import java.util.Random;
-
-import it.unibo.smol.model.api.Entity;
-import it.unibo.smol.model.api.World;
-import it.unibo.smol.model.impl.EntityFactoryImpl;
-import it.unibo.smol.model.impl.WorldImpl;
 import it.unibo.smol.view.api.GameMap;
+import it.unibo.smol.view.impl.GameMapImpl;
 import javafx.geometry.Point2D;
 import javax.swing.Timer;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,33 +24,17 @@ public class Enemy {
     private Point2D enemyNextPosition;
     private Timer enemyTimeUp;
     private EnemyMoves enemyMovement;
-    private Entity enemy;
-    private World world;
 
-    private int angryMoleCreation;
-    private int basicMoleCreation;
-    private int elemtMoleCreation;
-
-    public Enemy(final GameMap mapDimension) {
-        this.world = new WorldImpl(basicMoleCreation, DEFAULT_MIN_TIME_UP, angryMoleCreation, DEFAULT_MAX_TIME_UP, DEFAULT_MAX_TIME_CAN_SPAWN);
-        this.mapDimension = mapDimension;
+    public Enemy() {
+        this.mapDimension = new GameMapImpl();
 
         this.minTimeUp = DEFAULT_MIN_TIME_UP;
         this.maxTimeUp = DEFAULT_MAX_TIME_UP;
         this.maxTimesCanSpawn = DEFAULT_MAX_TIME_CAN_SPAWN;
 
-        setRandoms();
         this.enemyPosition = initialEnemyPosition();
         this.enemyNextPosition = enemySetsPosition(new Random().nextInt(4));
-        this.enemy = new enemyCreation();
         this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, this);
-    }
-
-    private void setRandoms() {
-        
-    }
-
-    private EntityFactoryImpl enemyCreation() {
     }
 
     private Point2D initialEnemyPosition() {
