@@ -15,12 +15,12 @@ public interface GameMap {
     double getWidth();
 
     /**
-     * @return 
+     * @return top and bottom border of game fence.
      */
     double getBorderHeight();
 
     /**
-     * 
+     * @return left and right border of game fence.
      */
     double getBorderWidth();
 
