@@ -1,5 +1,6 @@
-package it.unibo.smol.model.impl.physicsComponent;
+package it.unibo.smol.model.impl.physicscomponent;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.Type;
@@ -13,11 +14,10 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 
     /**
      * Constructor inherited by the super-class {@link PhysicsComponent}.
-     * @param movementSpeed : See the super-Constructor
      * @param hitBox : See the super-Constructor
      */
     public PlayerPhysicsComponent(final HitBox hitBox) {
-        super(5.0, hitBox);
+        super(Constant.PLAYER_MOVSPD, hitBox);
     }
 
     /**

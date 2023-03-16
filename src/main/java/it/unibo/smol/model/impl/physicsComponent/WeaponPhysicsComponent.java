@@ -1,5 +1,6 @@
-package it.unibo.smol.model.impl.physicsComponent;
+package it.unibo.smol.model.impl.physicscomponent;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.api.Entity;
@@ -13,11 +14,10 @@ public class WeaponPhysicsComponent extends PhysicsComponent {
 
     /**
      * Constructor inherited by the super-class {@link PhysicsComponent}.
-     * @param movementSpeed : See the super-Constructor
      * @param hitBox : See the super-Constructor
      */
     public WeaponPhysicsComponent(final HitBox hitBox) {
-        super(0.0, hitBox);
+        super(Constant.WEAPON_MOVSPD, hitBox);
     }
 
     /**

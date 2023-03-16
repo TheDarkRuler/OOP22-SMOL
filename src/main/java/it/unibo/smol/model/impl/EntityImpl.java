@@ -135,7 +135,6 @@ public class EntityImpl implements Entity {
             this.moveX(physicsComp.getX());
             this.moveY(physicsComp.getY());
         }
-        
         physicsComp.checkCollision();
         if (healthComp.isPresent() && healthComp.get().isDead()) {
             this.gameState.notifyDeath();

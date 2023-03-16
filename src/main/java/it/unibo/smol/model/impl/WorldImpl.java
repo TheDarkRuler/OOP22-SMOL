@@ -29,15 +29,15 @@ public class WorldImpl implements World {
         this.entities = new ArrayList<>();
         //moles
         for (int i = 0; i < basicMoles; i++) {
-            this.entities.add(new EntityFactoryImpl().createBasicMole(i, i));
+            this.entities.add(new EntityFactoryImpl().createBasicEnemy(i, i));
         }
 
         for (int i = 0; i < elmetMoles; i++) {
-            this.entities.add(new EntityFactoryImpl().createElmetMole(i, i));
+            this.entities.add(new EntityFactoryImpl().createElmetEnemy(i, i));
         }
 
         for (int i = 0; i < angryMoles; i++) {
-            this.entities.add(new EntityFactoryImpl().createAngryMole(i, i));
+            this.entities.add(new EntityFactoryImpl().createAngryEnemy(i, i));
         }
 
         //lifePlants

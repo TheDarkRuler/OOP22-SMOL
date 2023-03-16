@@ -100,7 +100,7 @@ public abstract class PhysicsComponent {
      * @return the hitbox
      */
     public HitBox getHitBox() {
-        return hitBox;
+        return this.hitBox;
     }
 
     /**

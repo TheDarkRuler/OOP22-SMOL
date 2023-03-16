@@ -1,5 +1,6 @@
-package it.unibo.smol.model.impl.physicsComponent;
+package it.unibo.smol.model.impl.physicscomponent;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.Type;
@@ -13,11 +14,10 @@ public class LifePlantsPhysicsComponent extends PhysicsComponent {
 
     /**
      * Constructor inherited by the super-class {@link PhysicsComponent}.
-     * @param movementSpeed : See the super-Constructor
      * @param hitBox : See the super-Constructor
      */
     public LifePlantsPhysicsComponent(final HitBox hitBox) {
-        super(0.0, hitBox);
+        super(Constant.HEALTH_MOVSPD, hitBox);
     }
 
     /**
@@ -25,8 +25,10 @@ public class LifePlantsPhysicsComponent extends PhysicsComponent {
      */
     @Override
     protected void collisonEvent(final Entity entityCollided) {
-        if (entityCollided.getType() == Type.ENEMY || entityCollided.getType() == Type.PLAYER) {
-            super.getEntity().getHealthComp().orElseThrow().setHealth(-1);
+        if (entityCollided.getType() == Type.ENEMY) {
+            super.getEntity().getHealthComp().orElseThrow().setHealth(Constant.ENEMY_DMG);
+        } else if (entityCollided.getType() == Type.PLAYER) {
+            super.getEntity().getHealthComp().orElseThrow().setHealth(Constant.PLAYER_DMG);
         }
     }
 
