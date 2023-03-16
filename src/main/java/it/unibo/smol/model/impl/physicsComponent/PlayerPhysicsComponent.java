@@ -1,10 +1,12 @@
-package it.unibo.smol.model.impl;
+package it.unibo.smol.model.impl.physicscomponent;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
+import javafx.geometry.Point2D;
 /**
  * The implementation of the {@link PhysicsComponent} rappresenting the Player behaviour.
  */
@@ -12,28 +14,29 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
 
     /**
      * Constructor inherited by the super-class {@link PhysicsComponent}.
-     * @param movementSpeed : See the super-Constructor
      * @param hitBox : See the super-Constructor
      */
-    public PlayerPhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
-        super(movementSpeed, hitBox);
+    public PlayerPhysicsComponent(final HitBox hitBox) {
+        super(Constant.PLAYER_MOVSPD, hitBox);
     }
 
     /**
-     * This method receive a {@link Directions} and translate it into actual movement.
-     * @param move : the direction given
+     * Whenever this entity collide with a Enemy {@link Type} entity, it takes knockBack.
      */
     @Override
-    public <A> void receiveMovement(final A move) {
-        Directions move1;
-
-        if (move instanceof Directions) {
-            move1 = (Directions) move;
-        } else {
-            throw new IllegalArgumentException("Direction type expected");
+    protected void collisonEvent(final Entity entityCollided) {
+        if (entityCollided.getType() == Type.ENEMY) {
+            super.setX(-getX());
+            super.setY(-getY());
         }
+    }
 
-        switch (move1) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void receiveMovement(final Directions move) {
+        switch (move) {
             case UP:
                 super.setY(super.getMovementSpeed());
                 break;
@@ -58,13 +61,10 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     }
 
     /**
-     * Whenever this entity collide with a Enemy {@link Type} entity, it takes knockBack.
+     * {@inheritDoc}
      */
     @Override
-    protected void collisonEvent(final Entity entityCollided) {
-        if (entityCollided.getType() == Type.ENEMY) {
-            super.setX(-getX());
-            super.setY(-getY());
-        }
+    public void receiveMovement(final Point2D move) {
+        //This component doesn't use this method
     } 
 }

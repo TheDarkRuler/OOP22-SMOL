@@ -1,6 +1,8 @@
 package it.unibo.smol.model.api;
 
+import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
+import javafx.geometry.Point2D;
 
 /**
  * Abstract class rappresenting the template of the Physics component for the {@link Entity}.
@@ -42,11 +44,16 @@ public abstract class PhysicsComponent {
     }
 
     /**
-     * Translate the command received from the {@link InputComponent} to actual movement.
-     * @param <A> : The possible data type of the command
-     * @param move : The command received
+     * This method receive a {@link Directions} and translate it into actual movement.
+     * @param move : the direction given
      */
-    public abstract <A> void receiveMovement(A move);
+    public abstract void receiveMovement(Directions move);
+
+    /**
+     * This method receive a {@link Point2D} and translate it into actual movement.
+     * @param move : the coordinate given
+     */
+    public abstract void receiveMovement(Point2D move);
 
     /**
      * Getter for the entity field.
@@ -93,7 +100,7 @@ public abstract class PhysicsComponent {
      * @return the hitbox
      */
     public HitBox getHitBox() {
-        return hitBox;
+        return this.hitBox;
     }
 
     /**
@@ -103,18 +110,6 @@ public abstract class PhysicsComponent {
      */
     public boolean isRigid() {
         return isRigid;
-    }
-
-    /**
-     * Change to the other state of the {@link #hitBox};
-     * Check for more infos ( {@link #isRigid()} ).
-     */
-    public void setRigid() {
-        if (isRigid) {
-            isRigid = false;
-        } else {
-            isRigid = true;
-        }
     }
 
     /**
