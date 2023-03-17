@@ -7,52 +7,24 @@ import java.util.stream.Collectors;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.World;
 import it.unibo.smol.view.api.GameMap;
+import it.unibo.smol.view.impl.GameMapImpl;
 import it.unibo.smol.model.Type;
 
 /**
  * implementation of world interface.
  */
 public class WorldImpl implements World {
+    private static final int INC_RATE = 20;
     private final List<Entity> entities;
-    private GameMap map;
-    private final int score;
+    private final GameMap map;
+    private int score;
     /**
      * constructor for game world.
-     * @param basicMoles
-     * @param elmetMoles 
-     * @param angryMoles
-     * @param lifePlants
-     * @param score
      */
-    public WorldImpl(final int basicMoles, final int elmetMoles, final int angryMoles, final int lifePlants, final int score) {
-        //TODO better dry if possible
+    public WorldImpl() {
         this.entities = new ArrayList<>();
-        //moles
-        for (int i = 0; i < basicMoles; i++) {
-            this.entities.add(new EntityFactoryImpl().createBasicMole(i, i));
-        }
-
-        for (int i = 0; i < elmetMoles; i++) {
-            this.entities.add(new EntityFactoryImpl().createElmetMole(i, i));
-        }
-
-        for (int i = 0; i < angryMoles; i++) {
-            this.entities.add(new EntityFactoryImpl().createAngryMole(i, i));
-        }
-
-        //lifePlants
-        for (int i = 0; i < lifePlants; i++) {
-            this.entities.add(new EntityFactoryImpl().createLifePlants(i, i));
-        }
-
-        //TODO decide place for player
-        //player
-        this.entities.add(new EntityFactoryImpl().createPlayer(elmetMoles, angryMoles));
-
-        //gamemap
-
-        //score
-        this.score = score;
+        this.map = new GameMapImpl();
+        this.score = 0;
     }
     /**
      * {@inheritDoc}
@@ -109,5 +81,26 @@ public class WorldImpl implements World {
     @Override
     public int getScore() {
         return this.score;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int diffIncrement() {
+        return getScore() / INC_RATE;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addEntity(final Entity entity) {
+        this.entities.add(entity);
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void incScore() {
+        this.score = this.score + 1;
     } 
 }

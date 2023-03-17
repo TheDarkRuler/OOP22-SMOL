@@ -18,7 +18,6 @@ public class GameMapImpl implements GameMap {
         screeHeight = Screen.getPrimary().getBounds().getHeight();
         screeWidth = Screen.getPrimary().getBounds().getWidth();
     }
-
     /**
      * {@inheritDoc}
      */
@@ -26,7 +25,6 @@ public class GameMapImpl implements GameMap {
     public double getHeight() {
         return Double.valueOf(screeHeight);
     }
-
     /**
      * {@inheritDoc}
      */
@@ -34,21 +32,33 @@ public class GameMapImpl implements GameMap {
     public double getWidth() {
         return Double.valueOf(screeWidth);
     }
-
     /**
      * {@inheritDoc}
      */
     @Override
     public double getBorderHeight() {
-        return screeHeight - (screeHeight / HEIGHT_PROPORTION);
+        return screeHeight / HEIGHT_PROPORTION;
     }
-
     /**
      * {@inheritDoc}
      */
     @Override
     public double getBorderWidth() {
-        return screeHeight - (screeHeight / WIDTH_PROPORTION);
+        return screeHeight / WIDTH_PROPORTION;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMapHeight() {
+        return screeHeight - getBorderHeight();
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMapWidth() {
+        return screeHeight - getBorderWidth();
     }
 
 }

@@ -1,9 +1,6 @@
 package it.unibo.smol.model.api;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 /**
  * Abstract class rappresenting the template of the graphics component for the {@link GameObject}.
  */
@@ -12,11 +9,12 @@ public abstract class GraphicComponent {
     private GraphicsContext graphic;
     private final double width;
     private final double height;
+    private Entity entity;
 
-    /**
+	/**
      * Basic constructor for the {@link GraphicComponent}.
-     * @param width
-     * @param height
+     * @param width : the width of the image
+     * @param height : the height of the image
      */
     public GraphicComponent(final double width, final double height) {
         this.width = width;
@@ -24,9 +22,22 @@ public abstract class GraphicComponent {
     }
 
     /**
+     * Set the correct animation.
+     */
+    public abstract void setAnimation();
+
+    /**
+     * Update the animation of the entity.
+     */
+    public abstract void updateAnimation();
+
+    /**
      * Update the current state of the {@link GraphicComponent}.
      */
-    public abstract void update();
+    public void update() {
+        updateAnimation();
+        setAnimation();
+    }
 
     /**
      * Generate the 2D model from the {@link resources} file.
@@ -67,17 +78,20 @@ public abstract class GraphicComponent {
     public double getHeight() {
         return this.height;
     }
+
+     /**
+    * Getter for thr entity field.
+    * @return the entity that use this component
+    */  
+    public Entity getEntity() {
+		return entity;
+	}
+
     /**
-     * Getter for a subImage.
-     * @param img
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @return  the subImage 
+     * Set the entity associated with this component.
+     * @param entity the entity that use this component
      */
-    public WritableImage getSubImage(final Image img, final int x, final int y, final int width, final int height) {
-        final PixelReader reader = img.getPixelReader();
-        return new WritableImage(reader, x, y, width, height);
-    }
+	public void setEntity(final Entity entity) {
+		this.entity = entity;
+	}
 }
