@@ -10,10 +10,10 @@ import it.unibo.smol.controller.impl.WeaponInputComponent;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.EntityFactory;
-import it.unibo.smol.model.impl.physicscomponent.EnemyPhysicsComponent;
-import it.unibo.smol.model.impl.physicscomponent.LifePlantsPhysicsComponent;
-import it.unibo.smol.model.impl.physicscomponent.PlayerPhysicsComponent;
-import it.unibo.smol.model.impl.physicscomponent.WeaponPhysicsComponent;
+import it.unibo.smol.model.impl.physicsComponent.EnemyPhysicsComponent;
+import it.unibo.smol.model.impl.physicsComponent.LifePlantsPhysicsComponent;
+import it.unibo.smol.model.impl.physicsComponent.PlayerPhysicsComponent;
+import it.unibo.smol.model.impl.physicsComponent.WeaponPhysicsComponent;
 import javafx.geometry.Point2D;
 /**
  * Implemention of the {@link EntityFactory} interface.

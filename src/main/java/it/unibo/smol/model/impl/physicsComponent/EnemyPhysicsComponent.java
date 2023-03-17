@@ -1,4 +1,4 @@
-package it.unibo.smol.model.impl.physicscomponent;
+package it.unibo.smol.model.impl.physicsComponent;
 
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
