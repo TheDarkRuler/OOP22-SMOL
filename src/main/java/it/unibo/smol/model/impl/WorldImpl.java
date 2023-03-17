@@ -16,22 +16,14 @@ import it.unibo.smol.model.Type;
 public class WorldImpl implements World {
     private static final int INC_RATE = 20;
     private final List<Entity> entities;
-    private GameMap map;
+    private final GameMap map;
     private int score;
     /**
      * constructor for game world.
-     * @param basicMoles
-     * @param elmetMoles 
-     * @param angryMoles
-     * @param lifePlants
-     * @param score
      */
     public WorldImpl() {
-        //TODO better dry if possible
         this.entities = new ArrayList<>();
-        //gamemap
         this.map = new GameMapImpl();
-        //score
         this.score = 0;
     }
     /**
@@ -95,7 +87,7 @@ public class WorldImpl implements World {
      */
     @Override
     public int diffIncrement() {
-        return getScore()/INC_RATE;
+        return getScore() / INC_RATE;
     }
     /**
      * {@inheritDoc}

@@ -49,15 +49,17 @@ public interface World {
     World updateWorld();
 
     /**
-     * @return difficulty increment
+     * @return difficulty increment.
      */
     int diffIncrement();
+
     /**
-     * 
+     * @param thisEntity is the entity to add to the list of entities.
      */
     void addEntity(Entity thisEntity);
+
     /**
-     * 
+     * increments game currenti game score.
      */
     void incScore();
 }
