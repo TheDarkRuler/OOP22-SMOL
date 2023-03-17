@@ -36,7 +36,7 @@ public final class LoadImgs {
         } catch (IllegalArgumentException e) {
             Logger.getLogger(LoadImgs.class.getName()).info("Illegal Argument");
         } catch (IOException e1) {
-            Logger.getLogger(LoadImgs.class.getName()).info("Illegal Argument");
+            Logger.getLogger(LoadImgs.class.getName()).info("IOException");
         }
         return image;
     }

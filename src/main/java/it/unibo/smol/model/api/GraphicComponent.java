@@ -1,6 +1,7 @@
 package it.unibo.smol.model.api;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 /**
  * Abstract class rappresenting the template of the graphics component for the {@link GameObject}.
  */
@@ -10,8 +11,9 @@ public abstract class GraphicComponent {
     private final double width;
     private final double height;
     private Entity entity;
+    private Image image;
 
-	/**
+    /**
      * Basic constructor for the {@link GraphicComponent}.
      * @param width : the width of the image
      * @param height : the height of the image
@@ -79,19 +81,35 @@ public abstract class GraphicComponent {
         return this.height;
     }
 
-     /**
+    /**
     * Getter for thr entity field.
     * @return the entity that use this component
-    */  
+    */
     public Entity getEntity() {
-		return entity;
-	}
+        return entity;
+    }
 
     /**
      * Set the entity associated with this component.
      * @param entity the entity that use this component
      */
-	public void setEntity(final Entity entity) {
-		this.entity = entity;
-	}
+    public void setEntity(final Entity entity) {
+        this.entity = entity;
+    }
+
+    /**
+     * Set the entity image.
+     * @param img the entity image
+     */
+    public void setImage(final Image img) {
+        this.image = img;
+    }
+
+    /**
+    * Getter for thr entity image.
+    * @return the image of the entity
+    */
+    public Image getImage() {
+        return image;
+    }
 }
