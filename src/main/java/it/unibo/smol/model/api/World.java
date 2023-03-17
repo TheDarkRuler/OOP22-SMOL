@@ -2,8 +2,6 @@ package it.unibo.smol.model.api;
 
 import java.util.List;
 
-import it.unibo.smol.view.api.GameMap;
-
 /**
  * Interface for World: a container for entities.
  */
@@ -34,11 +32,6 @@ public interface World {
     void remove(Entity thisEntity);
 
     /**
-     * @return gmae map.
-     */
-    GameMap getMap();
-
-    /**
      * @return score.
      */
     int getScore();
@@ -49,15 +42,17 @@ public interface World {
     World updateWorld();
 
     /**
-     * @return difficulty increment
+     * @return difficulty increment.
      */
     int diffIncrement();
+
     /**
-     * 
+     * @param thisEntity is the entity to add to the list of entities.
      */
     void addEntity(Entity thisEntity);
+
     /**
-     * 
+     * increments game currenti game score.
      */
     void incScore();
 }

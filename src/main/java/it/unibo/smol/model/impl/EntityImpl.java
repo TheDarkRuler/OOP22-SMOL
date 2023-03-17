@@ -140,5 +140,19 @@ public class EntityImpl implements Entity {
             this.gameState.notifyDeath();
         }
         graphicComp.update();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Entity copyOf() {
+        return new EntityImpl(this.type,
+        this.inputComp,
+        this.healthComp,
+        this.graphicComp,
+        this.physicsComp,
+        this.currentX,
+        this.currentY);
     } 
 }

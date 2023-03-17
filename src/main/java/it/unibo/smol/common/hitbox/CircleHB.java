@@ -106,4 +106,12 @@ public class CircleHB implements HitBox {
     public boolean isColliding(final HitBox hitBox) {
         return hitBox.isColliding(this);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HitBox copyOf() {
+        return new CircleHB(this.center, this.radius);
+    }
 }
