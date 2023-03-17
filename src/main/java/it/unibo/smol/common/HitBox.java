@@ -45,4 +45,10 @@ public interface HitBox {
      */
     boolean isColliding(RectangleHB rectangle);
 
+    /**
+     * clone object.
+     * @return a copy
+     */
+    HitBox copyOf();
+
 }
