@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.World;
-import it.unibo.smol.view.api.GameMap;
-import it.unibo.smol.view.impl.GameMapImpl;
 import it.unibo.smol.model.Type;
 
 /**
@@ -16,14 +14,14 @@ import it.unibo.smol.model.Type;
 public class WorldImpl implements World {
     private static final int INC_RATE = 20;
     private final List<Entity> entities;
-    private final GameMap map;
+    //private final GameMap map;
     private int score;
     /**
      * constructor for game world.
      */
     public WorldImpl() {
         this.entities = new ArrayList<>();
-        this.map = new GameMapImpl();
+        //this.map = new GameMapImpl();
         this.score = 0;
     }
     /**
@@ -60,13 +58,6 @@ public class WorldImpl implements World {
     @Override
     public void remove(final Entity thisEntity) {
         entities.remove(thisEntity);
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public GameMap getMap() {
-        return this.map;
     }
     /**
      * {@inheritDoc}

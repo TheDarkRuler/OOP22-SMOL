@@ -2,8 +2,6 @@ package it.unibo.smol.model.api;
 
 import java.util.List;
 
-import it.unibo.smol.view.api.GameMap;
-
 /**
  * Interface for World: a container for entities.
  */
@@ -32,11 +30,6 @@ public interface World {
      * @param thisEntity entity to remove from the list of entities.
      */
     void remove(Entity thisEntity);
-
-    /**
-     * @return gmae map.
-     */
-    GameMap getMap();
 
     /**
      * @return score.
