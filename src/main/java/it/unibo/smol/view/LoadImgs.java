@@ -15,6 +15,7 @@ public final class LoadImgs {
    * file name of images.
    */
     public static final String WORLD_IMG = "garden.jpg";
+    public static final String MOLE = "mole1.gif";
 
     private LoadImgs() throws UnsupportedEncodingException {
         throw new UnsupportedEncodingException("This is a utily class");
@@ -28,11 +29,13 @@ public final class LoadImgs {
      * @throws IOException
      * @throws FileNotFoundException
      */
-    public static Image getSprites(final String filename) throws FileNotFoundException, IOException {
+    public static Image getSprites(final String filename) {
         Image image = null;
         try (FileInputStream path = new FileInputStream("src/main/resources/images/" + filename);) {
             image = new Image(path);
         } catch (IllegalArgumentException e) {
+            Logger.getLogger(LoadImgs.class.getName()).info("Illegal Argument");
+        } catch (IOException e1) {
             Logger.getLogger(LoadImgs.class.getName()).info("Illegal Argument");
         }
         return image;
