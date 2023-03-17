@@ -1,10 +1,12 @@
 package it.unibo.smol.controller.input;
 
 import java.util.Random;
+
 import it.unibo.smol.view.api.GameMap;
-import it.unibo.smol.view.impl.GameMapImpl;
 import javafx.geometry.Point2D;
 import javax.swing.Timer;
+import java.util.Collections;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,13 +27,13 @@ public class Enemy {
     private Timer enemyTimeUp;
     private EnemyMoves enemyMovement;
 
-    public Enemy() {
-        this.mapDimension = new GameMapImpl();
+    public Enemy(final GameMap mapDimension) {
 
         this.minTimeUp = DEFAULT_MIN_TIME_UP;
         this.maxTimeUp = DEFAULT_MAX_TIME_UP;
         this.maxTimesCanSpawn = DEFAULT_MAX_TIME_CAN_SPAWN;
 
+        this.mapDimension = mapDimension;
         this.enemyPosition = initialEnemyPosition();
         this.enemyNextPosition = enemySetsPosition(new Random().nextInt(4));
         this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, this);
@@ -111,9 +113,9 @@ public class Enemy {
                     if (enemyTimesSpawn < maxTimesCanSpawn) {
                         enemyNextPosition = enemySearchNextPos();
                         enemyMovement.positionUpdate(enemyPosition, enemyNextPosition);
-                    } /*else if (enemyTimesSpawn <= maxTimeSpawn) {
-                        enemyGoesOnPlants();
-                    }*/
+                    } else if (enemyTimesSpawn <= maxTimesCanSpawn) {
+                        //enemyGoesOnPlants();
+                    }
                     enemyTimeUp.stop();
                 }  
             });
@@ -122,6 +124,10 @@ public class Enemy {
     /*
      * da fare enemyGoesOnPlants, guarda QuadratoGUI.
      */
+    /*private void enemyGoesOnPlants() {
+        Collections.shuffle(plants);
+        if (plants.stream().count() == plants.stream().filter(a -> a.getPhysicsComp().))
+    }*/
 
     public boolean isEnemyOnPlant() {
         return enemyTimesSpawn <= maxTimesCanSpawn;
