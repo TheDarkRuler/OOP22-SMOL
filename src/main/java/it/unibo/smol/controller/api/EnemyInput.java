@@ -1,16 +1,15 @@
-package it.unibo.smol.controller.input;
+package it.unibo.smol.controller.api;
 
 import java.util.Random;
 
+import it.unibo.smol.controller.input.EnemyMoves;
 import it.unibo.smol.view.api.GameMap;
 import javafx.geometry.Point2D;
 import javax.swing.Timer;
-import java.util.Collections;
-import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Enemy {
+public abstract class EnemyInput {
 
     private static final int DEFAULT_MIN_TIME_UP = 1500;
     private static final int DEFAULT_MAX_TIME_UP = 2500;
@@ -27,7 +26,7 @@ public class Enemy {
     private Timer enemyTimeUp;
     private EnemyMoves enemyMovement;
 
-    public Enemy(final GameMap mapDimension) {
+    public EnemyInput(final GameMap mapDimension) {
 
         this.minTimeUp = DEFAULT_MIN_TIME_UP;
         this.maxTimeUp = DEFAULT_MAX_TIME_UP;
@@ -132,4 +131,5 @@ public class Enemy {
     public boolean isEnemyOnPlant() {
         return enemyTimesSpawn <= maxTimesCanSpawn;
     } 
+    
 }

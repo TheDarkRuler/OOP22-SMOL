@@ -1,5 +1,6 @@
 package it.unibo.smol.controller.input;
 
+import it.unibo.smol.controller.api.EnemyInput;
 import javafx.geometry.Point2D;
 
 public class EnemyMoves {
@@ -8,10 +9,10 @@ public class EnemyMoves {
     private Point2D to;
     private double moveX;
     private double moveY;
-    private Enemy enemyToMove;
+    private EnemyInput enemyToMove;
     private boolean enemyIsUnder;
 
-    public EnemyMoves(final Point2D from, final Point2D to, final Enemy enemyToMove) {
+    public EnemyMoves(final Point2D from, final Point2D to, final EnemyInput enemyToMove) {
         this.from = from;
         this.to = to;
         this.enemyToMove = enemyToMove;

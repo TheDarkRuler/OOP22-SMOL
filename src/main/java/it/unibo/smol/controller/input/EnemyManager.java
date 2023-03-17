@@ -1,6 +1,7 @@
 package it.unibo.smol.controller.input;
 
 import java.util.List;
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.World;
 import it.unibo.smol.view.api.GameMap;
@@ -11,6 +12,8 @@ public class EnemyManager {
     private final GameMap mapDimension;
     private World world;
     private Entity enemyType;
+    private Constant constants;
+    private int enemyHealth;
 
     public EnemyManager(final World world, final Entity enemyType, final GameMap mapDimension) {
         this.world = world;
