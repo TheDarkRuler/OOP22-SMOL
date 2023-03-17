@@ -82,7 +82,7 @@ public abstract class PhysicsComponent {
      * Set the entity associated with this component.
      * @param e : The entity that use this component
      */
-    public void setEntity(Entity e) {
+    public void setEntity(final Entity e) {
         this.entity = e;
     }
 
