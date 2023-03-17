@@ -14,7 +14,7 @@ import it.unibo.smol.model.api.PhysicsComponent;
  */
 public class EntityImpl implements Entity {
     private final Type type;
-    private final InputComponent inputComp;
+    private final Optional<InputComponent> inputComp;
     private final Optional<HealthComponent> healthComp;
     private final GraphicComponent graphicComp;
     private final PhysicsComponent physicsComp;
@@ -32,7 +32,7 @@ public class EntityImpl implements Entity {
      * @param currentX
      * @param currentY
      */
-    public EntityImpl(final Type type, final InputComponent inputComp,
+    public EntityImpl(final Type type, final Optional<InputComponent> inputComp,
             final Optional<HealthComponent> healthComp,
             final GraphicComponent graphicComp, final PhysicsComponent physicsComp,
             final double currentX, final double currentY) {
@@ -123,9 +123,18 @@ public class EntityImpl implements Entity {
      */
     @Override
     public void update() {
-        physicsComp.receiveMovement(inputComp.getDirection());
-        this.moveX(physicsComp.getX());
-        this.moveY(physicsComp.getY());
+        if (inputComp.isPresent()) {
+            final InputComponent inputCompPresent = inputComp.orElseThrow();
+            if (inputCompPresent.getDirection().isPresent()) {
+                physicsComp.receiveMovement(inputCompPresent.getDirection().orElseThrow());
+            }
+            if (inputCompPresent.getPosition().isPresent()) {
+                physicsComp.receiveMovement(inputCompPresent.getPosition().orElseThrow());
+            }
+            physicsComp.setRigid(inputCompPresent.isHittable());
+            this.moveX(physicsComp.getX());
+            this.moveY(physicsComp.getY());
+        }
         physicsComp.checkCollision();
         if (healthComp.isPresent() && healthComp.get().isDead()) {
             this.gameState.notifyDeath();
