@@ -1,9 +1,14 @@
 package it.unibo.smol.controller.api;
 
+import java.util.Optional;
 import java.util.Random;
-
+import it.unibo.smol.common.Constant;
+import it.unibo.smol.common.HitBox;
+import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.input.EnemyMoves;
+import it.unibo.smol.model.api.World;
 import it.unibo.smol.view.api.GameMap;
+import it.unibo.smol.view.impl.GameMapImpl;
 import javafx.geometry.Point2D;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
@@ -13,26 +18,30 @@ public abstract class EnemyInput {
 
     private static final int DEFAULT_MIN_TIME_UP = 1500;
     private static final int DEFAULT_MAX_TIME_UP = 2500;
-    private static final int DEFAULT_MAX_TIME_CAN_SPAWN = 2;
 
     private final GameMap mapDimension;
-    private int minTimeUp;
-    private int maxTimeUp;
+    protected int minTimeUp;
+    protected int maxTimeUp;
     private int enemySection;
-    private int enemyTimesSpawn;
+    protected int enemyTimesSpawn;
     private int maxTimesCanSpawn;
-    private Point2D enemyPosition;
-    private Point2D enemyNextPosition;
-    private Timer enemyTimeUp;
-    private EnemyMoves enemyMovement;
+    protected Point2D enemyPosition;
+    protected Point2D enemyNextPosition;
+    protected Timer enemyTimeUp;
+    protected EnemyMoves enemyMovement;
+    private World world;
+    private HitBox newPosHitBox;
+    private boolean isNewPosViable;
 
-    public EnemyInput(final GameMap mapDimension) {
+    public EnemyInput(final int maxTimesCanSpawn, final World world) {
 
         this.minTimeUp = DEFAULT_MIN_TIME_UP;
         this.maxTimeUp = DEFAULT_MAX_TIME_UP;
-        this.maxTimesCanSpawn = DEFAULT_MAX_TIME_CAN_SPAWN;
 
-        this.mapDimension = mapDimension;
+        this.isNewPosViable = true;
+        this.world = world;
+        this.maxTimesCanSpawn = maxTimesCanSpawn;
+        this.mapDimension = new GameMapImpl();
         this.enemyPosition = initialEnemyPosition();
         this.enemyNextPosition = enemySetsPosition(new Random().nextInt(4));
         this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, this);
@@ -56,34 +65,47 @@ public abstract class EnemyInput {
         return new Random().nextBoolean() ? first : second;
     }
 
-    private Point2D enemySetsPosition(final int choosenSegment) {
-        this.enemySection = choosenSegment;
-        switch (choosenSegment) {
-            case 0:
-                return new Point2D(enemyRandX(),
-                    enemyRandY());
-            case 1:
-                return new Point2D(enemyRandX() + (mapDimension.getMapWidth() / 2),
-                    enemyRandY());
-            case 2:
-                return new Point2D(enemyRandX(),
-                    enemyRandY() + (mapDimension.getMapHeight() / 2));
-            case 3:   
-                return new Point2D(enemyRandX() + (mapDimension.getMapWidth() / 2),
-                    enemyRandY() + (mapDimension.getMapHeight() / 2)); 
-            default:
-                return null;
-        }
-    }
-
     private double enemyRandX() {
-        return (mapDimension.getBorderWidth() / 2)  /*+ Enemy size / 2 */+
-            (new Random().nextDouble(mapDimension.getMapWidth() / 2 /*- enemy size */)); 
+        return (mapDimension.getBorderWidth() / 2)  + (Constant.ENEMY_WIDTH / 2) +
+            (new Random().nextDouble((mapDimension.getMapWidth() / 2) - Constant.ENEMY_WIDTH)); 
     }
 
     private double enemyRandY() {
-        return (mapDimension.getBorderHeight() / 2)  /*+ Enemy size / 2 */+
-            (new Random().nextDouble(mapDimension.getMapHeight() / 2));
+        return (mapDimension.getBorderHeight() / 2) + (Constant.ENEMY_HEIGHT / 2) +
+            (new Random().nextDouble((mapDimension.getMapHeight() / 2) - Constant.ENEMY_HEIGHT));
+    }
+
+    private Point2D enemySetsPosition(final int choosenSegment) {
+        this.enemySection = choosenSegment;
+        this.isNewPosViable = true;
+        Optional<Point2D> temp;
+        do {
+            switch (choosenSegment) {
+                case 0:
+                    temp = Optional.of(new Point2D(enemyRandX(),
+                        enemyRandY()));
+                case 1:
+                    temp = Optional.of( new Point2D(enemyRandX() + (mapDimension.getMapWidth() / 2),
+                        enemyRandY()));
+                case 2:
+                    temp = Optional.of( new Point2D(enemyRandX(),
+                        enemyRandY() + (mapDimension.getMapHeight() / 2)));
+                case 3:   
+                    temp = Optional.of( new Point2D(enemyRandX() + (mapDimension.getMapWidth() / 2),
+                        enemyRandY() + (mapDimension.getMapHeight() / 2))); 
+                default:
+                    temp = Optional.empty();
+                    break;
+            }
+            newPosHitBox = new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT, temp.get());
+            world.getEntities().stream()
+                .forEach(a -> {
+                    if (newPosHitBox.isColliding(a.getPhysicsComp().getHitBox())) {
+                        this.isNewPosViable = false;
+                    }
+                });
+        } while (!isNewPosViable);
+        return temp.get();
     }
 
     public void setEnemyPosition(final Point2D newPosition) {
@@ -91,6 +113,7 @@ public abstract class EnemyInput {
     }
 
     public void enemyIsUp() {
+        enemyTimesSpawn++;
         enemyStaysUpTimer();
     }
 
@@ -99,11 +122,10 @@ public abstract class EnemyInput {
         while (temp == enemySection) {
             temp = new Random().nextInt(4);
         }
-        enemyTimesSpawn++;
         return enemySetsPosition(temp);
     }
 
-    private void enemyStaysUpTimer() {
+    protected void enemyStaysUpTimer() {
         enemyTimeUp = new Timer(minTimeUp + new Random().nextInt(maxTimeUp - minTimeUp),
             new ActionListener() {
 
