@@ -1,4 +1,7 @@
 package it.unibo.smol.model.api;
+
+import java.util.Map;
+
 /**
  *  Interface for control the state of the game.
  */
@@ -34,4 +37,20 @@ public interface GameState {
      *  Notify the world to kill entities.
      */
     void notifyDeath();
+
+    /**
+     * @return a map of plants occupied.
+     */
+    Map<Entity,Boolean> occupiedPlants();
+
+    /**
+     * @param plant the plant to set free.
+     */
+    void setPlantFree(Entity plant);
+    
+    /**
+     * @param plant the plant to set occupied.
+     */
+    void setPlantOccupied(Entity plant);
+
 }
