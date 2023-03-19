@@ -11,10 +11,10 @@ import it.unibo.smol.model.api.World;
  * The implementation of the GameState.
  */
 public class GameStateImpl implements GameState {
-    private static Boolean OCCUPIED = true;
-    private static Boolean FREE = false;
+    private static final Boolean OCCUPIED = true;
+    private static final Boolean FREE = false;
     private final World world;
-    private final Map<Entity,Boolean> occupiedPlants;
+    private final Map<Entity, Boolean> occupiedPlants;
 
     /**
      * Constructor.
@@ -83,8 +83,17 @@ public class GameStateImpl implements GameState {
 
     private void updateLifePlants() {
         this.world.getLifePlants().forEach(plant -> {
-            if(!occupiedPlants.containsKey(plant)) {
+            if (!occupiedPlants.containsKey(plant)) {
                 occupiedPlants.put(plant, FREE);
+            }
+        });
+        checkRemoved();
+    }
+
+    private void checkRemoved() {
+        occupiedPlants.keySet().forEach(plant -> {
+            if (!this.world.getLifePlants().contains(plant)) {
+                occupiedPlants.remove(plant);
             }
         });
     }
@@ -93,18 +102,22 @@ public class GameStateImpl implements GameState {
      * {@inheritDoc}
      */
     @Override
-    public void setPlantFree(Entity plant) {
+    public void setPlantFree(final Entity plant) {
         updateLifePlants();
-        occupiedPlants.put(plant, FREE);
+        if (occupiedPlants.containsKey(plant)) {
+            occupiedPlants.put(plant, FREE);
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setPlantOccupied(Entity plant) {
+    public void setPlantOccupied(final Entity plant) {
         updateLifePlants();
-        occupiedPlants.put(plant, OCCUPIED);
+        if (occupiedPlants.containsKey(plant)) {
+            occupiedPlants.put(plant, OCCUPIED);
+        }
     }
 
 }

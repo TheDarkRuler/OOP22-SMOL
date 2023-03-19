@@ -41,13 +41,13 @@ public interface GameState {
     /**
      * @return a map of plants occupied.
      */
-    Map<Entity,Boolean> occupiedPlants();
+    Map<Entity, Boolean> occupiedPlants();
 
     /**
      * @param plant the plant to set free.
      */
     void setPlantFree(Entity plant);
-    
+
     /**
      * @param plant the plant to set occupied.
      */
