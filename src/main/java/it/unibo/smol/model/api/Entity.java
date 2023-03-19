@@ -1,7 +1,7 @@
 package it.unibo.smol.model.api;
 
+import javafx.geometry.Point2D;
 import java.util.Optional;
-
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.impl.HealthComponent;
 
@@ -20,6 +20,12 @@ public interface Entity {
      * @return {@code y}
      */
     double getCurrentY();
+
+    /**
+     * Get the current position of the object.
+     * @return a Point2D
+     */
+    Point2D getCurrentPosition();
 
     /**
      * Getter for the GameState. 

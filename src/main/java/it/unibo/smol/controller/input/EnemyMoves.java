@@ -1,5 +1,8 @@
 package it.unibo.smol.controller.input;
 
+import java.util.Optional;
+
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.EnemyInput;
 import javafx.geometry.Point2D;
 
@@ -21,15 +24,18 @@ public class EnemyMoves {
         enemyIsUnder = true;
     }
 
-    public void enemyMovement() {
+    public Optional<Point2D> enemyMove() {
         if (enemyIsUnder){
-            if (from.distance(to) > 1/*mettere la velocita della talpa qua*/) {
+            if (from.distance(to) > Constant.ENEMY_MOVSPD) {
                 from = from.add(from.getX() < to.getX() ? moveX : -moveX, 0);
                 from = from.add(0, from.getY() < to.getY() ? moveY : -moveY);
             } else {
                 notifyEnemyHasArrived();
             }
+        } else {
+            return Optional.empty();
         }
+        return Optional.of(from);
     }
 
     private void notifyEnemyHasArrived() {
@@ -50,8 +56,6 @@ public class EnemyMoves {
         this.from = from;
         this.to = to;
         setMovementVariable();
-    }
-
-    /* positionUpdated in modo diverso, (guarda QuadratoGUI) */
-    
+        this.enemyIsUnder = true;
+    }  
 }

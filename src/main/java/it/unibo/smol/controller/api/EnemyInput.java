@@ -1,12 +1,15 @@
 package it.unibo.smol.controller.api;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.HitBox;
 import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.input.EnemyMoves;
-import it.unibo.smol.model.api.World;
+import it.unibo.smol.model.api.Entity;
+import it.unibo.smol.model.api.GameState;
 import it.unibo.smol.view.api.GameMap;
 import it.unibo.smol.view.impl.GameMapImpl;
 import javafx.geometry.Point2D;
@@ -29,17 +32,17 @@ public abstract class EnemyInput {
     protected Point2D enemyNextPosition;
     protected Timer enemyTimeUp;
     protected EnemyMoves enemyMovement;
-    private World world;
+    private GameState gs;
     private HitBox newPosHitBox;
     private boolean isNewPosViable;
 
-    public EnemyInput(final int maxTimesCanSpawn, final World world) {
+    public EnemyInput(final int maxTimesCanSpawn, final GameState gs) {
 
         this.minTimeUp = DEFAULT_MIN_TIME_UP;
         this.maxTimeUp = DEFAULT_MAX_TIME_UP;
 
         this.isNewPosViable = true;
-        this.world = world;
+        this.gs = gs;
         this.maxTimesCanSpawn = maxTimesCanSpawn;
         this.mapDimension = new GameMapImpl();
         this.enemyPosition = initialEnemyPosition();
@@ -77,9 +80,9 @@ public abstract class EnemyInput {
 
     private Point2D enemySetsPosition(final int choosenSegment) {
         this.enemySection = choosenSegment;
-        this.isNewPosViable = true;
         Optional<Point2D> temp;
         do {
+            this.isNewPosViable = true;
             switch (choosenSegment) {
                 case 0:
                     temp = Optional.of(new Point2D(enemyRandX(),
@@ -98,7 +101,7 @@ public abstract class EnemyInput {
                     break;
             }
             newPosHitBox = new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT, temp.get());
-            world.getEntities().stream()
+            gs.getWorld().getEntities().stream()
                 .forEach(a -> {
                     if (newPosHitBox.isColliding(a.getPhysicsComp().getHitBox())) {
                         this.isNewPosViable = false;
@@ -133,25 +136,48 @@ public abstract class EnemyInput {
                 public void actionPerformed(ActionEvent e) {
                     if (enemyTimesSpawn < maxTimesCanSpawn) {
                         enemyNextPosition = enemySearchNextPos();
-                        enemyMovement.positionUpdate(enemyPosition, enemyNextPosition);
                     } else if (enemyTimesSpawn <= maxTimesCanSpawn) {
-                        //enemyGoesOnPlants();
+                        enemyGoesOnPlants();
                     }
+                    enemyMovement.positionUpdate(enemyPosition, enemyNextPosition);
                     enemyTimeUp.stop();
                 }  
             });
         enemyTimeUp.start();
     }
+
     /*
      * da fare enemyGoesOnPlants, guarda QuadratoGUI.
      */
-    /*private void enemyGoesOnPlants() {
+    private void enemyGoesOnPlants() {
+        List<Entity> plants = gs.occupiedPlants().keySet().stream().toList();
         Collections.shuffle(plants);
-        if (plants.stream().count() == plants.stream().filter(a -> a.getPhysicsComp().))
-    }*/
+        if (plants.stream().count() == gs.occupiedPlants().values()
+            .stream()
+            .filter(a -> a.equals(true))
+            .count()) {
+            this.enemyNextPosition = plants
+                .stream()
+                .findAny()
+                .get()
+                .getCurrentPosition();
+        } else {
+            Entity choosenPlant = plants
+                .stream()
+                .filter(a -> gs.occupiedPlants().get(a).equals(false))
+                .findAny()
+                .get();
+            this.enemyNextPosition = choosenPlant.getCurrentPosition();
+            gs.setPlantOccupied(choosenPlant);
+        }
+    }
 
     public boolean isEnemyOnPlant() {
         return enemyTimesSpawn <= maxTimesCanSpawn;
-    } 
+    }
+
+    public Optional<Point2D> enemyUpdatePos() {
+        return enemyMovement.enemyMove();
+    }
     
 }

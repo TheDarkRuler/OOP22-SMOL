@@ -5,15 +5,15 @@ import it.unibo.smol.controller.api.EnemyInput;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import it.unibo.smol.model.api.World;
+import it.unibo.smol.model.api.GameState;
 import javax.swing.Timer;
 
 public class EnemyBombInput extends EnemyInput {
 
     private static final int BOMB_ENEMY_MAX_SPAWNS = 2;
 
-    public EnemyBombInput(final World world) {
-        super(BOMB_ENEMY_MAX_SPAWNS, world);
+    public EnemyBombInput(final GameState gs) {
+        super(BOMB_ENEMY_MAX_SPAWNS, gs);
     }
 
     @Override
