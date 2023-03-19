@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
+import it.unibo.smol.model.impl.EntityImpl;
 import javafx.geometry.Point2D;
 
 /**
@@ -75,7 +76,7 @@ public abstract class PhysicsComponent {
      * @return The entity that use this component
      */
     public Entity getEntity() {
-        return entity.copyOf();
+        return new EntityImpl(entity);
     }
 
     /**
@@ -164,5 +165,11 @@ public abstract class PhysicsComponent {
     public void setRigid(final boolean isRigid) {
         this.isRigid = isRigid;
     }
+
+    /**
+     * 
+     * @return a copy of the current Physics component
+     */
+    public abstract PhysicsComponent makeCopy();
 
 }

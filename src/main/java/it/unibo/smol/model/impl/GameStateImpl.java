@@ -21,7 +21,7 @@ public class GameStateImpl implements GameState {
      * @param world
      */
     public GameStateImpl(final World world) {
-        this.world = world;
+        this.world = new WorldImpl(world);
         this.occupiedPlants = new HashMap<>();
     }
 
@@ -30,7 +30,7 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public World getWorld() {
-        return this.world;
+        return new WorldImpl(this.world);
     }
 
     /**
@@ -78,7 +78,7 @@ public class GameStateImpl implements GameState {
     @Override
     public Map<Entity, Boolean> occupiedPlants() {
         updateLifePlants();
-        return this.occupiedPlants;
+        return new HashMap<>(this.occupiedPlants);
     }
 
     private void updateLifePlants() {

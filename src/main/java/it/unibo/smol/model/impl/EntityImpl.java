@@ -47,6 +47,20 @@ public class EntityImpl implements Entity {
     }
 
     /**
+     * copy constructor
+     * @param entity
+     */
+    public EntityImpl(final Entity entity) {
+        this.type = entity.getType();
+        this.inputComp = entity.getInputComp();
+        this.healthComp = entity.getHealthComp();
+        this.graphicComp = null;
+        this.currentX = entity.getCurrentX();
+        this.currentY = entity.getCurrentY();
+        this.gameState = entity.getGameState();
+        this.physicsComp = entity.getPhysicsComp();
+    }
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -115,7 +129,7 @@ public class EntityImpl implements Entity {
      */
     @Override
     public PhysicsComponent getPhysicsComp() {
-        return physicsComp;
+        return physicsComp.makeCopy();
     }
 
     /**
@@ -142,17 +156,14 @@ public class EntityImpl implements Entity {
         graphicComp.update();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public Entity copyOf() {
-        return new EntityImpl(this.type,
-        this.inputComp,
-        this.healthComp,
-        this.graphicComp,
-        this.physicsComp,
-        this.currentX,
-        this.currentY);
+    public Optional<InputComponent> getInputComp() {
+        return this.inputComp;
+    }
+
+    @Override
+    public GraphicComponent getGraphicComponent() {
+        //TODO adjust graphic component when properly defined
+        return null;
     } 
 }

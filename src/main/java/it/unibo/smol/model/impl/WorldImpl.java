@@ -16,6 +16,7 @@ public class WorldImpl implements World {
     private final List<Entity> entities;
     //private final GameMap map;
     private int score;
+
     /**
      * constructor for game world.
      */
@@ -23,6 +24,14 @@ public class WorldImpl implements World {
         this.entities = new ArrayList<>();
         //this.map = new GameMapImpl();
         this.score = 0;
+    }
+
+    /**
+     * copy constructor
+     */
+    public WorldImpl (World world) {
+        this.entities = world.getEntities();
+        this.score = world.getScore();
     }
     /**
      * {@inheritDoc}

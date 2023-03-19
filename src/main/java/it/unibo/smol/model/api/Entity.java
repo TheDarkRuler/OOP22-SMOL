@@ -2,6 +2,7 @@ package it.unibo.smol.model.api;
 
 import java.util.Optional;
 
+import it.unibo.smol.controller.api.InputComponent;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.impl.HealthComponent;
 
@@ -58,6 +59,18 @@ public interface Entity {
     Optional<HealthComponent> getHealthComp();
 
     /**
+     * Getter for the InputComponent.
+     * @return The inputComponent
+     */
+    Optional<InputComponent> getInputComp();
+
+    /**
+     * Getter for the InputComponent.
+     * @return The graphicComponent
+     */
+    GraphicComponent getGraphicComponent();
+
+    /**
      * Getter for the PhysicsComponent.
      * @return The PhysicsComponent
      */
@@ -68,9 +81,4 @@ public interface Entity {
      */
     void update();
 
-    /**
-     * Create a copy of Entity.
-     * @return the copy
-     */
-    Entity copyOf();
 }
