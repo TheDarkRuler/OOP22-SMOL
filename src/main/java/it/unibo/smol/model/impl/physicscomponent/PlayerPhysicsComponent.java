@@ -1,4 +1,4 @@
-package it.unibo.smol.model.impl.physicsComponent;
+package it.unibo.smol.model.impl.physicscomponent;
 
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
@@ -47,7 +47,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
             super.setX(-super.getMovementSpeed());
                 break;
             case RIGHT:
-            super.setY(super.getMovementSpeed());
+            super.setX(super.getMovementSpeed());
                 break;
             case STAY_X:
             super.setX(0);
@@ -66,5 +66,5 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     @Override
     public void receiveMovement(final Point2D move) {
         //This component doesn't use this method
-    } 
+    }
 }

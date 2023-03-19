@@ -1,5 +1,8 @@
 package it.unibo.smol.model.api;
 
+import java.util.List;
+import java.util.Optional;
+
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 import javafx.geometry.Point2D;
@@ -24,7 +27,7 @@ public abstract class PhysicsComponent {
      */
     public PhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
         this.movementSpeed = movementSpeed;
-        this.hitBox = hitBox;
+        this.hitBox = hitBox.copyOf();
         this.isRigid = true;
     }
 
@@ -44,6 +47,18 @@ public abstract class PhysicsComponent {
     }
 
     /**
+     * Check the collision with the given list of Entities.
+     * @param list the given list of Entities
+     * @return {@code Empty} if there isn't a collision; Otherwise the Entity that collide with 
+     */
+    public Optional<Entity> checkCollision(final List<Entity> list) {
+        return list.stream()
+            .filter(x -> !this.equals(x.getPhysicsComp()))
+            .filter(x -> hitBox.isColliding(x.getPhysicsComp().getHitBox()))
+            .findAny();
+    }
+
+    /**
      * This method receive a {@link Directions} and translate it into actual movement.
      * @param move : the direction given
      */
@@ -60,15 +75,15 @@ public abstract class PhysicsComponent {
      * @return The entity that use this component
      */
     public Entity getEntity() {
-        return entity;
+        return entity.copyOf();
     }
 
     /**
      * Set the entity associated with this component.
-     * @param entity : The entity that use this component
+     * @param e : The entity that use this component
      */
-    public void setEntity(final Entity entity) {
-        this.entity = entity;
+    public void setEntity(final Entity e) {
+        this.entity = e;
     }
 
     /**
@@ -100,7 +115,7 @@ public abstract class PhysicsComponent {
      * @return the hitbox
      */
     public HitBox getHitBox() {
-        return this.hitBox;
+        return this.hitBox.copyOf();
     }
 
     /**
@@ -149,4 +164,5 @@ public abstract class PhysicsComponent {
     public void setRigid(final boolean isRigid) {
         this.isRigid = isRigid;
     }
+
 }

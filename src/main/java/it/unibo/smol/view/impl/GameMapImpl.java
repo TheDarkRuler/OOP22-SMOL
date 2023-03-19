@@ -53,6 +53,7 @@ public class GameMapImpl implements GameMap {
     public double getMapHeight() {
         return screeHeight - getBorderHeight();
     }
+
     /**
      * {@inheritDoc}
      */

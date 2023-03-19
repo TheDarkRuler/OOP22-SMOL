@@ -67,4 +67,10 @@ public interface Entity {
      * Update all the component of the object.
      */
     void update();
+
+    /**
+     * Create a copy of Entity.
+     * @return the copy
+     */
+    Entity copyOf();
 }

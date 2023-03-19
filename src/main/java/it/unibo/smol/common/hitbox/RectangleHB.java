@@ -97,4 +97,12 @@ public class RectangleHB implements HitBox {
         return hitBox.isColliding(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HitBox copyOf() {
+        return new RectangleHB(this.width, this.height, this.center);
+    }
+
 }
