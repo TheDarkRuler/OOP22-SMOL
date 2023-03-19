@@ -27,7 +27,7 @@ public class EnemyBombInput extends EnemyInput {
                         enemyNextPosition = enemySearchNextPos();
                         enemyMovement.positionUpdate(enemyPosition, enemyNextPosition);
                     } else {
-                        //enemyDies();
+                        gs.notifyDeath();
                     }
                     enemyTimeUp.stop();
                 }  

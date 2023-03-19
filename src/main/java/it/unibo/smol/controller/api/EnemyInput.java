@@ -32,7 +32,7 @@ public abstract class EnemyInput {
     protected Point2D enemyNextPosition;
     protected Timer enemyTimeUp;
     protected EnemyMoves enemyMovement;
-    private GameState gs;
+    protected GameState gs;
     private HitBox newPosHitBox;
     private boolean isNewPosViable;
 
@@ -178,6 +178,10 @@ public abstract class EnemyInput {
 
     public Optional<Point2D> enemyUpdatePos() {
         return enemyMovement.enemyMove();
+    }
+
+    public boolean isEnemyUnder() {
+        return enemyMovement.isEnemyUnderground();
     }
     
 }

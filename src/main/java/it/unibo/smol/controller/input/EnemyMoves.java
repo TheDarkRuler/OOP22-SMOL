@@ -57,5 +57,9 @@ public class EnemyMoves {
         this.to = to;
         setMovementVariable();
         this.enemyIsUnder = true;
-    }  
+    }
+
+    public boolean isEnemyUnderground() {
+        return enemyIsUnder;
+    }
 }
