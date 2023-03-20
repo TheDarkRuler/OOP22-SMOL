@@ -20,12 +20,7 @@ public interface GameState {
     /**
      *  Notify the world to increase the score.
      */
-    void incScore();
-
-    /**
-     * Notify the world to decrease the score.
-     */
-    void decScore();
+    void incScore(int quantity);
 
     /**
      * Getter for the score.

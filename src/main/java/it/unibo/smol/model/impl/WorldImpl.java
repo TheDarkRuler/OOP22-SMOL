@@ -101,7 +101,7 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void incScore() {
-        this.score = this.score + 1;
+    public void incScore(final int quantity) {
+        this.score = this.score + quantity;
     } 
 }

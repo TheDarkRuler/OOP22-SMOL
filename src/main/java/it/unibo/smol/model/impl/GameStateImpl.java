@@ -54,15 +54,8 @@ public class GameStateImpl implements GameState {
      * {@inheritDoc}
      */
     @Override
-    public void incScore() {
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void decScore() {
+    public void incScore(final int quantity) {
+        this.world.incScore(quantity);
     }
 
     /**
@@ -70,7 +63,7 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public int getScore() {
-        return 0;
+        return this.world.getScore();
     }
 
     /**
