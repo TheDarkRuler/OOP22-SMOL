@@ -43,4 +43,12 @@ public class WeaponInputComponent implements InputComponent {
     public boolean isHittable() {
         return mouse.isWeaponSmashed();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void freezeInput(final int millisec) {
+        mouse.freezeInputs(millisec);
+    }
 }
