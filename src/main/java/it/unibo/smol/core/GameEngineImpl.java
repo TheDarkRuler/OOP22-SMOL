@@ -1,5 +1,9 @@
 package it.unibo.smol.core;
 
+import it.unibo.smol.model.api.GameState;
+import it.unibo.smol.model.api.World;
+import it.unibo.smol.view.impl.GameViewState;
+
 /**
  * This class is the engine of the game.
  * The purpose of the engine is to control the {@link GameLoop} thread
@@ -52,9 +56,9 @@ public class GameEngineImpl implements GameEngine {
      * {@inheritDoc}
      */
     @Override
-    public void init() {
+    public void init(final World w, final GameState gs, final GameViewState gv) {
         state = true;
-        gameLoop = new GameLoop();
+        gameLoop = new GameLoop(w, gs, gv);
         gameLoop.start();
     }
 }

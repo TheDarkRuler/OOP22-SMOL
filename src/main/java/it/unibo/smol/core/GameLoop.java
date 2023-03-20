@@ -1,5 +1,9 @@
 package it.unibo.smol.core;
 
+import it.unibo.smol.model.api.GameState;
+import it.unibo.smol.model.api.World;
+import it.unibo.smol.view.impl.GameViewState;
+
 /**
  * This class is the responsible of the overall flow control of the game.
  */
@@ -15,6 +19,21 @@ public class GameLoop extends Thread {
     private double delta;
     private boolean end;
 
+    private World world;
+    private GameState gameState;
+    private GameViewState gameViewState;
+
+    /**
+     * Constructor for the GameLoop.
+     * @param world world where the game set
+     * @param gameState the state of the game
+     * @param gameViewState the visual rappresentation of the game
+     */
+    public GameLoop(final World world, final GameState gameState, final GameViewState gameViewState) {
+        this.world = world;
+        this.gameState = gameState;
+        this.gameViewState = gameViewState;
+    }
     // ALL commented code is for FPS checking
     /*long timer =0;
     int drawCount=0;*/
@@ -50,24 +69,24 @@ public class GameLoop extends Thread {
     }
 
     /**
-     * update.
+     * Update the logic and check the end condition of the Game.
      */
     public void update() {
-        end = false;
+        world.updateWorld();
+        end = gameState.isGameOver();
     }
 
     /**
      * process.
      */
     private void processInput() {
-
     }
 
     /**
-     * repaint.
+     * Repaint the Window with the change ocurred by the {@link #update()} method.
      */
     private void repaint() {
-
+        gameViewState.repaint();
     }
 
     /**

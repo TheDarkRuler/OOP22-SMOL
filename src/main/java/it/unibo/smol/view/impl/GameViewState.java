@@ -59,4 +59,8 @@ public class GameViewState implements WindowState {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void repaint() {
+        
+    }
 }
