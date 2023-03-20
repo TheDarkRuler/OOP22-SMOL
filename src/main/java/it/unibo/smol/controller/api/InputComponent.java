@@ -23,4 +23,10 @@ public interface InputComponent {
      * @return true if the entity is hittable, false otherwise
      */
     boolean isHittable();
+
+    /**
+     * Freeze the input for some time.
+     * @param millisec the time express in millisecond
+     */
+    void freezeInput(int millisec);
 }

@@ -27,6 +27,8 @@ public final class Constant {
     public static final int ENEMY_HELMET_HP = 200;
     /**enemy damage. */
     public static final int ENEMY_DMG = -1;
+    /**The time the player stay freeze when the bomb explode. */
+    public static final int BOMB_EXPLOSION = 1000;
 
     /**lifeplant width. */
     public static final int HEALTH_WIDTH = 180;
