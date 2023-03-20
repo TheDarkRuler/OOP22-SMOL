@@ -40,10 +40,10 @@ public class EntityImpl implements Entity {
         this.inputComp = inputComp;
         this.healthComp = healthComp;
         this.graphicComp = graphicComp;
-        this.physicsComp = physicsComp;
+        this.physicsComp = physicsComp.makeCopy();
         this.currentX = currentX;
         this.currentY = currentY;
-        physicsComp.setEntity(this);
+        physicsComp.setEntity(new EntityImpl(this));
     }
 
     /**
@@ -60,6 +60,7 @@ public class EntityImpl implements Entity {
         this.gameState = entity.getGameState();
         this.physicsComp = entity.getPhysicsComp();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -81,7 +82,7 @@ public class EntityImpl implements Entity {
      */
     @Override
     public GameState getGameState() {
-        return gameState;
+        return new GameStateImpl(gameState);
     }
 
     /**
@@ -105,7 +106,7 @@ public class EntityImpl implements Entity {
      */
     @Override
     public void setGameState(final GameState gs) {
-        this.gameState = gs;
+        this.gameState = new GameStateImpl(gs);
     }
 
     /**

@@ -26,6 +26,15 @@ public class GameStateImpl implements GameState {
     }
 
     /**
+     * Constructor.
+     * @param world
+     */
+    public GameStateImpl(final GameState gameState) {
+        this.world = gameState.getWorld();
+        this.occupiedPlants = gameState.occupiedPlants();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

@@ -27,9 +27,10 @@ public class WorldImpl implements World {
     }
 
     /**
-     * copy constructor
+     * copy constructor.
+     * @param world is the world that we want to copy
      */
-    public WorldImpl (World world) {
+    public WorldImpl(final World world) {
         this.entities = world.getEntities();
         this.score = world.getScore();
     }

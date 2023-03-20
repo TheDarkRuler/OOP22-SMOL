@@ -35,8 +35,9 @@ public abstract class PhysicsComponent {
     /**
      * Update the position of the entity and check the collision with the other entity present.
      */
-    public void checkCollision() {
-        this.entity.getGameState().getWorld().getEntities().stream()
+    public void checkCollision() throws NullPointerException {
+        if (this.entity != null) {
+            this.entity.getGameState().getWorld().getEntities().stream()
             .map(x -> x.getPhysicsComp())
             .filter(x -> !this.equals(x))
             .filter(x -> hitBox.isColliding(x.getHitBox()))
@@ -45,6 +46,9 @@ public abstract class PhysicsComponent {
                         this.collisonEvent(x.getEntity());
                     }
                 });
+        } else {
+            throw new NullPointerException("No entity linked to this component");
+        }
     }
 
     /**
@@ -84,7 +88,7 @@ public abstract class PhysicsComponent {
      * @param e : The entity that use this component
      */
     public void setEntity(final Entity e) {
-        this.entity = e;
+        this.entity = new EntityImpl(e);
     }
 
     /**
