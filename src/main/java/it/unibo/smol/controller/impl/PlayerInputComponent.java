@@ -43,4 +43,12 @@ public class PlayerInputComponent implements InputComponent {
     public boolean isHittable() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void freezeInput(final int millisec) {
+        //This component don't use this feature yet.
+    }
 }

@@ -54,5 +54,5 @@ public interface World {
     /**
      * increments game currenti game score.
      */
-    void incScore();
+    void incScore(int quantity);
 }
