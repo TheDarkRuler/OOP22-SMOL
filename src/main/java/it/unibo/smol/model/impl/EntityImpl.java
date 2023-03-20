@@ -5,9 +5,9 @@ import java.util.Optional;
 import it.unibo.smol.controller.api.InputComponent;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
-import it.unibo.smol.model.api.GameState;
 import it.unibo.smol.model.api.GraphicComponent;
 import it.unibo.smol.model.api.PhysicsComponent;
+import it.unibo.smol.model.api.World;
 
 /**
  * The implementation that rappresent everything present in the game world.
@@ -20,7 +20,7 @@ public class EntityImpl implements Entity {
     private final PhysicsComponent physicsComp;
     private double currentX;
     private double currentY;
-    private GameState gameState;
+    private World world;
 
     /**
      * Constructor for creating entities utilizing the entity factory.
@@ -47,7 +47,7 @@ public class EntityImpl implements Entity {
     }
 
     /**
-     * copy constructor
+     * Copy constructor.
      * @param entity
      */
     public EntityImpl(final Entity entity) {
@@ -57,7 +57,7 @@ public class EntityImpl implements Entity {
         this.graphicComp = null;
         this.currentX = entity.getCurrentX();
         this.currentY = entity.getCurrentY();
-        this.gameState = entity.getGameState();
+        this.world = entity.getWorld();
         this.physicsComp = entity.getPhysicsComp();
     }
 
@@ -81,8 +81,8 @@ public class EntityImpl implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public GameState getGameState() {
-        return new GameStateImpl(gameState);
+    public World getWorld() {
+        return new WorldImpl(world);
     }
 
     /**
@@ -105,8 +105,8 @@ public class EntityImpl implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public void setGameState(final GameState gs) {
-        this.gameState = new GameStateImpl(gs);
+    public void setWorld(final World w) {
+        this.world = new WorldImpl(w);
     }
 
     /**
@@ -152,16 +152,22 @@ public class EntityImpl implements Entity {
         }
         physicsComp.checkCollision();
         if (healthComp.isPresent() && healthComp.get().isDead()) {
-            this.gameState.notifyDeath();
+            this.getWorld().remove(this);
         }
         graphicComp.update();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<InputComponent> getInputComp() {
         return this.inputComp;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GraphicComponent getGraphicComponent() {
         //TODO adjust graphic component when properly defined
