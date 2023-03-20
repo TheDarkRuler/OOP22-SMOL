@@ -1,7 +1,7 @@
 package it.unibo.smol.model.impl;
 
+import javafx.geometry.Point2D;
 import java.util.Optional;
-
 import it.unibo.smol.controller.api.InputComponent;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
@@ -75,6 +75,14 @@ public class EntityImpl implements Entity {
     @Override
     public double getCurrentY() {
         return currentY;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Point2D getCurrentPosition() {
+        return new Point2D(currentX, currentY);
     }
 
     /**
