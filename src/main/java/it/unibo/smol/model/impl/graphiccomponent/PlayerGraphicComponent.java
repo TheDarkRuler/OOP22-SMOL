@@ -1,27 +1,23 @@
 package it.unibo.smol.model.impl.graphiccomponent;
 
-import java.io.FileNotFoundException;
-
+import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.GraphicComponent;
 import it.unibo.smol.view.LoadImgs;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
 /**
  * The implementation of the {@link GraphicComponent} rappresenting the Player graphic.
  */
 public class PlayerGraphicComponent extends GraphicComponent {
 
-    private boolean moving, attacking;
+    private boolean moving;
+    private boolean attacking;
 
     /**
      * Constructors inherited by the super-class {@link GraphicComponent}.
      * @param width : See the super-Constructor
      * @param height : See the super-Constructor
      */
-    public PlayerGraphicComponent(final double width, final double height) {
-        super(width, height);
-        //super.setImage(LoadImgs.getSprites(LoadImgs.PLAYER_IDLE));
+    public PlayerGraphicComponent(final Entity entity, final double width, final double height) {
+        super(entity, width, height);
     }
 
     /**
@@ -30,15 +26,13 @@ public class PlayerGraphicComponent extends GraphicComponent {
     @Override
     public void setAnimation() {
 
-        /*if (moving) {
-            this.image = LoadImgs.getSprites(LoadImgs.PLAYER_MOVING);
+        if (moving) {
+            setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+        } else if (attacking){
+            setImage(LoadImgs.getSprites(LoadImgs.WORLD_IMG));
         } else {
-            this.image = LoadImgs.getSprites(LoadImgs.PLAYER_IDLE);
+            setImage(LoadImgs.getSprites(LoadImgs.WORLD_IMG));
         }
-
-        if (attacking) {
-            this.image = LoadImgs.getSprites(LoadImgs.PLAYER_ATTACK);
-        }*/
     }
 
     /**
@@ -48,24 +42,15 @@ public class PlayerGraphicComponent extends GraphicComponent {
     public void updateAnimation() {
 
         if(super.getEntity().getPhysicsComp().getX() == 0 &&
-            super.getEntity().getPhysicsComp().getY() ==0) {
-                moving = false;
-            } else {
-                moving = true;
-            }
-     
+            super.getEntity().getPhysicsComp().getY() == 0) {
+            moving = false;
+        }else {
+            moving = true;
+        }
         /*if() {
             attacking = true;
         } else {
             attacking = false;
         }*/
-    }
-
-    /**
-     * {@inheritDoc}.
-     */
-    @Override
-    public void render(GraphicsContext g, double x, double y) {
-        g.drawImage(super.getImage(), x, y, this.getWidth(), this.getHeight());
     }
 }

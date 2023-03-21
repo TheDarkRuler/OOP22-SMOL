@@ -1,26 +1,27 @@
 package it.unibo.smol.model.api;
 
-import javafx.scene.canvas.GraphicsContext;
+import it.unibo.smol.view.impl.GraphicsDraw;
 import javafx.scene.image.Image;
 /**
  * Abstract class rappresenting the template of the graphics component for the {@link GameObject}.
  */
 public abstract class GraphicComponent {
 
-    private GraphicsContext graphic;
     private final double width;
     private final double height;
     private Entity entity;
     private Image image;
+    private GraphicsDraw graphic;
 
     /**
      * Basic constructor for the {@link GraphicComponent}.
      * @param width : the width of the image
      * @param height : the height of the image
      */
-    public GraphicComponent(final double width, final double height) {
+    public GraphicComponent(final Entity entity, final double width, final double height) {
         this.width = width;
         this.height = height;
+        setEntity(entity);
     }
 
     /**
@@ -58,21 +59,16 @@ public abstract class GraphicComponent {
      * @param x : The X coordinate on the destination for the upper left of the image
      * @param y : The Y coordinate on the destination for the upper left of the image
      */
-    public abstract void render(GraphicsContext g, double x, double y); 
-
-    /**
-     * Setter for the {@link #graphic} field.
-     * @param g : The value that's gonna be set
-     */
-    public void setGraphic(final GraphicsContext g) {
-        this.graphic = g;
-    }
+    public void render() {
+        this.update();
+        this.graphic.drawSprite(this.image, this.entity);
+    }; 
 
     /**
      * Getter for the {@link #graphic} field.
      * @return {@link #graphic}
      */
-    public GraphicsContext getGraphic() {
+    public GraphicsDraw getGraphic() {
         return this.graphic;
     }
 

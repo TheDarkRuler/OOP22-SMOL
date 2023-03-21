@@ -1,34 +1,36 @@
 package it.unibo.smol.model.impl.graphiccomponent;
 
+import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.GraphicComponent;
-import javafx.scene.canvas.GraphicsContext;
+import it.unibo.smol.view.LoadImgs;
 
 /**
  * The implementation of the {@link GraphicComponent} rappresenting the Plants graphic.
  */
 public class LifePlantsGraphicComponent extends GraphicComponent{
 
-    public LifePlantsGraphicComponent(double width, double height) {
-        super(width, height);
-        //TODO Auto-generated constructor stub
-    }
+    private boolean isHalfDead;
 
-    @Override
-    public void render(GraphicsContext g, double x, double y) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'render'");
+    public LifePlantsGraphicComponent(final Entity entity, final double width, final double height) {
+        super(entity, width, height);
     }
 
     @Override
     public void setAnimation() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setAnimation'");
+        if (isHalfDead) {
+            super.setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+        } else {
+            super.setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+        }
     }
 
     @Override
     public void updateAnimation() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateAnimation'");
+        if (super.getEntity().getHealthComp().get().getCurrentHealth() <= 10/*meta vita */) {
+            isHalfDead = true;
+        } else {
+            isHalfDead = false;
+        }
     }
     
 }

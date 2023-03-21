@@ -1,36 +1,42 @@
 package it.unibo.smol.model.impl.graphiccomponent;
 
+import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.GraphicComponent;
 import it.unibo.smol.view.LoadImgs;
-import javafx.fxml.LoadException;
-import javafx.scene.canvas.GraphicsContext;
 
 /**
  * The implementation of the {@link GraphicComponent} rappresenting the Weapon graphic.
  */
 public class WeaponGraphicComponent extends GraphicComponent{
 
-    public WeaponGraphicComponent(double width, double height) {
-        super(width, height);
-        //super.setImage(LoadImgs.getSprites(LoadImgs.));
+    private boolean attacking;
+
+    public WeaponGraphicComponent(final Entity entity, final double width, final double height) {
+        super(entity, width, height);
     }
 
     @Override
-    public void render(GraphicsContext g, double x, double y) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'render'");
+    public void render() {
+        super.update();
+        if (attacking) {
+            super.getGraphic().drawSprite(super.getImage(), super.getEntity());
+        }
     }
 
     @Override
     public void setAnimation() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setAnimation'");
+        if(attacking) {
+            super.setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+        }
     }
 
     @Override
     public void updateAnimation() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateAnimation'");
+        if(attacking/*is Hammer SMashed == true */) {
+            attacking = true;
+        } else {
+            attacking = false;
+        }
     }
     
 }
