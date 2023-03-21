@@ -37,9 +37,9 @@ public interface World {
     int getScore();
 
     /**
-     * @return updated Word.
+     *  update Word.
      */
-    World updateWorld();
+    void updateWorld();
 
     /**
      * @return difficulty increment.
