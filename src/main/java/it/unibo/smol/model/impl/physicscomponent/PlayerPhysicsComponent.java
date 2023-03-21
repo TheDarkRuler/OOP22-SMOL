@@ -67,4 +67,12 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     public void receiveMovement(final Point2D move) {
         //This component doesn't use this method
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PhysicsComponent makeCopy() {
+        return this;
+    }
 }

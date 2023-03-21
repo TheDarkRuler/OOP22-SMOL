@@ -47,4 +47,12 @@ public class EnemyPhysicsComponent extends PhysicsComponent {
         super.setX(move.getX() - super.getEntity().getCurrentX());
         super.setY(move.getY() - super.getEntity().getCurrentY());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PhysicsComponent makeCopy() {
+        return this;
+    }
 }

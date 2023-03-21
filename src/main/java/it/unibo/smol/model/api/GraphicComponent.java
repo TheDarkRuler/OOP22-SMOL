@@ -24,6 +24,17 @@ public abstract class GraphicComponent {
     }
 
     /**
+     * copy constructor of Graphic Component
+     */
+    public GraphicComponent(GraphicComponent graphicComponent) {
+        this.entity = graphicComponent.getEntity();
+        this.graphic = graphicComponent.getGraphic();
+        this.height = graphicComponent.getHeight();
+        this.image = graphicComponent.getImage();
+        this.width = graphicComponent.getWidth();
+    }
+
+    /**
      * Set the correct animation.
      */
     public abstract void setAnimation();

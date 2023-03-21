@@ -2,6 +2,8 @@ package it.unibo.smol.model.api;
 
 import javafx.geometry.Point2D;
 import java.util.Optional;
+
+import it.unibo.smol.controller.api.InputComponent;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.impl.HealthComponent;
 
@@ -28,10 +30,10 @@ public interface Entity {
     Point2D getCurrentPosition();
 
     /**
-     * Getter for the GameState. 
-     * @return the GameState
+     * Getter for the World. 
+     * @return the World
      */
-    GameState getGameState();
+    World getWorld();
 
     /**
      * Add the new x coordinate to the current X.
@@ -46,10 +48,10 @@ public interface Entity {
     void moveY(double y);
 
     /**
-     * Set the current GameState.
-     * @param gs the GameState to set
+     * Set the current World.
+     * @param w the World to set
      */
-    void setGameState(GameState gs);
+    void setWorld(World w);
 
     /**
      * Getter for the field type.
@@ -64,6 +66,18 @@ public interface Entity {
     Optional<HealthComponent> getHealthComp();
 
     /**
+     * Getter for the InputComponent.
+     * @return The inputComponent
+     */
+    Optional<InputComponent> getInputComp();
+
+    /**
+     * Getter for the InputComponent.
+     * @return The graphicComponent
+     */
+    GraphicComponent getGraphicComponent();
+
+    /**
      * Getter for the PhysicsComponent.
      * @return The PhysicsComponent
      */
@@ -74,9 +88,4 @@ public interface Entity {
      */
     void update();
 
-    /**
-     * Create a copy of Entity.
-     * @return the copy
-     */
-    Entity copyOf();
 }

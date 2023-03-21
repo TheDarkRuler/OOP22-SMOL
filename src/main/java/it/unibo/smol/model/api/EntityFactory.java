@@ -18,7 +18,7 @@ public interface EntityFactory {
      * @param y the y location where the entities spawn
      * @return a entities that rappresent the enemy with more HP
      */
-    Entity createElmetEnemy(double x, double y);
+    Entity createHelmetEnemy(double x, double y);
 
     /**
      * create an angry enemy entities.

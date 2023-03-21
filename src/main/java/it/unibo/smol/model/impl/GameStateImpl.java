@@ -1,6 +1,5 @@
 package it.unibo.smol.model.impl;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import it.unibo.smol.model.api.Entity;
@@ -11,18 +10,22 @@ import it.unibo.smol.model.api.World;
  * The implementation of the GameState.
  */
 public class GameStateImpl implements GameState {
-    private static Boolean OCCUPIED = true;
-    private static Boolean FREE = false;
     private final World world;
-    private final Map<Entity,Boolean> occupiedPlants;
 
     /**
      * Constructor.
      * @param world
      */
     public GameStateImpl(final World world) {
-        this.world = world;
-        this.occupiedPlants = new HashMap<>();
+        this.world = new WorldImpl(world);
+    }
+
+    /**
+     * copy constructor.
+     * @param gameState the game state that we want to copy
+     */
+    public GameStateImpl(final GameState gameState) {
+        this.world = gameState.getWorld();
     }
 
     /**
@@ -30,7 +33,7 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public World getWorld() {
-        return this.world;
+        return new WorldImpl(this.world);
     }
 
     /**
@@ -45,15 +48,8 @@ public class GameStateImpl implements GameState {
      * {@inheritDoc}
      */
     @Override
-    public void incScore() {
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void decScore() {
+    public void incScore(final int quantity) {
+        this.world.incScore(quantity);
     }
 
     /**
@@ -61,7 +57,7 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public int getScore() {
-        return 0;
+        return this.world.getScore();
     }
 
     /**
@@ -77,34 +73,7 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public Map<Entity, Boolean> occupiedPlants() {
-        updateLifePlants();
-        return this.occupiedPlants;
-    }
-
-    private void updateLifePlants() {
-        this.world.getLifePlants().forEach(plant -> {
-            if(!occupiedPlants.containsKey(plant)) {
-                occupiedPlants.put(plant, FREE);
-            }
-        });
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setPlantFree(Entity plant) {
-        updateLifePlants();
-        occupiedPlants.put(plant, FREE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setPlantOccupied(Entity plant) {
-        updateLifePlants();
-        occupiedPlants.put(plant, OCCUPIED);
+        return getWorld().occupiedPlants();
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
+import it.unibo.smol.model.impl.EntityImpl;
 import javafx.geometry.Point2D;
 
 /**
@@ -35,7 +36,8 @@ public abstract class PhysicsComponent {
      * Update the position of the entity and check the collision with the other entity present.
      */
     public void checkCollision() {
-        this.entity.getGameState().getWorld().getEntities().stream()
+        if (this.entity != null) {
+            this.entity.getWorld().getEntities().stream()
             .map(x -> x.getPhysicsComp())
             .filter(x -> !this.equals(x))
             .filter(x -> hitBox.isColliding(x.getHitBox()))
@@ -44,6 +46,9 @@ public abstract class PhysicsComponent {
                         this.collisonEvent(x.getEntity());
                     }
                 });
+        } else {
+            throw new IllegalStateException("Entity should be linked to his component");
+        }
     }
 
     /**
@@ -75,7 +80,7 @@ public abstract class PhysicsComponent {
      * @return The entity that use this component
      */
     public Entity getEntity() {
-        return entity.copyOf();
+        return new EntityImpl(entity);
     }
 
     /**
@@ -83,7 +88,7 @@ public abstract class PhysicsComponent {
      * @param e : The entity that use this component
      */
     public void setEntity(final Entity e) {
-        this.entity = e;
+        this.entity = new EntityImpl(e);
     }
 
     /**
@@ -164,5 +169,11 @@ public abstract class PhysicsComponent {
     public void setRigid(final boolean isRigid) {
         this.isRigid = isRigid;
     }
+
+    /**
+     * 
+     * @return a copy of the current Physics component
+     */
+    public abstract PhysicsComponent makeCopy();
 
 }

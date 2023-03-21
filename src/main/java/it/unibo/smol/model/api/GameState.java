@@ -18,14 +18,10 @@ public interface GameState {
     boolean isGameOver();
 
     /**
-     *  Notify the world to increase the score.
+     * Notify the world to increase the score.
+     * @param quantity is the incremental value
      */
-    void incScore();
-
-    /**
-     * Notify the world to decrease the score.
-     */
-    void decScore();
+    void incScore(int quantity);
 
     /**
      * Getter for the score.
@@ -41,16 +37,6 @@ public interface GameState {
     /**
      * @return a map of plants occupied.
      */
-    Map<Entity,Boolean> occupiedPlants();
-
-    /**
-     * @param plant the plant to set free.
-     */
-    void setPlantFree(Entity plant);
-    
-    /**
-     * @param plant the plant to set occupied.
-     */
-    void setPlantOccupied(Entity plant);
+    Map<Entity, Boolean> occupiedPlants();
 
 }

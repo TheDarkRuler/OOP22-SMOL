@@ -44,7 +44,7 @@ public class EntityFactoryImpl implements EntityFactory {
         Optional.empty(),
         null,
         new PlayerPhysicsComponent(new RectangleHB(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT,
-        new Point2D(x, y))),
+            new Point2D(x, y))),
         x, y);
     }
 
@@ -58,7 +58,7 @@ public class EntityFactoryImpl implements EntityFactory {
         Optional.of(new HealthComponent(Constant.HEALTH_HP)),
         null,
         new LifePlantsPhysicsComponent(new RectangleHB(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT,
-        new Point2D(x, y))),
+            new Point2D(x, y))),
         x, y);
     }
 
@@ -79,7 +79,7 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createElmetEnemy(final double x, final double y) {
+    public Entity createHelmetEnemy(final double x, final double y) {
         return new EntityImpl(Type.ENEMY,
         null,
         Optional.of(new HealthComponent(Constant.ENEMY_HELMET_HP)),
