@@ -1,7 +1,6 @@
 package it.unibo.smol.core;
 
 import it.unibo.smol.model.api.GameState;
-import it.unibo.smol.model.api.World;
 import it.unibo.smol.view.impl.GameViewState;
 
 /**
@@ -31,10 +30,9 @@ public interface GameEngine {
 
     /**
      * This method create a and start a new {@link GameLoop}.
-     * @param w the world
      * @param gs the GameState
      * @param gv the GameView
      */
-    void init(World w, GameState gs, GameViewState gv);
+    void init(GameState gs, GameViewState gv);
 
 }

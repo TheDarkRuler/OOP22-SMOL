@@ -1,7 +1,6 @@
 package it.unibo.smol.core;
 
 import it.unibo.smol.model.api.GameState;
-import it.unibo.smol.model.api.World;
 import it.unibo.smol.view.impl.GameViewState;
 
 /**
@@ -56,9 +55,9 @@ public class GameEngineImpl implements GameEngine {
      * {@inheritDoc}
      */
     @Override
-    public void init(final World w, final GameState gs, final GameViewState gv) {
+    public void init(final GameState gs, final GameViewState gv) {
         state = true;
-        gameLoop = new GameLoop(w, gs, gv);
+        gameLoop = new GameLoop(gs, gv);
         gameLoop.start();
     }
 }

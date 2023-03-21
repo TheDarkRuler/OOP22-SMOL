@@ -1,7 +1,7 @@
 package it.unibo.smol.core;
 
 import it.unibo.smol.model.api.GameState;
-import it.unibo.smol.model.api.World;
+import it.unibo.smol.model.impl.GameStateImpl;
 import it.unibo.smol.view.impl.GameViewState;
 
 /**
@@ -17,26 +17,23 @@ public class GameLoop extends Thread {
 
     private long pastTime;
     private double delta;
-    private boolean end;
 
-    private World world;
-    private GameState gameState;
-    private GameViewState gameViewState;
+    final private GameState gameState;
+    final private GameViewState gameViewState;
 
-    /**
-     * Constructor for the GameLoop.
-     * @param world world where the game set
-     * @param gameState the state of the game
-     * @param gameViewState the visual rappresentation of the game
-     */
-    public GameLoop(final World world, final GameState gameState, final GameViewState gameViewState) {
-        this.world = world;
-        this.gameState = gameState;
-        this.gameViewState = gameViewState;
-    }
     // ALL commented code is for FPS checking
     /*long timer =0;
     int drawCount=0;*/
+
+    /**
+     * Constructor for the GameLoop.
+     * @param gameState the state of the game
+     * @param gameViewState the visual rappresentation of the game
+     */
+    public GameLoop(final GameState gameState, final GameViewState gameViewState) {
+        this.gameState = new GameStateImpl(gameState);
+        this.gameViewState = gameViewState;
+    }
 
     /**
      * Override of the {@code run()} method in the {@link Thread} class.
@@ -47,7 +44,8 @@ public class GameLoop extends Thread {
         long now;
         long lastFrame = System.nanoTime();
         pastTime = System.nanoTime();
-        while (!end) {
+
+        while (!gameState.isGameOver()) {
             now = System.nanoTime();
 
             if (syncTime(UPS_INTERVAL)) {
@@ -72,8 +70,7 @@ public class GameLoop extends Thread {
      * Update the logic and check the end condition of the Game.
      */
     public void update() {
-        world.updateWorld();
-        end = gameState.isGameOver();
+        gameState.getWorld().updateWorld();     
     }
 
     /**
