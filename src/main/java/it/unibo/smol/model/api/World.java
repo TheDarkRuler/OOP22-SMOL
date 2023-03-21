@@ -1,6 +1,7 @@
 package it.unibo.smol.model.api;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Interface for World: a container for entities.
@@ -52,7 +53,24 @@ public interface World {
     void addEntity(Entity thisEntity);
 
     /**
-     * increments game currenti game score.
+     * increments game current game score.
+     * @param quantity is the incremental value
      */
     void incScore(int quantity);
+
+    /**
+     * @return a map of plants occupied.
+     */
+    Map<Entity, Boolean> occupiedPlants();
+
+    /**
+     * @param plant the plant to set free.
+     */
+    void setPlantFree(Entity plant);
+
+    /**
+     * @param plant the plant to set occupied.
+     */
+    void setPlantOccupied(Entity plant);
+
 }
