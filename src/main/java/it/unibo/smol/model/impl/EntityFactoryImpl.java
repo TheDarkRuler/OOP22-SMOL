@@ -79,7 +79,7 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createElmetEnemy(final double x, final double y) {
+    public Entity createHelmetEnemy(final double x, final double y) {
         return new EntityImpl(Type.ENEMY,
         null,
         Optional.of(new HealthComponent(Constant.ENEMY_HELMET_HP)),
