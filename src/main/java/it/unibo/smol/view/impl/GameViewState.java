@@ -25,6 +25,8 @@ public class GameViewState implements WindowState {
     private final GameMap map;
     private boolean started;
 
+    private int i = 0;
+
     /**
      * constructor for Game View window state.
      */
@@ -32,6 +34,7 @@ public class GameViewState implements WindowState {
         this.map = new GameMapImpl();
         this.started = false;
     }
+    
     /**
      * {@inheritDoc}
      */
@@ -39,6 +42,7 @@ public class GameViewState implements WindowState {
     public void render(final Stage stage) throws IOException {
         if (!started) {
             try {
+                started = true;
                 this.start(stage);
             } catch (IOException e) {
                 logger.log(Level.SEVERE, "GameViewError::", e);
@@ -59,7 +63,8 @@ public class GameViewState implements WindowState {
         final var root = new Pane();
         final var scene = new Scene(root, map.getWidth(),
             map.getHeight(), Color.BLACK);
-
+        root.setBackground(null);
+        scene.setFill(Color.GREEN);
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
         scene.setOnMouseMoved(mouseEventHandler);
@@ -68,11 +73,14 @@ public class GameViewState implements WindowState {
         scene.setOnMouseDragged(mouseEventHandler);
         scene.setOnMouseEntered(mouseEventHandler);
         stage.setScene(scene);
+        stage.setX(0);
+        stage.setY(0);
         stage.show();
     }
 
     public void repaint(final Stage stage) throws IOException {
-        
+        i++;
+            stage.getScene().setFill(Color.rgb(i, i, i));
     }
 }
 

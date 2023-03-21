@@ -1,8 +1,11 @@
 package it.unibo.smol.core;
 
+import java.io.IOException;
+
 import it.unibo.smol.model.api.GameState;
 import it.unibo.smol.model.impl.GameStateImpl;
 import it.unibo.smol.view.impl.GameViewState;
+import javafx.stage.Stage;
 
 /**
  * This class is the responsible of the overall flow control of the game.
@@ -19,7 +22,8 @@ public class GameLoop extends Thread {
     private double delta;
 
     final private GameState gameState;
-    final private GameViewState gameViewState;
+    final private GameViewState gv;
+    final private Stage view;
 
     // ALL commented code is for FPS checking
     /*long timer =0;
@@ -30,9 +34,10 @@ public class GameLoop extends Thread {
      * @param gameState the state of the game
      * @param gameViewState the visual rappresentation of the game
      */
-    public GameLoop(final GameState gameState, final GameViewState gameViewState) {
+    public GameLoop(final GameState gameState,final GameViewState gv, final Stage view) {
         this.gameState = new GameStateImpl(gameState);
-        this.gameViewState = gameViewState;
+        this.gv = gv;
+        this.view = view;
     }
 
     /**
@@ -49,7 +54,6 @@ public class GameLoop extends Thread {
             now = System.nanoTime();
 
             if (syncTime(UPS_INTERVAL)) {
-                processInput();
                 update();
             }
 
@@ -83,7 +87,11 @@ public class GameLoop extends Thread {
      * Repaint the Window with the change ocurred by the {@link #update()} method.
      */
     private void repaint() {
-        gameViewState.repaint();
+        try {
+            gv.render(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

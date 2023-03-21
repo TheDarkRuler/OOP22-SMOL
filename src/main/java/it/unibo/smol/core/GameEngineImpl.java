@@ -1,7 +1,10 @@
 package it.unibo.smol.core;
 
-import it.unibo.smol.model.api.GameState;
+import it.unibo.smol.model.impl.GameStateImpl;
+import it.unibo.smol.model.impl.WorldImpl;
 import it.unibo.smol.view.impl.GameViewState;
+import it.unibo.smol.view.impl.WindowImpl;
+import javafx.stage.Stage;
 
 /**
  * This class is the engine of the game.
@@ -55,9 +58,12 @@ public class GameEngineImpl implements GameEngine {
      * {@inheritDoc}
      */
     @Override
-    public void init(final GameState gs, final GameViewState gv) {
+    public void init(final Stage primaryStage) {
         state = true;
-        gameLoop = new GameLoop(gs, gv);
+        var gv = new GameViewState();
+        gameLoop = new GameLoop(new GameStateImpl(new WorldImpl()), gv, primaryStage);
+        new WindowImpl(gv).launch(primaryStage);
         gameLoop.start();
+        
     }
 }

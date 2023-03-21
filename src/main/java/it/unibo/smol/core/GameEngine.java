@@ -1,7 +1,6 @@
 package it.unibo.smol.core;
 
-import it.unibo.smol.model.api.GameState;
-import it.unibo.smol.view.impl.GameViewState;
+import javafx.stage.Stage;
 
 /**
  * Functional interface for the Implementation of a GameEngine.
@@ -30,9 +29,7 @@ public interface GameEngine {
 
     /**
      * This method create a and start a new {@link GameLoop}.
-     * @param gs the GameState
-     * @param gv the GameView
      */
-    void init(GameState gs, GameViewState gv);
+    void init(Stage primaryStage);
 
 }

@@ -47,7 +47,7 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public boolean isGameOver() {
-        return world.getLifePlants().isEmpty();
+        return false;//world.getLifePlants().isEmpty();
     }
 
     /**
