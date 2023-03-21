@@ -12,7 +12,7 @@ public class EnemyBasicInput extends EnemyInput {
 
     /**
      * gives the enemy Max times spawn and the given game state.
-     * @param gs
+     * @param world
      */
     public EnemyBasicInput(final World world) {
         super(BASIC_ENEMY_MAX_SPAWNS, world);

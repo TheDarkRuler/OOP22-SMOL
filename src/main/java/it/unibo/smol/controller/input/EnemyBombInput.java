@@ -20,7 +20,7 @@ public class EnemyBombInput extends EnemyInput {
 
     /**
      * gives the enemy Max times spawn and the given game state.
-     * @param gs
+     * @param world
      */
     public EnemyBombInput(final World world) {
         super(BOMB_ENEMY_MAX_SPAWNS, world);

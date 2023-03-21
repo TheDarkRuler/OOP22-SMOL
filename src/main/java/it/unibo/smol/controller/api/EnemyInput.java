@@ -9,7 +9,6 @@ import it.unibo.smol.common.HitBox;
 import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.input.EnemyMoves;
 import it.unibo.smol.model.api.Entity;
-import it.unibo.smol.model.api.GameState;
 import it.unibo.smol.model.api.World;
 import it.unibo.smol.view.api.GameMap;
 import it.unibo.smol.view.impl.GameMapImpl;
@@ -43,7 +42,7 @@ public class EnemyInput {
     /**
      * inizialize the first position and and the first movements ogf the enemy.
      * @param maxTimesCanSpawn
-     * @param gs
+     * @param world
      */
     public EnemyInput(final int maxTimesCanSpawn, final World world) {
 

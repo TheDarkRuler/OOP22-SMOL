@@ -44,5 +44,11 @@ public class EnemyInputComponent implements InputComponent {
     public boolean isHittable() {
         return input.isEnemyUnder();
     }
+
+    @Override
+    public void freezeInput(int millisec) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'freezeInput'");
+    }
     
 }

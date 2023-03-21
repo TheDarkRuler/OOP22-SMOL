@@ -12,7 +12,7 @@ public class EnemyHelmetInput extends EnemyInput {
 
     /**
      * gives the enemy Max times spawn and the given game state.
-     * @param gs
+     * @param world
      */
     public EnemyHelmetInput(final World world) {
         super(HELMET_ENEMY_MAX_SPAWNS, world);

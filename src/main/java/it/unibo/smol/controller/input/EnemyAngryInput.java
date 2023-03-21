@@ -12,7 +12,7 @@ public class EnemyAngryInput extends EnemyInput {
 
     /**
      * gives the enemy Max times spawn and the given game state.
-     * @param gs
+     * @param world
      */
     public EnemyAngryInput(final World world) {
         super(ANGRY_ENEMY_MAX_SPAWNS, world);
