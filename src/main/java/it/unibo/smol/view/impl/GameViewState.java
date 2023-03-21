@@ -23,23 +23,34 @@ public class GameViewState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
 
     private final GameMap map;
+    private boolean started;
 
     /**
      * constructor for Game View window state.
      */
     public GameViewState() {
         this.map = new GameMapImpl();
+        this.started = false;
     }
     /**
      * {@inheritDoc}
      */
     @Override
     public void render(final Stage stage) throws IOException {
-        try {
-            this.start(stage);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "GameViewError::", e);
+        if (!started) {
+            try {
+                this.start(stage);
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "GameViewError::", e);
+            }
+        } else {
+            try {
+                this.repaint(stage);
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "GameViewError::", e);
+            }
         }
+        
     }
 
     private void start(final Stage stage) throws IOException {
@@ -60,7 +71,8 @@ public class GameViewState implements WindowState {
         stage.show();
     }
 
-    public void repaint() {
+    public void repaint(final Stage stage) throws IOException {
         
     }
 }
+
