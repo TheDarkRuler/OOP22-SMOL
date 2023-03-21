@@ -10,6 +10,7 @@ import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.input.EnemyMoves;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.GameState;
+import it.unibo.smol.model.api.World;
 import it.unibo.smol.view.api.GameMap;
 import it.unibo.smol.view.impl.GameMapImpl;
 import javafx.geometry.Point2D;
@@ -35,7 +36,7 @@ public class EnemyInput {
     private Point2D enemyNextPosition;
     private Timer enemyTimeUp;
     private final EnemyMoves enemyMovement;
-    private final GameState gs;
+    private final World world;
     private HitBox newPosHitBox;
     private boolean isNewPosViable;
 
@@ -44,13 +45,13 @@ public class EnemyInput {
      * @param maxTimesCanSpawn
      * @param gs
      */
-    public EnemyInput(final int maxTimesCanSpawn, final GameState gs) {
+    public EnemyInput(final int maxTimesCanSpawn, final World world) {
 
         this.minTimeUp = DEFAULT_MIN_TIME_UP;
         this.maxTimeUp = DEFAULT_MAX_TIME_UP;
 
         this.isNewPosViable = true;
-        this.gs = gs;
+        this.world = world;
         this.maxTimesCanSpawn = maxTimesCanSpawn;
         this.mapDimension = new GameMapImpl();
         this.enemyPosition = initialEnemyPosition();
@@ -136,7 +137,7 @@ public class EnemyInput {
                     break;
             }
             newPosHitBox = new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT, temp.get());
-            gs.getWorld().getEntities().stream()
+            this.world.getEntities().stream()
                 .forEach(a -> {
                     if (newPosHitBox.isColliding(a.getPhysicsComp().getHitBox())) {
                         this.isNewPosViable = false;
@@ -200,9 +201,9 @@ public class EnemyInput {
      * it goes in a random plant where there's already a enemy.
      */
     private void enemyGoesOnPlants() {
-        final List<Entity> plants = gs.occupiedPlants().keySet().stream().toList();
+        final List<Entity> plants = world.occupiedPlants().keySet().stream().toList();
         Collections.shuffle(plants);
-        if (plants.stream().count() == gs.occupiedPlants().values()
+        if (plants.stream().count() == world.occupiedPlants().values()
             .stream()
             .filter(a -> a.equals(true))
             .count()) {
@@ -214,11 +215,11 @@ public class EnemyInput {
         } else {
             final Entity choosenPlant = plants
                 .stream()
-                .filter(a -> gs.occupiedPlants().get(a).equals(false))
+                .filter(a -> world.occupiedPlants().get(a).equals(false))
                 .findAny()
                 .get();
             this.enemyNextPosition = choosenPlant.getCurrentPosition();
-            gs.setPlantOccupied(choosenPlant);
+            world.setPlantOccupied(choosenPlant);
         }
     }
 
@@ -282,8 +283,8 @@ public class EnemyInput {
      * gets the Game State.
      * @return gs
      */
-    protected GameState getGameState() {
-        return this.gs;
+    protected World getWorld() {
+        return this.world;
     }
 
     /**

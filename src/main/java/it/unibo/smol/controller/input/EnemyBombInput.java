@@ -5,7 +5,8 @@ import it.unibo.smol.controller.api.EnemyInput;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import it.unibo.smol.model.api.GameState;
+import it.unibo.smol.model.api.World;
+
 import javax.swing.Timer;
 
 /**
@@ -21,8 +22,8 @@ public class EnemyBombInput extends EnemyInput {
      * gives the enemy Max times spawn and the given game state.
      * @param gs
      */
-    public EnemyBombInput(final GameState gs) {
-        super(BOMB_ENEMY_MAX_SPAWNS, gs);
+    public EnemyBombInput(final World world) {
+        super(BOMB_ENEMY_MAX_SPAWNS, world);
     }
 
     /**
@@ -40,7 +41,7 @@ public class EnemyBombInput extends EnemyInput {
                         setEnemyNextPosition(enemySearchNextPos());
                         getEnemyMovement().positionUpdate(getEnemyPosition(), getEnemyNextPosition());
                     } else {
-                        getGameState().notifyDeath();
+                        //getWorld().remove(get);
                     }
                     enemyTimeUp.stop();
                 }

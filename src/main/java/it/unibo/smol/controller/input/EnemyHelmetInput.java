@@ -1,7 +1,7 @@
 package it.unibo.smol.controller.input;
 
 import it.unibo.smol.controller.api.EnemyInput;
-import it.unibo.smol.model.api.GameState;
+import it.unibo.smol.model.api.World;
 
 /**
  * creates a enemy with elmet.
@@ -14,7 +14,7 @@ public class EnemyHelmetInput extends EnemyInput {
      * gives the enemy Max times spawn and the given game state.
      * @param gs
      */
-    public EnemyHelmetInput(final GameState gs) {
-        super(HELMET_ENEMY_MAX_SPAWNS, gs);
+    public EnemyHelmetInput(final World world) {
+        super(HELMET_ENEMY_MAX_SPAWNS, world);
     }
 }
