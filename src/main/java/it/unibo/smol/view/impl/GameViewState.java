@@ -10,6 +10,8 @@ import it.unibo.smol.view.api.GameMap;
 import it.unibo.smol.view.api.WindowState;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -23,6 +25,9 @@ public class GameViewState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
 
     private final GameMap map;
+    private GraphicsContext graphics;
+    private Canvas canvas;
+    private GraphicsDraw graphicsDraw;
 
     /**
      * constructor for Game View window state.
@@ -49,6 +54,9 @@ public class GameViewState implements WindowState {
         final var scene = new Scene(root, map.getWidth(),
             map.getHeight(), Color.BLACK);
 
+        this.canvas = new Canvas(map.getWidth(), map.getHeight());
+        this.graphics = this.canvas.getGraphicsContext2D();
+        graphicsDraw = new GraphicsDraw(this.graphics);
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
         scene.setOnMouseMoved(mouseEventHandler);
