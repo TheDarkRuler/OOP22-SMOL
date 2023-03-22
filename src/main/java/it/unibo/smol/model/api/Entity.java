@@ -72,12 +72,6 @@ public interface Entity {
     Optional<InputComponent> getInputComp();
 
     /**
-     * Getter for the InputComponent.
-     * @return The graphicComponent
-     */
-    GraphicComponent getGraphicComponent();
-
-    /**
      * Getter for the PhysicsComponent.
      * @return The PhysicsComponent
      */

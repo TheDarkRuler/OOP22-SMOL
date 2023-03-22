@@ -54,8 +54,9 @@ public class EnemyCreation {
      * Change the spawn rate of the enemies.
      */
     private void changeDifficulty() {
-        entitiesMap.put("Angry_mole", DEF_RATE_ANGRY + gameState.getScore() / INC_DIFFICULTY_PIVOT * INC_RATE_ANGRY);
-        entitiesMap.put("Helmet_mole", DEF_RATE_HELMET + gameState.getScore() / INC_DIFFICULTY_PIVOT * INC_RATE_HELMET);
+        final int temp = gameState.getScore() / INC_DIFFICULTY_PIVOT;
+        entitiesMap.put("Angry_mole", DEF_RATE_ANGRY + temp * INC_RATE_ANGRY);
+        entitiesMap.put("Helmet_mole", DEF_RATE_HELMET + temp * INC_RATE_HELMET);
     }
 
     /**

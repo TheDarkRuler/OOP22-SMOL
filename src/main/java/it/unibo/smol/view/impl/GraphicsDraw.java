@@ -1,6 +1,7 @@
 package it.unibo.smol.view.impl;
 
 import it.unibo.smol.model.api.Entity;
+import it.unibo.smol.model.api.GraphicComponent;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -12,12 +13,12 @@ public class GraphicsDraw {
         this.g = g;
     }
 
-    public void drawSprite(final Image image, final Entity entity) {
+    public void drawSprite(final Image image, final Entity entity, final GraphicComponent graphicComponent) {
         g.drawImage(image,
-            entity.getCurrentX() - entity.getGraphicComponent().getWidth() / 2,
-            entity.getCurrentY() - entity.getGraphicComponent().getHeight() / 2,
-            entity.getGraphicComponent().getWidth(),
-            entity.getGraphicComponent().getHeight());
+            entity.getCurrentX() - graphicComponent.getWidth() / 2,
+            entity.getCurrentY() - graphicComponent.getHeight() / 2,
+            graphicComponent.getWidth(),
+            graphicComponent.getHeight());
     }
     
 }

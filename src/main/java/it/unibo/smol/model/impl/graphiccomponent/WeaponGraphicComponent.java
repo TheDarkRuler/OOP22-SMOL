@@ -26,7 +26,7 @@ public class WeaponGraphicComponent extends GraphicComponent {
     public void render() {
         super.update();
         if (attacking) {
-            super.getGraphic().drawSprite(super.getImage(), super.getEntity());
+            super.getGraphic().drawSprite(super.getImage(), super.getEntity(), this);
         }
     }
 

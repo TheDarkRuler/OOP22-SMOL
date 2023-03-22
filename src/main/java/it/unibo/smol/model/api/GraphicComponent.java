@@ -58,7 +58,7 @@ public abstract class GraphicComponent {
      */
     public void render() {
         this.update();
-        this.graphic.drawSprite(this.image, this.entity);
+        this.graphic.drawSprite(this.image, this.entity, this);
     }
 
     /**

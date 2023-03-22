@@ -172,13 +172,4 @@ public class EntityImpl implements Entity {
     public Optional<InputComponent> getInputComp() {
         return this.inputComp;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public GraphicComponent getGraphicComponent() {
-        //TODO adjust graphic component when properly defined
-        return null;
-    } 
 }
