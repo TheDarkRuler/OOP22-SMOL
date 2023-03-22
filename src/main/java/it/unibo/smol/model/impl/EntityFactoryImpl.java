@@ -5,11 +5,22 @@ import java.util.Optional;
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.hitbox.CircleHB;
 import it.unibo.smol.common.hitbox.RectangleHB;
+import it.unibo.smol.controller.impl.EnemyInputComponent;
 import it.unibo.smol.controller.impl.PlayerInputComponent;
 import it.unibo.smol.controller.impl.WeaponInputComponent;
+import it.unibo.smol.controller.input.EnemyAngryInput;
+import it.unibo.smol.controller.input.EnemyBasicInput;
+import it.unibo.smol.controller.input.EnemyBombInput;
+import it.unibo.smol.controller.input.EnemyHelmetInput;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.EntityFactory;
+import it.unibo.smol.model.api.World;
+import it.unibo.smol.model.impl.graphiccomponent.EnemyGraphicComponent;
+import it.unibo.smol.model.impl.graphiccomponent.LifePlantsGraphicComponent;
+import it.unibo.smol.model.impl.graphiccomponent.PlayerGraphicComponent;
+import it.unibo.smol.model.impl.graphiccomponent.WeaponGraphicComponent;
+import it.unibo.smol.model.impl.physicscomponent.BombEnemyPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.EnemyPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.LifePlantsPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.PlayerPhysicsComponent;
@@ -24,14 +35,14 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createBasicEnemy(final Point2D initalPosition) {
+    public Entity createBasicEnemy(final Point2D initialPosition, World w) {
         return new EntityImpl(Type.ENEMY, 
-        null,
+        Optional.of(new EnemyInputComponent(new EnemyBasicInput(w, initialPosition))),
         Optional.of(new HealthComponent(Constant.ENEMY_HP)), 
-        null, 
+        new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT), 
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
-        initalPosition)),
-        initalPosition.getX(), initalPosition.getY());
+        initialPosition)),
+        initialPosition.getX(), initialPosition.getY());
     }
 
     /**
@@ -42,7 +53,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.PLAYER, 
         Optional.of(new PlayerInputComponent()),
         Optional.empty(),
-        null,
+        new PlayerGraphicComponent(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT),
         new PlayerPhysicsComponent(new RectangleHB(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT,
             new Point2D(x, y))),
         x, y);
@@ -56,7 +67,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.HEALTH,
         Optional.empty(),
         Optional.of(new HealthComponent(Constant.HEALTH_HP)),
-        null,
+        new LifePlantsGraphicComponent(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT),
         new LifePlantsPhysicsComponent(new RectangleHB(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT,
             new Point2D(x, y))),
         x, y);
@@ -70,7 +81,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.WEAPON,
         Optional.of(new WeaponInputComponent()),
         Optional.empty(),
-        null,
+        new WeaponGraphicComponent(2*Constant.WEAPON_RADIUS, 2*Constant.WEAPON_RADIUS),
         new WeaponPhysicsComponent(new CircleHB(new Point2D(x, y), Constant.WEAPON_RADIUS)),
         x, y);
     }
@@ -79,27 +90,38 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createHelmetEnemy(final Point2D initalPosition) {
+    public Entity createHelmetEnemy(final Point2D initialPosition, World w) {
         return new EntityImpl(Type.ENEMY,
-        null,
+        Optional.of(new EnemyInputComponent(new EnemyHelmetInput(w, initialPosition))),
         Optional.of(new HealthComponent(Constant.ENEMY_HELMET_HP)),
-        null,
+        new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT),
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
-        initalPosition)),
-        initalPosition.getX(), initalPosition.getY());
+        initialPosition)),
+        initialPosition.getX(), initialPosition.getY());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Entity createAngryEnemy(final Point2D initalPosition) {
+    public Entity createAngryEnemy(final Point2D initalPosition, World w) {
         return new EntityImpl(Type.ENEMY,
-        null,
+        Optional.of(new EnemyInputComponent(new EnemyAngryInput(w, initalPosition))),
         Optional.of(new HealthComponent(Constant.ENEMY_HP)),
-        null,
+        new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT),
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initalPosition)),
         initalPosition.getX(), initalPosition.getY());
+    }
+
+    @Override
+    public Entity createBombEnemy(Point2D initialPosition, World w) {
+        return new EntityImpl(Type.ENEMY, 
+        Optional.of(new EnemyInputComponent(new EnemyBombInput(w, initialPosition))),
+        Optional.of(new HealthComponent(Constant.ENEMY_HP)), 
+        new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT), 
+        new BombEnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
+        initialPosition)),
+        initialPosition.getX(), initialPosition.getY());
     }
 }
