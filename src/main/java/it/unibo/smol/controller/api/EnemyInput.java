@@ -41,6 +41,7 @@ public class EnemyInput {
      * inizialize the first position and and the first movements ogf the enemy.
      * @param maxTimesCanSpawn
      * @param world
+     * @param initialEnemyPosition
      */
     public EnemyInput(final int maxTimesCanSpawn, final World world, final Point2D initialEnemyPosition) {
 

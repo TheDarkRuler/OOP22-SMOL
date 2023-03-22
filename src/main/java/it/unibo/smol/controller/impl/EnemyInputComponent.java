@@ -16,8 +16,9 @@ public class EnemyInputComponent implements InputComponent {
 
     /**
      * constructor to initialize the AI inputs for any enemy entities.
+     * @param input
      */
-    public EnemyInputComponent(EnemyInput input) {
+    public EnemyInputComponent(final EnemyInput input) {
         this.input = input;
     }
 
@@ -46,8 +47,7 @@ public class EnemyInputComponent implements InputComponent {
     }
 
     @Override
-    public void freezeInput(int millisec) {
-        //This component don't use this feature yet.
+    public void freezeInput(final int millisec) {
+        //This component doesn't use this feature yet.
     }
-    
 }

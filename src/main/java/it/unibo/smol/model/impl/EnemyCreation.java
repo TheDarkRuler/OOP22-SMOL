@@ -85,7 +85,8 @@ public class EnemyCreation {
      * Timer that create moles with a certain delay (minTimeEnemySpawn and maxTimeEnemySpawn).
      */
     private void creationTimer() {
-        final Timer enemyCreationTimer = new Timer(minTimeEnemySpawn + new Random().nextInt(maxTimeEnemySpawn - minTimeEnemySpawn),
+        final Timer enemyCreationTimer = new Timer(minTimeEnemySpawn + new Random()
+            .nextInt(maxTimeEnemySpawn - minTimeEnemySpawn),
             new ActionListener() {
 
                 @Override

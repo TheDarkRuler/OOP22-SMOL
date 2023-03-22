@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  */
 public class MenuState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
-    private GameEngine gameEngine = new GameEngineImpl();
+    private final GameEngine gameEngine = new GameEngineImpl();
     /**
      * {@inheritDoc}
      */
