@@ -44,10 +44,11 @@ public class EntityImpl implements Entity {
         this.currentX = currentX;
         this.currentY = currentY;
         physicsComp.setEntity(new EntityImpl(this));
+        graphicComp.setEntity(new EntityImpl(this));
     }
 
     /**
-     * copy constructor
+     * Copy constructor.
      * @param entity
      */
     public EntityImpl(final Entity entity) {
