@@ -60,9 +60,9 @@ public class GameViewState implements WindowState {
         final EventHandler<KeyEvent> keyEventHandler = new KeyInputs();
         final EventHandler<MouseEvent> mouseEventHandler = new MouseInputs();
         final var root = new Pane();
-        final var scene = new Scene(root, map.getWidth(),
-            map.getHeight(), Color.BLACK);
-        final var canvas = new Canvas(map.getWidth(), map.getHeight());
+        final var scene = new Scene(root, GameMap.WIDTH,
+            GameMap.HEIGHT, Color.BLACK);
+        final var canvas = new Canvas(GameMap.WIDTH, GameMap.HEIGHT);
         this.graphic = canvas.getGraphicsContext2D();
         root.setBackground(null);
         scene.setFill(Color.GREEN);
