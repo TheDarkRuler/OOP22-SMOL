@@ -65,13 +65,13 @@ public class EnemyCreation {
     private void spawnEntity(final String enemyName) {
         switch (enemyName) {
             case "Mole":
-                new EntityFactoryImpl().createBasicEnemy(initialEnemyPosition());
+                new EntityFactoryImpl().createBasicEnemy(initialEnemyPosition(), gameState.getWorld());
                 break;
             case "Helmet_mole":
-                new EntityFactoryImpl().createHelmetEnemy(initialEnemyPosition());
+                new EntityFactoryImpl().createHelmetEnemy(initialEnemyPosition(), gameState.getWorld());
                 break;
             case "Angry_mole":
-                new EntityFactoryImpl().createAngryEnemy(initialEnemyPosition());
+                new EntityFactoryImpl().createAngryEnemy(initialEnemyPosition(), gameState.getWorld());
                 break;
             case "Bomb_mole":
                 //new EntityFactoryImpl().creatBombMole(initialEnemyPosition());
