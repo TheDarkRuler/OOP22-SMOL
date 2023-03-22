@@ -1,20 +1,27 @@
 package it.unibo.smol.model.impl.graphiccomponent;
 
-import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.GraphicComponent;
 import it.unibo.smol.view.LoadImgs;
 
 /**
  * The implementation of the {@link GraphicComponent} rappresenting the Plants graphic.
  */
-public class LifePlantsGraphicComponent extends GraphicComponent{
+public class LifePlantsGraphicComponent extends GraphicComponent {
 
     private boolean isHalfDead;
 
-    public LifePlantsGraphicComponent(final Entity entity, final double width, final double height) {
-        super(entity, width, height);
+    /**
+     * 
+     * @param width
+     * @param height
+     */
+    public LifePlantsGraphicComponent(final double width, final double height) {
+        super(width, height);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setAnimation() {
         if (isHalfDead) {
@@ -24,13 +31,17 @@ public class LifePlantsGraphicComponent extends GraphicComponent{
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateAnimation() {
-        if (super.getEntity().getHealthComp().get().getCurrentHealth() <= 10/*meta vita */) {
-            isHalfDead = true;
-        } else {
-            isHalfDead = false;
+        if (super.getEntity() != null) {
+            if (super.getEntity().getHealthComp().get().getCurrentHealth() <= 10/*meta vita */) {
+                isHalfDead = true;
+            } else {
+                isHalfDead = false;
+            }
         }
     }
-    
 }

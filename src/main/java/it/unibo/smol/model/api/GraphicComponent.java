@@ -18,16 +18,16 @@ public abstract class GraphicComponent {
      * @param width : the width of the image
      * @param height : the height of the image
      */
-    public GraphicComponent(final Entity entity, final double width, final double height) {
+    public GraphicComponent(final double width, final double height) {
         this.width = width;
         this.height = height;
-        setEntity(entity);
     }
 
     /**
-     * copy constructor of Graphic Component
+     * copy constructor of Graphic Component.
+     * @param graphicComponent
      */
-    public GraphicComponent(GraphicComponent graphicComponent) {
+    public GraphicComponent(final GraphicComponent graphicComponent) {
         this.entity = graphicComponent.getEntity();
         this.graphic = graphicComponent.getGraphic();
         this.height = graphicComponent.getHeight();
@@ -54,15 +54,12 @@ public abstract class GraphicComponent {
     }
 
     /**
-     * Generate the 2D model from the {@link resources} file.
-     * @param g : The object that encapsulate the information for the rendering operations
-     * @param x : The X coordinate on the destination for the upper left of the image
-     * @param y : The Y coordinate on the destination for the upper left of the image
+     * {@inheritDoc}
      */
     public void render() {
         this.update();
         this.graphic.drawSprite(this.image, this.entity);
-    }; 
+    }
 
     /**
      * Getter for the {@link #graphic} field.

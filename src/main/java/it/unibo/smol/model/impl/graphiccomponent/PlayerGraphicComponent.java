@@ -1,6 +1,5 @@
 package it.unibo.smol.model.impl.graphiccomponent;
 
-import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.GraphicComponent;
 import it.unibo.smol.view.LoadImgs;
 /**
@@ -16,8 +15,8 @@ public class PlayerGraphicComponent extends GraphicComponent {
      * @param width : See the super-Constructor
      * @param height : See the super-Constructor
      */
-    public PlayerGraphicComponent(final Entity entity, final double width, final double height) {
-        super(entity, width, height);
+    public PlayerGraphicComponent(final double width, final double height) {
+        super(width, height);
     }
 
     /**
@@ -28,7 +27,7 @@ public class PlayerGraphicComponent extends GraphicComponent {
 
         if (moving) {
             setImage(LoadImgs.getSprites(LoadImgs.MOLE));
-        } else if (attacking){
+        } else if (attacking) {
             setImage(LoadImgs.getSprites(LoadImgs.WORLD_IMG));
         } else {
             setImage(LoadImgs.getSprites(LoadImgs.WORLD_IMG));
@@ -40,17 +39,20 @@ public class PlayerGraphicComponent extends GraphicComponent {
      */
     @Override
     public void updateAnimation() {
-
-        if(super.getEntity().getPhysicsComp().getX() == 0 &&
-            super.getEntity().getPhysicsComp().getY() == 0) {
-            moving = false;
-        }else {
-            moving = true;
+        if (super.getEntity() != null) {
+            if (super.getEntity() != null) {
+                if (super.getEntity().getPhysicsComp().getX() == 0 
+                    && super.getEntity().getPhysicsComp().getY() == 0) {
+                    moving = false;
+                } else {
+                    moving = true;
+                }
+                /*if() {
+                    attacking = true;
+                } else {
+                    attacking = false;
+                }*/
+            }
         }
-        /*if() {
-            attacking = true;
-        } else {
-            attacking = false;
-        }*/
     }
 }

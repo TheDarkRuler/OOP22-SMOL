@@ -1,6 +1,5 @@
 package it.unibo.smol.model.impl.graphiccomponent;
 
-import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.GraphicComponent;
 import it.unibo.smol.view.LoadImgs;
 
@@ -16,10 +15,13 @@ public class EnemyGraphicComponent extends GraphicComponent {
      * @param width
      * @param height
      */
-    public EnemyGraphicComponent(final Entity entity, final double width, final double height) {
-        super(entity, width, height);
+    public EnemyGraphicComponent(final double width, final double height) {
+        super(width, height);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setAnimation() {
         if (moving) {
@@ -29,14 +31,18 @@ public class EnemyGraphicComponent extends GraphicComponent {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateAnimation() {
-        if(super.getEntity().getPhysicsComp().getX() == 0 &&
-            super.getEntity().getPhysicsComp().getY() == 0) {
-            moving = false;
-        } else {
-            moving = true;
+        if (super.getEntity() != null) {
+            if (super.getEntity().getPhysicsComp().getX() == 0 
+                && super.getEntity().getPhysicsComp().getY() == 0) {
+                moving = false;
+            } else {
+                moving = true;
+            }
         }
     }
-    
 }
