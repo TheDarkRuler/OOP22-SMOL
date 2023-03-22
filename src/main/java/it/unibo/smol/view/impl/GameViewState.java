@@ -6,9 +6,6 @@ import java.util.logging.Level;
 
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
-import it.unibo.smol.model.api.World;
-import it.unibo.smol.model.impl.GameStateImpl;
-import it.unibo.smol.model.impl.WorldImpl;
 import it.unibo.smol.view.api.GameMap;
 import it.unibo.smol.view.api.WindowState;
 import javafx.event.EventHandler;

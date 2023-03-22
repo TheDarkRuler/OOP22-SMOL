@@ -155,7 +155,7 @@ public class EntityImpl implements Entity {
         if (healthComp.isPresent() && healthComp.get().isDead()) {
             this.getWorld().remove(this);
         }
-        graphicComp.update();
+        graphicComp.render();
     }
 
     /**

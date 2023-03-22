@@ -44,5 +44,10 @@ public class EnemyInputComponent implements InputComponent {
     public boolean isHittable() {
         return input.isEnemyUnder();
     }
+
+    @Override
+    public void freezeInput(int millisec) {
+        //This component don't use this feature yet.
+    }
     
 }
