@@ -77,6 +77,13 @@ public class EntityImpl implements Entity {
     public double getCurrentY() {
         return currentY;
     }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Point2D getCurrentPosition() {
+        return new Point2D(currentX, currentY);
+    }
 
     /**
      * {@inheritDoc}

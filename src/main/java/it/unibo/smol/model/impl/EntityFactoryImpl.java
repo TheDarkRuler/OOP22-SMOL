@@ -24,14 +24,14 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createBasicEnemy(final double x, final double y) {
+    public Entity createBasicEnemy(final Point2D initalPosition) {
         return new EntityImpl(Type.ENEMY, 
         null,
         Optional.of(new HealthComponent(Constant.ENEMY_HP)), 
         null, 
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
-        new Point2D(x, y))),
-        x, y);
+        initalPosition)),
+        initalPosition.getX(), initalPosition.getY());
     }
 
     /**
@@ -79,27 +79,27 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createHelmetEnemy(final double x, final double y) {
+    public Entity createHelmetEnemy(final Point2D initalPosition) {
         return new EntityImpl(Type.ENEMY,
         null,
         Optional.of(new HealthComponent(Constant.ENEMY_HELMET_HP)),
         null,
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
-        new Point2D(x, y))),
-        x, y);
+        initalPosition)),
+        initalPosition.getX(), initalPosition.getY());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Entity createAngryEnemy(final double x, final double y) {
+    public Entity createAngryEnemy(final Point2D initalPosition) {
         return new EntityImpl(Type.ENEMY,
         null,
         Optional.of(new HealthComponent(Constant.ENEMY_HP)),
         null,
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
-        new Point2D(x, y))),
-        x, y);
+        initalPosition)),
+        initalPosition.getX(), initalPosition.getY());
     }
 }

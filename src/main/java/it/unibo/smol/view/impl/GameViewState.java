@@ -6,7 +6,7 @@ import java.util.logging.Level;
 
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
-import it.unibo.smol.view.api.GameMap;
+import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.WindowState;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -24,7 +24,6 @@ import javafx.stage.Stage;
 public class GameViewState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
 
-    private final GameMap map;
     private GraphicsContext graphic;
     private boolean started;
 
@@ -34,7 +33,6 @@ public class GameViewState implements WindowState {
      * constructor for Game View window state.
      */
     public GameViewState() {
-        this.map = new GameMapImpl();
         this.started = false;
     }
     /**
