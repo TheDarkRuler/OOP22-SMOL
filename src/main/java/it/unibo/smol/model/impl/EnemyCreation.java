@@ -8,29 +8,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import javax.swing.Timer;
-
 import it.unibo.smol.model.api.GameState;
+import it.unibo.smol.view.GameMap;
+import javafx.geometry.Point2D;
 
 /**
- *
- */
+ * Create enemies randomly, gives an initial position and changes weight for the random
+ * when the score increases. 
+*/
 public class EnemyCreation {
 
     private static final double DEF_RATE_BASIC = 1.0;
     private static final double DEF_RATE_HELMET = 0.45;
     private static final double DEF_RATE_ANGRY = 0.325;
     private static final double DEF_RATE_BOMB = 0.2;
+    private static final double INC_RATE_ANGRY = 0.025;
+    private static final double INC_RATE_HELMET = 0.05;
+    private static final int DEF_MAX_TIME_SPAWN = 4000;
+    private static final int DEF_MIN_TIME_SPAWN = 3000;
     private static final int INC_DIFFICULTY_PIVOT = 20;
     private static final int DIFFICULTY_LIMIT = 5;
 
     private final GameState gameState;
-    private Map<String, Double> entitiesMap;
-    private int minTimeEnemySpawn;
-    private int maxTimeEnemySpawn;
-    private List<Double> weightList;
-    private Timer enemyCreationTimer;
+    private final Map<String, Double> entitiesMap;
+    private final int minTimeEnemySpawn;
+    private final int maxTimeEnemySpawn;
 
     /**
      * Constructor.
@@ -42,8 +45,8 @@ public class EnemyCreation {
                                                 "Helmet_mole", DEF_RATE_HELMET,
                                                 "Angry_mole", DEF_RATE_ANGRY,
                                                 "Bomb_mole", DEF_RATE_BOMB));
-        this.minTimeEnemySpawn = 3000;
-        this.maxTimeEnemySpawn = 4000;
+        this.minTimeEnemySpawn = DEF_MIN_TIME_SPAWN;
+        this.maxTimeEnemySpawn = DEF_MAX_TIME_SPAWN;
         creationTimer();
     }
 
@@ -51,54 +54,88 @@ public class EnemyCreation {
      * Change the spawn rate of the enemies.
      */
     private void changeDifficulty() {
-        entitiesMap.put("Angry_mole", DEF_RATE_ANGRY + gameState.getScore() / INC_DIFFICULTY_PIVOT * 0.025);
-        entitiesMap.put("Helmet_mole", DEF_RATE_HELMET + gameState.getScore() / INC_DIFFICULTY_PIVOT * 0.05);
+        entitiesMap.put("Angry_mole", DEF_RATE_ANGRY + gameState.getScore() / INC_DIFFICULTY_PIVOT * INC_RATE_ANGRY);
+        entitiesMap.put("Helmet_mole", DEF_RATE_HELMET + gameState.getScore() / INC_DIFFICULTY_PIVOT * INC_RATE_HELMET);
     }
 
     /**
      * Spawn the enemy.
      * @param enemyName : the name of the enemy
      */
-    private void spawnEntity(String enemyName) {
+    private void spawnEntity(final String enemyName) {
         switch (enemyName) {
             case "Mole":
-                
+                new EntityFactoryImpl().createBasicEnemy(initialEnemyPosition());
                 break;
             case "Helmet_mole":
+                new EntityFactoryImpl().createHelmetEnemy(initialEnemyPosition());
                 break;
             case "Angry_mole":
+                new EntityFactoryImpl().createAngryEnemy(initialEnemyPosition());
                 break;
             case "Bomb_mole":
+                //new EntityFactoryImpl().creatBombMole(initialEnemyPosition());
                 break;
             default:
                 break;
         }
     }
 
+    /**
+     * Timer that create moles with a certain delay (minTimeEnemySpawn and maxTimeEnemySpawn).
+     */
     private void creationTimer() {
-        this.enemyCreationTimer = new Timer(minTimeEnemySpawn + new Random().nextInt(maxTimeEnemySpawn - minTimeEnemySpawn),
+        final Timer enemyCreationTimer = new Timer(minTimeEnemySpawn + new Random().nextInt(maxTimeEnemySpawn - minTimeEnemySpawn),
             new ActionListener() {
 
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    weightList = new ArrayList<>(entitiesMap.values());
-                    Double randomDouble = Math.random();
+                    final List<Double> weightList = new ArrayList<>(entitiesMap.values());
+                    final Double randomDouble = Math.random();
                     Collections.sort(weightList);
 
                     if (gameState.getScore() / INC_DIFFICULTY_PIVOT <= DIFFICULTY_LIMIT) {
                         changeDifficulty();
                     }
 
-                    for (Double spawnPercentual : weightList) {
+                    for (final Double spawnPercentual : weightList) {
                         if (spawnPercentual >= randomDouble) {
                            spawnEntity(entitiesMap.entrySet()
                                 .stream()
-                                .filter(s->s.getValue().equals(spawnPercentual))
+                                .filter(s -> s.getValue().equals(spawnPercentual))
                                 .findAny().get().getKey());
                         }
                     }
                 }
             });
-        this.enemyCreationTimer.start();
-    } 
+        enemyCreationTimer.start();
+    }
+
+    /**
+     * sets a position on the fence where the enemy starts.
+     * @return the initial position
+     */
+    private Point2D initialEnemyPosition() {
+        if (new Random().nextBoolean()) {
+            return new Point2D(randomBetweenTwo(GameMap.BORDER_WIDTH / 2,
+                GameMap.BORDER_WIDTH / 2 + GameMap.MAP_WIDTH),
+                GameMap.BORDER_HEIGHT / 2 + new Random()
+                    .nextDouble(GameMap.MAP_HEIGHT - GameMap.BORDER_HEIGHT / 2));
+        } else {
+            return new Point2D(GameMap.BORDER_WIDTH / 2 + new Random()
+            .nextDouble(GameMap.MAP_WIDTH - GameMap.BORDER_WIDTH / 2),
+                randomBetweenTwo(GameMap.BORDER_HEIGHT / 2,
+                GameMap.BORDER_HEIGHT / 2 + GameMap.MAP_HEIGHT));
+        }
+    }
+
+    /**
+     * returns a random between two double given number.
+     * @param first
+     * @param second
+     * @return one of the two given parameter
+     */
+    private double randomBetweenTwo(final double first, final double second) {
+        return new Random().nextBoolean() ? first : second;
+    }
 }

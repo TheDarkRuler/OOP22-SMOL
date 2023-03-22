@@ -10,8 +10,7 @@ import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.input.EnemyMoves;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.World;
-import it.unibo.smol.view.api.GameMap;
-import it.unibo.smol.view.impl.GameMapImpl;
+import it.unibo.smol.view.GameMap;
 import javafx.geometry.Point2D;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
@@ -25,7 +24,6 @@ public class EnemyInput {
     private static final int DEFAULT_MIN_TIME_UP = 1500;
     private static final int DEFAULT_MAX_TIME_UP = 2500;
 
-    private final GameMap mapDimension;
     private final int minTimeUp;
     private final int maxTimeUp;
     private int enemySection;
@@ -44,7 +42,7 @@ public class EnemyInput {
      * @param maxTimesCanSpawn
      * @param world
      */
-    public EnemyInput(final int maxTimesCanSpawn, final World world) {
+    public EnemyInput(final int maxTimesCanSpawn, final World world, final Point2D initialEnemyPosition) {
 
         this.minTimeUp = DEFAULT_MIN_TIME_UP;
         this.maxTimeUp = DEFAULT_MAX_TIME_UP;
@@ -52,38 +50,9 @@ public class EnemyInput {
         this.isNewPosViable = true;
         this.world = world;
         this.maxTimesCanSpawn = maxTimesCanSpawn;
-        this.mapDimension = new GameMapImpl();
-        this.enemyPosition = initialEnemyPosition();
+        this.enemyPosition = initialEnemyPosition;
         this.enemyNextPosition = enemySetsPosition(new Random().nextInt(4)).get();
         this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, this);
-    }
-
-    /**
-     * sets a position on the fence where the enemy starts.
-     * @return the initial position
-     */
-    private Point2D initialEnemyPosition() {
-        if (new Random().nextBoolean()) {
-            return new Point2D(randomBetweenTwo(mapDimension.getBorderWidth() / 2,
-                mapDimension.getBorderWidth() / 2 + mapDimension.getMapWidth()),
-                mapDimension.getBorderHeight() / 2 + new Random()
-                    .nextDouble(mapDimension.getMapHeight() - mapDimension.getBorderHeight() / 2));
-        } else {
-            return new Point2D(mapDimension.getBorderWidth() / 2 + new Random()
-            .nextDouble(mapDimension.getMapWidth() - mapDimension.getBorderWidth() / 2),
-                randomBetweenTwo(mapDimension.getBorderHeight() / 2,
-                mapDimension.getBorderHeight() / 2 + mapDimension.getMapHeight()));
-        }
-    }
-
-    /**
-     * returns a random between two double given number.
-     * @param first
-     * @param second
-     * @return one of the two given parameter
-     */
-    private double randomBetweenTwo(final double first, final double second) {
-        return new Random().nextBoolean() ? first : second;
     }
 
     /**
@@ -91,8 +60,8 @@ public class EnemyInput {
      * @return a random x position
      */
     private double enemyRandX() {
-        return mapDimension.getBorderWidth() / 2  + Constant.ENEMY_WIDTH / 2
-            + new Random().nextDouble(mapDimension.getMapWidth() / 2 - Constant.ENEMY_WIDTH); 
+        return GameMap.BORDER_WIDTH / 2  + Constant.ENEMY_WIDTH / 2
+            + new Random().nextDouble(GameMap.MAP_WIDTH / 2 - Constant.ENEMY_WIDTH); 
     }
 
     /**
@@ -100,8 +69,8 @@ public class EnemyInput {
      * @return a random y position
      */
     private double enemyRandY() {
-        return mapDimension.getBorderHeight() / 2 + Constant.ENEMY_HEIGHT / 2
-            + new Random().nextDouble(mapDimension.getMapHeight() / 2 - Constant.ENEMY_HEIGHT);
+        return GameMap.BORDER_HEIGHT / 2 + Constant.ENEMY_HEIGHT / 2
+            + new Random().nextDouble(GameMap.MAP_HEIGHT / 2 - Constant.ENEMY_HEIGHT);
     }
 
     /**
@@ -120,16 +89,16 @@ public class EnemyInput {
                         enemyRandY()));
                     break;
                 case 1:
-                    temp = Optional.of(new Point2D(enemyRandX() + (mapDimension.getMapWidth() / 2),
+                    temp = Optional.of(new Point2D(enemyRandX() + (GameMap.MAP_WIDTH / 2),
                         enemyRandY()));
                     break;
                 case 2:
                     temp = Optional.of(new Point2D(enemyRandX(),
-                        enemyRandY() + (mapDimension.getMapHeight() / 2)));
+                        enemyRandY() + (GameMap.MAP_HEIGHT / 2)));
                     break;
                 case 3:
-                    temp = Optional.of(new Point2D(enemyRandX() + (mapDimension.getMapWidth() / 2),
-                        enemyRandY() + (mapDimension.getMapHeight() / 2))); 
+                    temp = Optional.of(new Point2D(enemyRandX() + (GameMap.MAP_WIDTH / 2),
+                        enemyRandY() + (GameMap.MAP_HEIGHT / 2))); 
                     break;
                 default:
                     temp = Optional.empty();

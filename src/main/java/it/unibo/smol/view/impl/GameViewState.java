@@ -6,7 +6,7 @@ import java.util.logging.Level;
 
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
-import it.unibo.smol.view.api.GameMap;
+import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.WindowState;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -22,13 +22,10 @@ import javafx.stage.Stage;
 public class GameViewState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
 
-    private final GameMap map;
-
     /**
      * constructor for Game View window state.
      */
     public GameViewState() {
-        this.map = new GameMapImpl();
     }
     /**
      * {@inheritDoc}
@@ -46,8 +43,8 @@ public class GameViewState implements WindowState {
         final EventHandler<KeyEvent> keyEventHandler = new KeyInputs();
         final EventHandler<MouseEvent> mouseEventHandler = new MouseInputs();
         final var root = new Pane();
-        final var scene = new Scene(root, map.getWidth(),
-            map.getHeight(), Color.BLACK);
+        final var scene = new Scene(root, GameMap.WIDTH,
+            GameMap.HEIGHT, Color.BLACK);
 
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
