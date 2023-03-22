@@ -5,9 +5,9 @@ import java.util.Optional;
 import it.unibo.smol.controller.api.InputComponent;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
-import it.unibo.smol.model.api.GraphicComponent;
 import it.unibo.smol.model.api.PhysicsComponent;
 import it.unibo.smol.model.api.World;
+import it.unibo.smol.view.api.GraphicComponent;
 
 /**
  * The implementation that rappresent everything present in the game world.
@@ -150,12 +150,8 @@ public class EntityImpl implements Entity {
     public void update() {
         if (inputComp.isPresent()) {
             final InputComponent inputCompPresent = inputComp.orElseThrow();
-            if (inputCompPresent.getDirection().isPresent()) {
-                physicsComp.receiveMovement(inputCompPresent.getDirection().orElseThrow());
-            }
-            if (inputCompPresent.getPosition().isPresent()) {
-                physicsComp.receiveMovement(inputCompPresent.getPosition().orElseThrow());
-            }
+            inputCompPresent.getDirection().ifPresent(x -> physicsComp.receiveMovement(x));
+            inputCompPresent.getPosition().ifPresent(x -> physicsComp.receiveMovement(x));
             physicsComp.setRigid(inputCompPresent.isHittable());
             this.moveX(physicsComp.getX());
             this.moveY(physicsComp.getY());
@@ -164,7 +160,7 @@ public class EntityImpl implements Entity {
         if (healthComp.isPresent() && healthComp.get().isDead()) {
             this.getWorld().remove(this);
         }
-        graphicComp.render();
+        //graphicComp.render();
     }
 
     /**

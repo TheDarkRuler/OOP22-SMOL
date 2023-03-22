@@ -1,7 +1,7 @@
 package it.unibo.smol.view.impl;
 
 import it.unibo.smol.model.api.Entity;
-import it.unibo.smol.model.api.GraphicComponent;
+import it.unibo.smol.view.api.GraphicComponent;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

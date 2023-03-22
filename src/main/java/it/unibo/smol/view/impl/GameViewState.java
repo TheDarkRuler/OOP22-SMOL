@@ -58,6 +58,7 @@ public class GameViewState implements WindowState {
             GameMap.HEIGHT, Color.BLACK);
         final var canvas = new Canvas(GameMap.WIDTH, GameMap.HEIGHT);
         this.graphic = canvas.getGraphicsContext2D();
+        new GraphicsDraw(graphic);
         root.setBackground(null);
         scene.setFill(Color.GREEN);
         scene.setOnKeyPressed(keyEventHandler);
@@ -71,8 +72,6 @@ public class GameViewState implements WindowState {
         stage.setX(0);
         stage.setY(0);
         stage.setScene(scene);
-        stage.setX(0);
-        stage.setY(0);
         stage.show();
     }
 
@@ -86,6 +85,8 @@ public class GameViewState implements WindowState {
         if (i > 250) {
             i =0;
         }
+        graphic.setStroke(Color.RED);
+            graphic.fillRect(100, 100, 100, 100);
             stage.getScene().setFill(Color.rgb(i, i, i));
     }
 }

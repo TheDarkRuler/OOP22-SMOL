@@ -1,6 +1,9 @@
-package it.unibo.smol.model.api;
+package it.unibo.smol.controller.api;
 
 import java.util.Map;
+
+import it.unibo.smol.model.api.Entity;
+import it.unibo.smol.model.api.World;
 
 /**
  *  Interface for control the state of the game.

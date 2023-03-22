@@ -1,7 +1,7 @@
-package it.unibo.smol.model.impl.graphiccomponent;
+package it.unibo.smol.view.impl.graphiccomponent;
 
-import it.unibo.smol.model.api.GraphicComponent;
 import it.unibo.smol.view.LoadImgs;
+import it.unibo.smol.view.api.GraphicComponent;
 
 /**
  * The implementation of the {@link GraphicComponent} rappresenting the Enemy graphic.

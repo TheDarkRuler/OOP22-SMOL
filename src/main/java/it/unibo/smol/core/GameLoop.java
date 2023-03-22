@@ -2,8 +2,8 @@ package it.unibo.smol.core;
 
 import java.util.Optional;
 
-import it.unibo.smol.model.api.GameState;
-import it.unibo.smol.model.impl.GameStateImpl;
+import it.unibo.smol.controller.api.GameState;
+import it.unibo.smol.controller.impl.GameStateImpl;
 import it.unibo.smol.view.impl.GameViewState;
 import javafx.stage.Stage;
 

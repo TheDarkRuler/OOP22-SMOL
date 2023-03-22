@@ -11,7 +11,7 @@ public class KeyInputs implements EventHandler<KeyEvent> {
     /**
      * Direction of the player.
      */
-    private static Directions movement;
+    private static Directions movement = Directions.STAY_X;
 
     /**
      * Handles the events, selecting everytime the right KeyEvent.

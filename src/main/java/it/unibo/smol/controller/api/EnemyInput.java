@@ -1,5 +1,6 @@
 package it.unibo.smol.controller.api;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -128,8 +129,10 @@ public class EnemyInput {
      * notifies that the enemy is not underground anymore.
      */
     public void enemyIsUp() {
-        enemyTimesSpawn++;
-        enemyStaysUpTimer();
+        if (enemyTimesSpawn < maxTimesCanSpawn) {
+            enemyStaysUpTimer();
+            enemyTimesSpawn++;
+        }
     }
 
     /**
@@ -157,6 +160,7 @@ public class EnemyInput {
                         enemyNextPosition = enemySearchNextPos();
                     } else if (enemyTimesSpawn <= maxTimesCanSpawn) {
                         enemyGoesOnPlants();
+                        enemyTimesSpawn++;
                     }
                     enemyMovement.positionUpdate(enemyPosition, enemyNextPosition);
                     enemyTimeUp.stop();
@@ -170,7 +174,7 @@ public class EnemyInput {
      * it goes in a random plant where there's already a enemy.
      */
     private void enemyGoesOnPlants() {
-        final List<Entity> plants = world.occupiedPlants().keySet().stream().toList();
+        final List<Entity> plants = new ArrayList<>(world.occupiedPlants().keySet().stream().toList());
         Collections.shuffle(plants);
         if (plants.stream().count() == world.occupiedPlants().values()
             .stream()

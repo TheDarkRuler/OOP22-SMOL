@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import javax.swing.Timer;
-import it.unibo.smol.model.api.GameState;
+
+import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.view.GameMap;
 import javafx.geometry.Point2D;
 

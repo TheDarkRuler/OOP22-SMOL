@@ -29,7 +29,6 @@ public class EnemyMoves {
         this.from = from;
         this.to = to;
         this.enemyToMove = enemyToMove;
-
         setMovementVariable();
         enemyIsUnder = true;
     }
@@ -40,10 +39,10 @@ public class EnemyMoves {
      * @return an empty if the enemy is not underground and the progressive enemy position if it is
      */
     public Optional<Point2D> enemyMove() {
-        if (enemyIsUnder) {
-            if (from.distance(to) > Constant.ENEMY_MOVSPD) {
-                from = from.add(from.getX() < to.getX() ? moveX : -moveX, 0);
-                from = from.add(0, from.getY() < to.getY() ? moveY : -moveY);
+        if (this.enemyIsUnder) {
+            if (this.from.distance(this.to) > Constant.ENEMY_MOVSPD) {
+                this.from = this.from.add(this.from.getX() < this.to.getX() ? this.moveX : -this.moveX, 0);
+                this.from = this.from.add(0, this.from.getY() < this.to.getY() ? this.moveY : -this.moveY);
             } else {
                 notifyEnemyHasArrived();
             }

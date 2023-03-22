@@ -1,5 +1,6 @@
-package it.unibo.smol.model.api;
+package it.unibo.smol.view.api;
 
+import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.view.impl.GraphicsDraw;
 import javafx.scene.image.Image;
 /**
