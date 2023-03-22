@@ -29,22 +29,35 @@ public class GameViewState implements WindowState {
 
     private final GameMap map;
     private GraphicsContext graphic;
+    private boolean started;
+
+    private int i = 0;
 
     /**
      * constructor for Game View window state.
      */
     public GameViewState() {
         this.map = new GameMapImpl();
+        this.started = false;
     }
     /**
      * {@inheritDoc}
      */
     @Override
-    public void render(final Stage stage) throws IOException {
-        try {
-            this.start(stage);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "GameViewError::", e);
+    public void render(final Stage stage) {
+        if (!started) {
+            try {
+                started = true;
+                this.start(stage);
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "GameViewError::", e);
+            }
+        } else {
+            try {
+                this.repaint(stage);
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "GameViewError::", e);
+            }
         }
     }
 
@@ -56,6 +69,8 @@ public class GameViewState implements WindowState {
             map.getHeight(), Color.BLACK);
         final var canvas = new Canvas(map.getWidth(), map.getHeight());
         this.graphic = canvas.getGraphicsContext2D();
+        root.setBackground(null);
+        scene.setFill(Color.GREEN);
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
         scene.setOnMouseMoved(mouseEventHandler);
@@ -67,6 +82,19 @@ public class GameViewState implements WindowState {
         stage.setX(0);
         stage.setY(0);
         stage.setScene(scene);
+        stage.setX(0);
+        stage.setY(0);
         stage.show();
     }
+
+    /**
+     * Repaint the graphic aspect of the view.
+     * @param stage The stage where the game is running
+     * @throws IOException Exception if the stage can't be rendered.
+     */
+    public void repaint(final Stage stage) throws IOException {
+        i++;
+            stage.getScene().setFill(Color.rgb(i, i, i));
+    }
 }
+

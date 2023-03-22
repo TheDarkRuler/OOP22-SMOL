@@ -1,7 +1,7 @@
 package it.unibo.smol.model.impl;
 
+import javafx.geometry.Point2D;
 import java.util.Optional;
-
 import it.unibo.smol.controller.api.InputComponent;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;

@@ -78,8 +78,8 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public World updateWorld() {
-        return this;
+    public void updateWorld() {
+        this.getEntities().forEach(x -> x.update());
     }
     /**
      * {@inheritDoc}}

@@ -1,5 +1,12 @@
 package it.unibo.smol.core;
 
+import java.util.Optional;
+
+import it.unibo.smol.model.api.GameState;
+import it.unibo.smol.model.impl.GameStateImpl;
+import it.unibo.smol.view.impl.GameViewState;
+import javafx.stage.Stage;
+
 /**
  * This class is the responsible of the overall flow control of the game.
  */
@@ -13,11 +20,26 @@ public class GameLoop extends Thread {
 
     private long pastTime;
     private double delta;
-    private boolean end;
+
+     private final GameState gameState;
+     private final GameViewState gv;
+     private final Stage view;
 
     // ALL commented code is for FPS checking
     /*long timer =0;
     int drawCount=0;*/
+
+    /**
+     * Constructor for the GameLoop.
+     * @param gameState the state of the game
+     * @param gv the visual rappresentation of the game
+     * @param view The stage of the current view
+     */
+    public GameLoop(final GameState gameState, final GameViewState gv, final Optional<Stage> view) {
+        this.gameState = new GameStateImpl(gameState);
+        this.gv = gv;
+        this.view = view.orElseThrow();
+    }
 
     /**
      * Override of the {@code run()} method in the {@link Thread} class.
@@ -28,12 +50,13 @@ public class GameLoop extends Thread {
         long now;
         long lastFrame = System.nanoTime();
         pastTime = System.nanoTime();
-        while (!end) {
+
+        while (!gameState.isGameOver()) {
             now = System.nanoTime();
 
             if (syncTime(UPS_INTERVAL)) {
-                processInput();
                 update();
+                processInput();
             }
 
             if ((now - lastFrame) >= FPS_INTERVAL) {
@@ -50,24 +73,23 @@ public class GameLoop extends Thread {
     }
 
     /**
-     * update.
+     * Update the logic and check the end condition of the Game.
      */
     public void update() {
-        end = false;
+        gameState.getWorld().updateWorld();
     }
 
     /**
      * process.
      */
     private void processInput() {
-
     }
 
     /**
-     * repaint.
+     * Repaint the Window with the change ocurred by the {@link #update()} method.
      */
     private void repaint() {
-
+            gv.render(view);
     }
 
     /**
