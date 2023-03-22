@@ -40,7 +40,6 @@ public class PlayerGraphicComponent extends GraphicComponent {
     @Override
     public void updateAnimation() {
         if (super.getEntity() != null) {
-            if (super.getEntity() != null) {
                 if (super.getEntity().getPhysicsComp().getX() == 0 
                     && super.getEntity().getPhysicsComp().getY() == 0) {
                     moving = false;
@@ -52,7 +51,6 @@ public class PlayerGraphicComponent extends GraphicComponent {
                 } else {
                     attacking = false;
                 }*/
-            }
         }
     }
 }

@@ -6,6 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.URL;
 
+import it.unibo.smol.core.GameEngine;
+import it.unibo.smol.core.GameEngineImpl;
 import it.unibo.smol.view.api.WindowState;
 
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,7 @@ import javafx.stage.Stage;
  */
 public class MenuState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
+    private final GameEngine gameEngine = new GameEngineImpl();
     /**
      * {@inheritDoc}
      */
@@ -43,7 +46,7 @@ public class MenuState implements WindowState {
         final Scene scene = new Scene(root, 1280, 720);
         final Button startGame = (Button) scene.lookup("#start");
         startGame.setOnMouseClicked(e -> {
-            new WindowImpl(new GameViewState()).launch(primaryStage);
+            gameEngine.init(primaryStage);
         });
         primaryStage.setTitle("Start Menu :)");
         primaryStage.setScene(scene);

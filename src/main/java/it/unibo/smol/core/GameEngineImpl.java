@@ -1,5 +1,13 @@
 package it.unibo.smol.core;
 
+import java.util.Optional;
+
+import it.unibo.smol.model.impl.GameStateImpl;
+import it.unibo.smol.model.impl.WorldImpl;
+import it.unibo.smol.view.impl.GameViewState;
+import it.unibo.smol.view.impl.WindowImpl;
+import javafx.stage.Stage;
+
 /**
  * This class is the engine of the game.
  * The purpose of the engine is to control the {@link GameLoop} thread
@@ -52,9 +60,11 @@ public class GameEngineImpl implements GameEngine {
      * {@inheritDoc}
      */
     @Override
-    public void init() {
+    public void init(final Stage primaryStage) {
         state = true;
-        gameLoop = new GameLoop();
+        final var gv = new GameViewState();
+        gameLoop = new GameLoop(new GameStateImpl(new WorldImpl()), gv, Optional.of(primaryStage));
+        new WindowImpl(gv).launch(primaryStage);
         gameLoop.start();
     }
 }
