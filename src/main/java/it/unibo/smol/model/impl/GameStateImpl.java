@@ -76,4 +76,8 @@ public class GameStateImpl implements GameState {
         return getWorld().occupiedPlants();
     }
 
+    @Override
+    public void initGame() { 
+    }
+
 }
