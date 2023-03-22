@@ -5,6 +5,8 @@ import java.util.Map;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.GameState;
 import it.unibo.smol.model.api.World;
+import it.unibo.smol.view.GameMap;
+import javafx.geometry.Point2D;
 
 /**
  * The implementation of the GameState.
@@ -41,7 +43,7 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public boolean isGameOver() {
-        return false;//world.getLifePlants().isEmpty();
+        return false; //world.getLifePlants().isEmpty();
     }
 
     /**
@@ -74,6 +76,16 @@ public class GameStateImpl implements GameState {
     @Override
     public Map<Entity, Boolean> occupiedPlants() {
         return getWorld().occupiedPlants();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initGame() {
+        new EntityFactoryImpl().createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2);
+        new EntityFactoryImpl().createWeapon(GameMap.WIDTH / 2, GameMap.HEIGHT / 2);
+        new EntityFactoryImpl().createBasicEnemy(new Point2D(GameMap.BORDER_WIDTH / 2, GameMap.BORDER_HEIGHT / 2), this.world);
     }
 
 }

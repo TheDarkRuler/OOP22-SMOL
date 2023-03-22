@@ -39,4 +39,9 @@ public interface GameState {
      */
     Map<Entity, Boolean> occupiedPlants();
 
+    /**
+     * Initialize the game.
+     */
+    void initGame();
+
 }
