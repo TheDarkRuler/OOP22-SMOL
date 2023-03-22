@@ -34,12 +34,11 @@ public class GameViewState implements WindowState {
         this.map = new GameMapImpl();
         this.started = false;
     }
-    
     /**
      * {@inheritDoc}
      */
     @Override
-    public void render(final Stage stage) throws IOException {
+    public void render(final Stage stage) {
         if (!started) {
             try {
                 started = true;
@@ -54,7 +53,6 @@ public class GameViewState implements WindowState {
                 logger.log(Level.SEVERE, "GameViewError::", e);
             }
         }
-        
     }
 
     private void start(final Stage stage) throws IOException {
@@ -78,6 +76,11 @@ public class GameViewState implements WindowState {
         stage.show();
     }
 
+    /**
+     * Repaint the graphic aspect of the view.
+     * @param stage The stage where the game is running
+     * @throws IOException Exception if the stage can't be rendered.
+     */
     public void repaint(final Stage stage) throws IOException {
         i++;
             stage.getScene().setFill(Color.rgb(i, i, i));

@@ -1,6 +1,6 @@
 package it.unibo.smol.core;
 
-import java.io.IOException;
+import java.util.Optional;
 
 import it.unibo.smol.model.api.GameState;
 import it.unibo.smol.model.impl.GameStateImpl;
@@ -21,9 +21,9 @@ public class GameLoop extends Thread {
     private long pastTime;
     private double delta;
 
-    final private GameState gameState;
-    final private GameViewState gv;
-    final private Stage view;
+     private final GameState gameState;
+     private final GameViewState gv;
+     private final Stage view;
 
     // ALL commented code is for FPS checking
     /*long timer =0;
@@ -32,12 +32,13 @@ public class GameLoop extends Thread {
     /**
      * Constructor for the GameLoop.
      * @param gameState the state of the game
-     * @param gameViewState the visual rappresentation of the game
+     * @param gv the visual rappresentation of the game
+     * @param view The stage of the current view
      */
-    public GameLoop(final GameState gameState,final GameViewState gv, final Stage view) {
+    public GameLoop(final GameState gameState, final GameViewState gv, final Optional<Stage> view) {
         this.gameState = new GameStateImpl(gameState);
         this.gv = gv;
-        this.view = view;
+        this.view = view.orElseThrow();
     }
 
     /**
@@ -55,6 +56,7 @@ public class GameLoop extends Thread {
 
             if (syncTime(UPS_INTERVAL)) {
                 update();
+                processInput();
             }
 
             if ((now - lastFrame) >= FPS_INTERVAL) {
@@ -74,7 +76,7 @@ public class GameLoop extends Thread {
      * Update the logic and check the end condition of the Game.
      */
     public void update() {
-        gameState.getWorld().updateWorld();     
+        gameState.getWorld().updateWorld();
     }
 
     /**
@@ -87,11 +89,7 @@ public class GameLoop extends Thread {
      * Repaint the Window with the change ocurred by the {@link #update()} method.
      */
     private void repaint() {
-        try {
             gv.render(view);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

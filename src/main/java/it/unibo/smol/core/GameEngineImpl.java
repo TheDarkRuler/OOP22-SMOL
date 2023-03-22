@@ -1,5 +1,7 @@
 package it.unibo.smol.core;
 
+import java.util.Optional;
+
 import it.unibo.smol.model.impl.GameStateImpl;
 import it.unibo.smol.model.impl.WorldImpl;
 import it.unibo.smol.view.impl.GameViewState;
@@ -60,10 +62,9 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void init(final Stage primaryStage) {
         state = true;
-        var gv = new GameViewState();
-        gameLoop = new GameLoop(new GameStateImpl(new WorldImpl()), gv, primaryStage);
+        final var gv = new GameViewState();
+        gameLoop = new GameLoop(new GameStateImpl(new WorldImpl()), gv, Optional.of(primaryStage));
         new WindowImpl(gv).launch(primaryStage);
         gameLoop.start();
-        
     }
 }
