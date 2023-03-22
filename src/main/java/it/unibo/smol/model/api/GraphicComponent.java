@@ -1,17 +1,17 @@
 package it.unibo.smol.model.api;
 
-import javafx.scene.canvas.GraphicsContext;
+import it.unibo.smol.view.impl.GraphicsDraw;
 import javafx.scene.image.Image;
 /**
  * Abstract class rappresenting the template of the graphics component for the {@link GameObject}.
  */
 public abstract class GraphicComponent {
 
-    private GraphicsContext graphic;
     private final double width;
     private final double height;
     private Entity entity;
     private Image image;
+    private GraphicsDraw graphic;
 
     /**
      * Basic constructor for the {@link GraphicComponent}.
@@ -24,9 +24,10 @@ public abstract class GraphicComponent {
     }
 
     /**
-     * copy constructor of Graphic Component
+     * copy constructor of Graphic Component.
+     * @param graphicComponent
      */
-    public GraphicComponent(GraphicComponent graphicComponent) {
+    public GraphicComponent(final GraphicComponent graphicComponent) {
         this.entity = graphicComponent.getEntity();
         this.graphic = graphicComponent.getGraphic();
         this.height = graphicComponent.getHeight();
@@ -53,26 +54,18 @@ public abstract class GraphicComponent {
     }
 
     /**
-     * Generate the 2D model from the {@link resources} file.
-     * @param g : The object that encapsulate the information for the rendering operations
-     * @param x : The X coordinate on the destination for the upper left of the image
-     * @param y : The Y coordinate on the destination for the upper left of the image
+     * {@inheritDoc}
      */
-    public abstract void render(GraphicsContext g, double x, double y); 
-
-    /**
-     * Setter for the {@link #graphic} field.
-     * @param g : The value that's gonna be set
-     */
-    public void setGraphic(final GraphicsContext g) {
-        this.graphic = g;
+    public void render() {
+        this.update();
+        this.graphic.drawSprite(this.image, this.entity);
     }
 
     /**
      * Getter for the {@link #graphic} field.
      * @return {@link #graphic}
      */
-    public GraphicsContext getGraphic() {
+    public GraphicsDraw getGraphic() {
         return this.graphic;
     }
 

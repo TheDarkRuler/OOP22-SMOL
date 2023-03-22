@@ -44,6 +44,7 @@ public class EntityImpl implements Entity {
         this.currentX = currentX;
         this.currentY = currentY;
         physicsComp.setEntity(new EntityImpl(this));
+        graphicComp.setEntity(new EntityImpl(this));
     }
 
     /**

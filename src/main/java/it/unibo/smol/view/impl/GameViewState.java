@@ -6,10 +6,15 @@ import java.util.logging.Level;
 
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
+import it.unibo.smol.model.api.World;
+import it.unibo.smol.model.impl.GameStateImpl;
+import it.unibo.smol.model.impl.WorldImpl;
 import it.unibo.smol.view.api.GameMap;
 import it.unibo.smol.view.api.WindowState;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -23,6 +28,7 @@ public class GameViewState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
 
     private final GameMap map;
+    private GraphicsContext graphic;
 
     /**
      * constructor for Game View window state.
@@ -48,7 +54,8 @@ public class GameViewState implements WindowState {
         final var root = new Pane();
         final var scene = new Scene(root, map.getWidth(),
             map.getHeight(), Color.BLACK);
-
+        final var canvas = new Canvas(map.getWidth(), map.getHeight());
+        this.graphic = canvas.getGraphicsContext2D();
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
         scene.setOnMouseMoved(mouseEventHandler);
@@ -56,6 +63,9 @@ public class GameViewState implements WindowState {
         scene.setOnMouseReleased(mouseEventHandler);
         scene.setOnMouseDragged(mouseEventHandler);
         scene.setOnMouseEntered(mouseEventHandler);
+        root.getChildren().add(canvas);
+        stage.setX(0);
+        stage.setY(0);
         stage.setScene(scene);
         stage.show();
     }
