@@ -35,25 +35,28 @@ public interface EntityFactory {
      * create a player entities.
      * @param x the x location where the entities spawn
      * @param y the y location where the entities spawn
+     * @param w
      * @return a entities that rappresent the player character
      */
-    Entity createPlayer(double x, double y);
+    Entity createPlayer(double x, double y, World w);
 
     /**
      * create a lifeplants entities.
      * @param x the x location where the entities spawn
      * @param y the y location where the entities spawn
+     * @param w
      * @return a entities that rappresent the health of the player
      */
-    Entity createLifePlants(double x, double y);
+    Entity createLifePlants(double x, double y, World w);
 
     /**
      * create a weapon entities.
      * @param x the x location where the entities spawn
      * @param y the y location where the entities spawn
+     * @param w
      * @return a entities that rappresent the weapon utilize by the player
      */
-    Entity createWeapon(double x, double y);
+    Entity createWeapon(double x, double y, World w);
 
     /**
      * create an Bomb enemy entities.

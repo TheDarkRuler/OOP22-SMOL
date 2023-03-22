@@ -83,8 +83,8 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public void initGame() {
-        new EntityFactoryImpl().createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2);
-        new EntityFactoryImpl().createWeapon(GameMap.WIDTH / 2, GameMap.HEIGHT / 2);
+        new EntityFactoryImpl().createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world);
+        new EntityFactoryImpl().createWeapon(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world);
         new EntityFactoryImpl().createBasicEnemy(new Point2D(GameMap.BORDER_WIDTH / 2, GameMap.BORDER_HEIGHT / 2), this.world);
     }
 

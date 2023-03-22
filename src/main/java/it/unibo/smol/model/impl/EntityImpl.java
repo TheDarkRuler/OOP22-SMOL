@@ -31,11 +31,12 @@ public class EntityImpl implements Entity {
      * @param physicsComp
      * @param currentX
      * @param currentY
+     * @param w
      */
     public EntityImpl(final Type type, final Optional<InputComponent> inputComp,
             final Optional<HealthComponent> healthComp,
             final GraphicComponent graphicComp, final PhysicsComponent physicsComp,
-            final double currentX, final double currentY) {
+            final double currentX, final double currentY, World w) {
         this.type = type;
         this.inputComp = inputComp;
         this.healthComp = healthComp;
@@ -43,6 +44,7 @@ public class EntityImpl implements Entity {
         this.physicsComp = physicsComp.makeCopy();
         this.currentX = currentX;
         this.currentY = currentY;
+        this.world = new WorldImpl(w);
         physicsComp.setEntity(new EntityImpl(this));
         graphicComp.setEntity(new EntityImpl(this));
     }

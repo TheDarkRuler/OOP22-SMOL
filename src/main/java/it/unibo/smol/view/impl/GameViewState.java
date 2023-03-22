@@ -30,12 +30,6 @@ public class GameViewState implements WindowState {
     private int i = 0;
 
     /**
-     * constructor for Game View window state.
-     */
-    public GameViewState() {
-        this.started = false;
-    }
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -89,6 +83,9 @@ public class GameViewState implements WindowState {
      */
     public void repaint(final Stage stage) throws IOException {
         i++;
+        if (i > 250) {
+            i =0;
+        }
             stage.getScene().setFill(Color.rgb(i, i, i));
     }
 }

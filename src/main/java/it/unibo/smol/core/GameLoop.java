@@ -51,6 +51,7 @@ public class GameLoop extends Thread {
         long lastFrame = System.nanoTime();
         pastTime = System.nanoTime();
 
+        gameState.initGame();
         while (!gameState.isGameOver()) {
             now = System.nanoTime();
 

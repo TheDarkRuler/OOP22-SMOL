@@ -42,48 +42,48 @@ public class EntityFactoryImpl implements EntityFactory {
         new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT), 
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initialPosition)),
-        initialPosition.getX(), initialPosition.getY());
+        initialPosition.getX(), initialPosition.getY(), w);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Entity createPlayer(final double x, final double y) {
+    public Entity createPlayer(final double x, final double y, World w) {
         return new EntityImpl(Type.PLAYER, 
         Optional.of(new PlayerInputComponent()),
         Optional.empty(),
         new PlayerGraphicComponent(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT),
         new PlayerPhysicsComponent(new RectangleHB(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT,
             new Point2D(x, y))),
-        x, y);
+        x, y, w);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Entity createLifePlants(final double x, final double y) {
+    public Entity createLifePlants(final double x, final double y, World w) {
         return new EntityImpl(Type.HEALTH,
         Optional.empty(),
         Optional.of(new HealthComponent(Constant.HEALTH_HP)),
         new LifePlantsGraphicComponent(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT),
         new LifePlantsPhysicsComponent(new RectangleHB(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT,
             new Point2D(x, y))),
-        x, y);
+        x, y, w);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Entity createWeapon(final double x, final double y) {
+    public Entity createWeapon(final double x, final double y, World w) {
         return new EntityImpl(Type.WEAPON,
         Optional.of(new WeaponInputComponent()),
         Optional.empty(),
         new WeaponGraphicComponent(2*Constant.WEAPON_RADIUS, 2*Constant.WEAPON_RADIUS),
         new WeaponPhysicsComponent(new CircleHB(new Point2D(x, y), Constant.WEAPON_RADIUS)),
-        x, y);
+        x, y, w);
     }
 
     /**
@@ -97,7 +97,7 @@ public class EntityFactoryImpl implements EntityFactory {
         new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT),
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initialPosition)),
-        initialPosition.getX(), initialPosition.getY());
+        initialPosition.getX(), initialPosition.getY(), w);
     }
 
     /**
@@ -111,7 +111,7 @@ public class EntityFactoryImpl implements EntityFactory {
         new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT),
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initalPosition)),
-        initalPosition.getX(), initalPosition.getY());
+        initalPosition.getX(), initalPosition.getY(), w);
     }
 
     @Override
@@ -122,6 +122,6 @@ public class EntityFactoryImpl implements EntityFactory {
         new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT), 
         new BombEnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initialPosition)),
-        initialPosition.getX(), initialPosition.getY());
+        initialPosition.getX(), initialPosition.getY(), w);
     }
 }
