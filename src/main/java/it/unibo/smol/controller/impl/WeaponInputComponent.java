@@ -16,8 +16,8 @@ public class WeaponInputComponent implements InputComponent {
     /**
      * constructor to initialize mouse inputs for weapon entity.
      */
-    public WeaponInputComponent() {
-        this.mouse = new MouseInputs();
+    public WeaponInputComponent(final MouseInputs mouse) {
+        this.mouse = mouse;
     }
 
     /**
@@ -33,6 +33,7 @@ public class WeaponInputComponent implements InputComponent {
      */
     @Override
     public Optional<Point2D> getPosition() {
+        mouse.setWeaponRange();
         return Optional.of(mouse.getWeaponLocation());
     }
 

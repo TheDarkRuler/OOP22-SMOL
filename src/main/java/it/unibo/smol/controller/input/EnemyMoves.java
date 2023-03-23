@@ -30,7 +30,7 @@ public class EnemyMoves {
         this.to = to;
         this.enemyToMove = enemyToMove;
         setMovementVariable();
-        enemyIsUnder = true;
+        this.enemyIsUnder = true;
     }
 
     /**
@@ -41,8 +41,9 @@ public class EnemyMoves {
     public Optional<Point2D> enemyMove() {
         if (this.enemyIsUnder) {
             if (this.from.distance(this.to) > Constant.ENEMY_MOVSPD) {
-                this.from = this.from.add(this.from.getX() < this.to.getX() ? this.moveX : -this.moveX, 0);
-                this.from = this.from.add(0, this.from.getY() < this.to.getY() ? this.moveY : -this.moveY);
+                this.from = this.from.add(this.from.getX() < this.to.getX() ? this.moveX * Constant.ENEMY_MOVSPD : -this.moveX * Constant.ENEMY_MOVSPD, 0);
+                this.from = this.from.add(0, this.from.getY() < this.to.getY() ? this.moveY * Constant.ENEMY_MOVSPD : -this.moveY * Constant.ENEMY_MOVSPD);
+                enemyToMove.setEnemyPosition(from);
             } else {
                 notifyEnemyHasArrived();
             }
@@ -65,7 +66,7 @@ public class EnemyMoves {
      */
     private void setMovementVariable() {
         this.moveX = getMovementSegments(Math.abs(from.getX() - to.getX()));
-        this.moveY = getMovementSegments(Math.abs(from.getX() - to.getX()));
+        this.moveY = getMovementSegments(Math.abs(from.getY() - to.getY()));
     }
 
     /**
@@ -74,7 +75,7 @@ public class EnemyMoves {
      * @return a double used by the enemy to move in the axis
      */
     private double getMovementSegments(final double temp) {
-        return temp / Math.max(Math.abs(from.getX() - to.getX()), Math.abs(from.getX() - to.getX()));
+        return temp / Math.max(Math.abs(from.getX() - to.getX()), Math.abs(from.getY() - to.getY()));
     }
 
     /**

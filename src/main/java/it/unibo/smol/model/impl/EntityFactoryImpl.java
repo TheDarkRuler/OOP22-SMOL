@@ -37,7 +37,7 @@ public class EntityFactoryImpl implements EntityFactory {
     @Override
     public Entity createPlayer(final double x, final double y, World w) {
         return new EntityImpl(Type.PLAYER, 
-        Optional.of(new PlayerInputComponent()),
+        Optional.of(new PlayerInputComponent(w.getKeyInputs())),
         Optional.empty(),
         new PlayerGraphicComponent(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT),
         new PlayerPhysicsComponent(new RectangleHB(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT,
@@ -65,7 +65,7 @@ public class EntityFactoryImpl implements EntityFactory {
     @Override
     public Entity createWeapon(final double x, final double y, World w) {
         return new EntityImpl(Type.WEAPON,
-        Optional.of(new WeaponInputComponent()),
+        Optional.of(new WeaponInputComponent(w.getMouseInputs())),
         Optional.empty(),
         new WeaponGraphicComponent(2*Constant.WEAPON_RADIUS, 2*Constant.WEAPON_RADIUS),
         new WeaponPhysicsComponent(new CircleHB(new Point2D(x, y), Constant.WEAPON_RADIUS)),

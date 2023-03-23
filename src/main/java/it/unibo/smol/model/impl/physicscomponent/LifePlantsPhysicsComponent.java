@@ -6,6 +6,7 @@ import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
+import it.unibo.smol.model.api.World;
 import javafx.geometry.Point2D;
 /**
  * The implementation of the {@link PhysicsComponent} rappresenting the Enemy behaviour.
@@ -44,7 +45,7 @@ public class LifePlantsPhysicsComponent extends PhysicsComponent {
      * {@inheritDoc}
      */
     @Override
-    public void receiveMovement(final Point2D move) {
+    public void receiveMovement(final Point2D move, final World world) {
         //This component doesn't use this method
     }
 

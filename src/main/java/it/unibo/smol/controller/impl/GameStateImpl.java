@@ -3,6 +3,8 @@ package it.unibo.smol.controller.impl;
 import java.util.Map;
 
 import it.unibo.smol.controller.api.GameState;
+import it.unibo.smol.controller.input.KeyInputs;
+import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.EntityFactory;
 import it.unibo.smol.model.api.World;
@@ -90,11 +92,28 @@ public class GameStateImpl implements GameState {
     @Override
     public void initGame() {
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
-        world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
-        world.addEntity(entityFactory.createBasicEnemy(new Point2D(GameMap.BORDER_WIDTH / 2, GameMap.BORDER_HEIGHT / 2), this.world));
-        world.addEntity(entityFactory.createLifePlants(300, 300, world));
-        world.addEntity(entityFactory.createLifePlants(400, 400, world));
-        world.addEntity(entityFactory.createLifePlants(900, 900, world));
+        world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2) + 50, this.world));
+        world.addEntity(entityFactory.createBasicEnemy(new Point2D(GameMap.BORDER_WIDTH, GameMap.BORDER_HEIGHT), this.world));
+        world.addEntity(entityFactory.createLifePlants(GameMap.BORDER_WIDTH / 2, GameMap.BORDER_HEIGHT / 2, world));
+        world.addEntity(entityFactory.createLifePlants(GameMap.BORDER_WIDTH / 2, GameMap.MAP_HEIGHT + GameMap.BORDER_HEIGHT/2, world));
+        world.addEntity(entityFactory.createLifePlants(GameMap.MAP_WIDTH + GameMap.BORDER_WIDTH/2, GameMap.BORDER_HEIGHT/2, world));
+        world.addEntity(entityFactory.createLifePlants(GameMap.BORDER_WIDTH/2 + GameMap.MAP_WIDTH, GameMap.BORDER_HEIGHT/2 + GameMap.MAP_HEIGHT, world));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setKeyInputs(final KeyInputs keyInputs) {
+        this.world.setKeyInputs(keyInputs);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMouseInputs(final MouseInputs mouseInputs) {
+        this.world.setMouseInputs(mouseInputs);
     }
 
 }
