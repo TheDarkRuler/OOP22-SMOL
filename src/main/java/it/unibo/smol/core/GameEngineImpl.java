@@ -64,9 +64,8 @@ public class GameEngineImpl implements GameEngine {
         state = true;
         final var gs = new GameStateImpl(new WorldImpl());
         final var gv = new GameViewState(gs);
-        new WindowImpl(gv).launch(primaryStage);
         gameLoop = new GameLoop(gs, gv, Optional.of(primaryStage));
-        
+        new WindowImpl(gv).launch(primaryStage);
         gameLoop.start();
     }
 }
