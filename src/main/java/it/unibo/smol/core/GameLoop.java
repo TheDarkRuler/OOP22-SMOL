@@ -3,7 +3,6 @@ package it.unibo.smol.core;
 import java.util.Optional;
 
 import it.unibo.smol.controller.api.GameState;
-import it.unibo.smol.controller.impl.GameStateImpl;
 import it.unibo.smol.view.impl.GameViewState;
 import javafx.stage.Stage;
 
@@ -36,7 +35,7 @@ public class GameLoop extends Thread {
      * @param view The stage of the current view
      */
     public GameLoop(final GameState gameState, final GameViewState gv, final Optional<Stage> view) {
-        this.gameState = new GameStateImpl(gameState);
+        this.gameState = gameState;
         this.gv = gv;
         this.view = view.orElseThrow();
     }
