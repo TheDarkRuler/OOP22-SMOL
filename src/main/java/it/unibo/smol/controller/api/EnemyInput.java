@@ -114,7 +114,6 @@ public class EnemyInput {
                     }
                 });
         } while (!isNewPosViable);
-        System.out.println(temp);
         return temp;
     }
 
@@ -197,7 +196,6 @@ public class EnemyInput {
             world.setPlantOccupied(choosenPlant);
 
         }
-        System.out.println(world.getLifePlants());
         return temp;
     }
 
