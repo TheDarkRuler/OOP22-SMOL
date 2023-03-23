@@ -16,12 +16,12 @@ public class PlayerInputComponent implements InputComponent {
     /**
      * constructor to initialize keyboard inputs for player entity.
      */
-    public PlayerInputComponent() {
-        input = new KeyInputs();
+    public PlayerInputComponent(final KeyInputs input) {
+        this.input = input;
     }
 
     /**
-     * {@inheritDoc}}
+     * {@inheritDoc}
      */
     @Override
     public Optional<Directions> getDirection() {
@@ -29,7 +29,7 @@ public class PlayerInputComponent implements InputComponent {
     }
 
     /**
-     * {@inheritDoc}}
+     * {@inheritDoc}
      */
     @Override
     public Optional<Point2D> getPosition() {
@@ -37,7 +37,7 @@ public class PlayerInputComponent implements InputComponent {
     }
 
     /**
-     * {@inheritDoc}}
+     * {@inheritDoc}
      */
     @Override
     public boolean isHittable() {

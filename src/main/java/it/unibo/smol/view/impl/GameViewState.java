@@ -9,11 +9,8 @@ import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.WindowState;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -27,6 +24,8 @@ public class GameViewState implements WindowState {
     private GraphicsDraw graphic;
     private boolean started;
     private final GameState gameState;
+    private KeyInputs keyEventHandler;
+    private MouseInputs mouseEventHandler;
 
     
     public GameViewState(GameState gameState) {
@@ -55,8 +54,10 @@ public class GameViewState implements WindowState {
     }
 
     private void start(final Stage stage) throws IOException {
-        final EventHandler<KeyEvent> keyEventHandler = new KeyInputs();
-        final EventHandler<MouseEvent> mouseEventHandler = new MouseInputs();
+        keyEventHandler = new KeyInputs();
+        mouseEventHandler = new MouseInputs();
+        setKeyInputs();
+        setMouseInputs();
         final var root = new Pane();
         final var scene = new Scene(root, GameMap.WIDTH,
             GameMap.HEIGHT, Color.BLACK);
@@ -85,6 +86,20 @@ public class GameViewState implements WindowState {
      */
     public void repaint(final Stage stage) throws IOException {
         gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
+    }
+
+    /**
+     * sets the keyInput in gamestate.
+     */
+    public void setKeyInputs() {
+        this.gameState.setKeyInputs(this.keyEventHandler);
+    }
+
+    /**
+     * sets the mouseInputs in gamestate.
+     */
+    public void setMouseInputs() {
+        this.gameState.setMouseInputs(this.mouseEventHandler);
     }
 }
 

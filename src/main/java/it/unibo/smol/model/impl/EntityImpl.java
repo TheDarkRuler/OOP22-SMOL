@@ -99,16 +99,16 @@ public class EntityImpl implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public void moveX(final double x) {
-        currentX += x;
+    public void setX(final double x) {
+        currentX = x;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void moveY(final double y) {
-        currentY += y;
+    public void setY(final double y) {
+        currentY = y;
     }
 
     /**
@@ -151,10 +151,15 @@ public class EntityImpl implements Entity {
         if (inputComp.isPresent()) {
             final InputComponent inputCompPresent = inputComp.orElseThrow();
             inputCompPresent.getDirection().ifPresent(x -> physicsComp.receiveMovement(x));
-            inputCompPresent.getPosition().ifPresent(x -> physicsComp.receiveMovement(x));
+            inputCompPresent.getPosition().ifPresent(x -> physicsComp.receiveMovement(x, world));
             physicsComp.setRigid(inputCompPresent.isHittable());
-            this.moveX(physicsComp.getX());
-            this.moveY(physicsComp.getY());
+            if (this.type.equals(Type.WEAPON)) {
+                this.setX(physicsComp.getX());
+                this.setY(physicsComp.getY());
+            } else {
+                this.setX(this.currentX + physicsComp.getX());
+                this.setY(this.currentY + physicsComp.getY());
+            }
         }
         physicsComp.checkCollision();
         if (healthComp.isPresent() && healthComp.get().isDead()) {

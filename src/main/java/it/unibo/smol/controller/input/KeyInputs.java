@@ -74,7 +74,6 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      * @param newMovement
      */
     public static void setMovement(final Directions newMovement) {
-
         KeyInputs.movement.add(newMovement);
     }
 }

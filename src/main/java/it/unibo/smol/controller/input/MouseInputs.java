@@ -15,7 +15,8 @@ import javafx.scene.input.MouseEvent;
 public class MouseInputs implements EventHandler<MouseEvent> {
 
     private static final int WEAPON_INC_RATE = 2;
-    private static final int WEAPON_MAX_RANGE = 100;
+    private static final int DEF_WEAPON_RANGE = 100;
+    private static final int WEAPON_MAX_RANGE = DEF_WEAPON_RANGE + 100;
     private static final int HOLD_TIME = 300;
     private static final int WEAPON_ATTACK_ANIM = 500;
 
@@ -137,7 +138,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      * checks if the weapon is max range and if not increase the range og hit.
      */
     public void setWeaponRange() {
-        if (weaponRange <= WEAPON_MAX_RANGE) {
+        if (DEF_WEAPON_RANGE + weaponRange <= WEAPON_MAX_RANGE) {
             weaponRange += weaponIncrease;
         }
     }
@@ -147,7 +148,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      * @return weaponRange
      */
     public int getWeaponRange() {
-        return this.weaponRange;
+        return this.weaponRange + DEF_WEAPON_RANGE;
     }
 
     /**

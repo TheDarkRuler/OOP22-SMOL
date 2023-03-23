@@ -3,6 +3,8 @@ package it.unibo.smol.controller.impl;
 import java.util.Map;
 
 import it.unibo.smol.controller.api.GameState;
+import it.unibo.smol.controller.input.KeyInputs;
+import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.EntityFactory;
 import it.unibo.smol.model.api.World;
@@ -95,6 +97,22 @@ public class GameStateImpl implements GameState {
         world.addEntity(entityFactory.createLifePlants(300, 300, world));
         world.addEntity(entityFactory.createLifePlants(400, 400, world));
         world.addEntity(entityFactory.createLifePlants(900, 900, world));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setKeyInputs(final KeyInputs keyInputs) {
+        this.world.setKeyInputs(keyInputs);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMouseInputs(final MouseInputs mouseInputs) {
+        this.world.setMouseInputs(mouseInputs);
     }
 
 }
