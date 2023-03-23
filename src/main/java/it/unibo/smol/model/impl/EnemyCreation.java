@@ -65,18 +65,23 @@ public class EnemyCreation {
      * @param enemyName : the name of the enemy
      */
     private void spawnEntity(final String enemyName) {
+        System.out.println(enemyName);
         switch (enemyName) {
             case "Mole":
-                new EntityFactoryImpl().createBasicEnemy(initialEnemyPosition(), gameState.getWorld());
+                gameState.getWorld()
+                    .addEntity(gameState.getEntityFactory().createBasicEnemy(initialEnemyPosition(), gameState.getWorld()));
                 break;
             case "Helmet_mole":
-                new EntityFactoryImpl().createHelmetEnemy(initialEnemyPosition(), gameState.getWorld());
+                gameState.getWorld()
+                    .addEntity(gameState.getEntityFactory().createBasicEnemy(initialEnemyPosition(), gameState.getWorld()));
                 break;
             case "Angry_mole":
-                new EntityFactoryImpl().createAngryEnemy(initialEnemyPosition(), gameState.getWorld());
+                gameState.getWorld()
+                    .addEntity(gameState.getEntityFactory().createBasicEnemy(initialEnemyPosition(), gameState.getWorld()));
                 break;
             case "Bomb_mole":
-                //new EntityFactoryImpl().creatBombMole(initialEnemyPosition());
+                gameState.getWorld()
+                    .addEntity(gameState.getEntityFactory().createBasicEnemy(initialEnemyPosition(), gameState.getWorld()));
                 break;
             default:
                 break;
@@ -100,15 +105,14 @@ public class EnemyCreation {
                     if (gameState.getScore() / INC_DIFFICULTY_PIVOT <= DIFFICULTY_LIMIT) {
                         changeDifficulty();
                     }
-
-                    for (final Double spawnPercentual : weightList) {
-                        if (spawnPercentual >= randomDouble) {
-                           spawnEntity(entitiesMap.entrySet()
-                                .stream()
-                                .filter(s -> s.getValue().equals(spawnPercentual))
-                                .findAny().get().getKey());
-                        }
-                    }
+                    System.out.println(weightList);
+                    System.out.println(randomDouble);
+                    spawnEntity(entitiesMap.entrySet()
+                        .stream()
+                        .filter(s -> s.getValue().equals(weightList.stream()
+                            .filter(x -> x >= randomDouble)
+                            .findFirst().get()))
+                        .findAny().get().getKey());
                 }
             });
         enemyCreationTimer.start();
