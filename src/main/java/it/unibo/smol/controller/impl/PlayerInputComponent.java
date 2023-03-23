@@ -25,7 +25,7 @@ public class PlayerInputComponent implements InputComponent {
      */
     @Override
     public Optional<Directions> getDirection() {
-        return Optional.of(input.getMovement());
+        return input.getMovement();
     }
 
     /**

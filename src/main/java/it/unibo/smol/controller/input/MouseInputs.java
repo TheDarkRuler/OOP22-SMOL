@@ -58,17 +58,18 @@ public class MouseInputs implements EventHandler<MouseEvent> {
             freezeInputs(WEAPON_ATTACK_ANIM);
 
         } else if (event.getEventType().equals(MouseEvent.MOUSE_MOVED) && !weaponSmashed && cursorOnScreen) {
-
-            this.weaponLocation = new Point2D(event.getX(), event.getY());
+            if (!weaponSmashed && cursorOnScreen){
+                this.weaponLocation = new Point2D(event.getX(), event.getY());
+            }
 
         } else if (event.getEventType().equals(MouseEvent.MOUSE_ENTERED)) {
 
             this.cursorOnScreen = true;
 
         } else if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED) && !weaponSmashed && cursorOnScreen) {
-
-            this.weaponLocation = new Point2D(event.getX(), event.getY());
-
+            if (!weaponSmashed && cursorOnScreen){
+                this.weaponLocation = new Point2D(event.getX(), event.getY());
+            }
         }
     }
 

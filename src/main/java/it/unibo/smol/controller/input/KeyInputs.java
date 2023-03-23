@@ -1,5 +1,8 @@
 package it.unibo.smol.controller.input;
 
+import java.util.Optional;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import it.unibo.smol.common.Directions;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
@@ -11,7 +14,7 @@ public class KeyInputs implements EventHandler<KeyEvent> {
     /**
      * Direction of the player.
      */
-    private static Directions movement = Directions.STAY_X;
+    private static Queue<Directions> movement = new PriorityQueue<>();
 
     /**
      * Handles the events, selecting everytime the right KeyEvent.
@@ -58,8 +61,12 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      * gives the Direction assigned earlier.
      * @return the movement Direction
      */
-    public Directions getMovement() {
-        return KeyInputs.movement;
+    public Optional<Directions> getMovement() {
+        if (movement.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(movement.poll());
+        }
     }
 
     /**
@@ -67,6 +74,7 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      * @param newMovement
      */
     public static void setMovement(final Directions newMovement) {
-        KeyInputs.movement = newMovement;
+
+        KeyInputs.movement.add(newMovement);
     }
 }
