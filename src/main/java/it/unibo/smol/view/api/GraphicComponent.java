@@ -57,8 +57,11 @@ public abstract class GraphicComponent {
      * {@inheritDoc}
      */
     public void render(GraphicsDraw graphic) {
-        this.update();
-        graphic.drawSprite(this.image, this.entity, this);
+        if (this.entity.getInputComp().isPresent()) {
+            graphic.undrawSprite(this.entity, this);
+            this.update();
+            graphic.drawSprite(this.image, this.entity, this);
+        }
     }
 
     /**

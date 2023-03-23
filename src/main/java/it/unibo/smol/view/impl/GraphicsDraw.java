@@ -20,5 +20,13 @@ public class GraphicsDraw {
             graphicComponent.getWidth(),
             graphicComponent.getHeight());
     }
+
+    public void undrawSprite(final Entity entity, final GraphicComponent graphicComponent) {
+        this.g.clearRect(
+            entity.getCurrentX() - graphicComponent.getWidth() / 2,
+            entity.getCurrentY() - graphicComponent.getHeight() / 2,
+            graphicComponent.getWidth(),
+            graphicComponent.getHeight());
+    }
     
 }

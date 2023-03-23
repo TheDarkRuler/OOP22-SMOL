@@ -9,6 +9,7 @@ import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.WindowState;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -72,6 +73,7 @@ public class GameViewState implements WindowState {
         scene.setOnMouseDragged(mouseEventHandler);
         scene.setOnMouseEntered(mouseEventHandler);
         root.getChildren().add(canvas);
+        gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
         stage.setX(0);
         stage.setY(0);
         stage.setScene(scene);
@@ -84,7 +86,9 @@ public class GameViewState implements WindowState {
      * @throws IOException Exception if the stage can't be rendered.
      */
     public void repaint(final Stage stage) throws IOException {
-        gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
+        Platform.runLater(() -> {
+            gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
+        }); 
     }
 }
 
