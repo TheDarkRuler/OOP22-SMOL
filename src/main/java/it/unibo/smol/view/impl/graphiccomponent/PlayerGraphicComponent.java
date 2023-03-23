@@ -30,7 +30,7 @@ public class PlayerGraphicComponent extends GraphicComponent {
         } else if (attacking) {
             setImage(LoadImgs.getSprites(LoadImgs.WORLD_IMG));
         } else {
-            setImage(LoadImgs.getSprites(LoadImgs.WORLD_IMG));
+            setImage(LoadImgs.getSprites(LoadImgs.MOLE));
         }
     }
 
