@@ -9,8 +9,10 @@ import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.WindowState;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -22,6 +24,7 @@ public class GameViewState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
 
     private GraphicsDraw graphic;
+    private GraphicsContext gContext;
     private boolean started;
     private final GameState gameState;
     private KeyInputs keyEventHandler;
@@ -62,7 +65,8 @@ public class GameViewState implements WindowState {
         final var scene = new Scene(root, GameMap.WIDTH,
             GameMap.HEIGHT, Color.BLACK);
         final var canvas = new Canvas(GameMap.WIDTH, GameMap.HEIGHT);
-        this.graphic = new GraphicsDraw(canvas.getGraphicsContext2D());
+        this.gContext = canvas.getGraphicsContext2D();
+        this.graphic = new GraphicsDraw(gContext);
         root.setBackground(null);
         scene.setFill(Color.GREEN);
         scene.setOnKeyPressed(keyEventHandler);
@@ -73,7 +77,6 @@ public class GameViewState implements WindowState {
         scene.setOnMouseDragged(mouseEventHandler);
         scene.setOnMouseEntered(mouseEventHandler);
         root.getChildren().add(canvas);
-        gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
         stage.setX(0);
         stage.setY(0);
         stage.setScene(scene);
@@ -86,7 +89,10 @@ public class GameViewState implements WindowState {
      * @throws IOException Exception if the stage can't be rendered.
      */
     public void repaint(final Stage stage) throws IOException {
-        gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
+        Platform.runLater(() -> {
+            gContext.clearRect(0, 0, GameMap.WIDTH, GameMap.HEIGHT);
+            gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
+        });
     }
 
     /**
