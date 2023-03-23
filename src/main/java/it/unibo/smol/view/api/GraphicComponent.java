@@ -12,7 +12,6 @@ public abstract class GraphicComponent {
     private final double height;
     private Entity entity;
     private Image image;
-    private GraphicsDraw graphic;
 
     /**
      * Basic constructor for the {@link GraphicComponent}.
@@ -30,7 +29,7 @@ public abstract class GraphicComponent {
      */
     public GraphicComponent(final GraphicComponent graphicComponent) {
         this.entity = graphicComponent.getEntity();
-        this.graphic = graphicComponent.getGraphic();
+        //this.graphic = graphicComponent.getGraphic();
         this.height = graphicComponent.getHeight();
         this.image = graphicComponent.getImage();
         this.width = graphicComponent.getWidth();
@@ -57,18 +56,18 @@ public abstract class GraphicComponent {
     /**
      * {@inheritDoc}
      */
-    public void render() {
+    public void render(GraphicsDraw graphic) {
         this.update();
-        this.graphic.drawSprite(this.image, this.entity, this);
+        graphic.drawSprite(this.image, this.entity, this);
     }
 
     /**
      * Getter for the {@link #graphic} field.
      * @return {@link #graphic}
-     */
+     *//*
     public GraphicsDraw getGraphic() {
         return this.graphic;
-    }
+    }*/
 
     /**
      * Getter for the {@link #width} field.

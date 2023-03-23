@@ -2,6 +2,7 @@ package it.unibo.smol.view.impl.graphiccomponent;
 
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.GraphicComponent;
+import it.unibo.smol.view.impl.GraphicsDraw;
 
 /**
  * The implementation of the {@link GraphicComponent} rappresenting the Weapon graphic.
@@ -23,10 +24,10 @@ public class WeaponGraphicComponent extends GraphicComponent {
      * 
      */
     @Override
-    public void render() {
+    public void render(GraphicsDraw graphic) {
         super.update();
         if (attacking) {
-            super.getGraphic().drawSprite(super.getImage(), super.getEntity(), this);
+            graphic.drawSprite(super.getImage(), super.getEntity(), this);
         }
     }
 

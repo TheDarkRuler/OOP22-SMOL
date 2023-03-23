@@ -62,9 +62,11 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void init(final Stage primaryStage) {
         state = true;
-        final var gv = new GameViewState();
-        gameLoop = new GameLoop(new GameStateImpl(new WorldImpl()), gv, Optional.of(primaryStage));
+        final var gs = new GameStateImpl(new WorldImpl());
+        final var gv = new GameViewState(gs);
         new WindowImpl(gv).launch(primaryStage);
+        gameLoop = new GameLoop(gs, gv, Optional.of(primaryStage));
+        
         gameLoop.start();
     }
 }

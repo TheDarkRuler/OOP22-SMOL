@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.view.GameMap;
@@ -24,10 +25,14 @@ import javafx.stage.Stage;
 public class GameViewState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
 
-    private GraphicsContext graphic;
+    private GraphicsDraw graphic;
     private boolean started;
+    private final GameState gameState;
 
-    private int i = 0;
+    
+    public GameViewState(GameState gameState) {
+        this.gameState = gameState;
+    }
 
     /**
      * {@inheritDoc}
@@ -57,8 +62,7 @@ public class GameViewState implements WindowState {
         final var scene = new Scene(root, GameMap.WIDTH,
             GameMap.HEIGHT, Color.BLACK);
         final var canvas = new Canvas(GameMap.WIDTH, GameMap.HEIGHT);
-        this.graphic = canvas.getGraphicsContext2D();
-        new GraphicsDraw(graphic);
+        this.graphic = new GraphicsDraw(canvas.getGraphicsContext2D());
         root.setBackground(null);
         scene.setFill(Color.GREEN);
         scene.setOnKeyPressed(keyEventHandler);
@@ -81,13 +85,7 @@ public class GameViewState implements WindowState {
      * @throws IOException Exception if the stage can't be rendered.
      */
     public void repaint(final Stage stage) throws IOException {
-        i++;
-        if (i > 250) {
-            i =0;
-        }
-        graphic.setStroke(Color.RED);
-            graphic.fillRect(100, 100, 100, 100);
-            stage.getScene().setFill(Color.rgb(i, i, i));
+        gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
     }
 }
 

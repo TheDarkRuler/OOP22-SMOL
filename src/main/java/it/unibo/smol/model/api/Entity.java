@@ -6,6 +6,7 @@ import java.util.Optional;
 import it.unibo.smol.controller.api.InputComponent;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.impl.HealthComponent;
+import it.unibo.smol.view.api.GraphicComponent;
 
 /**
  *  Functional interface for object and entities in the game.
@@ -76,6 +77,12 @@ public interface Entity {
      * @return The PhysicsComponent
      */
     PhysicsComponent getPhysicsComp();
+
+    /**
+     * Getter for Graphic component.
+     * @return The GraphicComponent 
+     */
+    GraphicComponent getGraphicComp();
 
     /**
      * Update all the component of the object.

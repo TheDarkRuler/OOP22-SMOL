@@ -25,9 +25,9 @@ public class LifePlantsGraphicComponent extends GraphicComponent {
     @Override
     public void setAnimation() {
         if (isHalfDead) {
-            super.setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+            super.setImage(LoadImgs.getSprites(LoadImgs.WORLD_IMG));
         } else {
-            super.setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+            super.setImage(LoadImgs.getSprites(LoadImgs.WORLD_IMG));
         }
     }
 

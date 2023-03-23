@@ -38,10 +38,10 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     public void receiveMovement(final Directions move) {
         switch (move) {
             case UP:
-                super.setY(super.getMovementSpeed());
+                super.setY(-super.getMovementSpeed());
                 break;
             case DOWN:
-            super.setY(-super.getMovementSpeed());
+            super.setY(super.getMovementSpeed());
                 break;
             case LEFT:
             super.setX(-super.getMovementSpeed());

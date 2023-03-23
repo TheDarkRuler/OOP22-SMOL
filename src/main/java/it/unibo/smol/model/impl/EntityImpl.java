@@ -46,7 +46,7 @@ public class EntityImpl implements Entity {
         this.currentY = currentY;
         this.world = new WorldImpl(w);
         physicsComp.setEntity(new EntityImpl(this));
-        graphicComp.setEntity(new EntityImpl(this));
+        graphicComp.setEntity(this);
     }
 
     /**
@@ -169,5 +169,12 @@ public class EntityImpl implements Entity {
     @Override
     public Optional<InputComponent> getInputComp() {
         return this.inputComp;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public GraphicComponent getGraphicComp() {
+        return this.graphicComp;
     }
 }
