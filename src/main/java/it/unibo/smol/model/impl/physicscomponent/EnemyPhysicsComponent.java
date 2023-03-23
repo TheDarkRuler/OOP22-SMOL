@@ -45,8 +45,8 @@ public class EnemyPhysicsComponent extends PhysicsComponent {
      */
     @Override
     public void receiveMovement(final Point2D move, final World world) {
-        super.setX(move.getX() - super.getEntity().getCurrentX());
-        super.setY(move.getY() - super.getEntity().getCurrentY());
+        super.setX(move.getX());
+        super.setY(move.getY());
     }
 
     /**

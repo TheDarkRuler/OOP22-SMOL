@@ -153,7 +153,7 @@ public class EntityImpl implements Entity {
             inputCompPresent.getDirection().ifPresent(x -> physicsComp.receiveMovement(x));
             inputCompPresent.getPosition().ifPresent(x -> physicsComp.receiveMovement(x, world));
             physicsComp.setRigid(inputCompPresent.isHittable());
-            if (this.type.equals(Type.WEAPON)) {
+            if (this.type.equals(Type.WEAPON) || this.type.equals(Type.ENEMY)) {
                 this.setX(physicsComp.getX());
                 this.setY(physicsComp.getY());
             } else {

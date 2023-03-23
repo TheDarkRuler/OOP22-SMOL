@@ -94,10 +94,10 @@ public class GameStateImpl implements GameState {
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2) + 50, this.world));
         world.addEntity(entityFactory.createBasicEnemy(new Point2D(GameMap.BORDER_WIDTH, GameMap.BORDER_HEIGHT), this.world));
-        world.addEntity(entityFactory.createLifePlants(GameMap.WIDTH*0.100, GameMap.HEIGHT*0.100, world));
-        world.addEntity(entityFactory.createLifePlants(GameMap.WIDTH*0.800, GameMap.HEIGHT*0.800, world));
-        world.addEntity(entityFactory.createLifePlants(GameMap.WIDTH*0.100, GameMap.HEIGHT*0.800, world));
-        world.addEntity(entityFactory.createLifePlants(GameMap.WIDTH*0.800, GameMap.HEIGHT*0.100, world));
+        world.addEntity(entityFactory.createLifePlants(GameMap.BORDER_WIDTH / 2, GameMap.BORDER_HEIGHT / 2, world));
+        world.addEntity(entityFactory.createLifePlants(GameMap.BORDER_WIDTH / 2, GameMap.MAP_HEIGHT + GameMap.BORDER_HEIGHT/2, world));
+        world.addEntity(entityFactory.createLifePlants(GameMap.MAP_WIDTH + GameMap.BORDER_WIDTH/2, GameMap.BORDER_HEIGHT/2, world));
+        world.addEntity(entityFactory.createLifePlants(GameMap.BORDER_WIDTH/2 + GameMap.MAP_WIDTH, GameMap.BORDER_HEIGHT/2 + GameMap.MAP_HEIGHT, world));
     }
 
     /**
