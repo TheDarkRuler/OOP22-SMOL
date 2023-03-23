@@ -9,8 +9,6 @@ import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.WindowState;
-import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
