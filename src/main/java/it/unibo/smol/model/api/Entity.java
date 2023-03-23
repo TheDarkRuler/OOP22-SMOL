@@ -40,13 +40,13 @@ public interface Entity {
      * Add the new x coordinate to the current X.
      * @param x : the new x to add in the object
      */
-    void moveX(double x);
+    void setX(double x);
 
     /**
      * Add the new y coordinate to the current Y.
      * @param y : the new y to add in the object
      */
-    void moveY(double y);
+    void setY(double y);
 
     /**
      * Set the current World.

@@ -2,6 +2,8 @@ package it.unibo.smol.controller.api;
 
 import java.util.Map;
 
+import it.unibo.smol.controller.input.KeyInputs;
+import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.World;
 
@@ -46,5 +48,15 @@ public interface GameState {
      * Initialize the game.
      */
     void initGame();
+
+    /**
+     * sets the keyInput in gamestate.
+     */
+    void setKeyInputs(KeyInputs keyInputs);
+
+    /**
+     * sets the mouseInputs in gamestate.
+     */
+    void setMouseInputs(MouseInputs mouseInputs);
 
 }

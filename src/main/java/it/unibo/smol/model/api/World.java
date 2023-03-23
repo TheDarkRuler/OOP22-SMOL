@@ -3,6 +3,9 @@ package it.unibo.smol.model.api;
 import java.util.List;
 import java.util.Map;
 
+import it.unibo.smol.controller.input.KeyInputs;
+import it.unibo.smol.controller.input.MouseInputs;
+
 /**
  * Interface for World: a container for entities.
  */
@@ -72,5 +75,25 @@ public interface World {
      * @param plant the plant to set occupied.
      */
     void setPlantOccupied(Entity plant);
+
+    /**
+     * sets the keyInput in world.
+     */
+    void setKeyInputs(KeyInputs keyInputs);
+
+    /**
+     * sets the mouseInputs in world.
+     */
+    void setMouseInputs(MouseInputs mouseInputs);
+
+    /**
+     * gets the keyInput in world.
+     */
+    KeyInputs getKeyInputs();
+
+    /**
+     * gets the mouseInputs in world.
+     */
+    MouseInputs getMouseInputs();
 
 }

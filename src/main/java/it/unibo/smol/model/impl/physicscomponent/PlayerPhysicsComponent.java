@@ -6,6 +6,7 @@ import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
+import it.unibo.smol.model.api.World;
 import javafx.geometry.Point2D;
 /**
  * The implementation of the {@link PhysicsComponent} rappresenting the Player behaviour.
@@ -41,19 +42,19 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
                 super.setY(-super.getMovementSpeed());
                 break;
             case DOWN:
-            super.setY(super.getMovementSpeed());
+                super.setY(super.getMovementSpeed());
                 break;
             case LEFT:
-            super.setX(-super.getMovementSpeed());
+                super.setX(-super.getMovementSpeed());
                 break;
             case RIGHT:
-            super.setX(super.getMovementSpeed());
+                super.setX(super.getMovementSpeed());
                 break;
             case STAY_X:
-            super.setX(0);
+                super.setX(0);
                 break;
             case STAY_Y:
-            super.setY(0);
+                super.setY(0);
                 break;
             default:
                 break;
@@ -63,8 +64,22 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     /**
      * {@inheritDoc}
      */
+    /*public void setX(final double x) {
+        super.setX(super.getEntity().getCurrentX() + x);
+    }*/
+
+    /**
+     * {@inheritDoc}
+     */
+    /*public void setY(final double y) {
+        super.setY(super.getEntity().getCurrentY() + y);
+    }*/
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void receiveMovement(final Point2D move) {
+    public void receiveMovement(final Point2D move, final World world) {
         //This component doesn't use this method
     }
 

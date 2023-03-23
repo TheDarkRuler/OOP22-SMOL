@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+import it.unibo.smol.controller.input.KeyInputs;
+import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.World;
 import it.unibo.smol.model.Type;
@@ -20,6 +21,8 @@ public class WorldImpl implements World {
     private final List<Entity> entities;
     private final Map<Entity, Boolean> occupiedPlants;
     private int score;
+    private KeyInputs keyInputs;
+    private MouseInputs mouseInputs;
 
     /**
      * constructor for game world.
@@ -38,6 +41,8 @@ public class WorldImpl implements World {
         this.entities = world.getEntities();
         this.score = world.getScore();
         this.occupiedPlants = world.occupiedPlants();
+        this.mouseInputs = world.getMouseInputs();
+        this.keyInputs = world.getKeyInputs();
     }
     /**
      * {@inheritDoc}
@@ -156,6 +161,38 @@ public class WorldImpl implements World {
         if (occupiedPlants.containsKey(plant)) {
             occupiedPlants.put(plant, OCCUPIED);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setKeyInputs(final KeyInputs keyInputs) {
+        this.keyInputs = keyInputs;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMouseInputs(final MouseInputs mouseInputs) {
+        this.mouseInputs = mouseInputs;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public KeyInputs getKeyInputs() {
+        return this.keyInputs;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MouseInputs getMouseInputs() {
+        return this.mouseInputs;
     }
 
 }
