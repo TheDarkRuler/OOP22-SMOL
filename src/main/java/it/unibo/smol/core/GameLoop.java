@@ -11,10 +11,10 @@ import javafx.stage.Stage;
  */
 public class GameLoop extends Thread {
 
-    private static final int FPS = 144;
+    private static final int FPS = 64;
     private static final double FPS_INTERVAL = 1_000_000_000 / FPS;
 
-    private static final int UPS = 200;
+    private static final int UPS = 100;
     private static final double UPS_INTERVAL = 1_000_000_000 / UPS;
 
     private long pastTime;
@@ -25,8 +25,8 @@ public class GameLoop extends Thread {
      private final Stage view;
 
     // ALL commented code is for FPS checking
-    /*long timer =0;
-    int drawCount=0;*/
+    long timer =0;
+    int drawCount=0;
 
     /**
      * Constructor for the GameLoop.
@@ -56,19 +56,19 @@ public class GameLoop extends Thread {
 
             if (syncTime(UPS_INTERVAL)) {
                 update();
-                processInput();
+                //processInput();
             }
 
             if ((now - lastFrame) >= FPS_INTERVAL) {
                 repaint();
                 lastFrame = now;
-                //drawCount++;
+                drawCount++;
             }
-            /*if (timer >= 1000000000) {
+            if (timer >= 1000000000) {
                 System.out.println("FPS: "+ drawCount);
                 drawCount=0;
                 timer=0;
-            }*/
+            }
         }
     }
 
@@ -101,7 +101,7 @@ public class GameLoop extends Thread {
     private boolean syncTime(final double interval) {
         final long currentTime = System.nanoTime();
         delta += (currentTime - pastTime) / interval;
-        //timer += (currentTime - lastTime);
+        timer += (currentTime - pastTime);
         pastTime = currentTime;
         if (delta >= 1) {
             delta--;

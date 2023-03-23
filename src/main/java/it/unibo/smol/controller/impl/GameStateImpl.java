@@ -92,12 +92,13 @@ public class GameStateImpl implements GameState {
     @Override
     public void initGame() {
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
-        world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2) + 50, this.world));
-        world.addEntity(entityFactory.createBasicEnemy(new Point2D(GameMap.BORDER_WIDTH, GameMap.BORDER_HEIGHT), this.world));
+        world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2), this.world));
+        /*world.addEntity(entityFactory.createBasicEnemy(new Point2D(GameMap.BORDER_WIDTH, GameMap.BORDER_HEIGHT), this.world));
         world.addEntity(entityFactory.createLifePlants(GameMap.WIDTH*0.100, GameMap.HEIGHT*0.100, world));
         world.addEntity(entityFactory.createLifePlants(GameMap.WIDTH*0.800, GameMap.HEIGHT*0.800, world));
         world.addEntity(entityFactory.createLifePlants(GameMap.WIDTH*0.100, GameMap.HEIGHT*0.800, world));
         world.addEntity(entityFactory.createLifePlants(GameMap.WIDTH*0.800, GameMap.HEIGHT*0.100, world));
+        */
     }
 
     /**

@@ -52,6 +52,12 @@ public final class Constant {
     /**weapon damage. */
     public static final int WEAPON_DMG = -100;
 
+    public static final double WEAPON_INC_RATE = screenWidth * 0.005;
+    public static final double DEF_WEAPON_RANGE = screenWidth * 0.200;
+    public static final double WEAPON_MAX_RANGE = DEF_WEAPON_RANGE*2;
+    public static final int HOLD_TIME = 300;
+    public static final int WEAPON_ATTACK_ANIM = 500;
+
     private Constant() throws UnsupportedEncodingException {
         throw new UnsupportedEncodingException("This is a utility class");
     }

@@ -3,6 +3,8 @@ package it.unibo.smol.controller.input;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.view.GameMap;
 import javafx.event.EventHandler;
@@ -14,11 +16,7 @@ import javafx.scene.input.MouseEvent;
  */
 public class MouseInputs implements EventHandler<MouseEvent> {
 
-    private static final int WEAPON_INC_RATE = 2;
-    private static final int DEF_WEAPON_RANGE = 100;
-    private static final int WEAPON_MAX_RANGE = DEF_WEAPON_RANGE + 100;
-    private static final int HOLD_TIME = 300;
-    private static final int WEAPON_ATTACK_ANIM = 500;
+    
 
     private static boolean playerFreeze;
     private boolean weaponSmashed;
@@ -49,14 +47,14 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     public void handle(final MouseEvent event) {
         if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED) && !this.weaponIsSmashing) {
             this.weaponIsSmashing = true;
-            this.animationTime.schedule(weaponExpands(), HOLD_TIME, TimeUnit.MILLISECONDS);
+            this.animationTime.schedule(weaponExpands(), Constant.HOLD_TIME, TimeUnit.MILLISECONDS);
 
         } else if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED) && !this.weaponSmashed) {
 
             this.weaponSmashed = true;
             this.weaponIncrease = 0;
             this.weaponLocation = new Point2D(event.getX(), event.getY());
-            freezeInputs(WEAPON_ATTACK_ANIM);
+            freezeInputs(Constant.WEAPON_ATTACK_ANIM);
 
         } else if (event.getEventType().equals(MouseEvent.MOUSE_MOVED) && !weaponSmashed && cursorOnScreen) {
             if (!weaponSmashed && cursorOnScreen){
@@ -93,7 +91,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
             @Override
             public void run() {
                 if (!weaponSmashed) {
-                    weaponIncrease = WEAPON_INC_RATE;
+                    weaponIncrease = (int)Constant.WEAPON_INC_RATE;
                 }
             }
         };
@@ -138,7 +136,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      * checks if the weapon is max range and if not increase the range og hit.
      */
     public void setWeaponRange() {
-        if (DEF_WEAPON_RANGE + weaponRange <= WEAPON_MAX_RANGE) {
+        if (Constant.DEF_WEAPON_RANGE + weaponRange <= Constant.WEAPON_MAX_RANGE) {
             weaponRange += weaponIncrease;
         }
     }
@@ -148,7 +146,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      * @return weaponRange
      */
     public int getWeaponRange() {
-        return this.weaponRange + DEF_WEAPON_RANGE;
+        return this.weaponRange + (int)Constant.DEF_WEAPON_RANGE;
     }
 
     /**

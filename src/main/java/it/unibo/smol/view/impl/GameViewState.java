@@ -26,6 +26,8 @@ public class GameViewState implements WindowState {
     private final GameState gameState;
     private KeyInputs keyEventHandler;
     private MouseInputs mouseEventHandler;
+    private Canvas canvas;
+
 
     
     public GameViewState(GameState gameState) {
@@ -61,7 +63,7 @@ public class GameViewState implements WindowState {
         final var root = new Pane();
         final var scene = new Scene(root, GameMap.WIDTH,
             GameMap.HEIGHT, Color.BLACK);
-        final var canvas = new Canvas(GameMap.WIDTH, GameMap.HEIGHT);
+        canvas = new Canvas(GameMap.WIDTH, GameMap.HEIGHT);
         this.graphic = new GraphicsDraw(canvas.getGraphicsContext2D());
         root.setBackground(null);
         scene.setFill(Color.GREEN);
@@ -85,6 +87,7 @@ public class GameViewState implements WindowState {
      * @throws IOException Exception if the stage can't be rendered.
      */
     public void repaint(final Stage stage) throws IOException {
+        canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
     }
 
