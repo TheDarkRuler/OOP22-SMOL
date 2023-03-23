@@ -41,8 +41,8 @@ public class EnemyMoves {
     public Optional<Point2D> enemyMove() {
         if (this.enemyIsUnder) {
             if (this.from.distance(this.to) > Constant.ENEMY_MOVSPD) {
-                this.from = this.from.add(this.from.getX() < this.to.getX() ? this.moveX : -this.moveX, 0);
-                this.from = this.from.add(0, this.from.getY() < this.to.getY() ? this.moveY : -this.moveY);
+                this.from = this.from.add(this.from.getX() < this.to.getX() ? this.moveX * Constant.ENEMY_MOVSPD : -this.moveX * Constant.ENEMY_MOVSPD, 0);
+                this.from = this.from.add(0, this.from.getY() < this.to.getY() ? this.moveY * Constant.ENEMY_MOVSPD : -this.moveY * Constant.ENEMY_MOVSPD);
             } else {
                 notifyEnemyHasArrived();
             }
