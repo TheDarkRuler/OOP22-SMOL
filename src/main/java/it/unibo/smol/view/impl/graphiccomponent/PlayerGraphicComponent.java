@@ -26,11 +26,11 @@ public class PlayerGraphicComponent extends GraphicComponent {
     public void setAnimation() {
 
         if (moving) {
-            setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+            setImage(LoadImgs.getSprites(LoadImgs.PLAYER));
         } else if (attacking) {
-            setImage(LoadImgs.getSprites(LoadImgs.WORLD_IMG));
+            setImage(LoadImgs.getSprites(LoadImgs.PLAYER));
         } else {
-            setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+            setImage(LoadImgs.getSprites(LoadImgs.PLAYER));
         }
     }
 

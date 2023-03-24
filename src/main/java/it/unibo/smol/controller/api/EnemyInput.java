@@ -159,7 +159,7 @@ public class EnemyInput {
                     if (enemyTimesSpawn < maxTimesCanSpawn) {
                         enemyNextPosition = enemySearchNextPos();
                     } else if (enemyTimesSpawn <= maxTimesCanSpawn) {
-                        enemyGoesOnPlants();
+                        enemyNextPosition = enemyGoesOnPlants();
                         enemyTimesSpawn++;
                     }
                     enemyMovement.positionUpdate(enemyPosition, enemyNextPosition);
@@ -173,14 +173,15 @@ public class EnemyInput {
      * chooses a free plant for the enemy to go, if all plants are occupied
      * it goes in a random plant where there's already a enemy.
      */
-    private void enemyGoesOnPlants() {
+    private Point2D enemyGoesOnPlants() {
+        final Point2D temp;
         final List<Entity> plants = new ArrayList<>(world.occupiedPlants().keySet().stream().toList());
         Collections.shuffle(plants);
         if (plants.stream().count() == world.occupiedPlants().values()
             .stream()
             .filter(a -> a.equals(true))
             .count()) {
-            this.enemyNextPosition = plants
+            temp = plants
                 .stream()
                 .findAny()
                 .get()
@@ -191,9 +192,11 @@ public class EnemyInput {
                 .filter(a -> world.occupiedPlants().get(a).equals(false))
                 .findAny()
                 .get();
-            this.enemyNextPosition = choosenPlant.getCurrentPosition();
+            temp = choosenPlant.getCurrentPosition();
             world.setPlantOccupied(choosenPlant);
+
         }
+        return temp;
     }
 
     /**

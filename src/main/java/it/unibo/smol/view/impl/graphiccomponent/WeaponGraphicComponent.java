@@ -23,7 +23,7 @@ public class WeaponGraphicComponent extends GraphicComponent {
      */
     @Override
     public void setAnimation() {
-        super.setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+        super.setImage(LoadImgs.getSprites(LoadImgs.W_TARGET));
     }
 
     /**

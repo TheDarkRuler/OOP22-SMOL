@@ -5,6 +5,7 @@ import java.util.Map;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.model.api.Entity;
+import it.unibo.smol.model.api.EntityFactory;
 import it.unibo.smol.model.api.World;
 
 /**
@@ -58,5 +59,7 @@ public interface GameState {
      * sets the mouseInputs in gamestate.
      */
     void setMouseInputs(MouseInputs mouseInputs);
+
+    EntityFactory getEntityFactory();
 
 }

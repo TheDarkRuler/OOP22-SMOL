@@ -8,10 +8,10 @@ import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.EntityFactory;
 import it.unibo.smol.model.api.World;
+import it.unibo.smol.model.impl.EnemyCreation;
 import it.unibo.smol.model.impl.EntityFactoryImpl;
 import it.unibo.smol.model.impl.WorldImpl;
 import it.unibo.smol.view.GameMap;
-import javafx.geometry.Point2D;
 
 /**
  * The implementation of the GameState.
@@ -43,7 +43,7 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public World getWorld() {
-        return new WorldImpl(this.world);
+        return this.world;
     }
 
     /**
@@ -93,6 +93,7 @@ public class GameStateImpl implements GameState {
     public void initGame() {
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2), this.world));
+        new EnemyCreation(this);
         /*world.addEntity(entityFactory.createBasicEnemy(new Point2D(GameMap.BORDER_WIDTH, GameMap.BORDER_HEIGHT), this.world));
         world.addEntity(entityFactory.createLifePlants(GameMap.WIDTH*0.100, GameMap.HEIGHT*0.100, world));
         world.addEntity(entityFactory.createLifePlants(GameMap.WIDTH*0.800, GameMap.HEIGHT*0.800, world));
@@ -115,6 +116,10 @@ public class GameStateImpl implements GameState {
     @Override
     public void setMouseInputs(final MouseInputs mouseInputs) {
         this.world.setMouseInputs(mouseInputs);
+    }
+
+    public EntityFactory getEntityFactory() {
+        return this.entityFactory;
     }
 
 }

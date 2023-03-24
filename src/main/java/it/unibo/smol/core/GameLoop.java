@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class GameLoop extends Thread {
 
-    private static final int FPS = 64;
+    private static final int FPS = 144;
     private static final double FPS_INTERVAL = 1_000_000_000 / FPS;
 
     private static final int UPS = 100;

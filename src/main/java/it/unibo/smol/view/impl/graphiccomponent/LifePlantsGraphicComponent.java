@@ -25,9 +25,9 @@ public class LifePlantsGraphicComponent extends GraphicComponent {
     @Override
     public void setAnimation() {
         if (isHalfDead) {
-            super.setImage(LoadImgs.getSprites(LoadImgs.WORLD_IMG));
+            super.setImage(LoadImgs.getSprites(LoadImgs.PLAYER));
         } else {
-            super.setImage(LoadImgs.getSprites(LoadImgs.WORLD_IMG));
+            super.setImage(LoadImgs.getSprites(LoadImgs.PLAYER));
         }
     }
 
@@ -36,12 +36,12 @@ public class LifePlantsGraphicComponent extends GraphicComponent {
      */
     @Override
     public void updateAnimation() {
-        if (super.getEntity() != null) {
-            if (super.getEntity().getHealthComp().get().getCurrentHealth() <= 10/*meta vita */) {
+        /*if (super.getEntity() != null) {
+            if (super.getEntity().getHealthComp().get().getCurrentHealth() <= 10/*meta vita ) {
                 isHalfDead = true;
             } else {
                 isHalfDead = false;
             }
-        }
+        }*/
     }
 }
