@@ -33,16 +33,16 @@ public class EnemyGraphicComponent extends GraphicComponent {
         }*/
         switch (enemyName) {
             case "Mole":
-                setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+                setImageName(LoadImgs.MOLE);
                 break;
             case "Helmet_mole":
-                setImage(LoadImgs.getSprites(LoadImgs.HELM_MOLE));
+                setImageName(LoadImgs.HELM_MOLE);
                 break;
             case "Angry_mole":
-                setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+                setImageName(LoadImgs.MOLE);
                 break;
             case "Bomb_mole":
-                setImage(LoadImgs.getSprites(LoadImgs.BOMB_MOLE));
+                setImageName(LoadImgs.BOMB_MOLE);
                 break;
         
             default:
