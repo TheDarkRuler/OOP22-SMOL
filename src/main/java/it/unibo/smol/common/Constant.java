@@ -13,18 +13,18 @@ public final class Constant {
     private static double screenWidth = Screen.getPrimary().getBounds().getWidth();
     
     /**player width. */
-    public static final double PLAYER_WIDTH = screenWidth * 0.100;
+    public static final double PLAYER_WIDTH = screenWidth * 0.060;
     /**player height. */
-    public static final double PLAYER_HEIGHT = screenHeight * 0.100;
+    public static final double PLAYER_HEIGHT = screenHeight * 0.060;
     /**player movement speed. */
     public static final double PLAYER_MOVSPD = screenWidth * 0.001;
     /**player damage. */
     public static final int PLAYER_DMG = -1;
 
     /**enemy width. */
-    public static final double ENEMY_WIDTH = screenWidth * 0.100;
+    public static final double ENEMY_WIDTH = screenWidth * 0.060;
     /**enemy height. */
-    public static final double ENEMY_HEIGHT = screenHeight * 0.100;
+    public static final double ENEMY_HEIGHT = screenHeight * 0.060;
     /**enemy movement speed. */
     public static final double ENEMY_MOVSPD = screenWidth * 0.0005;
     /**enemy health point. */
@@ -46,16 +46,20 @@ public final class Constant {
     public static final int HEALTH_HP = 1000;
 
     /**weapon radius. */
-    public static final double WEAPON_RADIUS = screenWidth * 0.025;
+    public static final double WEAPON_RADIUS = screenWidth * 0.015;
     /**weapon movement speed. */
     public static final double WEAPON_MOVSPD = 0.0;
     /**weapon damage. */
     public static final int WEAPON_DMG = -100;
-
+    /**the increase rate of the weapon range. */
     public static final double WEAPON_INC_RATE = screenWidth * 0.0015;
+    /**The basic weapon range. */
     public static final double DEF_WEAPON_RANGE = screenWidth * 0.100;
+    /**the max weapon range. */
     public static final double WEAPON_MAX_RANGE = DEF_WEAPON_RANGE*4;
+    /**the waiting time before the hammer start increasing range. */
     public static final int HOLD_TIME = 100;
+    /**the waiting after the hammer get smashed. */
     public static final int WEAPON_ATTACK_ANIM = 250;
 
     private Constant() throws UnsupportedEncodingException {
