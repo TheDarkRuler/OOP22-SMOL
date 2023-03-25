@@ -69,19 +69,19 @@ public class EnemyCreation {
         switch (enemyName) {
             case "Mole":
                 gameState.getWorld()
-                    .addEntity(gameState.getEntityFactory().createBasicEnemy(initialEnemyPosition(), gameState.getWorld(), enemyName));
+                    .addEntity(gameState.getEntityFactory().createBasicEnemy(initialEnemyPosition(), gameState.getWorld()));
                 break;
             case "Helmet_mole":
                 gameState.getWorld()
-                    .addEntity(gameState.getEntityFactory().createHelmetEnemy(initialEnemyPosition(), gameState.getWorld(), enemyName));
+                    .addEntity(gameState.getEntityFactory().createHelmetEnemy(initialEnemyPosition(), gameState.getWorld()));
                 break;
             case "Angry_mole":
                 gameState.getWorld()
-                    .addEntity(gameState.getEntityFactory().createAngryEnemy(initialEnemyPosition(), gameState.getWorld(), enemyName));
+                    .addEntity(gameState.getEntityFactory().createAngryEnemy(initialEnemyPosition(), gameState.getWorld()));
                 break;
             case "Bomb_mole":
                 gameState.getWorld()
-                    .addEntity(gameState.getEntityFactory().createBombEnemy(initialEnemyPosition(), gameState.getWorld(), enemyName));
+                    .addEntity(gameState.getEntityFactory().createBombEnemy(initialEnemyPosition(), gameState.getWorld()));
                 break;
             default:
                 break;
