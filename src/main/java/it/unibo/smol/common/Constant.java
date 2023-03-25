@@ -17,7 +17,7 @@ public final class Constant {
     /**player height. */
     public static final double PLAYER_HEIGHT = screenHeight * 0.100;
     /**player movement speed. */
-    public static final double PLAYER_MOVSPD = screenWidth * 0.005;
+    public static final double PLAYER_MOVSPD = screenWidth * 0.001;
     /**player damage. */
     public static final int PLAYER_DMG = -1;
 
@@ -26,7 +26,7 @@ public final class Constant {
     /**enemy height. */
     public static final double ENEMY_HEIGHT = screenHeight * 0.100;
     /**enemy movement speed. */
-    public static final double ENEMY_MOVSPD = screenWidth * 0.010;
+    public static final double ENEMY_MOVSPD = screenWidth * 0.0005;
     /**enemy health point. */
     public static final int ENEMY_HP = 100;
     /**enemy with helmet health point. */
@@ -37,9 +37,9 @@ public final class Constant {
     public static final int BOMB_EXPLOSION = 1000;
 
     /**lifeplant width. */
-    public static final double HEALTH_WIDTH = screenWidth * 0.025;
+    public static final double HEALTH_WIDTH = screenWidth * 0.100;
     /**lifeplant height. */
-    public static final double HEALTH_HEIGHT = screenWidth * 0.025;
+    public static final double HEALTH_HEIGHT = screenWidth * 0.100;
     /**lifeplant movement speed. */
     public static final double HEALTH_MOVSPD = 0.0;
     /**lifeplant health point. */
@@ -52,11 +52,11 @@ public final class Constant {
     /**weapon damage. */
     public static final int WEAPON_DMG = -100;
 
-    public static final double WEAPON_INC_RATE = screenWidth * 0.005;
-    public static final double DEF_WEAPON_RANGE = screenWidth * 0.200;
-    public static final double WEAPON_MAX_RANGE = DEF_WEAPON_RANGE*2;
-    public static final int HOLD_TIME = 300;
-    public static final int WEAPON_ATTACK_ANIM = 500;
+    public static final double WEAPON_INC_RATE = screenWidth * 0.0015;
+    public static final double DEF_WEAPON_RANGE = screenWidth * 0.100;
+    public static final double WEAPON_MAX_RANGE = DEF_WEAPON_RANGE*4;
+    public static final int HOLD_TIME = 100;
+    public static final int WEAPON_ATTACK_ANIM = 250;
 
     private Constant() throws UnsupportedEncodingException {
         throw new UnsupportedEncodingException("This is a utility class");

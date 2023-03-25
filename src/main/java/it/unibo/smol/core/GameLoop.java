@@ -11,10 +11,10 @@ import javafx.stage.Stage;
  */
 public class GameLoop extends Thread {
 
-    private static final int FPS = 144;
+    private static final int FPS = 60;
     private static final double FPS_INTERVAL = 1_000_000_000 / FPS;
 
-    private static final int UPS = 100;
+    private static final int UPS = 200;
     private static final double UPS_INTERVAL = 1_000_000_000 / UPS;
 
     private long pastTime;
@@ -56,7 +56,6 @@ public class GameLoop extends Thread {
 
             if (syncTime(UPS_INTERVAL)) {
                 update();
-                //processInput();
             }
 
             if ((now - lastFrame) >= FPS_INTERVAL) {
@@ -77,12 +76,6 @@ public class GameLoop extends Thread {
      */
     public void update() {
         gameState.getWorld().updateWorld();
-    }
-
-    /**
-     * process.
-     */
-    private void processInput() {
     }
 
     /**
