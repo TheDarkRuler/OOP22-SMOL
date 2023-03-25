@@ -83,8 +83,8 @@ public class RectangleHB implements HitBox {
      */
     @Override
     public boolean isColliding(final RectangleHB rectangle) {
-        return Math.abs(this.center.getX() - rectangle.getCenter().getX()) <= (this.width + rectangle.getWidth()) / 2 
-            && Math.abs(this.center.getY() - rectangle.getCenter().getY()) <= (this.height + rectangle.getHeight()) / 2;
+        return Math.abs(this.center.getX() - rectangle.getCenter().getX()) <= (this.width/2) + (rectangle.getWidth() / 2) 
+            && Math.abs(this.center.getY() - rectangle.getCenter().getY()) <= (this.height/2) + (rectangle.getHeight() / 2);
     }
 
     /**

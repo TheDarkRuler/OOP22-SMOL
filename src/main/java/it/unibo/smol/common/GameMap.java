@@ -1,4 +1,4 @@
-package it.unibo.smol.view;
+package it.unibo.smol.common;
 
 import java.io.UnsupportedEncodingException;
 import javafx.stage.Screen;

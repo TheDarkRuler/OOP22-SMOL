@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+import it.unibo.smol.common.GameMap;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
-import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.WindowState;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -15,6 +15,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
@@ -77,6 +78,11 @@ public class GameViewState implements WindowState {
         scene.setOnMouseDragged(mouseEventHandler);
         scene.setOnMouseEntered(mouseEventHandler);
         root.getChildren().add(canvas);
+        var fence = new Rectangle(GameMap.BORDER_WIDTH / 2, GameMap.BORDER_HEIGHT / 2, GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT);
+        fence.setStroke(Color.BLACK);
+        fence.setStrokeWidth(2);
+        fence.setFill(Color.TRANSPARENT);
+        root.getChildren().add(fence);
         stage.setX(0);
         stage.setY(0);
         stage.setScene(scene);

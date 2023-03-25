@@ -3,8 +3,8 @@ package it.unibo.smol.model.impl;
 import java.util.Random;
 
 import it.unibo.smol.common.Constant;
+import it.unibo.smol.common.GameMap;
 import it.unibo.smol.controller.api.GameState;
-import it.unibo.smol.view.GameMap;
 import javafx.geometry.Point2D;
 
 public class PlantsCreation {

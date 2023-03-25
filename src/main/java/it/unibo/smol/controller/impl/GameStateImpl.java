@@ -2,6 +2,7 @@ package it.unibo.smol.controller.impl;
 
 import java.util.Map;
 
+import it.unibo.smol.common.GameMap;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
@@ -12,7 +13,6 @@ import it.unibo.smol.model.impl.EnemyCreation;
 import it.unibo.smol.model.impl.EntityFactoryImpl;
 import it.unibo.smol.model.impl.PlantsCreation;
 import it.unibo.smol.model.impl.WorldImpl;
-import it.unibo.smol.view.GameMap;
 
 /**
  * The implementation of the GameState.

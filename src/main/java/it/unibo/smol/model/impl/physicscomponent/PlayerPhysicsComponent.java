@@ -2,7 +2,9 @@ package it.unibo.smol.model.impl.physicscomponent;
 
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
+import it.unibo.smol.common.GameMap;
 import it.unibo.smol.common.HitBox;
+import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
@@ -37,27 +39,33 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
      */
     @Override
     public void receiveMovement(final Directions move) {
-        switch (move) {
-            case UP:
-                super.setY(-super.getMovementSpeed());
-                break;
-            case DOWN:
-                super.setY(super.getMovementSpeed());
-                break;
-            case LEFT:
-                super.setX(-super.getMovementSpeed());
-                break;
-            case RIGHT:
-                super.setX(super.getMovementSpeed());
-                break;
-            case STAY_X:
-                super.setX(0);
-                break;
-            case STAY_Y:
-                super.setY(0);
-                break;
-            default:
-                break;
+        if (!this.getHitBox().isColliding(new RectangleHB(GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT, new Point2D(GameMap.WIDTH / 2, GameMap.HEIGHT / 2)))) {
+            System.out.println("AAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAa\nAAAAAAAAAAAAA\n");
+            super.setX(0);
+            super.setY(0);
+        } else {
+            switch (move) {
+                case UP:
+                    super.setY(-super.getMovementSpeed());
+                    break;
+                case DOWN:
+                    super.setY(super.getMovementSpeed());
+                    break;
+                case LEFT:
+                    super.setX(-super.getMovementSpeed());
+                    break;
+                case RIGHT:
+                    super.setX(super.getMovementSpeed());
+                    break;
+                case STAY_X:
+                    super.setX(0);
+                    break;
+                case STAY_Y:
+                    super.setY(0);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
