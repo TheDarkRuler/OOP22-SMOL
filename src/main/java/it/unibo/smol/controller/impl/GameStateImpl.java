@@ -10,6 +10,7 @@ import it.unibo.smol.model.api.EntityFactory;
 import it.unibo.smol.model.api.World;
 import it.unibo.smol.model.impl.EnemyCreation;
 import it.unibo.smol.model.impl.EntityFactoryImpl;
+import it.unibo.smol.model.impl.PlantsCreation;
 import it.unibo.smol.model.impl.WorldImpl;
 import it.unibo.smol.view.GameMap;
 
@@ -91,14 +92,10 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public void initGame() {
+        new PlantsCreation(this);
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2) + 50, this.world));
         new EnemyCreation(this);
-
-        world.addEntity(entityFactory.createLifePlants(GameMap.BORDER_WIDTH / 2, GameMap.BORDER_HEIGHT / 2, world));
-        world.addEntity(entityFactory.createLifePlants(GameMap.BORDER_WIDTH / 2, GameMap.MAP_HEIGHT + GameMap.BORDER_HEIGHT/2, world));
-        world.addEntity(entityFactory.createLifePlants(GameMap.MAP_WIDTH + GameMap.BORDER_WIDTH/2, GameMap.BORDER_HEIGHT/2, world));
-        world.addEntity(entityFactory.createLifePlants(GameMap.BORDER_WIDTH/2 + GameMap.MAP_WIDTH, GameMap.BORDER_HEIGHT/2 + GameMap.MAP_HEIGHT, world));
     }
 
     /**

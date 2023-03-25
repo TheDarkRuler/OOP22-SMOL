@@ -37,6 +37,7 @@ public class EnemyInput {
     private final World world;
     private HitBox newPosHitBox;
     private boolean isNewPosViable;
+    private final Random rand;
 
     /**
      * inizialize the first position and and the first movements ogf the enemy.
@@ -50,10 +51,11 @@ public class EnemyInput {
         this.maxTimeUp = DEFAULT_MAX_TIME_UP;
 
         this.isNewPosViable = true;
+        this.rand = new Random();
         this.world = world;
         this.maxTimesCanSpawn = maxTimesCanSpawn;
         this.enemyPosition = initialEnemyPosition;
-        this.enemyNextPosition = enemySetsPosition(new Random().nextInt(4)).get();
+        this.enemyNextPosition = enemySetsPosition(rand.nextInt(4)).get();
         this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, this);
     }
 
@@ -63,7 +65,7 @@ public class EnemyInput {
      */
     private double enemyRandX() {
         return GameMap.BORDER_WIDTH / 2  + Constant.ENEMY_WIDTH / 2
-            + new Random().nextDouble(GameMap.MAP_WIDTH / 2 - Constant.ENEMY_WIDTH); 
+            + rand.nextDouble(GameMap.MAP_WIDTH / 2 - Constant.ENEMY_WIDTH); 
     }
 
     /**
@@ -72,7 +74,7 @@ public class EnemyInput {
      */
     private double enemyRandY() {
         return GameMap.BORDER_HEIGHT / 2 + Constant.ENEMY_HEIGHT / 2
-            + new Random().nextDouble(GameMap.MAP_HEIGHT / 2 - Constant.ENEMY_HEIGHT);
+            + rand.nextDouble(GameMap.MAP_HEIGHT / 2 - Constant.ENEMY_HEIGHT);
     }
 
     /**
@@ -142,7 +144,7 @@ public class EnemyInput {
     protected Point2D enemySearchNextPos() {
         int temp = enemySection;
         while (temp == enemySection) {
-            temp = new Random().nextInt(4);
+            temp = rand.nextInt(4);
         }
         return enemySetsPosition(temp).get();
     }
@@ -151,7 +153,7 @@ public class EnemyInput {
      * allowes the enemy to stay up for a period of time.
      */
     protected void enemyStaysUpTimer() {
-        enemyTimeUp = new Timer(minTimeUp + new Random().nextInt(maxTimeUp - minTimeUp),
+        enemyTimeUp = new Timer(minTimeUp + rand.nextInt(maxTimeUp - minTimeUp),
             new ActionListener() {
 
                 @Override
