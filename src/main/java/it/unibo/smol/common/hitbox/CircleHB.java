@@ -114,4 +114,20 @@ public class CircleHB implements HitBox {
     public HitBox copyOf() {
         return new CircleHB(this.center, this.radius);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getWidth() {
+        return this.radius * 2;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getHeight() {
+        return getWidth();
+    }
 }

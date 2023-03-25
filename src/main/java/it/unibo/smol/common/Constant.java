@@ -17,7 +17,7 @@ public final class Constant {
     /**player height. */
     public static final double PLAYER_HEIGHT = screenHeight * 0.100;
     /**player movement speed. */
-    public static final double PLAYER_MOVSPD = screenWidth * 0.005;
+    public static final double PLAYER_MOVSPD = screenWidth * 0.0005;
     /**player damage. */
     public static final int PLAYER_DMG = -1;
 

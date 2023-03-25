@@ -39,7 +39,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
      */
     @Override
     public void receiveMovement(final Directions move) {
-        if (!this.getHitBox().isColliding(new RectangleHB(GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT, new Point2D(GameMap.WIDTH / 2, GameMap.HEIGHT / 2)))) {
+        if (!this.getHitBox().isColliding(new RectangleHB(GameMap.MAP_WIDTH - this.getHitBox().getWidth()*2, GameMap.MAP_HEIGHT - this.getHitBox().getHeight()*2, new Point2D(GameMap.WIDTH / 2, GameMap.HEIGHT / 2)))) {
             System.out.println("AAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAa\nAAAAAAAAAAAAA\n");
             super.setX(0);
             super.setY(0);

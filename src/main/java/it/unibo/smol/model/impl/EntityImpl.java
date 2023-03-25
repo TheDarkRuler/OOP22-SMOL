@@ -160,6 +160,7 @@ public class EntityImpl implements Entity {
                 this.setX(this.currentX + physicsComp.getX());
                 this.setY(this.currentY + physicsComp.getY());
             }
+            this.getPhysicsComp().getHitBox().setCenter(this.getCurrentPosition());
         }
         physicsComp.checkCollision();
         if (healthComp.isPresent() && healthComp.get().isDead()) {

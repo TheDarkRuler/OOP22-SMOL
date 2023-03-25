@@ -120,7 +120,7 @@ public abstract class PhysicsComponent {
      * @return the hitbox
      */
     public HitBox getHitBox() {
-        return this.hitBox.copyOf();
+        return this.hitBox;
     }
 
     /**

@@ -82,7 +82,7 @@ public class GameViewState implements WindowState {
         fence.setStroke(Color.BLACK);
         fence.setStrokeWidth(2);
         fence.setFill(Color.TRANSPARENT);
-        root.getChildren().add(fence);
+        root.getChildren().add(fence);        
         stage.setX(0);
         stage.setY(0);
         stage.setScene(scene);
@@ -99,6 +99,12 @@ public class GameViewState implements WindowState {
             gContext.clearRect(0, 0, GameMap.WIDTH, GameMap.HEIGHT);
             gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
         });
+        /*var fence2 = new Rectangle(gameState.getWorld().getPlayer().getPhysicsComp().getHitBox().getWidth(),
+            gameState.getWorld().getPlayer().getPhysicsComp().getHitBox().getHeight(),
+            gameState.getWorld().getPlayer().getCurrentX(),
+            gameState.getWorld().getPlayer().getCurrentY());
+        fence2.setStroke(Color.WHITE);
+        root.getChildren().add(fence2);*/
     }
 
     /**

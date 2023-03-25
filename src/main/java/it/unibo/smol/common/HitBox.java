@@ -51,4 +51,15 @@ public interface HitBox {
      */
     HitBox copyOf();
 
+    /**
+     * get the width.
+     * @returns the width of the hitbox
+     */
+    double getWidth();
+
+    /**
+     * get the height.
+     * @returns the height of the hitbox
+     */
+    double getHeight();
 }
