@@ -2,23 +2,19 @@ package it.unibo.smol.view.impl.graphiccomponent;
 
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.GraphicComponent;
-
 /**
- * The implementation of the {@link GraphicComponent} rappresenting the Enemy graphic.
+ * Class for the BasicEnemy graphic.
  */
-public class EnemyGraphicComponent extends GraphicComponent {
+public class BasicEnemyGraphicComponent extends GraphicComponent {
 
     private boolean moving;
-    private String enemyName;
-
     /**
      * 
      * @param width
      * @param height
      */
-    public EnemyGraphicComponent(final double width, final double height, final String enemyName) {
+    public BasicEnemyGraphicComponent(final double width, final double height) {
         super(width, height);
-        this.enemyName = enemyName;
     }
 
     /**
@@ -31,23 +27,7 @@ public class EnemyGraphicComponent extends GraphicComponent {
         } else {
             setImage(LoadImgs.getSprites(LoadImgs.MOLE));
         }*/
-        switch (enemyName) {
-            case "Mole":
-                setImage(LoadImgs.getSprites(LoadImgs.MOLE));
-                break;
-            case "Helmet_mole":
-                setImage(LoadImgs.getSprites(LoadImgs.HELM_MOLE));
-                break;
-            case "Angry_mole":
-                setImage(LoadImgs.getSprites(LoadImgs.MOLE));
-                break;
-            case "Bomb_mole":
-                setImage(LoadImgs.getSprites(LoadImgs.BOMB_MOLE));
-                break;
-        
-            default:
-                break;
-        }
+        setImageName(LoadImgs.MOLE);
     }
 
     /**

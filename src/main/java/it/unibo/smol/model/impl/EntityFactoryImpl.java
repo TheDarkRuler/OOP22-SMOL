@@ -21,7 +21,10 @@ import it.unibo.smol.model.impl.physicscomponent.EnemyPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.LifePlantsPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.PlayerPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.WeaponPhysicsComponent;
-import it.unibo.smol.view.impl.graphiccomponent.EnemyGraphicComponent;
+import it.unibo.smol.view.impl.graphiccomponent.AngryEnemyGraphicComponent;
+import it.unibo.smol.view.impl.graphiccomponent.BasicEnemyGraphicComponent;
+import it.unibo.smol.view.impl.graphiccomponent.BombEnemyGraphicComponent;
+import it.unibo.smol.view.impl.graphiccomponent.HelmetEnemyGraphicComponent;
 import it.unibo.smol.view.impl.graphiccomponent.LifePlantsGraphicComponent;
 import it.unibo.smol.view.impl.graphiccomponent.PlayerGraphicComponent;
 import it.unibo.smol.view.impl.graphiccomponent.WeaponGraphicComponent;
@@ -35,7 +38,7 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createPlayer(final double x, final double y, World w) {
+    public Entity createPlayer(final double x, final double y, final World w) {
         return new EntityImpl(Type.PLAYER, 
         Optional.of(new PlayerInputComponent(w.getKeyInputs())),
         Optional.empty(),
@@ -49,7 +52,7 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createLifePlants(final double x, final double y, World w) {
+    public Entity createLifePlants(final double x, final double y, final World w) {
         return new EntityImpl(Type.HEALTH,
         Optional.empty(),
         Optional.of(new HealthComponent(Constant.HEALTH_HP)),
@@ -63,11 +66,11 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createWeapon(final double x, final double y, World w) {
+    public Entity createWeapon(final double x, final double y, final World w) {
         return new EntityImpl(Type.WEAPON,
         Optional.of(new WeaponInputComponent(w.getMouseInputs())),
         Optional.empty(),
-        new WeaponGraphicComponent(2*Constant.WEAPON_RADIUS, 2*Constant.WEAPON_RADIUS),
+        new WeaponGraphicComponent(2*Constant.WEAPON_RADIUS, 2 * Constant.WEAPON_RADIUS),
         new WeaponPhysicsComponent(new CircleHB(new Point2D(x, y), Constant.WEAPON_RADIUS)),
         x, y, w);
     }
@@ -76,11 +79,11 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createBasicEnemy(final Point2D initialPosition, final World w, final String enemyName) {
+    public Entity createBasicEnemy(final Point2D initialPosition, final World w) {
         return new EntityImpl(Type.ENEMY, 
         Optional.of(new EnemyInputComponent(new EnemyBasicInput(w, initialPosition))),
         Optional.of(new HealthComponent(Constant.ENEMY_HP)), 
-        new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT, enemyName), 
+        new BasicEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT), 
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initialPosition)),
         initialPosition.getX(), initialPosition.getY(), w);
@@ -90,11 +93,11 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createHelmetEnemy(final Point2D initialPosition, World w, final String enemyName) {
+    public Entity createHelmetEnemy(final Point2D initialPosition, final World w) {
         return new EntityImpl(Type.ENEMY,
         Optional.of(new EnemyInputComponent(new EnemyHelmetInput(w, initialPosition))),
         Optional.of(new HealthComponent(Constant.ENEMY_HELMET_HP)),
-        new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT, enemyName),
+        new HelmetEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT),
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initialPosition)),
         initialPosition.getX(), initialPosition.getY(), w);
@@ -104,11 +107,11 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createAngryEnemy(final Point2D initalPosition, World w, final String enemyName) {
+    public Entity createAngryEnemy(final Point2D initalPosition, final World w) {
         return new EntityImpl(Type.ENEMY,
         Optional.of(new EnemyInputComponent(new EnemyAngryInput(w, initalPosition))),
         Optional.of(new HealthComponent(Constant.ENEMY_HP)),
-        new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT, enemyName),
+        new AngryEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT),
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initalPosition)),
         initalPosition.getX(), initalPosition.getY(), w);
@@ -118,11 +121,11 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createBombEnemy(Point2D initialPosition, World w, final String enemyName) {
+    public Entity createBombEnemy(final Point2D initialPosition, final World w) {
         return new EntityImpl(Type.ENEMY, 
         Optional.of(new EnemyInputComponent(new EnemyBombInput(w, initialPosition))),
         Optional.of(new HealthComponent(Constant.ENEMY_HP)), 
-        new EnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT, enemyName), 
+        new BombEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT), 
         new BombEnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initialPosition)),
         initialPosition.getX(), initialPosition.getY(), w);

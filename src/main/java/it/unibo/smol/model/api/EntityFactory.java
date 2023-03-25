@@ -11,11 +11,10 @@ public interface EntityFactory {
      * create a basic enemy entities.
      * @param initialPosition the initial position of the enemy
      * @param w the world where the entity create
-     * @param enemyName
      * @return a entities that rappresent the basic enemy
      */
-    Entity createBasicEnemy(Point2D initialPosition, World w, String enemyName);
-    
+    Entity createBasicEnemy(Point2D initialPosition, World w);
+
     /**
      * create a player entities.
      * @param x the x location where the entities spawn
@@ -47,26 +46,23 @@ public interface EntityFactory {
      * create an elmet enemy entities.
      * @param initialPosition the initial position of the enemy
      * @param w the world where the entity create
-     * @param enemyName
      * @return a entities that rappresent the enemy with more HP
      */
-    Entity createHelmetEnemy(Point2D initialPosition, World w, String enemyName);
+    Entity createHelmetEnemy(Point2D initialPosition, World w);
 
     /**
      * create an angry enemy entities.
      * @param initialPosition the initial position of the enemy
      * @param w the world where the entity create
-     * @param enemyName
      * @return a entities that rappresent the enemy with more movement speed
      */
-    Entity createAngryEnemy(Point2D initialPosition, World w, String enemyName);
+    Entity createAngryEnemy(Point2D initialPosition, World w);
 
     /**
      * create an Bomb enemy entities.
      * @param initialPosition the initial position of the enemy
      * @param w the world where the entity create
-     * @param enemyName
      * @return a entities that rappresent the enemy with more movement speed
      */
-    Entity createBombEnemy(Point2D initialPosition, World w, String enemyName);
+    Entity createBombEnemy(Point2D initialPosition, World w);
 }

@@ -2,7 +2,7 @@ package it.unibo.smol.view.api;
 
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.view.impl.GraphicsDraw;
-import javafx.scene.image.Image;
+
 /**
  * Abstract class rappresenting the template of the graphics component for the {@link GameObject}.
  */
@@ -11,7 +11,7 @@ public abstract class GraphicComponent {
     private final double width;
     private final double height;
     private Entity entity;
-    private Image image;
+    private String imageName;
 
     /**
      * Basic constructor for the {@link GraphicComponent}.
@@ -31,7 +31,7 @@ public abstract class GraphicComponent {
         this.entity = graphicComponent.getEntity();
         //this.graphic = graphicComponent.getGraphic();
         this.height = graphicComponent.getHeight();
-        this.image = graphicComponent.getImage();
+        this.imageName = graphicComponent.getImageName();
         this.width = graphicComponent.getWidth();
     }
 
@@ -60,7 +60,7 @@ public abstract class GraphicComponent {
         //if (this.entity.getInputComp().isPresent()) {
             //graphic.undrawSprite(this.entity, this);
             this.update();
-            graphic.drawSprite(this.image, this.entity, this);
+            graphic.drawSprite(this.imageName, this.entity, this);
        // }
     }
 
@@ -108,15 +108,15 @@ public abstract class GraphicComponent {
      * Set the entity image.
      * @param img the entity image
      */
-    public void setImage(final Image img) {
-        this.image = img;
+    public void setImageName(final String imageName) {
+        this.imageName = imageName;
     }
 
     /**
     * Getter for thr entity image.
     * @return the image of the entity
     */
-    public Image getImage() {
-        return image;
+    public String getImageName() {
+        return imageName;
     }
 }
