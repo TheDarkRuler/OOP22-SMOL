@@ -31,6 +31,10 @@ public class LifePlantsPhysicsComponent extends PhysicsComponent {
         } else if (entityCollided.getType() == Type.PLAYER) {
             super.getEntity().getHealthComp().orElseThrow().setHealth(Constant.PLAYER_DMG);
         }
+
+        if (super.getEntity().getHealthComp().orElseThrow().isDead() && entityCollided.getType() == Type.ENEMY) {
+            entityCollided.getWorld().remove(entityCollided);
+        }
     }
 
     /**

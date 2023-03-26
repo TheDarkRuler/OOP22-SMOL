@@ -43,7 +43,7 @@ public class HealthComponent {
      * Test if the Entity is dead.
      * @return {@code True} if the entity have more of 0 health; {@code False} otherwise
      */
-    protected boolean isDead() {
+    public boolean isDead() {
         return currentHealth <= 0;
     }
 }
