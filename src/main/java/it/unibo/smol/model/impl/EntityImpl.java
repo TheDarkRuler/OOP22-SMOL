@@ -41,7 +41,7 @@ public class EntityImpl implements Entity {
         this.inputComp = inputComp;
         this.healthComp = healthComp;
         this.graphicComp = graphicComp;
-        this.physicsComp = physicsComp.makeCopy();
+        this.physicsComp = physicsComp;
         this.currentX = currentX;
         this.currentY = currentY;
         this.world = new WorldImpl(w);
@@ -92,7 +92,7 @@ public class EntityImpl implements Entity {
      */
     @Override
     public World getWorld() {
-        return new WorldImpl(world);
+        return world;
     }
 
     /**
@@ -116,7 +116,7 @@ public class EntityImpl implements Entity {
      */
     @Override
     public void setWorld(final World w) {
-        this.world = new WorldImpl(w);
+        this.world = w;
     }
 
     /**
@@ -140,7 +140,7 @@ public class EntityImpl implements Entity {
      */
     @Override
     public PhysicsComponent getPhysicsComp() {
-        return physicsComp.makeCopy();
+        return physicsComp;
     }
 
     /**
@@ -160,7 +160,8 @@ public class EntityImpl implements Entity {
                 this.setX(this.currentX + physicsComp.getX());
                 this.setY(this.currentY + physicsComp.getY());
             }
-            System.out.println("Entity "+this.type+" move to x:"+(int)this.currentX+" y:"+(int)this.currentY);
+            physicsComp.updateHitbox(currentX, currentY);
+            //System.out.println("Entity "+this.type+" move to x:"+(int)this.currentX+" y:"+(int)this.currentY);
         }
         physicsComp.checkCollision();
         if (healthComp.isPresent() && healthComp.get().isDead()) {

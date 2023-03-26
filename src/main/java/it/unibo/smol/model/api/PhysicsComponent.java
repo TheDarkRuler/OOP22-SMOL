@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
-import it.unibo.smol.model.impl.EntityImpl;
 import javafx.geometry.Point2D;
 
 /**
@@ -28,7 +27,7 @@ public abstract class PhysicsComponent {
      */
     public PhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
         this.movementSpeed = movementSpeed;
-        this.hitBox = hitBox.copyOf();
+        this.hitBox = hitBox;
         this.isRigid = true;
     }
 
@@ -81,7 +80,7 @@ public abstract class PhysicsComponent {
      * @return The entity that use this component
      */
     public Entity getEntity() {
-        return new EntityImpl(entity);
+        return entity;
     }
 
     /**
@@ -89,7 +88,7 @@ public abstract class PhysicsComponent {
      * @param e : The entity that use this component
      */
     public void setEntity(final Entity e) {
-        this.entity = new EntityImpl(e);
+        this.entity = e;
     }
 
     /**
@@ -121,7 +120,7 @@ public abstract class PhysicsComponent {
      * @return the hitbox
      */
     public HitBox getHitBox() {
-        return this.hitBox.copyOf();
+        return this.hitBox;
     }
 
     /**
@@ -169,6 +168,10 @@ public abstract class PhysicsComponent {
      */
     public void setRigid(final boolean isRigid) {
         this.isRigid = isRigid;
+    }
+
+    public void updateHitbox(final double x, final double y) {
+        this.hitBox.setCenter(new Point2D(x, y));
     }
 
     /**
