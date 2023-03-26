@@ -65,7 +65,7 @@ public class EnemyCreation {
      * @param enemyName : the name of the enemy
      */
     private void spawnEntity(final String enemyName) {
-        System.out.println(enemyName);
+        //System.out.println(enemyName);
         switch (enemyName) {
             case "Mole":
                 gameState.getWorld()
@@ -105,8 +105,8 @@ public class EnemyCreation {
                     if (gameState.getScore() / INC_DIFFICULTY_PIVOT <= DIFFICULTY_LIMIT) {
                         changeDifficulty();
                     }
-                    System.out.println(weightList);
-                    System.out.println(randomDouble);
+                    //System.out.println(weightList);
+                    //System.out.println(randomDouble);
                     spawnEntity(entitiesMap.entrySet()
                         .stream()
                         .filter(s -> s.getValue().equals(weightList.stream()

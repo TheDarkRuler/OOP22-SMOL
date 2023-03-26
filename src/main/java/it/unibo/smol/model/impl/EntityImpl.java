@@ -44,8 +44,8 @@ public class EntityImpl implements Entity {
         this.physicsComp = physicsComp;
         this.currentX = currentX;
         this.currentY = currentY;
-        this.world = new WorldImpl(w);
-        physicsComp.setEntity(new EntityImpl(this));
+        this.world = w;
+        physicsComp.setEntity(this);
         graphicComp.setEntity(this);
     }
 
@@ -167,7 +167,6 @@ public class EntityImpl implements Entity {
         if (healthComp.isPresent() && healthComp.get().isDead()) {
             this.getWorld().remove(this);
         }
-        //graphicComp.render();
     }
 
     /**

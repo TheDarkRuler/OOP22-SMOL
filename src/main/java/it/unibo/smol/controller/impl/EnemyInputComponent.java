@@ -43,7 +43,7 @@ public class EnemyInputComponent implements InputComponent {
      */
     @Override
     public boolean isHittable() {
-        return input.isEnemyUnder();
+        return !input.isEnemyUnder();
     }
 
     @Override
