@@ -8,6 +8,7 @@ import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.view.GameMap;
+import it.unibo.smol.view.api.HealthBarTank;
 import it.unibo.smol.view.api.WindowState;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
@@ -30,6 +32,7 @@ public class GameViewState implements WindowState {
     private KeyInputs keyEventHandler;
     private MouseInputs mouseEventHandler;
     private Canvas canvas;
+    private Rectangle healthBar;
 
 
     
@@ -79,6 +82,8 @@ public class GameViewState implements WindowState {
         scene.setOnMouseDragged(mouseEventHandler);
         scene.setOnMouseEntered(mouseEventHandler);
         root.getChildren().add(canvas);
+        updateHealthBar();
+        root.getChildren().add(healthBar);
         stage.setX(0);
         stage.setY(0);
         stage.setScene(scene);
@@ -93,6 +98,7 @@ public class GameViewState implements WindowState {
     public void repaint(final Stage stage) throws IOException {
         Platform.runLater(() -> {
             gContext.clearRect(0, 0, GameMap.WIDTH, GameMap.HEIGHT);
+            updateHealthBar();
             gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
         });
     }
@@ -109,6 +115,19 @@ public class GameViewState implements WindowState {
      */
     public void setMouseInputs() {
         this.gameState.setMouseInputs(this.mouseEventHandler);
+    }
+
+    private void updateHealthBar() {
+        HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
+        this.healthBar = new Rectangle(   healthBarData.getCenter().getX(), 
+                                        healthBarData.getCenter().getY(), 
+                                        healthBarData.getHealthBarWidth(), 
+                                        healthBarData.getHealthBarHeight()
+                                    );
+        healthBar.setStroke(Color.BLACK);
+        healthBar.setStrokeWidth(2);
+        healthBar.setFill(Color.RED);
+        //Double healtPercentage = ;
     }
 }
 
