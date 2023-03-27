@@ -22,12 +22,12 @@ public class BasicEnemyGraphicComponent extends GraphicComponent {
      */
     @Override
     public void setAnimation() {
-        /*if (moving) {
-            setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+        if (moving) {
+            setImageName(LoadImgs.PLAYER);
         } else {
-            setImage(LoadImgs.getSprites(LoadImgs.MOLE));
-        }*/
-        setImageName(LoadImgs.MOLE);
+            setImageName(LoadImgs.MOLE);
+        }
+        //setImageName(LoadImgs.MOLE);
     }
 
     /**
@@ -36,8 +36,7 @@ public class BasicEnemyGraphicComponent extends GraphicComponent {
     @Override
     public void updateAnimation() {
         if (super.getEntity() != null) {
-            if (super.getEntity().getPhysicsComp().getX() == 0 
-                && super.getEntity().getPhysicsComp().getY() == 0) {
+            if (super.getEntity().getInputComp().orElseThrow().isHittable()) {
                 moving = false;
             } else {
                 moving = true;

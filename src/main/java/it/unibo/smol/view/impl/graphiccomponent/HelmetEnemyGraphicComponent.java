@@ -1,5 +1,6 @@
 package it.unibo.smol.view.impl.graphiccomponent;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.GraphicComponent;
 /**
@@ -8,6 +9,7 @@ import it.unibo.smol.view.api.GraphicComponent;
 public class HelmetEnemyGraphicComponent extends GraphicComponent {
 
     private boolean moving;
+    private boolean isHalfDead;
 
     /**
      * 
@@ -23,12 +25,16 @@ public class HelmetEnemyGraphicComponent extends GraphicComponent {
      */
     @Override
     public void setAnimation() {
-        /*if (moving) {
-            setImage(LoadImgs.getSprites(LoadImgs.MOLE));
+        if (moving) {
+            setImageName(LoadImgs.MOLE_DIG);
         } else {
-            setImage(LoadImgs.getSprites(LoadImgs.MOLE));
-        }*/
-        setImageName(LoadImgs.HELM_MOLE);
+            if (isHalfDead) {
+                setImageName(LoadImgs.MOLE);
+            } else {
+                setImageName(LoadImgs.HELM_MOLE);
+            }
+        }
+        //setImageName(LoadImgs.MOLE);
     }
 
     /**
@@ -37,11 +43,14 @@ public class HelmetEnemyGraphicComponent extends GraphicComponent {
     @Override
     public void updateAnimation() {
         if (super.getEntity() != null) {
-            if (super.getEntity().getPhysicsComp().getX() == 0 
-                && super.getEntity().getPhysicsComp().getY() == 0) {
+            if (super.getEntity().getInputComp().orElseThrow().isHittable()) {
                 moving = false;
             } else {
                 moving = true;
+            }
+            //System.out.println(super.getEntity().getHealthComp().orElseThrow().getCurrentHealth());
+            if (super.getEntity().getHealthComp().orElseThrow().getCurrentHealth() < Constant.ENEMY_HELMET_HP) {
+                isHalfDead = true;
             }
         }
     }
