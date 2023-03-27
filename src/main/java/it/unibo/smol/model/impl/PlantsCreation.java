@@ -9,7 +9,7 @@ import javafx.geometry.Point2D;
 
 public class PlantsCreation {
 
-    private static final int NUM_PLANTS = 4;
+    
     
     private GameState gs;
     private Random rand;
@@ -21,7 +21,7 @@ public class PlantsCreation {
     }
 
     private void createPlants() {
-        for (int i = 0; i < NUM_PLANTS; i++) {
+        for (int i = 0; i < Constant.NUM_PLANTS; i++) {
             Point2D plantPosition = findPosition(i);
             gs.getWorld()
                 .addEntity(gs.getEntityFactory()
