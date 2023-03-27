@@ -55,6 +55,8 @@ public final class Constant {
     public static final double HEALTH_MOVSPD = 0.0;
     /**lifeplant health point. */
     public static final int HEALTH_HP = 1000;
+    /**number of plants present at spawn. */
+    public static final int NUM_PLANTS = 4;
 
     /**-----------------------
      * WEAPON UTILITIES VALUES 
