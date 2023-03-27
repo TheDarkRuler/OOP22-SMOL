@@ -2,6 +2,9 @@ package it.unibo.smol.view.impl;
 
 import java.io.IOException;
 import java.util.logging.Logger;
+
+import org.w3c.dom.css.RGBColor;
+
 import java.util.logging.Level;
 
 import it.unibo.smol.controller.api.GameState;
@@ -83,6 +86,7 @@ public class GameViewState implements WindowState {
         scene.setOnMouseEntered(mouseEventHandler);
         root.getChildren().add(canvas);
         initializeHealthBar();
+        root.getChildren().add(underHealthBar());
         root.getChildren().add(healthBar);
         stage.setX(0);
         stage.setY(0);
@@ -119,18 +123,29 @@ public class GameViewState implements WindowState {
 
     private void initializeHealthBar() {
         HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
-        //System.out.println(healthBarData.getHealthBarWidth());
         this.healthBar = new Rectangle(   healthBarData.getCenter().getX(), 
                                         healthBarData.getCenter().getY(), 
                                         healthBarData.getHealthBarWidth(), 
                                         healthBarData.getHealthBarHeight()
                                     );
-        healthBar.setFill(Color.RED);
+        healthBar.setFill(healthBarData.healthBarColor());
+    }
+
+    private Rectangle underHealthBar() {
+        HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
+        var underHealth = new Rectangle(   healthBarData.getCenter().getX(), 
+                                        healthBarData.getCenter().getY(), 
+                                        healthBarData.getHealthBarWidth(), 
+                                        healthBarData.getHealthBarHeight()
+                                    );
+        underHealth.setFill(Color.RED);
+        underHealth.setStrokeWidth(healthBarData.getHealthBarBorder());
+        underHealth.setStroke(Color.BLACK);
+        return underHealth;
     }
 
     private void updateHealthBar() {
         HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
-        //System.out.println(healthBarData.getHealthBarWidth());
         this.healthBar.setWidth(healthBarData.getHealthBarWidth() * healthBarData.updateHealthPercentage());
     }
 }

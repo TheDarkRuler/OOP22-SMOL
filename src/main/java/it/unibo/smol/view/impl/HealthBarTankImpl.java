@@ -5,6 +5,7 @@ import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.HealthBarTank;
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 
 /**
  * class that implements HealthBarTank.
@@ -19,6 +20,7 @@ public class HealthBarTankImpl implements HealthBarTank {
     private static final int CENTER_HEIGHT_PROPORTION = 4;
     private static final int WIDTH_PROPORTION = 2;
     private static final int HEIGHT_PROPORTION = 10;
+    private static final int BORDER_PROPORTION = 35;
     /* public static final double CENTER_WIDTH_PROPORTION = Double.valueOf(GameMap.BORDER_WIDTH / 2);
     public static final double CENTER_HEIGHT = Double.valueOf(GameMap.BORDER_WIDTH / 4);
 
@@ -56,6 +58,16 @@ public class HealthBarTankImpl implements HealthBarTank {
             }
         });
         return Double.valueOf(currentLife / (Constant.NUM_PLANTS * Constant.HEALTH_HP));
+    }
+
+    @Override
+    public Double getHealthBarBorder() {
+        return Double.valueOf(GameMap.BORDER_WIDTH / BORDER_PROPORTION);
+    }
+
+    @Override
+    public Color healthBarColor() {
+        return Color.rgb(0, 153, 51);
     }
 
 }

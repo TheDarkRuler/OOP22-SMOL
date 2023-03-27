@@ -1,6 +1,7 @@
 package it.unibo.smol.view.api;
 
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 
 public interface HealthBarTank {
     /**
@@ -23,5 +24,15 @@ public interface HealthBarTank {
      * @return current life percentage
      */
     Double updateHealthPercentage();
+
+    /**
+     * @return border of the health bar
+     */
+    Double getHealthBarBorder();
+
+    /**
+     * @return
+     */
+    Color healthBarColor();
     
 }
