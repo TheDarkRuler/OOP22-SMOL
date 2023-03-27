@@ -1,14 +1,13 @@
 package it.unibo.smol.model.impl;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import javax.swing.Timer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
@@ -27,6 +26,7 @@ public class EnemyCreation {
     private final Map<String, Double> entitiesMap;
     private final int minTimeEnemySpawn;
     private final int maxTimeEnemySpawn;
+    private final Random rand;
 
     /**
      * Constructor.
@@ -40,6 +40,7 @@ public class EnemyCreation {
                                                 "Bomb_mole", Constant.DEF_RATE_BOMB));
         this.minTimeEnemySpawn = Constant.DEF_MIN_TIME_SPAWN;
         this.maxTimeEnemySpawn = Constant.DEF_MAX_TIME_SPAWN;
+        rand = new Random();
         creationTimer();
     }
 
@@ -84,30 +85,29 @@ public class EnemyCreation {
      * Timer that create moles with a certain delay (minTimeEnemySpawn and maxTimeEnemySpawn).
      */
     private void creationTimer() {
-        final Timer enemyCreationTimer = new Timer(minTimeEnemySpawn + new Random()
-            .nextInt(maxTimeEnemySpawn - minTimeEnemySpawn),
-            new ActionListener() {
 
-                @Override
-                public void actionPerformed(final ActionEvent e) {
-                    final List<Double> weightList = new ArrayList<>(entitiesMap.values());
-                    final Double randomDouble = Math.random();
-                    Collections.sort(weightList);
+        final Timer enemyCreationTimer = new Timer();
 
-                    if (gameState.getScore() / Constant.INC_DIFFICULTY_PIVOT <= Constant.DIFFICULTY_LIMIT) {
-                        changeDifficulty();
-                    }
-                    //System.out.println(weightList);
-                    //System.out.println(randomDouble);
-                    spawnEntity(entitiesMap.entrySet()
-                        .stream()
-                        .filter(s -> s.getValue().equals(weightList.stream()
-                            .filter(x -> x >= randomDouble)
-                            .findFirst().get()))
-                        .findAny().get().getKey());
+        enemyCreationTimer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                final List<Double> weightList = new ArrayList<>(entitiesMap.values());
+                final Double randomDouble = Math.random();
+                Collections.sort(weightList);
+
+                if (gameState.getScore() / Constant.INC_DIFFICULTY_PIVOT <= Constant.DIFFICULTY_LIMIT) {
+                    changeDifficulty();
                 }
-            });
-        enemyCreationTimer.start();
+                spawnEntity(entitiesMap.entrySet()
+                    .stream()
+                    .filter(s -> s.getValue().equals(weightList.stream()
+                        .filter(x -> x >= randomDouble)
+                        .findFirst().get()))
+                    .findAny().get().getKey());
+            }
+            
+        }, 0, minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn) );
     }
 
     /**
@@ -118,10 +118,10 @@ public class EnemyCreation {
         if (new Random().nextBoolean()) {
             return new Point2D(randomBetweenTwo(GameMap.BORDER_WIDTH / 2,
                 GameMap.BORDER_WIDTH / 2 + GameMap.MAP_WIDTH),
-                GameMap.BORDER_HEIGHT / 2 + new Random()
+                GameMap.BORDER_HEIGHT / 2 + rand
                     .nextDouble(GameMap.MAP_HEIGHT - GameMap.BORDER_HEIGHT / 2));
         } else {
-            return new Point2D(GameMap.BORDER_WIDTH / 2 + new Random()
+            return new Point2D(GameMap.BORDER_WIDTH / 2 + rand
             .nextDouble(GameMap.MAP_WIDTH - GameMap.BORDER_WIDTH / 2),
                 randomBetweenTwo(GameMap.BORDER_HEIGHT / 2,
                 GameMap.BORDER_HEIGHT / 2 + GameMap.MAP_HEIGHT));
@@ -135,6 +135,6 @@ public class EnemyCreation {
      * @return one of the two given parameter
      */
     private double randomBetweenTwo(final double first, final double second) {
-        return new Random().nextBoolean() ? first : second;
+        return rand.nextBoolean() ? first : second;
     }
 }
