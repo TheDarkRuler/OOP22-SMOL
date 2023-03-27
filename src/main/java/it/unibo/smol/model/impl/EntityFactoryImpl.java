@@ -142,7 +142,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.WALL,
         Optional.empty(),
         Optional.empty(),
-        new BombEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT),
+        new PlayerGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT),
         new WallPhysicsComponent(hitbox),
         hitbox.getCenter().getX(), hitbox.getCenter().getY(), w);
     }

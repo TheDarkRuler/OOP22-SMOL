@@ -23,7 +23,7 @@ public class BasicEnemyGraphicComponent extends GraphicComponent {
     @Override
     public void setAnimation() {
         if (moving) {
-            setImageName(LoadImgs.PLAYER);
+            setImageName(LoadImgs.GROUND);
         } else {
             setImageName(LoadImgs.MOLE);
         }

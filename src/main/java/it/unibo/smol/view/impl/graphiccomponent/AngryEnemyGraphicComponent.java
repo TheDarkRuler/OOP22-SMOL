@@ -25,9 +25,9 @@ public class AngryEnemyGraphicComponent extends GraphicComponent {
     @Override
     public void setAnimation() {
         if (moving) {
-            setImageName(LoadImgs.PLAYER);
+            setImageName(LoadImgs.GROUND);
         } else {
-            setImageName(LoadImgs.MOLE);
+            setImageName(LoadImgs.ANGRY_MOLE);
         }
         //setImageName(LoadImgs.MOLE);
     }

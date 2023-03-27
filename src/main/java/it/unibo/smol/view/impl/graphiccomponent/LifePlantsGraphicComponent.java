@@ -1,5 +1,6 @@
 package it.unibo.smol.view.impl.graphiccomponent;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.GraphicComponent;
 
@@ -25,9 +26,9 @@ public class LifePlantsGraphicComponent extends GraphicComponent {
     @Override
     public void setAnimation() {
         if (isHalfDead) {
-            super.setImageName(LoadImgs.PLAYER);
+            super.setImageName(LoadImgs.LIFE_PLANTS);
         } else {
-            super.setImageName(LoadImgs.PLAYER);
+            super.setImageName(LoadImgs.LIFE_PLANTS);
         }
     }
 
@@ -36,12 +37,12 @@ public class LifePlantsGraphicComponent extends GraphicComponent {
      */
     @Override
     public void updateAnimation() {
-        /*if (super.getEntity() != null) {
-            if (super.getEntity().getHealthComp().get().getCurrentHealth() <= 10/*meta vita ) {
+        if (super.getEntity() != null) {
+            if (super.getEntity().getHealthComp().get().getCurrentHealth() <= Constant.HEALTH_HP/2 ) {
                 isHalfDead = true;
             } else {
                 isHalfDead = false;
             }
-        }*/
+        }
     }
 }

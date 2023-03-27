@@ -26,10 +26,10 @@ public class HelmetEnemyGraphicComponent extends GraphicComponent {
     @Override
     public void setAnimation() {
         if (moving) {
-            setImageName(LoadImgs.MOLE_DIG);
+            setImageName(LoadImgs.GROUND);
         } else {
             if (isHalfDead) {
-                setImageName(LoadImgs.MOLE);
+                setImageName(LoadImgs.HELM_HIT_MOLE);
             } else {
                 setImageName(LoadImgs.HELM_MOLE);
             }
