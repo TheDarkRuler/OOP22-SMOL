@@ -50,4 +50,12 @@ public class EnemyInputComponent implements InputComponent {
     public void freezeInput(final int millisec) {
         //This component doesn't use this feature yet.
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EnemyInput getEnemyInput() {
+        return this.input;
+    }
 }

@@ -3,6 +3,7 @@ package it.unibo.smol.controller.impl;
 import java.util.Optional;
 
 import it.unibo.smol.common.Directions;
+import it.unibo.smol.controller.api.EnemyInput;
 import it.unibo.smol.controller.api.InputComponent;
 import it.unibo.smol.controller.input.KeyInputs;
 import javafx.geometry.Point2D;
@@ -50,5 +51,14 @@ public class PlayerInputComponent implements InputComponent {
     @Override
     public void freezeInput(final int millisec) {
         //This component don't use this feature yet.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EnemyInput getEnemyInput() {
+        //this component will not use this method.
+        return null;
     }
 }

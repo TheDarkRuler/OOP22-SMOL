@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.HitBox;
 import it.unibo.smol.common.hitbox.RectangleHB;
@@ -13,17 +17,11 @@ import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.World;
 import it.unibo.smol.view.GameMap;
 import javafx.geometry.Point2D;
-import javax.swing.Timer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * class that includes all the inputs for the different type of enemy and manages the enemies movement.
  */
 public class EnemyInput {
-
-    private static final int DEFAULT_MIN_TIME_UP = 1500;
-    private static final int DEFAULT_MAX_TIME_UP = 2500;
 
     private final int minTimeUp;
     private final int maxTimeUp;
@@ -32,12 +30,13 @@ public class EnemyInput {
     private final int maxTimesCanSpawn;
     private Point2D enemyPosition;
     private Point2D enemyNextPosition;
-    private Timer enemyTimeUp;
     private final EnemyMoves enemyMovement;
     private final World world;
     private HitBox newPosHitBox;
     private boolean isNewPosViable;
     private final Random rand;
+    private Entity entity;
+    private final ScheduledExecutorService enemyStaysUpTime;
 
     /**
      * inizialize the first position and and the first movements ogf the enemy.
@@ -45,18 +44,36 @@ public class EnemyInput {
      * @param world
      * @param initialEnemyPosition
      */
-    public EnemyInput(final int maxTimesCanSpawn, final World world, final Point2D initialEnemyPosition) {
+    public EnemyInput(final int maxTimesCanSpawn, final World world,
+        final Point2D initialEnemyPosition) {
 
-        this.minTimeUp = DEFAULT_MIN_TIME_UP;
-        this.maxTimeUp = DEFAULT_MAX_TIME_UP;
+        this.minTimeUp = Constant.DEFAULT_MIN_TIME_UP;
+        this.maxTimeUp = Constant.DEFAULT_MAX_TIME_UP;
 
         this.isNewPosViable = true;
+        this.enemyStaysUpTime = Executors.newSingleThreadScheduledExecutor();
         this.rand = new Random();
         this.world = world;
         this.maxTimesCanSpawn = maxTimesCanSpawn;
         this.enemyPosition = initialEnemyPosition;
         this.enemyNextPosition = enemySetsPosition(rand.nextInt(4)).get();
         this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, this);
+    }
+
+    /**
+     * sets the entity to move.
+     * @param entity
+     */
+    public void setEntity(final Entity entity) {
+        this.entity = entity;
+    }
+
+    /**
+     * gets the entityt to move.
+     * @return entity
+     */
+    public Entity getEntity() {
+        return this.entity;
     }
 
     /**
@@ -132,9 +149,31 @@ public class EnemyInput {
      */
     public void enemyIsUp() {
         if (enemyTimesSpawn < maxTimesCanSpawn) {
-            enemyStaysUpTimer();
+            //enemyStaysUpTimer();
+            this.enemyStaysUpTime.schedule(enemyStaysUp(), minTimeUp + rand.nextInt(maxTimeUp - minTimeUp),
+                TimeUnit.MILLISECONDS);
             enemyTimesSpawn++;
         }
+    }
+
+    /**
+     * allowes the enemy to stay up for a period of time.
+     */
+    protected Runnable enemyStaysUp() {
+        return new Runnable() {
+
+            @Override
+            public void run() {
+                if (enemyTimesSpawn < maxTimesCanSpawn) {
+                    enemyNextPosition = enemySearchNextPos();
+                } else if (enemyTimesSpawn <= maxTimesCanSpawn) {
+                    enemyNextPosition = enemyGoesOnPlants();
+                    enemyTimesSpawn++;
+                }
+                enemyMovement.positionUpdate(enemyPosition, enemyNextPosition);
+            }
+
+        };
     }
 
     /**
@@ -147,28 +186,6 @@ public class EnemyInput {
             temp = rand.nextInt(4);
         }
         return enemySetsPosition(temp).get();
-    }
-
-    /**
-     * allowes the enemy to stay up for a period of time.
-     */
-    protected void enemyStaysUpTimer() {
-        enemyTimeUp = new Timer(minTimeUp + rand.nextInt(maxTimeUp - minTimeUp),
-            new ActionListener() {
-
-                @Override
-                public void actionPerformed(final ActionEvent e) {
-                    if (enemyTimesSpawn < maxTimesCanSpawn) {
-                        enemyNextPosition = enemySearchNextPos();
-                    } else if (enemyTimesSpawn <= maxTimesCanSpawn) {
-                        enemyNextPosition = enemyGoesOnPlants();
-                        enemyTimesSpawn++;
-                    }
-                    enemyMovement.positionUpdate(enemyPosition, enemyNextPosition);
-                    enemyTimeUp.stop();
-                }
-            });
-        enemyTimeUp.start();
     }
 
     /**
@@ -258,8 +275,8 @@ public class EnemyInput {
     }
 
     /**
-     * gets the Game State.
-     * @return gs
+     * gets the World.
+     * @return world
      */
     protected World getWorld() {
         return this.world;

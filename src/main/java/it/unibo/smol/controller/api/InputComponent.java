@@ -29,4 +29,10 @@ public interface InputComponent {
      * @param millisec the time express in millisecond
      */
     void freezeInput(int millisec);
+
+    /**
+     * gets the enemyInput.
+     * @return enemyinput
+     */
+    EnemyInput getEnemyInput();
 }

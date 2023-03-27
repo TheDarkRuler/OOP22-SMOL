@@ -43,6 +43,18 @@ public final class Constant {
     public static final int BOMB_EXPLOSION = 1000;
     /**The amount of point for killing an enemy */
     public static final int ENEMY_SCORE = 100;
+    /**Max time a Bomb mole can spawn */
+    public static final int BOMB_ENEMY_MAX_SPAWNS = 3;
+    /**Max time a Helmet mole can spawn */
+    public static final int HELMET_ENEMY_MAX_SPAWNS = 3;
+    /**Max time a Angry mole can spawn */
+    public static final int ANGRY_ENEMY_MAX_SPAWNS = 2;
+    /**Max time a Basic mole can spawn */
+    public static final int BASIC_ENEMY_MAX_SPAWNS = 3;
+    /**Min time a enemy stays up */
+    public static final int DEFAULT_MIN_TIME_UP = 1500;
+    /**Max time a enemy stays up */
+    public static final int DEFAULT_MAX_TIME_UP = 2500;
 
     /**---------------------------
      * LIFEPLANTS UTILITIES VALUES 
@@ -74,7 +86,7 @@ public final class Constant {
     /**the max weapon range. */
     public static final double WEAPON_MAX_RANGE = DEF_WEAPON_RANGE*4;
     /**the waiting time before the hammer start increasing range. */
-    public static final int HOLD_TIME = 100;
+    public static final int HOLD_TIME = 300;
     /**the waiting after the hammer get smashed. */
     public static final int WEAPON_ATTACK_ANIM = 250;
 

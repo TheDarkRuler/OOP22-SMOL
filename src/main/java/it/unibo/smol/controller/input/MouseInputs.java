@@ -22,8 +22,9 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     private boolean weaponSmashed;
     private boolean weaponIsSmashing;
     private boolean cursorOnScreen;
-    private int weaponIncrease;
-    private int weaponRange;
+    private boolean weaponHits;
+    private double weaponIncrease;
+    private double weaponRange;
     private final ScheduledExecutorService animationTime;
     private Point2D weaponLocation;
 
@@ -32,6 +33,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      */
     public MouseInputs() {
         this.weaponSmashed = false;
+        this.weaponHits = false;
         this.weaponIsSmashing = false;
         this.weaponRange = 0;
         this.weaponIncrease = 0;
@@ -52,6 +54,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         } else if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED) && !this.weaponSmashed) {
 
             this.weaponSmashed = true;
+            this.weaponHits = true;
             this.weaponIncrease = 0;
             this.weaponLocation = new Point2D(event.getX(), event.getY());
             freezeInputs(Constant.WEAPON_ATTACK_ANIM);
@@ -91,7 +94,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
             @Override
             public void run() {
                 if (!weaponSmashed) {
-                    weaponIncrease = (int)Constant.WEAPON_INC_RATE;
+                    weaponIncrease = Constant.WEAPON_INC_RATE;
                 }
             }
         };
@@ -145,8 +148,8 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      * returns the weaponRange to draw it.
      * @return weaponRange
      */
-    public int getWeaponRange() {
-        return this.weaponRange + (int)Constant.DEF_WEAPON_RANGE;
+    public double getWeaponRange() {
+        return this.weaponRange + Constant.DEF_WEAPON_RANGE;
     }
 
     /**
@@ -170,7 +173,11 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      * @return weaponSmashed
      */
     public boolean isWeaponSmashed() {
-        return this.weaponSmashed;
+        if (weaponHits) {
+            this.weaponHits = false;
+            return true;
+        }
+        return false;
     }
 
     /**
