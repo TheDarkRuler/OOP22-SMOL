@@ -42,11 +42,19 @@ public class EnemyBombInput extends EnemyInput {
                         setEnemyNextPosition(enemySearchNextPos());
                         getEnemyMovement().positionUpdate(getEnemyPosition(), getEnemyNextPosition());
                     } else {
-                        //getWorld().remove(get);
+                        removeBomb();
                     }
                     enemyTimeUp.stop();
                 }
             });
         enemyTimeUp.start();
+    }
+
+    /**
+     * removes the bomb from the world.
+     */
+    private void removeBomb() {
+        getWorld().remove(getWorld().getMoles().stream()
+            .filter(x -> x.getInputComp().get().getEnemyInput().equals(this)).findAny().get());
     }
 }

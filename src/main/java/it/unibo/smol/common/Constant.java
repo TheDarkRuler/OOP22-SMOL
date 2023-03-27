@@ -58,7 +58,7 @@ public final class Constant {
     /**the max weapon range. */
     public static final double WEAPON_MAX_RANGE = DEF_WEAPON_RANGE*4;
     /**the waiting time before the hammer start increasing range. */
-    public static final int HOLD_TIME = 100;
+    public static final int HOLD_TIME = 300;
     /**the waiting after the hammer get smashed. */
     public static final int WEAPON_ATTACK_ANIM = 250;
 
