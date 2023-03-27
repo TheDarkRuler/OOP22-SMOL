@@ -21,6 +21,7 @@ public class GraphicsDraw {
     }
 
     private void storeImages() {
+        images.put(LoadImgs.ANGRY_MOLE, LoadImgs.getSprites(LoadImgs.ANGRY_MOLE));
         images.put(LoadImgs.BOMB_MOLE, LoadImgs.getSprites(LoadImgs.BOMB_MOLE));
         images.put(LoadImgs.HELM_MOLE, LoadImgs.getSprites(LoadImgs.HELM_MOLE));
         images.put(LoadImgs.MOLE, LoadImgs.getSprites(LoadImgs.MOLE));

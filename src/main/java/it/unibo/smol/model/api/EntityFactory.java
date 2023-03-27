@@ -1,5 +1,6 @@
 package it.unibo.smol.model.api;
 
+import it.unibo.smol.common.HitBox;
 import javafx.geometry.Point2D;
 
 /**
@@ -65,4 +66,12 @@ public interface EntityFactory {
      * @return a entities that rappresent the enemy with more movement speed
      */
     Entity createBombEnemy(Point2D initialPosition, World w);
+
+    /**
+     * create a Wall entity.
+     * @param hitbox
+     * @param w
+     * @return a entities that rappresent a wall for boundingbox
+     */
+    Entity createWall(HitBox hitBox, World w);
 }
