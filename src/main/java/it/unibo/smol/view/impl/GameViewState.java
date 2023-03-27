@@ -119,7 +119,7 @@ public class GameViewState implements WindowState {
 
     private void initializeHealthBar() {
         HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
-        System.out.println(healthBarData.getHealthBarWidth());
+        //System.out.println(healthBarData.getHealthBarWidth());
         this.healthBar = new Rectangle(   healthBarData.getCenter().getX(), 
                                         healthBarData.getCenter().getY(), 
                                         healthBarData.getHealthBarWidth(), 
@@ -130,7 +130,7 @@ public class GameViewState implements WindowState {
 
     private void updateHealthBar() {
         HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
-        System.out.println(healthBarData.getHealthBarWidth());
+        //System.out.println(healthBarData.getHealthBarWidth());
         this.healthBar.setWidth(healthBarData.getHealthBarWidth() * healthBarData.updateHealthPercentage());
     }
 }
