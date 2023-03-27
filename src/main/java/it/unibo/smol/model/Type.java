@@ -24,4 +24,8 @@ public enum Type {
      */
     WEAPON,
 
+    /**
+     * The wall entity.
+     */
+    WALL,
 }

@@ -20,6 +20,7 @@ public final class LoadImgs {
     public static final String HELM_MOLE = "Helmet_mole.gif";
     public static final String BOMB_MOLE = "Bomb_mole.gif";
     public static final String W_TARGET = "weapon_target.png";
+    public static final String ANGRY_MOLE = "Angry_mole.gif";
 
     private LoadImgs() throws UnsupportedEncodingException {
         throw new UnsupportedEncodingException("This is a utily class");

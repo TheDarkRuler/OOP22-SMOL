@@ -2,6 +2,7 @@ package it.unibo.smol.controller.impl;
 
 import java.util.Map;
 
+import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
@@ -14,6 +15,7 @@ import it.unibo.smol.model.impl.EntityFactoryImpl;
 import it.unibo.smol.model.impl.PlantsCreation;
 import it.unibo.smol.model.impl.WorldImpl;
 import it.unibo.smol.view.GameMap;
+import javafx.geometry.Point2D;
 
 /**
  * The implementation of the GameState.
@@ -96,6 +98,11 @@ public class GameStateImpl implements GameState {
     @Override
     public void initGame() {
         new PlantsCreation(this);
+        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH / 2, GameMap.HEIGHT, new Point2D(GameMap.BORDER_WIDTH / 4 , GameMap.HEIGHT/2)),this.world));
+        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH / 2, GameMap.HEIGHT, new Point2D(GameMap.WIDTH - GameMap.BORDER_WIDTH / 4 , GameMap.HEIGHT/2)),this.world));
+        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.BORDER_HEIGHT / 2, new Point2D(GameMap.WIDTH / 2, GameMap.BORDER_HEIGHT / 4)),this.world));
+        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.BORDER_HEIGHT / 2, new Point2D(GameMap.WIDTH / 2 , GameMap.HEIGHT - GameMap.BORDER_HEIGHT / 4)),this.world));
+
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2), this.world));
         new EnemyCreation(this);

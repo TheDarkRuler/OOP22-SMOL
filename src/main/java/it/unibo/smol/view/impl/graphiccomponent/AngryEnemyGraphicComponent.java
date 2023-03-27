@@ -29,7 +29,7 @@ public class AngryEnemyGraphicComponent extends GraphicComponent {
         } else {
             setImage(LoadImgs.getSprites(LoadImgs.MOLE));
         }*/
-        setImageName(LoadImgs.MOLE);
+        setImageName(LoadImgs.ANGRY_MOLE);
     }
 
     /**

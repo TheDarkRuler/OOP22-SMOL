@@ -3,6 +3,7 @@ package it.unibo.smol.model.impl;
 import java.util.Optional;
 
 import it.unibo.smol.common.Constant;
+import it.unibo.smol.common.HitBox;
 import it.unibo.smol.common.hitbox.CircleHB;
 import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.impl.EnemyInputComponent;
@@ -20,7 +21,9 @@ import it.unibo.smol.model.impl.physicscomponent.BombEnemyPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.EnemyPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.LifePlantsPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.PlayerPhysicsComponent;
+import it.unibo.smol.model.impl.physicscomponent.WallPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.WeaponPhysicsComponent;
+import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.impl.graphiccomponent.AngryEnemyGraphicComponent;
 import it.unibo.smol.view.impl.graphiccomponent.BasicEnemyGraphicComponent;
 import it.unibo.smol.view.impl.graphiccomponent.BombEnemyGraphicComponent;
@@ -129,5 +132,18 @@ public class EntityFactoryImpl implements EntityFactory {
         new BombEnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initialPosition)),
         initialPosition.getX(), initialPosition.getY(), w);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Entity createWall(HitBox hitbox, World w) {
+        return new EntityImpl(Type.WALL,
+        Optional.empty(),
+        Optional.empty(),
+        new BombEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT),
+        new WallPhysicsComponent(hitbox),
+        hitbox.getCenter().getX(), hitbox.getCenter().getY(), w);
     }
 }
