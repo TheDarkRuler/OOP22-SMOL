@@ -23,9 +23,6 @@ import javafx.geometry.Point2D;
  */
 public class EnemyInput {
 
-    private static final int DEFAULT_MIN_TIME_UP = 1500;
-    private static final int DEFAULT_MAX_TIME_UP = 2500;
-
     private final int minTimeUp;
     private final int maxTimeUp;
     private int enemySection;
@@ -50,8 +47,8 @@ public class EnemyInput {
     public EnemyInput(final int maxTimesCanSpawn, final World world,
         final Point2D initialEnemyPosition) {
 
-        this.minTimeUp = DEFAULT_MIN_TIME_UP;
-        this.maxTimeUp = DEFAULT_MAX_TIME_UP;
+        this.minTimeUp = Constant.DEFAULT_MIN_TIME_UP;
+        this.maxTimeUp = Constant.DEFAULT_MAX_TIME_UP;
 
         this.isNewPosViable = true;
         this.enemyStaysUpTime = Executors.newSingleThreadScheduledExecutor();
