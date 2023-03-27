@@ -51,7 +51,7 @@ public class GameLoop extends Thread {
         pastTime = System.nanoTime();
 
         gameState.initGame();
-        while (!gameState.isGameOver()) {
+        do {
             now = System.nanoTime();
 
             if (syncTime(UPS_INTERVAL)) {
@@ -68,7 +68,8 @@ public class GameLoop extends Thread {
                 drawCount=0;
                 timer=0;
             }
-        }
+        } while (!gameState.isGameOver());
+        
     }
 
     /**
