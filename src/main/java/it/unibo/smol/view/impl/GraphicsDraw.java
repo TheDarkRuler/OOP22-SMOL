@@ -24,10 +24,14 @@ public class GraphicsDraw {
         images.put(LoadImgs.ANGRY_MOLE, LoadImgs.getSprites(LoadImgs.ANGRY_MOLE));
         images.put(LoadImgs.BOMB_MOLE, LoadImgs.getSprites(LoadImgs.BOMB_MOLE));
         images.put(LoadImgs.HELM_MOLE, LoadImgs.getSprites(LoadImgs.HELM_MOLE));
+        images.put(LoadImgs.HELM_HIT_MOLE, LoadImgs.getSprites(LoadImgs.HELM_HIT_MOLE) );
         images.put(LoadImgs.MOLE, LoadImgs.getSprites(LoadImgs.MOLE));
         images.put(LoadImgs.PLAYER, LoadImgs.getSprites(LoadImgs.PLAYER));
         images.put(LoadImgs.WORLD_IMG, LoadImgs.getSprites(LoadImgs.WORLD_IMG));
         images.put(LoadImgs.W_TARGET, LoadImgs.getSprites(LoadImgs.W_TARGET));
+        images.put(LoadImgs.GROUND, LoadImgs.getSprites(LoadImgs.GROUND));
+        images.put(LoadImgs.GROUND, LoadImgs.getSprites(LoadImgs.GROUND));
+        images.put(LoadImgs.LIFE_PLANTS, LoadImgs.getSprites(LoadImgs.LIFE_PLANTS));
     
     }
 
