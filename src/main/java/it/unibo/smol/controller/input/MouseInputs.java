@@ -23,8 +23,8 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     private boolean weaponIsSmashing;
     private boolean cursorOnScreen;
     private boolean weaponHits;
-    private int weaponIncrease;
-    private int weaponRange;
+    private double weaponIncrease;
+    private double weaponRange;
     private final ScheduledExecutorService animationTime;
     private Point2D weaponLocation;
 
@@ -94,7 +94,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
             @Override
             public void run() {
                 if (!weaponSmashed) {
-                    weaponIncrease = (int)Constant.WEAPON_INC_RATE;
+                    weaponIncrease = Constant.WEAPON_INC_RATE;
                 }
             }
         };
@@ -148,8 +148,8 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      * returns the weaponRange to draw it.
      * @return weaponRange
      */
-    public int getWeaponRange() {
-        return this.weaponRange + (int)Constant.DEF_WEAPON_RANGE;
+    public double getWeaponRange() {
+        return this.weaponRange + Constant.DEF_WEAPON_RANGE;
     }
 
     /**

@@ -43,7 +43,7 @@ public class WeaponPhysicsComponent extends PhysicsComponent {
      */
     @Override
     public void receiveMovement(final Point2D move, final World world) {
-        final int wRange = world.getMouseInputs().getWeaponRange();
+        final double wRange = world.getMouseInputs().getWeaponRange();
         final Point2D playerLocation = world.getEntities()
             .stream()
             .filter(x -> x.getType().equals(Type.PLAYER))
@@ -53,7 +53,7 @@ public class WeaponPhysicsComponent extends PhysicsComponent {
         super.setY(weaponLocation.getY());
     }
 
-    private Point2D setWeaponLocation(final Point2D move, final int wRange, final Point2D playerLocation) {
+    private Point2D setWeaponLocation(final Point2D move, final double wRange, final Point2D playerLocation) {
         final double r = wRange / 2;
         double angle = Math.atan2(move.getY() - playerLocation.getY(), move.getX() - playerLocation.getX());
         double tempX = r * Math.cos(angle);
