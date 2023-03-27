@@ -5,6 +5,7 @@ import java.util.Map;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
+import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.EntityFactory;
 import it.unibo.smol.model.api.World;
@@ -52,7 +53,9 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public boolean isGameOver() {
-        return false; //world.getLifePlants().isEmpty();
+        return !world.getEntities().stream()
+            .filter(x -> x.getType() == Type.HEALTH)
+            .findAny().isPresent();
     }
 
     /**

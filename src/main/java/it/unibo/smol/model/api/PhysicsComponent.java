@@ -42,7 +42,7 @@ public abstract class PhysicsComponent {
             .filter(x -> hitBox.isColliding(x.getHitBox()))
             .forEach(x -> {
                     if (this.isRigid() && x.isRigid()) {
-                        System.out.println("Entity "+this.entity.getType()+" has collided with "+x.entity.getType());
+                        //System.out.println("Entity "+this.entity.getType()+" has collided with "+x.entity.getType());
                         this.collisonEvent(x.getEntity());
                     }
                 });

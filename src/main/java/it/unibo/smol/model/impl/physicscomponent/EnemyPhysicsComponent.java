@@ -29,6 +29,9 @@ public class EnemyPhysicsComponent extends PhysicsComponent {
     protected void collisonEvent(final Entity entityCollided) {
         if (entityCollided.getType() == Type.WEAPON) {
             super.getEntity().getHealthComp().orElseThrow().setHealth(Constant.WEAPON_DMG);
+            if (super.getEntity().getHealthComp().orElseThrow().isDead()) {
+                super.getEntity().getWorld().incScore(Constant.ENEMY_SCORE);
+            }
         }
     }
 
