@@ -6,8 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
@@ -27,6 +28,7 @@ public class EnemyCreation {
     private final int minTimeEnemySpawn;
     private final int maxTimeEnemySpawn;
     private final Random rand;
+    private final ScheduledExecutorService enemyCreation;
 
     /**
      * Constructor.
@@ -41,6 +43,7 @@ public class EnemyCreation {
         this.minTimeEnemySpawn = Constant.DEF_MIN_TIME_SPAWN;
         this.maxTimeEnemySpawn = Constant.DEF_MAX_TIME_SPAWN;
         rand = new Random();
+        this.enemyCreation = Executors.newSingleThreadScheduledExecutor();
         creationTimer();
     }
 
@@ -81,14 +84,17 @@ public class EnemyCreation {
         }
     }
 
+    private void creationTimer() {
+        this.enemyCreation.schedule(createEnemy(), minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn),
+            TimeUnit.MILLISECONDS);
+    }
+
     /**
      * Timer that create moles with a certain delay (minTimeEnemySpawn and maxTimeEnemySpawn).
      */
-    private void creationTimer() {
+    private Runnable createEnemy() {
 
-        final Timer enemyCreationTimer = new Timer();
-
-        enemyCreationTimer.schedule(new TimerTask() {
+        return new Runnable() {
 
             @Override
             public void run() {
@@ -105,9 +111,10 @@ public class EnemyCreation {
                         .filter(x -> x >= randomDouble)
                         .findFirst().get()))
                     .findAny().get().getKey());
+                creationTimer();
             }
             
-        }, 0, minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn) );
+        };
     }
 
     /**
