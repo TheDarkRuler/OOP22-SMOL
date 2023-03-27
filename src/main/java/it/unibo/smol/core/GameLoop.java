@@ -65,11 +65,12 @@ public class GameLoop extends Thread {
             }
             if (timer >= 1000000000) {
                 System.out.println("FPS: "+ drawCount);
+                System.out.println(gameState.getScore());
                 drawCount=0;
                 timer=0;
             }
         } while (!gameState.isGameOver());
-        
+
     }
 
     /**

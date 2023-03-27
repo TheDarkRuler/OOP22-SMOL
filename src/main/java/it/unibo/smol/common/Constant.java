@@ -11,7 +11,10 @@ public final class Constant {
 
     private static double screenHeight = Screen.getPrimary().getBounds().getHeight();
     private static double screenWidth = Screen.getPrimary().getBounds().getWidth();
-    
+
+    /**-----------------------
+     * PLAYER UTILITIES VALUES
+     * -----------------------*/
     /**player width. */
     public static final double PLAYER_WIDTH = screenWidth * 0.060;
     /**player height. */
@@ -21,6 +24,9 @@ public final class Constant {
     /**player damage. */
     public static final int PLAYER_DMG = -1;
 
+    /**----------------------
+     * ENEMY UTILITIES VALUES
+     * ----------------------*/
     /**enemy width. */
     public static final double ENEMY_WIDTH = screenWidth * 0.060;
     /**enemy height. */
@@ -35,7 +41,12 @@ public final class Constant {
     public static final int ENEMY_DMG = -1;
     /**The time the player stay freeze when the bomb explode. */
     public static final int BOMB_EXPLOSION = 1000;
+    /**The amount of point for killing an enemy */
+    public static final int ENEMY_SCORE = 100;
 
+    /**---------------------------
+     * LIFEPLANTS UTILITIES VALUES 
+     * ---------------------------*/
     /**lifeplant width. */
     public static final double HEALTH_WIDTH = screenWidth * 0.100;
     /**lifeplant height. */
@@ -45,6 +56,9 @@ public final class Constant {
     /**lifeplant health point. */
     public static final int HEALTH_HP = 1000;
 
+    /**-----------------------
+     * WEAPON UTILITIES VALUES 
+     * -----------------------*/
     /**weapon radius. */
     public static final double WEAPON_RADIUS = screenWidth * 0.015;
     /**weapon movement speed. */
@@ -61,6 +75,30 @@ public final class Constant {
     public static final int HOLD_TIME = 100;
     /**the waiting after the hammer get smashed. */
     public static final int WEAPON_ATTACK_ANIM = 250;
+
+    /**----------------------
+     * ENEMY SPAWN RATE VALUE 
+     * ----------------------*/
+    /** Default spawn rate for basic enemy. */
+    public static final double DEF_RATE_BASIC = 1.0;
+    /** Default spawn rate for helmet enemy.*/
+    public static final double DEF_RATE_HELMET = 0.45;
+    /** Default spawn rate for angry enemy.*/
+    public static final double DEF_RATE_ANGRY = 0.325;
+    /** Default spawn rate for bomb enemy.*/
+    public static final double DEF_RATE_BOMB = 0.2;
+    /** Increase spawn rate for angry enemy.*/
+    public static final double INC_RATE_ANGRY = 0.025;
+    /** Increase spawn rate for helmet enemy.*/
+    public static final double INC_RATE_HELMET = 0.05;
+    /** Default max time of spawn.*/
+    public static final int DEF_MAX_TIME_SPAWN = 4000;
+    /** Default minimum time of spawn*/
+    public static final int DEF_MIN_TIME_SPAWN = 3000;
+    /** Whenever the score reaches a multiple of this value the difficulty increase.*/
+    public static final int INC_DIFFICULTY_PIVOT = 2000;
+    /** The number of difficulty stage.*/
+    public static final int DIFFICULTY_LIMIT = 5;
 
     private Constant() throws UnsupportedEncodingException {
         throw new UnsupportedEncodingException("This is a utility class");
