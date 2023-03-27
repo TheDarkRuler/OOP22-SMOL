@@ -82,7 +82,7 @@ public class GameViewState implements WindowState {
         scene.setOnMouseDragged(mouseEventHandler);
         scene.setOnMouseEntered(mouseEventHandler);
         root.getChildren().add(canvas);
-        updateHealthBar();
+        initializeHealthBar();
         root.getChildren().add(healthBar);
         stage.setX(0);
         stage.setY(0);
@@ -117,17 +117,21 @@ public class GameViewState implements WindowState {
         this.gameState.setMouseInputs(this.mouseEventHandler);
     }
 
-    private void updateHealthBar() {
+    private void initializeHealthBar() {
         HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
+        System.out.println(healthBarData.getHealthBarWidth());
         this.healthBar = new Rectangle(   healthBarData.getCenter().getX(), 
                                         healthBarData.getCenter().getY(), 
                                         healthBarData.getHealthBarWidth(), 
                                         healthBarData.getHealthBarHeight()
                                     );
-        healthBar.setStroke(Color.BLACK);
-        healthBar.setStrokeWidth(2);
         healthBar.setFill(Color.RED);
-        //Double healtPercentage = ;
+    }
+
+    private void updateHealthBar() {
+        HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
+        System.out.println(healthBarData.getHealthBarWidth());
+        this.healthBar.setWidth(healthBarData.getHealthBarWidth() * healthBarData.updateHealthPercentage());
     }
 }
 

@@ -1,5 +1,6 @@
 package it.unibo.smol.view.impl;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.HealthBarTank;
@@ -33,7 +34,7 @@ public class HealthBarTankImpl implements HealthBarTank {
 
     @Override
     public Point2D getCenter() {
-        return new Point2D(this.centerWidth, (Double.valueOf(GameMap.BORDER_WIDTH / CENTER_HEIGHT_PROPORTION)));
+        return new Point2D(this.centerWidth , (Double.valueOf(GameMap.BORDER_WIDTH / CENTER_HEIGHT_PROPORTION)));
     }
 
     @Override
@@ -47,13 +48,14 @@ public class HealthBarTankImpl implements HealthBarTank {
     }
 
     @Override
-    public Double getHealthPercentage() {
+    public Double updateHealthPercentage() {
+        this.currentLife = Double.valueOf(0);
         gameState.getWorld().getLifePlants().forEach(x -> {
             if (x.getHealthComp().isPresent()) {
                 currentLife = currentLife + x.getHealthComp().get().getCurrentHealth();
             }
         });
-        throw new UnsupportedOperationException("Unimplemented method 'getHealthPercentage'");
+        return Double.valueOf(currentLife / (Constant.NUM_PLANTS * Constant.HEALTH_HP));
     }
 
 }

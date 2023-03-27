@@ -20,8 +20,8 @@ public interface HealthBarTank {
     Double getHealthBarHeight();
 
     /**
-     * @return
+     * @return current life percentage
      */
-    Double getHealthPercentage();
+    Double updateHealthPercentage();
     
 }
