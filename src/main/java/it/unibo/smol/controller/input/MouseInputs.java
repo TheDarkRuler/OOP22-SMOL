@@ -47,7 +47,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      */
     @Override
     public void handle(final MouseEvent event) {
-        if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED) && !this.weaponIsSmashing) {
+        if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED) && !this.weaponIsSmashing && !this.weaponSmashed) {
             this.weaponIsSmashing = true;
             this.animationTime.schedule(weaponExpands(), Constant.HOLD_TIME, TimeUnit.MILLISECONDS);
 
