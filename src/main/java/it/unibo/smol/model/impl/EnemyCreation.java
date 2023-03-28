@@ -23,8 +23,8 @@ public class EnemyCreation {
 
     private final GameState gameState;
     private final Map<String, Double> entitiesMap;
-    private final int minTimeEnemySpawn;
-    private final int maxTimeEnemySpawn;
+    private int minTimeEnemySpawn;
+    private int maxTimeEnemySpawn;
     private final Random rand;
     private final Timer createEnemyTimer;
 
@@ -52,6 +52,10 @@ public class EnemyCreation {
         final int temp = gameState.getScore() / Constant.INC_DIFFICULTY_PIVOT;
         entitiesMap.put("Angry_mole", Constant.DEF_RATE_ANGRY + (temp * Constant.INC_RATE_ANGRY));
         entitiesMap.put("Helmet_mole", Constant.DEF_RATE_HELMET + (temp * Constant.INC_RATE_HELMET));
+        minTimeEnemySpawn -= temp * Constant.DEC_TIME_SPAWN;
+        maxTimeEnemySpawn -= temp * Constant.DEC_TIME_SPAWN;
+        System.out.println(minTimeEnemySpawn);
+        System.out.println(maxTimeEnemySpawn);
     }
 
     /**

@@ -5,7 +5,9 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import it.unibo.smol.common.Directions;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 /**
  * Class that creates an EventHandler for the keyboards events.
@@ -15,6 +17,11 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      * Direction of the player.
      */
     private static Queue<Directions> movement = new PriorityQueue<>();
+    private final Stage stage;
+
+    public KeyInputs(final Stage stage) {
+        this.stage = stage;
+    }
 
     /**
      * Handles the events, selecting everytime the right KeyEvent.
@@ -22,8 +29,17 @@ public class KeyInputs implements EventHandler<KeyEvent> {
     @Override
     public void handle(final KeyEvent event) {
 
-        if (event.getEventType().equals(KeyEvent.KEY_PRESSED) && !MouseInputs.isPlayerFreezed()
-            && !MouseInputs.isPlayerStunned()) {
+        if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
+
+            if (event.getCode().equals(KeyCode.F11)) {
+                if (stage.isFullScreen()) {
+                    stage.setFullScreen(false);
+                } else {
+                    stage.setFullScreen(true);
+                }
+            }
+
+            if (!MouseInputs.isPlayerFreezed() && !MouseInputs.isPlayerStunned()) {
             switch (event.getCode()) {
                 case W:
                     KeyInputs.setMovement(Directions.UP);
@@ -39,6 +55,7 @@ public class KeyInputs implements EventHandler<KeyEvent> {
                     break;
                 default:
                     break;
+                }
             }
 
         } else if (event.getEventType().equals(KeyEvent.KEY_RELEASED) && !MouseInputs.isPlayerFreezed()

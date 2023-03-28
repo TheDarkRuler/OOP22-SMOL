@@ -111,10 +111,12 @@ public final class Constant {
     public static final double INC_RATE_ANGRY = 0.025;
     /** Increase spawn rate for helmet enemy.*/
     public static final double INC_RATE_HELMET = 0.05;
+    /** Decrease time spawn.*/
+    public static final int DEC_TIME_SPAWN = 200; 
     /** Default max time of spawn.*/
-    public static final int DEF_MAX_TIME_SPAWN = 4000;
+    public static final int DEF_MAX_TIME_SPAWN = 3500;
     /** Default minimum time of spawn*/
-    public static final int DEF_MIN_TIME_SPAWN = 3000;
+    public static final int DEF_MIN_TIME_SPAWN = 2500;
     /** Whenever the score reaches a multiple of this value the difficulty increase.*/
     public static final int INC_DIFFICULTY_PIVOT = 2000;
     /** The number of difficulty stage.*/
