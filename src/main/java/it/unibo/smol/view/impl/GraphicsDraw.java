@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.unibo.smol.model.api.Entity;
+import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.GraphicComponent;
 import javafx.scene.canvas.GraphicsContext;
@@ -36,11 +37,15 @@ public class GraphicsDraw {
     }
 
     public void drawSprite(final String imageName, final Entity entity, final GraphicComponent graphicComponent) {
+        System.out.println("Proporzioni x: "+GameMap.SCREEN_PROP_X);
+        System.out.println("Proporzioni y: "+GameMap.SCREEN_PROP_Y);
+        System.out.println(imageName);
+        System.out.println("\t\t^"+entity.getType());
         g.drawImage(images.get(imageName),
-            entity.getCurrentX() - graphicComponent.getWidth() / 2,
-            entity.getCurrentY() - graphicComponent.getHeight() / 2,
-            graphicComponent.getWidth(),
-            graphicComponent.getHeight());
+            ((entity.getCurrentX() - graphicComponent.getWidth() / 2)*GameMap.SCREEN_PROP_X),
+            ((entity.getCurrentY() - graphicComponent.getHeight() / 2)*GameMap.SCREEN_PROP_Y),
+            (graphicComponent.getWidth()*GameMap.SCREEN_PROP_X),
+            (graphicComponent.getHeight()*GameMap.SCREEN_PROP_Y));
     }
 
     public void undrawSprite(final Entity entity, final GraphicComponent graphicComponent) {

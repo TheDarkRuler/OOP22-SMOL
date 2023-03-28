@@ -98,10 +98,10 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public void initGame() {
-        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH / 2, GameMap.HEIGHT, new Point2D(GameMap.BORDER_WIDTH / 4 , GameMap.HEIGHT/2)),this.world));
-        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH / 2, GameMap.HEIGHT, new Point2D(GameMap.WIDTH - GameMap.BORDER_WIDTH / 4 , GameMap.HEIGHT/2)),this.world));
-        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.BORDER_HEIGHT / 2, new Point2D(GameMap.WIDTH / 2, GameMap.BORDER_HEIGHT / 4)),this.world));
-        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.BORDER_HEIGHT / 2, new Point2D(GameMap.WIDTH / 2 , GameMap.HEIGHT - GameMap.BORDER_HEIGHT / 4)),this.world));
+        //world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH, GameMap.HEIGHT, new Point2D(GameMap.BORDER_WIDTH / 2 , GameMap.HEIGHT/2)),this.world));
+        //world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH, GameMap.HEIGHT, new Point2D(GameMap.MAP_WIDTH + GameMap.BORDER_WIDTH / 2 , GameMap.HEIGHT/2)),this.world));
+        //world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.BORDER_HEIGHT, new Point2D(GameMap.WIDTH / 2, GameMap.BORDER_HEIGHT/2)),this.world));
+        //world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.MAP_HEIGHT, new Point2D(GameMap.WIDTH / 2 , GameMap.MAP_HEIGHT + GameMap.BORDER_HEIGHT/2)),this.world));
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2), this.world));
         new PlantsCreation(this);

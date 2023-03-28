@@ -205,7 +205,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      * @return weaponLocation
      */
     public Point2D getWeaponLocation() {
-        return this.weaponLocation;
+        return new Point2D(weaponLocation.getX()/GameMap.SCREEN_PROP_X, weaponLocation.getY()/GameMap.SCREEN_PROP_Y);
     }
 
     /**

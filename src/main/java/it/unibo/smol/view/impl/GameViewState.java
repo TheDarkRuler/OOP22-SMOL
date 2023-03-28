@@ -78,7 +78,7 @@ public class GameViewState implements WindowState {
         final var root = new Pane();
         final var scene = new Scene(root, GameMap.WIDTH,
             GameMap.HEIGHT, Color.BLACK);
-        final var canvas = new Canvas(GameMap.WIDTH, GameMap.HEIGHT);
+        final var canvas = new Canvas(GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y);
         this.gContext = canvas.getGraphicsContext2D();
         this.graphic = new GraphicsDraw(gContext);
         root.setBackground(null);
@@ -111,7 +111,7 @@ public class GameViewState implements WindowState {
      */
     public void repaint(final Stage stage) throws IOException {
         Platform.runLater(() -> {
-            gContext.clearRect(0, 0, GameMap.WIDTH, GameMap.HEIGHT);
+            gContext.clearRect(0, 0, GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y);
             updateHealthBar();
             score.setText(Integer.toString(gameState.getScore()));
             gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
@@ -143,14 +143,14 @@ public class GameViewState implements WindowState {
     }
 
     private void initializeScore() {
-        score = new Text(GameMap.WIDTH - GameMap.BORDER_WIDTH, GameMap.BORDER_WIDTH / 4, Integer.toString(gameState.getScore()));
+        score = new Text((GameMap.MAP_WIDTH-GameMap.BORDER_WIDTH)*GameMap.SCREEN_PROP_X, GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 4, Integer.toString(gameState.getScore()));
         //final File fontPath = new File("src/main/resources/font/ShortBaby-Mg2w.ttf");
         //Font customFont = Font.loadFont("src/main/resources/font/ShortBaby-Mg2w.ttf", 10.0);
         score.setFont(Font.font("Impact", FontWeight.BOLD, 18));
         score.setFill(Color.WHITE);
         score.setTextAlignment(TextAlignment.RIGHT);
-        score.setScaleX(5);
-        score.setScaleY(5);
+        score.setScaleX(2);
+        score.setScaleY(2);
         score.setVisible(true);
 
 
