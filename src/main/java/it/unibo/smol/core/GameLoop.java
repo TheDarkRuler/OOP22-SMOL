@@ -73,7 +73,8 @@ public class GameLoop extends Thread {
                 timer=0;
             }
         } while (!gameState.isGameOver());
-        new WindowImpl(new GameOverWinState()).launch(view);;
+        gameState.stopEnemyCreation();
+        this.interrupt();
     }
 
     /**

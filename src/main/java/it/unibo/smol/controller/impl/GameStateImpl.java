@@ -23,6 +23,7 @@ import javafx.geometry.Point2D;
 public class GameStateImpl implements GameState {
     private final World world;
     private final EntityFactory entityFactory;
+    private EnemyCreation enemyCreator;
 
     /**
      * Constructor.
@@ -97,15 +98,14 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public void initGame() {
-        new PlantsCreation(this);
         world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH / 2, GameMap.HEIGHT, new Point2D(GameMap.BORDER_WIDTH / 4 , GameMap.HEIGHT/2)),this.world));
         world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH / 2, GameMap.HEIGHT, new Point2D(GameMap.WIDTH - GameMap.BORDER_WIDTH / 4 , GameMap.HEIGHT/2)),this.world));
         world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.BORDER_HEIGHT / 2, new Point2D(GameMap.WIDTH / 2, GameMap.BORDER_HEIGHT / 4)),this.world));
         world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.BORDER_HEIGHT / 2, new Point2D(GameMap.WIDTH / 2 , GameMap.HEIGHT - GameMap.BORDER_HEIGHT / 4)),this.world));
-
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2), this.world));
-        new EnemyCreation(this);
+        new PlantsCreation(this);
+        this.enemyCreator = new EnemyCreation(this);
     }
 
     /**
@@ -126,6 +126,10 @@ public class GameStateImpl implements GameState {
 
     public EntityFactory getEntityFactory() {
         return this.entityFactory;
+    }
+
+    public void stopEnemyCreation() {
+        this.enemyCreator.stopCreation();
     }
 
 }
