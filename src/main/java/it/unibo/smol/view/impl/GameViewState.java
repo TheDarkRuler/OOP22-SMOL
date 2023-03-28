@@ -101,8 +101,8 @@ public class GameViewState implements WindowState {
         stage.setY(0);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setFullScreen(true);
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        stage.setFullScreen(true);
         stage.show();
     }
 
