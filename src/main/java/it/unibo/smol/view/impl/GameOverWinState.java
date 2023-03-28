@@ -9,6 +9,7 @@ import it.unibo.smol.view.api.WindowState;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -59,6 +60,15 @@ public class GameOverWinState implements WindowState {
             });
             restart.setLayoutX(GameMap.WIDTH / 2 - GameMap.BORDER_WIDTH * 2);
             close.setLayoutX(GameMap.WIDTH / 2 );
+            root.setOnKeyPressed(e -> {
+                if (e.getCode().equals(KeyCode.F11)) {
+                    if (stage.isFullScreen()) {
+                        stage.setFullScreen(false);
+                    } else {
+                        stage.setFullScreen(true);
+                    }
+                }
+            });
             root.getChildren().add(restart);
             root.getChildren().add(close);
             stage.setTitle("Game Over :(");
