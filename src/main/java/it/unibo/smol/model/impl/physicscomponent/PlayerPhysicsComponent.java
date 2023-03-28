@@ -27,8 +27,8 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     @Override
     protected void collisonEvent(final Entity entityCollided) {
         if (entityCollided.getType() == Type.ENEMY) {
-            super.setX(-getX());
-            super.setY(-getY());
+            super.setX(0);
+            super.setY(0);
         }
     }
 
