@@ -1,14 +1,12 @@
 package it.unibo.smol.model.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
@@ -28,7 +26,6 @@ public class EnemyCreation {
     private final int minTimeEnemySpawn;
     private final int maxTimeEnemySpawn;
     private final Random rand;
-    private final ScheduledExecutorService enemyCreation;
 
     /**
      * Constructor.
@@ -43,7 +40,6 @@ public class EnemyCreation {
         this.minTimeEnemySpawn = Constant.DEF_MIN_TIME_SPAWN;
         this.maxTimeEnemySpawn = Constant.DEF_MAX_TIME_SPAWN;
         rand = new Random();
-        this.enemyCreation = Executors.newSingleThreadScheduledExecutor();
         creationTimer();
     }
 
@@ -52,8 +48,8 @@ public class EnemyCreation {
      */
     private void changeDifficulty() {
         final int temp = gameState.getScore() / Constant.INC_DIFFICULTY_PIVOT;
-        entitiesMap.put("Angry_mole", Constant.DEF_RATE_ANGRY + temp * Constant.INC_RATE_ANGRY);
-        entitiesMap.put("Helmet_mole", Constant.DEF_RATE_HELMET + temp * Constant.INC_RATE_HELMET);
+        entitiesMap.put("Angry_mole", Constant.DEF_RATE_ANGRY + (temp * Constant.INC_RATE_ANGRY));
+        entitiesMap.put("Helmet_mole", Constant.DEF_RATE_HELMET + (temp * Constant.INC_RATE_HELMET));
     }
 
     /**
@@ -84,37 +80,35 @@ public class EnemyCreation {
         }
     }
 
-    private void creationTimer() {
-        this.enemyCreation.schedule(createEnemy(), minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn),
-            TimeUnit.MILLISECONDS);
-    }
-
+    
     /**
      * Timer that create moles with a certain delay (minTimeEnemySpawn and maxTimeEnemySpawn).
      */
-    private Runnable createEnemy() {
+    private void creationTimer() {
 
-        return new Runnable() {
+        Timer createEnemyTimer = new Timer();
+
+        createEnemyTimer.schedule(new TimerTask() {
 
             @Override
             public void run() {
-                final List<Double> weightList = new ArrayList<>(entitiesMap.values());
-                final Double randomDouble = Math.random();
-                Collections.sort(weightList);
-
                 if (gameState.getScore() / Constant.INC_DIFFICULTY_PIVOT <= Constant.DIFFICULTY_LIMIT) {
                     changeDifficulty();
                 }
+                final List<Double> weightList = new ArrayList<>(entitiesMap.values().stream().sorted().toList());
+                final Double randomDouble = Math.random();
+
+                System.out.println(weightList);
                 spawnEntity(entitiesMap.entrySet()
                     .stream()
-                    .filter(s -> s.getValue().equals(weightList.stream()
+                    .filter(s -> s.getValue().equals(weightList.stream().sorted()
                         .filter(x -> x >= randomDouble)
                         .findFirst().get()))
                     .findAny().get().getKey());
-                creationTimer();
             }
             
-        };
+        }, minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn), 
+        minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn));
     }
 
     /**

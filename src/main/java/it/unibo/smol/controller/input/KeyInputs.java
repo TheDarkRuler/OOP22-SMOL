@@ -62,11 +62,10 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      * @return the movement Direction
      */
     public Optional<Directions> getMovement() {
-        if (movement.isEmpty()) {
-            return Optional.empty();
-        } else {
-            return Optional.of(movement.poll());
+        if (!movement.isEmpty()) {
+            return Optional.of(movement.remove());
         }
+        return Optional.empty();
     }
 
     /**

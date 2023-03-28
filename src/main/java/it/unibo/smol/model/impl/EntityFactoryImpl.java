@@ -23,7 +23,6 @@ import it.unibo.smol.model.impl.physicscomponent.LifePlantsPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.PlayerPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.WallPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.WeaponPhysicsComponent;
-import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.impl.graphiccomponent.AngryEnemyGraphicComponent;
 import it.unibo.smol.view.impl.graphiccomponent.BasicEnemyGraphicComponent;
 import it.unibo.smol.view.impl.graphiccomponent.BombEnemyGraphicComponent;
