@@ -174,5 +174,6 @@ public class GameViewState implements WindowState {
         HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
         this.healthBar.setWidth(healthBarData.getHealthBarWidth() * healthBarData.updateHealthPercentage());
     }
+
 }
 
