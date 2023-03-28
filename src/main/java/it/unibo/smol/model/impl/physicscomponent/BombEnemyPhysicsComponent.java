@@ -24,6 +24,7 @@ public class BombEnemyPhysicsComponent extends EnemyPhysicsComponent {
     protected void collisonEvent(final Entity entityCollided) {
         if (entityCollided.getType() == Type.WEAPON) {
             super.getEntity().getInputComp().orElseThrow().freezeInput(Constant.BOMB_EXPLOSION);
+            super.getEntity().getHealthComp().orElseThrow().setHealth(Constant.WEAPON_DMG);
         }
     }
 }
