@@ -3,8 +3,6 @@ package it.unibo.smol.view.impl;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import org.w3c.dom.css.RGBColor;
-
 import java.util.logging.Level;
 
 import it.unibo.smol.controller.api.GameState;
@@ -91,6 +89,8 @@ public class GameViewState implements WindowState {
         stage.setX(0);
         stage.setY(0);
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setFullScreen(true);
         stage.show();
     }
 
