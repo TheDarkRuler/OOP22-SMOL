@@ -8,34 +8,45 @@ import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
 import it.unibo.smol.model.api.World;
 import javafx.geometry.Point2D;
-
+/**
+ * The implementation of the {@link PhysicsComponent} rappresenting a wall of the map.
+ */
 public class WallPhysicsComponent extends PhysicsComponent {
 
-    public WallPhysicsComponent(HitBox hitBox) {
+    /**
+     * Constructor inherited by the super-class {@link PhysicsComponent}.
+     * @param hitBox : See the super-Constructor
+     */
+    public WallPhysicsComponent(final HitBox hitBox) {
         super(Constant.ENEMY_MOVSPD, hitBox);
     }
 
     @Override
-    public void receiveMovement(Directions move) {
+    public void receiveMovement(final Directions move) {
         //This component doesn't use this method
     }
 
     @Override
-    public void receiveMovement(Point2D move, World world) {
+    public void receiveMovement(final Point2D move, final World world) {
         //This component doesn't use this method
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void collisonEvent(Entity entityCollided) {
+    protected void collisonEvent(final Entity entityCollided) {
         if (entityCollided.getType() == Type.PLAYER) {
-            getEntity().getWorld().getPlayer().getPhysicsComp().setX(-getX());
-            getEntity().getWorld().getPlayer().getPhysicsComp().setY(-getY());
+            entityCollided.setX(entityCollided.getCurrentX() - entityCollided.getPhysicsComp().getX());
+            entityCollided.setY(entityCollided.getCurrentY() - entityCollided.getPhysicsComp().getY());
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PhysicsComponent makeCopy() {
         return this;
     }
-    
 }
