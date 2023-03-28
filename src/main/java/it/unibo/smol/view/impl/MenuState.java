@@ -49,6 +49,10 @@ public class MenuState implements WindowState {
         startGame.setOnMouseClicked(e -> {
             gameEngine.init(primaryStage);
         });
+        final Button gameOver = (Button) scene.lookup("#gameOver");
+        gameOver.setOnMouseClicked(e -> {
+            new WindowImpl(new GameOverWinState()).launch(primaryStage);
+        });
         primaryStage.setTitle("Start Menu :)");
         primaryStage.setScene(scene);
         primaryStage.show();

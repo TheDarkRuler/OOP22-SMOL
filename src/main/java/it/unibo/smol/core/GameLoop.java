@@ -3,7 +3,10 @@ package it.unibo.smol.core;
 import java.util.Optional;
 
 import it.unibo.smol.controller.api.GameState;
+import it.unibo.smol.view.api.WindowState;
+import it.unibo.smol.view.impl.GameOverWinState;
 import it.unibo.smol.view.impl.GameViewState;
+import it.unibo.smol.view.impl.WindowImpl;
 import javafx.stage.Stage;
 
 /**
@@ -70,7 +73,7 @@ public class GameLoop extends Thread {
                 timer=0;
             }
         } while (!gameState.isGameOver());
-
+        new WindowImpl(new GameOverWinState()).launch(view);;
     }
 
     /**

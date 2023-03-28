@@ -9,6 +9,7 @@ import it.unibo.smol.view.api.WindowState;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GameOverWinState implements WindowState {
@@ -31,11 +32,17 @@ public class GameOverWinState implements WindowState {
      */
     private void start(final Stage stage) throws IOException {
         final var root = new Pane();
-        final Scene scene = new Scene(root, GameMap.MAP_WIDTH, GameMap.BORDER_HEIGHT);
+        final var scene = new Scene(root, GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT, Color.AQUA);
         final Button restart = new Button();
         restart.setText("RESTART");
         restart.setTranslateX(GameMap.MAP_WIDTH / 2);
-        restart.setTranslateY(GameMap.MAP_HEIGHT - GameMap.BORDER_WIDTH);
+        restart.setTranslateY(GameMap.MAP_HEIGHT / 2);
+        restart.setPrefWidth(GameMap.BORDER_WIDTH);
+        restart.setPrefHeight(GameMap.BORDER_WIDTH / 2);
+        restart.setOnMouseClicked(e -> {
+            new WindowImpl(new MenuState()).launch(stage);;
+        });
+        root.getChildren().add(restart);
         stage.setTitle("Game Over :(");
         stage.setScene(scene);
         stage.show();

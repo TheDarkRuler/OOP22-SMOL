@@ -9,6 +9,6 @@
       <children>
          <Button fx:id="start" layoutX="457.0" layoutY="212.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="366.0" text="Start" />
          <Button layoutX="457.0" layoutY="334.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="366.0" text="options" />
-         <Button layoutX="457.0" layoutY="453.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="366.0" text="Impossible" />
+         <Button fx:id="gameOver" layoutX="457.0" layoutY="453.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="366.0" text="Impossible" />
       </children>
 </VBox>
