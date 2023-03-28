@@ -305,4 +305,8 @@ public class EnemyInput {
     public boolean isEnemyUnder() {
         return enemyMovement.isEnemyUnderground();
     }
+
+    public void freezeMouseInputs(final int millisec) {
+        this.getWorld().getMouseInputs().freezeInputsFromBomb(millisec);
+    }
 }

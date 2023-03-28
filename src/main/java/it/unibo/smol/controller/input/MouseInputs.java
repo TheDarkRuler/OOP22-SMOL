@@ -19,6 +19,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     
 
     private static boolean playerFreeze;
+    private static boolean playerStunned;
     private boolean weaponSmashed;
     private boolean weaponIsSmashing;
     private boolean cursorOnScreen;
@@ -38,6 +39,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         this.weaponRange = 0;
         this.weaponIncrease = 0;
         this.cursorOnScreen = false;
+        MouseInputs.playerStunned = false;
         this.animationTime = Executors.newSingleThreadScheduledExecutor();
         this.weaponLocation = new Point2D(GameMap.WIDTH / 2, GameMap.HEIGHT / 2);
     }
@@ -47,11 +49,14 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      */
     @Override
     public void handle(final MouseEvent event) {
-        if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED) && !this.weaponIsSmashing && !this.weaponSmashed) {
+        if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED) 
+            && !this.weaponIsSmashing && !this.weaponSmashed
+            && !MouseInputs.playerFreeze && !MouseInputs.playerStunned) {
             this.weaponIsSmashing = true;
             this.animationTime.schedule(weaponExpands(), Constant.HOLD_TIME, TimeUnit.MILLISECONDS);
 
-        } else if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED) && !this.weaponSmashed) {
+        } else if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED) && !this.weaponSmashed
+            && !MouseInputs.playerFreeze && !MouseInputs.playerStunned) {
 
             this.weaponSmashed = true;
             this.weaponHits = true;
@@ -59,19 +64,17 @@ public class MouseInputs implements EventHandler<MouseEvent> {
             this.weaponLocation = new Point2D(event.getX(), event.getY());
             freezeInputs(Constant.WEAPON_ATTACK_ANIM);
 
-        } else if (event.getEventType().equals(MouseEvent.MOUSE_MOVED) && !weaponSmashed && cursorOnScreen) {
-            if (!weaponSmashed && cursorOnScreen){
-                this.weaponLocation = new Point2D(event.getX(), event.getY());
-            }
+        } else if (event.getEventType().equals(MouseEvent.MOUSE_MOVED) && !weaponSmashed && cursorOnScreen
+            && !MouseInputs.playerFreeze && !MouseInputs.playerStunned) {
+            this.weaponLocation = new Point2D(event.getX(), event.getY());
 
         } else if (event.getEventType().equals(MouseEvent.MOUSE_ENTERED)) {
 
             this.cursorOnScreen = true;
 
-        } else if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED) && !weaponSmashed && cursorOnScreen) {
-            if (!weaponSmashed && cursorOnScreen){
-                this.weaponLocation = new Point2D(event.getX(), event.getY());
-            }
+        } else if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED) && !weaponSmashed && cursorOnScreen
+            && !MouseInputs.playerFreeze && !MouseInputs.playerStunned) {
+            this.weaponLocation = new Point2D(event.getX(), event.getY());
         }
     }
 
@@ -82,6 +85,15 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     public void freezeInputs(final int freezeTime) {
         playerBlock();
         animationTime.schedule(releaseInput(), freezeTime, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * freezes the player's inputs for a given period of time in milliseconds.
+     * @param freezeTime
+     */
+    public void freezeInputsFromBomb(final int freezeTime) {
+        playerGetStunned();
+        animationTime.schedule(releaseStun(), freezeTime, TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -116,12 +128,48 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     }
 
     /**
+     * Realease the player from the stun status.
+     * @return a runnable
+     */
+    private Runnable releaseStun() {
+        return new Runnable() {
+
+            @Override
+            public void run() {
+                weaponRange = 0;
+                playerReleasedFromStun();
+            }
+            
+        };
+    }
+
+    /**
+     * player get stunned.
+     */
+    private void playerGetStunned() {
+        KeyInputs.setMovement(Directions.STAY_X);
+        KeyInputs.setMovement(Directions.STAY_Y);
+        MouseInputs.playerStunned = true;
+    }
+
+    /**
      * starts the animation blocking player inputs.
      */
     private void playerBlock() {
         KeyInputs.setMovement(Directions.STAY_X);
         KeyInputs.setMovement(Directions.STAY_Y);
         MouseInputs.playerFreeze = true;
+    }
+
+    /**
+     * player release from stun.
+     */
+    private void playerReleasedFromStun() {
+        KeyInputs.setMovement(Directions.STAY_X);
+        KeyInputs.setMovement(Directions.STAY_Y);
+        MouseInputs.playerStunned = false;
+        this.weaponSmashed = false;
+        this.weaponIsSmashing = false;
     }
 
     /**
@@ -186,6 +234,14 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      */
     protected static boolean isPlayerFreezed() {
         return MouseInputs.playerFreeze;
+    }
+
+    /**
+     * returns if the player status is going to let the two input files communicate.
+     * @return if the player is stunned
+     */
+    protected static boolean isPlayerStunned() {
+        return MouseInputs.playerStunned;
     }
 
 }

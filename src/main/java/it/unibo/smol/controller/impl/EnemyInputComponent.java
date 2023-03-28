@@ -46,9 +46,12 @@ public class EnemyInputComponent implements InputComponent {
         return !input.isEnemyUnder();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void freezeInput(final int millisec) {
-        //This component doesn't use this feature yet.
+        this.input.freezeMouseInputs(millisec);
     }
 
     /**
