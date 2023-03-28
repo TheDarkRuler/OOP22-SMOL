@@ -31,8 +31,6 @@ public final class Constant {
     public static final double ENEMY_WIDTH = screenWidth * 0.060;
     /**enemy height. */
     public static final double ENEMY_HEIGHT = screenHeight * 0.060;
-    /**enemy movement speed. */
-    public static final double ENEMY_MOVSPD = screenWidth * 0.0005;
     /**enemy health point. */
     public static final int ENEMY_HP = 100;
     /**enemy with helmet health point. */
@@ -51,6 +49,14 @@ public final class Constant {
     public static final int ANGRY_ENEMY_MAX_SPAWNS = 2;
     /**Max time a Basic mole can spawn */
     public static final int BASIC_ENEMY_MAX_SPAWNS = 3;
+    /**Speed of the Bomb mole */
+    public static final double BOMB_ENEMY_SPEED = screenWidth * 0.0005;
+    /**Speed of the Helmet mole */
+    public static final double HELMET_ENEMY_SPEED = screenWidth * 0.0005;
+    /**Speed of the Angry mole */
+    public static final double ANGRY_ENEMY_SPEED = screenWidth * 0.001;
+    /**Speed of the Basic mole */
+    public static final double BASIC_ENEMY_SPEED = screenWidth * 0.0005;
     /**Min time a enemy stays up */
     public static final int DEFAULT_MIN_TIME_UP = 1500;
     /**Max time a enemy stays up */

@@ -16,6 +16,6 @@ public class EnemyBasicInput extends EnemyInput {
      * @param initialEnemyPosition
      */
     public EnemyBasicInput(final World world, final Point2D initialEnemyPosition) {
-        super(Constant.BASIC_ENEMY_MAX_SPAWNS, world, initialEnemyPosition);
+        super(Constant.BASIC_ENEMY_MAX_SPAWNS, world, initialEnemyPosition, Constant.BASIC_ENEMY_SPEED);
     }
 }

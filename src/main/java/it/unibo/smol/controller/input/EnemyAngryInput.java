@@ -16,7 +16,7 @@ public class EnemyAngryInput extends EnemyInput {
      * @param initialEnemyPosition
      */
     public EnemyAngryInput(final World world, final Point2D initialEnemyPosition) {
-        super(Constant.ANGRY_ENEMY_MAX_SPAWNS, world, initialEnemyPosition);
+        super(Constant.ANGRY_ENEMY_MAX_SPAWNS, world, initialEnemyPosition, Constant.ANGRY_ENEMY_SPEED);
     }
 
 }

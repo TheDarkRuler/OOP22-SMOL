@@ -14,8 +14,8 @@ public class BombEnemyPhysicsComponent extends EnemyPhysicsComponent {
      * Constructor inherited by the super-class {@link PhysicsComponent}.
      * @param hitBox : See the super-Constructor
      */
-    public BombEnemyPhysicsComponent(final HitBox hitBox) {
-        super(hitBox);
+    public BombEnemyPhysicsComponent(final HitBox hitBox, final double movSpeed) {
+        super(hitBox, movSpeed);
     }
     /**
      * Whenever this entity collide with a Weapon {@link Type} entity, it takes 1 damage.

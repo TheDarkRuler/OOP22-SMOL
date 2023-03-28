@@ -16,6 +16,6 @@ public class EnemyHelmetInput extends EnemyInput {
      * @param initialEnemyPosition
      */
     public EnemyHelmetInput(final World world, final Point2D initialEnemyPosition) {
-        super(Constant.HELMET_ENEMY_MAX_SPAWNS, world, initialEnemyPosition);
+        super(Constant.HELMET_ENEMY_MAX_SPAWNS, world, initialEnemyPosition, Constant.HELMET_ENEMY_SPEED);
     }
 }

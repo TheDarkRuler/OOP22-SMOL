@@ -12,7 +12,7 @@ import javafx.geometry.Point2D;
 public class WallPhysicsComponent extends PhysicsComponent {
 
     public WallPhysicsComponent(HitBox hitBox) {
-        super(Constant.ENEMY_MOVSPD, hitBox);
+        super(Constant.HEALTH_MOVSPD, hitBox);
     }
 
     @Override

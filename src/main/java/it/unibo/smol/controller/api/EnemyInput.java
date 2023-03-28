@@ -45,7 +45,7 @@ public class EnemyInput {
      * @param initialEnemyPosition
      */
     public EnemyInput(final int maxTimesCanSpawn, final World world,
-        final Point2D initialEnemyPosition) {
+        final Point2D initialEnemyPosition, final double movSpeed) {
 
         this.minTimeUp = Constant.DEFAULT_MIN_TIME_UP;
         this.maxTimeUp = Constant.DEFAULT_MAX_TIME_UP;
@@ -57,7 +57,7 @@ public class EnemyInput {
         this.maxTimesCanSpawn = maxTimesCanSpawn;
         this.enemyPosition = initialEnemyPosition;
         this.enemyNextPosition = enemySetsPosition(rand.nextInt(4)).get();
-        this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, this);
+        this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, this, movSpeed);
     }
 
     /**

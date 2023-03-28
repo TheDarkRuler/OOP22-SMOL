@@ -17,7 +17,7 @@ public class EnemyBombInput extends EnemyInput {
      * @param initialEnemyPosition
      */
     public EnemyBombInput(final World world, final Point2D initialEnemyPosition) {
-        super(Constant.BOMB_ENEMY_MAX_SPAWNS, world, initialEnemyPosition);
+        super(Constant.BOMB_ENEMY_MAX_SPAWNS, world, initialEnemyPosition, Constant.BOMB_ENEMY_SPEED);
     }
 
     /**

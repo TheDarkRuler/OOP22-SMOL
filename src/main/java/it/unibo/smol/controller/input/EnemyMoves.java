@@ -1,8 +1,6 @@
 package it.unibo.smol.controller.input;
 
 import java.util.Optional;
-
-import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.EnemyInput;
 import javafx.geometry.Point2D;
 
@@ -16,6 +14,7 @@ public class EnemyMoves {
     private Point2D to;
     private double moveX;
     private double moveY;
+    private final double movSpeed;
     private final EnemyInput enemyToMove;
     private boolean enemyIsUnder;
 
@@ -25,9 +24,10 @@ public class EnemyMoves {
      * @param to
      * @param enemyToMove
      */
-    public EnemyMoves(final Point2D from, final Point2D to, final EnemyInput enemyToMove) {
+    public EnemyMoves(final Point2D from, final Point2D to, final EnemyInput enemyToMove, final double movSpeed) {
         this.from = from;
         this.to = to;
+        this.movSpeed = movSpeed;
         this.enemyToMove = enemyToMove;
         setMovementVariable();
         this.enemyIsUnder = true;
@@ -40,9 +40,9 @@ public class EnemyMoves {
      */
     public Optional<Point2D> enemyMove() {
         if (this.enemyIsUnder) {
-            if (this.from.distance(this.to) > Constant.ENEMY_MOVSPD) {
-                this.from = this.from.add(this.from.getX() < this.to.getX() ? this.moveX * Constant.ENEMY_MOVSPD : -this.moveX * Constant.ENEMY_MOVSPD, 0);
-                this.from = this.from.add(0, this.from.getY() < this.to.getY() ? this.moveY * Constant.ENEMY_MOVSPD : -this.moveY * Constant.ENEMY_MOVSPD);
+            if (this.from.distance(this.to) > movSpeed) {
+                this.from = this.from.add(this.from.getX() < this.to.getX() ? this.moveX * movSpeed : -this.moveX * movSpeed, 0);
+                this.from = this.from.add(0, this.from.getY() < this.to.getY() ? this.moveY * movSpeed : -this.moveY * movSpeed);
                 enemyToMove.setEnemyPosition(from);
             } else {
                 notifyEnemyHasArrived();
