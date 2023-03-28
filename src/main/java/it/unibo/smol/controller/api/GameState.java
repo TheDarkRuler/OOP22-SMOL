@@ -60,6 +60,15 @@ public interface GameState {
      */
     void setMouseInputs(MouseInputs mouseInputs);
 
+    /**
+     * gets the entity factory for the entities creation.
+     * @return the entity factory
+     */
     EntityFactory getEntityFactory();
+
+    /**
+     * stops the creation of enemies.
+     */
+    void stopEnemyCreation();
 
 }

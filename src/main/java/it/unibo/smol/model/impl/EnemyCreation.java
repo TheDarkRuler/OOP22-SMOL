@@ -26,6 +26,7 @@ public class EnemyCreation {
     private final int minTimeEnemySpawn;
     private final int maxTimeEnemySpawn;
     private final Random rand;
+    private final Timer createEnemyTimer;
 
     /**
      * Constructor.
@@ -39,7 +40,8 @@ public class EnemyCreation {
                                                 "Bomb_mole", Constant.DEF_RATE_BOMB));
         this.minTimeEnemySpawn = Constant.DEF_MIN_TIME_SPAWN;
         this.maxTimeEnemySpawn = Constant.DEF_MAX_TIME_SPAWN;
-        rand = new Random();
+        this.createEnemyTimer = new Timer();
+        this.rand = new Random();
         creationTimer();
     }
 
@@ -86,9 +88,7 @@ public class EnemyCreation {
      */
     private void creationTimer() {
 
-        Timer createEnemyTimer = new Timer();
-
-        createEnemyTimer.schedule(new TimerTask() {
+        this.createEnemyTimer.schedule(new TimerTask() {
 
             @Override
             public void run() {
@@ -137,5 +137,9 @@ public class EnemyCreation {
      */
     private double randomBetweenTwo(final double first, final double second) {
         return rand.nextBoolean() ? first : second;
+    }
+
+    public void stopCreation() {
+        this.createEnemyTimer.cancel();
     }
 }

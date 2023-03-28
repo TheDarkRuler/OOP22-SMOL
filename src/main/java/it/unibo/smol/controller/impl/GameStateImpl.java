@@ -23,6 +23,7 @@ import javafx.geometry.Point2D;
 public class GameStateImpl implements GameState {
     private final World world;
     private final EntityFactory entityFactory;
+    private EnemyCreation enemyCreator;
 
     /**
      * Constructor.
@@ -104,7 +105,7 @@ public class GameStateImpl implements GameState {
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2), this.world));
         new PlantsCreation(this);
-        new EnemyCreation(this);
+        this.enemyCreator = new EnemyCreation(this);
     }
 
     /**
@@ -125,6 +126,10 @@ public class GameStateImpl implements GameState {
 
     public EntityFactory getEntityFactory() {
         return this.entityFactory;
+    }
+
+    public void stopEnemyCreation() {
+        this.enemyCreator.stopCreation();
     }
 
 }
