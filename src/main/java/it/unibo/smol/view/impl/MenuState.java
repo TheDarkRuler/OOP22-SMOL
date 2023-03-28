@@ -8,6 +8,7 @@ import java.net.URL;
 
 import it.unibo.smol.core.GameEngine;
 import it.unibo.smol.core.GameEngineImpl;
+import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.WindowState;
 
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,7 @@ import javafx.stage.Stage;
  * Implementation of the menu state, it renders the menu.
  */
 public class MenuState implements WindowState {
-    private static Logger logger = Logger.getLogger("myLog");
+    private static Logger logger = Logger.getLogger("menuLogger");
     private final GameEngine gameEngine = new GameEngineImpl();
     /**
      * {@inheritDoc}
@@ -43,7 +44,7 @@ public class MenuState implements WindowState {
     private void start(final Stage primaryStage) throws IOException {
         final URL url = new File("src/main/resources/layouts/Menu.fxml").toURI().toURL();
         final Parent root = FXMLLoader.load(url);
-        final Scene scene = new Scene(root, 1280, 720);
+        final Scene scene = new Scene(root, GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT);
         final Button startGame = (Button) scene.lookup("#start");
         startGame.setOnMouseClicked(e -> {
             gameEngine.init(primaryStage);
