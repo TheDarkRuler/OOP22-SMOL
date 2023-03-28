@@ -3,11 +3,11 @@ package it.unibo.smol.view.impl;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.Key;
 import java.util.logging.Logger;
 
 import java.util.logging.Level;
 
-import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
@@ -18,6 +18,7 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -71,7 +72,7 @@ public class GameViewState implements WindowState {
     }
 
     private void start(final Stage stage) throws IOException {
-        keyEventHandler = new KeyInputs();
+        keyEventHandler = new KeyInputs(stage);
         mouseEventHandler = new MouseInputs();
         setKeyInputs();
         setMouseInputs();
@@ -101,6 +102,7 @@ public class GameViewState implements WindowState {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setFullScreen(true);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
     }
 
