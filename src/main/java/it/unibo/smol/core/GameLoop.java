@@ -70,7 +70,8 @@ public class GameLoop extends Thread {
                 timer=0;
             }
         } while (!gameState.isGameOver());
-
+        gameState.stopEnemyCreation();
+        this.interrupt();
     }
 
     /**

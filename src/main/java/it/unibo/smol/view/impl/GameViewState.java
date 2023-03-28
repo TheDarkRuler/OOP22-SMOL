@@ -1,12 +1,15 @@
 package it.unibo.smol.view.impl;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Logger;
 
 import org.w3c.dom.css.RGBColor;
 
 import java.util.logging.Level;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
@@ -20,6 +23,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -35,6 +42,7 @@ public class GameViewState implements WindowState {
     private KeyInputs keyEventHandler;
     private MouseInputs mouseEventHandler;
     private Canvas canvas;
+    private Text score;
     private Rectangle healthBar;
 
 
@@ -86,8 +94,10 @@ public class GameViewState implements WindowState {
         scene.setOnMouseEntered(mouseEventHandler);
         root.getChildren().add(canvas);
         initializeHealthBar();
+        initializeScore();
         root.getChildren().add(underHealthBar());
         root.getChildren().add(healthBar);
+        root.getChildren().add(score);
         stage.setX(0);
         stage.setY(0);
         stage.setScene(scene);
@@ -103,6 +113,7 @@ public class GameViewState implements WindowState {
         Platform.runLater(() -> {
             gContext.clearRect(0, 0, GameMap.WIDTH, GameMap.HEIGHT);
             updateHealthBar();
+            score.setText(Integer.toString(gameState.getScore()));
             gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
         });
     }
@@ -129,6 +140,21 @@ public class GameViewState implements WindowState {
                                         healthBarData.getHealthBarHeight()
                                     );
         healthBar.setFill(healthBarData.healthBarColor());
+    }
+
+    private void initializeScore() {
+        score = new Text(GameMap.WIDTH - GameMap.BORDER_WIDTH, GameMap.BORDER_WIDTH / 4, Integer.toString(gameState.getScore()));
+        //final File fontPath = new File("src/main/resources/font/ShortBaby-Mg2w.ttf");
+        //Font customFont = Font.loadFont("src/main/resources/font/ShortBaby-Mg2w.ttf", 10.0);
+        score.setFont(Font.font("Impact", FontWeight.BOLD, 18));
+        score.setFill(Color.WHITE);
+        score.setTextAlignment(TextAlignment.RIGHT);
+        score.setScaleX(5);
+        score.setScaleY(5);
+        score.setVisible(true);
+
+
+        
     }
 
     private Rectangle underHealthBar() {

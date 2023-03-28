@@ -30,7 +30,6 @@ public class PlantsCreation {
                 final var temp = new RectangleHB(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT, plantPosition);
                 gs.getWorld().getEntities().forEach(x -> {
                     if (temp.isColliding(x.getPhysicsComp().getHitBox())) {
-                        System.out.println("ciao");
                         this.validPosition = false;
                     }
                 });

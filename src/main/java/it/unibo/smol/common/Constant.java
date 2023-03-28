@@ -38,7 +38,7 @@ public final class Constant {
     /**enemy damage. */
     public static final int ENEMY_DMG = -1;
     /**The time the player stay freeze when the bomb explode. */
-    public static final int BOMB_EXPLOSION = 1000;
+    public static final int BOMB_EXPLOSION = 2000;
     /**The amount of point for killing an enemy */
     public static final int ENEMY_SCORE = 100;
     /**Max time a Bomb mole can spawn */
