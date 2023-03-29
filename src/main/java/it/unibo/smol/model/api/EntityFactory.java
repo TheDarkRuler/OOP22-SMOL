@@ -69,7 +69,7 @@ public interface EntityFactory {
 
     /**
      * create a Wall entity.
-     * @param hitbox
+     * @param hitBox
      * @param w
      * @return a entities that rappresent a wall for boundingbox
      */

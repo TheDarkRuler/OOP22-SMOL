@@ -72,6 +72,7 @@ public abstract class PhysicsComponent {
     /**
      * This method receive a {@link Point2D} and translate it into actual movement.
      * @param move : the coordinate given
+     * @param world
      */
     public abstract void receiveMovement(Point2D move, World world);
 
@@ -170,6 +171,11 @@ public abstract class PhysicsComponent {
         this.isRigid = isRigid;
     }
 
+    /**
+     * updates the hitbox of the enetities.
+     * @param x
+     * @param y
+     */
     public void updateHitbox(final double x, final double y) {
         this.hitBox.setCenter(new Point2D(x, y));
     }

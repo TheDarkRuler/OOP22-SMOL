@@ -72,7 +72,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.WEAPON,
         Optional.of(new WeaponInputComponent(w.getMouseInputs())),
         Optional.empty(),
-        Optional.of(new WeaponGraphicComponent(2*Constant.WEAPON_RADIUS, 2 * Constant.WEAPON_RADIUS)),
+        Optional.of(new WeaponGraphicComponent(2 * Constant.WEAPON_RADIUS, 2 * Constant.WEAPON_RADIUS)),
         new WeaponPhysicsComponent(new CircleHB(new Point2D(x, y), Constant.WEAPON_RADIUS)),
         x, y, w);
     }
@@ -137,7 +137,7 @@ public class EntityFactoryImpl implements EntityFactory {
      * {@inheritDoc}
      */
     @Override
-    public Entity createWall(HitBox hitbox, World w) {
+    public Entity createWall(final HitBox hitbox, final World w) {
         return new EntityImpl(Type.WALL,
         Optional.empty(),
         Optional.empty(),

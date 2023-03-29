@@ -16,8 +16,6 @@ import javafx.scene.input.MouseEvent;
  */
 public class MouseInputs implements EventHandler<MouseEvent> {
 
-    
-
     private static boolean playerFreeze;
     private static boolean playerStunned;
     private boolean weaponSmashed;
@@ -143,7 +141,6 @@ public class MouseInputs implements EventHandler<MouseEvent> {
                 weaponRange = 0;
                 playerReleasedFromStun();
             }
-            
         };
     }
 
@@ -209,7 +206,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      * @return weaponLocation
      */
     public Point2D getWeaponLocation() {
-        return new Point2D(weaponLocation.getX()/GameMap.SCREEN_PROP_X, weaponLocation.getY()/GameMap.SCREEN_PROP_Y);
+        return new Point2D(weaponLocation.getX() / GameMap.SCREEN_PROP_X, weaponLocation.getY() / GameMap.SCREEN_PROP_Y);
     }
 
     /**

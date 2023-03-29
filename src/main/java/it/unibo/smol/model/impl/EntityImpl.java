@@ -36,7 +36,7 @@ public class EntityImpl implements Entity {
     public EntityImpl(final Type type, final Optional<InputComponent> inputComp,
             final Optional<HealthComponent> healthComp,
             final Optional<GraphicComponent> graphicComp, final PhysicsComponent physicsComp,
-            final double currentX, final double currentY, World w) {
+            final double currentX, final double currentY, final World w) {
         this.type = type;
         this.inputComp = inputComp;
         this.healthComp = healthComp;

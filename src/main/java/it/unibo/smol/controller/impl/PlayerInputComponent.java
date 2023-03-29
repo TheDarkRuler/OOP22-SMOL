@@ -16,6 +16,7 @@ public class PlayerInputComponent implements InputComponent {
 
     /**
      * constructor to initialize keyboard inputs for player entity.
+     * @param input
      */
     public PlayerInputComponent(final KeyInputs input) {
         this.input = input;

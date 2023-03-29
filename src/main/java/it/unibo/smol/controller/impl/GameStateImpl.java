@@ -99,14 +99,18 @@ public class GameStateImpl implements GameState {
     @Override
     public void initGame() {
         //v OVEST WALL v
-        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH, GameMap.HEIGHT, new Point2D(GameMap.BORDER_WIDTH / 2 , GameMap.HEIGHT/2)),this.world));
+        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH, GameMap.HEIGHT,
+            new Point2D(GameMap.BORDER_WIDTH / 2, GameMap.HEIGHT / 2)), this.world));
         //v EAST WALL v
-        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH, GameMap.HEIGHT, new Point2D(GameMap.MAP_WIDTH + GameMap.BORDER_WIDTH / 2 , GameMap.HEIGHT/2)),this.world));
+        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.BORDER_WIDTH, GameMap.HEIGHT,
+            new Point2D(GameMap.MAP_WIDTH + GameMap.BORDER_WIDTH / 2, GameMap.HEIGHT / 2)), this.world));
         //v NORTH WALL v
-        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.BORDER_HEIGHT, new Point2D(GameMap.WIDTH / 2, GameMap.BORDER_HEIGHT/2)),this.world));
+        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.BORDER_HEIGHT,
+            new Point2D(GameMap.WIDTH / 2, GameMap.BORDER_HEIGHT / 2)), this.world));
         //v SUD WALL v
-        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.BORDER_HEIGHT, new Point2D(GameMap.WIDTH / 2 , GameMap.MAP_HEIGHT + GameMap.BORDER_HEIGHT/2)),this.world));
-        
+        world.addEntity(entityFactory.createWall(new RectangleHB(GameMap.WIDTH, GameMap.BORDER_HEIGHT,
+            new Point2D(GameMap.WIDTH / 2, GameMap.MAP_HEIGHT + GameMap.BORDER_HEIGHT / 2)), this.world));
+
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2), this.world));
         new PlantsCreation(this);
@@ -129,10 +133,17 @@ public class GameStateImpl implements GameState {
         this.world.setMouseInputs(mouseInputs);
     }
 
+    /**
+     * gets the entity factory in order to create entities.
+     * @return the entity factory
+     */
     public EntityFactory getEntityFactory() {
         return this.entityFactory;
     }
 
+    /**
+     * stops the enemyCreation Timer.
+     */
     public void stopEnemyCreation() {
         this.enemyCreator.stopCreation();
     }
