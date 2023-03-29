@@ -46,8 +46,6 @@
 }
 
 #score {
-    color: white;
-    -fx-color: white;
-    -fx-text-inner-color: red;
+    fill: beige;
     -fx-fill: beige;
 }
