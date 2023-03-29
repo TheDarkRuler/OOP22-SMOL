@@ -56,21 +56,10 @@ public abstract class GraphicComponent {
     /**
      * {@inheritDoc}
      */
-    public void render(GraphicsDraw graphic) {
-        //if (this.entity.getInputComp().isPresent()) {
-            //graphic.undrawSprite(this.entity, this);
-            this.update();
-            graphic.drawSprite(this.imageName, this.entity, this);
-       // }
+    public void render(final GraphicsDraw graphic) {
+        this.update();
+        graphic.drawSprite(this.imageName, this.entity, this);
     }
-
-    /**
-     * Getter for the {@link #graphic} field.
-     * @return {@link #graphic}
-     *//*
-    public GraphicsDraw getGraphic() {
-        return this.graphic;
-    }*/
 
     /**
      * Getter for the {@link #width} field.
@@ -106,7 +95,7 @@ public abstract class GraphicComponent {
 
     /**
      * Set the entity image.
-     * @param img the entity image
+     * @param imageName the name of the image for this entity
      */
     public void setImageName(final String imageName) {
         this.imageName = imageName;

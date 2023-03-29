@@ -22,9 +22,16 @@ public final class GameMap {
      */
     public static final double WIDTH = 1600;
 
-    public static final double SCREEN_PROP_X =  screenWidth / WIDTH ;
+    /**
+     * proportion between the width of the screen and the logical width of the view.
+     */
+    public static final double SCREEN_PROP_X =  screenWidth / WIDTH;
 
+    /**
+     * proportion between the height of the screen and the logical height of the view.
+     */
     public static final double SCREEN_PROP_Y =  screenHeight / HEIGHT;
+
     /**
      * Height of the border.
      */

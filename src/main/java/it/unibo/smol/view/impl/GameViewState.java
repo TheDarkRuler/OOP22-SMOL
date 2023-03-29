@@ -34,7 +34,9 @@ import javafx.stage.Stage;
  * Implementation of the main state, it renders the game.
  */
 public class GameViewState implements WindowState {
+
     private static Logger logger = Logger.getLogger("myLog");
+    private static final int SCORE_SIZE = 18;
 
     private GraphicsDraw graphic;
     private GraphicsContext gContext;
@@ -45,9 +47,11 @@ public class GameViewState implements WindowState {
     private Text score;
     private Rectangle healthBar;
 
-
-    
-    public GameViewState(GameState gameState) {
+    /**
+     * constructor made to get the gamseState.
+     * @param gameState
+     */
+    public GameViewState(final GameState gameState) {
         this.gameState = gameState;
     }
 
@@ -78,15 +82,16 @@ public class GameViewState implements WindowState {
         setKeyInputs();
         setMouseInputs();
         final var root = new Pane();
-        final var scene = new Scene(root, GameMap.WIDTH*GameMap.SCREEN_PROP_X,
-            GameMap.HEIGHT*GameMap.SCREEN_PROP_Y, Color.BLACK);
-        final var canvas = new Canvas(GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y);
+        final var scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X,
+            GameMap.HEIGHT * GameMap.SCREEN_PROP_Y, Color.BLACK);
+        final var canvas = new Canvas(GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y);
         this.gContext = canvas.getGraphicsContext2D();
         gContext.setImageSmoothing(false);
         this.graphic = new GraphicsDraw(gContext);
         root.setBackground(new Background(new BackgroundImage(LoadImgs.getSprites(LoadImgs.BACKGROUND),
             BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-            new BackgroundSize(GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y, false, false, false, false))));
+            new BackgroundSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y,
+            false, false, false, false))));
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
         scene.setOnMouseMoved(mouseEventHandler);
@@ -104,8 +109,8 @@ public class GameViewState implements WindowState {
         stage.setY(0);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setFullScreenExitHint("Be careful, Moles are coming for your vegetables" + 
-            " (F11 to enable and disable full screen)");
+        stage.setFullScreenExitHint("Be careful, Moles are coming for your vegetables" 
+            + " (F11 to enable and disable full screen)");
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
         stage.show();
@@ -118,7 +123,7 @@ public class GameViewState implements WindowState {
      */
     public void repaint(final Stage stage) throws IOException {
         Platform.runLater(() -> {
-            gContext.clearRect(0, 0, GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y);
+            gContext.clearRect(0, 0, GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y);
             updateHealthBar();
             score.setText(Integer.toString(gameState.getScore()));
             gameState.getWorld().getEntities().stream()
@@ -144,7 +149,7 @@ public class GameViewState implements WindowState {
 
     private void initializeHealthBar() {
         HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
-        this.healthBar = new Rectangle(   healthBarData.getCenter().getX(), 
+        this.healthBar = new Rectangle(healthBarData.getCenter().getX(), 
                                         healthBarData.getCenter().getY(), 
                                         healthBarData.getHealthBarWidth(), 
                                         healthBarData.getHealthBarHeight()
@@ -153,8 +158,9 @@ public class GameViewState implements WindowState {
     }
 
     private void initializeScore() {
-        score = new Text((GameMap.MAP_WIDTH-GameMap.BORDER_WIDTH)*GameMap.SCREEN_PROP_X, GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 3, Integer.toString(gameState.getScore()));
-        score.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, 18));
+        score = new Text((GameMap.MAP_WIDTH - GameMap.BORDER_WIDTH) * GameMap.SCREEN_PROP_X,
+            GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 3, Integer.toString(gameState.getScore()));
+        score.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, SCORE_SIZE));
         score.setFill(Color.WHITE);
         score.setTextAlignment(TextAlignment.RIGHT);
         score.setScaleX(3);
@@ -164,7 +170,7 @@ public class GameViewState implements WindowState {
 
     private Rectangle underHealthBar() {
         HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
-        var underHealth = new Rectangle(   healthBarData.getCenter().getX(), 
+        var underHealth = new Rectangle(healthBarData.getCenter().getX(), 
                                         healthBarData.getCenter().getY(), 
                                         healthBarData.getHealthBarWidth(), 
                                         healthBarData.getHealthBarHeight()

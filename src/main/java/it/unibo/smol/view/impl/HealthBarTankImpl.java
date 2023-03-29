@@ -11,9 +11,6 @@ import javafx.scene.paint.Color;
  * class that implements HealthBarTank.
  */
 public class HealthBarTankImpl implements HealthBarTank {
-    private Double centerWidth;
-    private Double currentLife;
-    private GameState gameState;
 
     //proportion variable
     private static final int CENTER_WIDTH_PROPORTION = 2;
@@ -21,38 +18,57 @@ public class HealthBarTankImpl implements HealthBarTank {
     private static final int WIDTH_PROPORTION = 3;
     private static final int HEIGHT_PROPORTION = 10;
     private static final int BORDER_PROPORTION = 35;
-    /* public static final double CENTER_WIDTH_PROPORTION = Double.valueOf(GameMap.BORDER_WIDTH / 2);
-    public static final double CENTER_HEIGHT = Double.valueOf(GameMap.BORDER_WIDTH / 4);
+    private static final int GREEN_VALUE_RGB = 153;
+    private static final int BLUE_VALUE_RGB = 51;
+    private static final int RED_VALUE_RGB = 0;
 
-    public static final double WIDTH = Double.valueOf(GameMap.BORDER_WIDTH * 2);
+    private Double centerWidth;
+    private Double currentLife;
+    private GameState gameState;
 
-    public static final double HEIGHT = Double.valueOf(GameMap.BORDER_WIDTH / 10); */
-
-    public HealthBarTankImpl(GameState gameState) {
-        this.centerWidth = Double.valueOf(GameMap.BORDER_WIDTH / CENTER_WIDTH_PROPORTION)*GameMap.SCREEN_PROP_X;
+    /**
+     * constructor that gets the gamestate and sets the centerWidth and the currentLife.
+     * @param gameState
+     */
+    public HealthBarTankImpl(final GameState gameState) {
+        this.centerWidth = Double.valueOf(GameMap.BORDER_WIDTH / CENTER_WIDTH_PROPORTION) * GameMap.SCREEN_PROP_X;
         this.currentLife = Double.valueOf(0);
         this.gameState = gameState;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Point2D getCenter() {
-        return new Point2D(this.centerWidth , (Double.valueOf(GameMap.BORDER_WIDTH / CENTER_HEIGHT_PROPORTION))*GameMap.SCREEN_PROP_Y);
+        return new Point2D(this.centerWidth,
+            (Double.valueOf(GameMap.BORDER_WIDTH / CENTER_HEIGHT_PROPORTION)) * GameMap.SCREEN_PROP_Y);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getHealthBarWidth() {
         return Double.valueOf(GameMap.BORDER_WIDTH * WIDTH_PROPORTION) * GameMap.SCREEN_PROP_X;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getHealthBarHeight() {
        return Double.valueOf(GameMap.BORDER_HEIGHT / HEIGHT_PROPORTION) * GameMap.SCREEN_PROP_Y;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double updateHealthPercentage() {
         this.currentLife = Double.valueOf(0);
         gameState.getWorld().getLifePlants().forEach(x -> {
+
             if (x.getHealthComp().isPresent()) {
                 currentLife = currentLife + x.getHealthComp().get().getCurrentHealth();
             }
@@ -60,14 +76,20 @@ public class HealthBarTankImpl implements HealthBarTank {
         return Double.valueOf(currentLife / (Constant.NUM_PLANTS * Constant.HEALTH_HP));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getHealthBarBorder() {
-        return Double.valueOf(GameMap.BORDER_WIDTH / BORDER_PROPORTION)*GameMap.SCREEN_PROP_X;
+        return Double.valueOf(GameMap.BORDER_WIDTH / BORDER_PROPORTION) * GameMap.SCREEN_PROP_X;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Color healthBarColor() {
-        return Color.rgb(0, 153, 51);
+        return Color.rgb(RED_VALUE_RGB, GREEN_VALUE_RGB, BLUE_VALUE_RGB);
     }
 
 }

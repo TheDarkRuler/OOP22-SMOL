@@ -6,9 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import java.net.URL;
-
 import it.unibo.smol.core.GameEngine;
 import it.unibo.smol.core.GameEngineImpl;
 import it.unibo.smol.view.GameMap;
@@ -33,8 +31,11 @@ import javafx.util.Duration;
  * Implementation of the menu state, it renders the menu.
  */
 public class MenuState implements WindowState {
+
     private static Logger logger = Logger.getLogger("menuLogger");
+    private static final int MENU_ANIM_DURATION = 500;
     private final GameEngine gameEngine = new GameEngineImpl();
+
     /**
      * {@inheritDoc}
      */
@@ -46,6 +47,7 @@ public class MenuState implements WindowState {
             logger.log(Level.SEVERE, "MenuStateError::", e);
         }
     }
+
     /**
      * This method generate the menu from a file FXML.
      * 
@@ -63,7 +65,7 @@ public class MenuState implements WindowState {
         title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, GameMap.BORDER_WIDTH));
         try {
             Image hammer = new Image(new FileInputStream("src/main/resources/images/hammer.png"));
-            Cursor hammerCursor = new ImageCursor(hammer, 20, 20);
+            Cursor hammerCursor = new ImageCursor(hammer);
             scene.setCursor(hammerCursor);
         } catch (FileNotFoundException e) {
             Logger.getLogger(MenuState.class.getName()).info("Illegal Argument");
@@ -86,11 +88,11 @@ public class MenuState implements WindowState {
         primaryStage.show();
     }
 
-    private void buttonManagement(Button btn) {
+    private void buttonManagement(final Button btn) {
         btn.setPrefWidth(GameMap.BORDER_WIDTH);
         btn.setPrefHeight(GameMap.BORDER_WIDTH / 3);
-        //Duration = 2.5 seconds
-        Duration duration = Duration.millis(500);
+        //Duration = 0.5 seconds
+        Duration duration = Duration.millis(MENU_ANIM_DURATION);
         RotateTransition rotateTransition = new RotateTransition(duration, btn);
         rotateTransition.setByAngle(360);
         rotateTransition.play();

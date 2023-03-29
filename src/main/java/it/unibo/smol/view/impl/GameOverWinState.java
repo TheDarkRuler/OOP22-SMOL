@@ -35,6 +35,7 @@ public class GameOverWinState implements WindowState {
     public GameOverWinState() {
         this.finalScore = 23500;
     }
+
     @Override
     public void render(Stage stage) throws IOException {
         try {
