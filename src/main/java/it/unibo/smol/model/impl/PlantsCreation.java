@@ -48,11 +48,11 @@ public class PlantsCreation {
             }
             case 1 -> {
                 return new Point2D(plantRand(1+GameMap.WIDTH/2, GameMap.MAP_WIDTH),
-                    plantRand(1+GameMap.HEIGHT/2, GameMap.MAP_HEIGHT));
+                    plantRand(1+GameMap.BORDER_HEIGHT, GameMap.HEIGHT/2));
             }
             case 2 -> {
                 return new Point2D(plantRand(1+GameMap.BORDER_WIDTH, GameMap.WIDTH/2),
-                    plantRand(1+GameMap.BORDER_HEIGHT, GameMap.HEIGHT/2));
+                    plantRand(1+GameMap.HEIGHT/2, GameMap.MAP_HEIGHT));
             } 
             case 3 -> {
                 return new Point2D(plantRand(1+GameMap.WIDTH/3, GameMap.WIDTH *2/3),
@@ -62,15 +62,6 @@ public class PlantsCreation {
                 return null;
             }
         }
-    }
-
-    /**
-     * finds a random position in the x axis.
-     * @return a random x position
-     */
-    private double plantRandX(double origin , double bound) {
-        return GameMap.BORDER_WIDTH  + Constant.HEALTH_WIDTH / 2
-            + rand.nextDouble(GameMap.MAP_WIDTH - Constant.HEALTH_WIDTH / 2) + bound; 
     }
 
     /**
