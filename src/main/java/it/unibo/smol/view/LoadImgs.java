@@ -3,6 +3,8 @@ package it.unibo.smol.view;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.scene.image.Image;
@@ -11,11 +13,9 @@ import javafx.scene.image.Image;
  */
 public final class LoadImgs {
 
-    /**name of the folder in which are the pixel sprites to use. */
-    private static final String PIXEL_FOLDER = "pixel_moles/";
-
-    /**name of the folder in which are the pixel sprites to use. */
-    private static final String VECTORIAL_FOLDER = "vectorial_moles/";
+    /**name of the folders in which are the sprites to use. */
+    private static final Map<String, String> SKIN_FOLDER = new HashMap<>(Map.of("Pixel Skins", "pixel_moles/",
+        "Vectorial Skins", "vectorial_moles/"));
 
     /**basic mole gif. */
     public static final String MOLE = "mole1.gif";
@@ -56,7 +56,8 @@ public final class LoadImgs {
      */
     public static Image getSprites(final String filename) {
         Image image = null;
-        try (FileInputStream path = new FileInputStream("src/main/resources/images/" + LoadImgs.PIXEL_FOLDER + filename);) {
+        try (FileInputStream path = new FileInputStream("src/main/resources/images/" 
+            + LoadImgs.SKIN_FOLDER.get("Pixel Skins") + filename);) {
             image = new Image(path);
         } catch (IllegalArgumentException e) {
             Logger.getLogger(LoadImgs.class.getName()).info("Illegal Argument");

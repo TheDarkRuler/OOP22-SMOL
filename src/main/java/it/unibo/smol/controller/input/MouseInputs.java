@@ -34,10 +34,10 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         this.weaponSmashed = false;
         this.weaponHits = false;
         this.weaponIsSmashing = false;
+        this.cursorOnScreen = false;
+        setPlayerStun(false);
         this.weaponRange = 0;
         this.weaponIncrease = 0;
-        this.cursorOnScreen = false;
-        MouseInputs.playerStunned = false;
         this.animationTime = Executors.newSingleThreadScheduledExecutor();
         this.weaponLocation = new Point2D(GameMap.WIDTH / 2, GameMap.HEIGHT / 2);
     }
@@ -150,7 +150,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     private void playerGetStunned() {
         KeyInputs.setMovement(Directions.STAY_X);
         KeyInputs.setMovement(Directions.STAY_Y);
-        MouseInputs.playerStunned = true;
+        setPlayerStun(true);
     }
 
     /**
@@ -168,7 +168,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     private void playerReleasedFromStun() {
         KeyInputs.setMovement(Directions.STAY_X);
         KeyInputs.setMovement(Directions.STAY_Y);
-        MouseInputs.playerStunned = false;
+        setPlayerStun(false);
         this.weaponSmashed = false;
         this.weaponIsSmashing = false;
     }
@@ -227,6 +227,14 @@ public class MouseInputs implements EventHandler<MouseEvent> {
             return true;
         }
         return false;
+    }
+
+    /**
+     * setter for the static variable player stun.
+     * @param value
+     */
+    private void setPlayerStun(final boolean value) {
+        MouseInputs.playerStunned = value;
     }
 
     /**

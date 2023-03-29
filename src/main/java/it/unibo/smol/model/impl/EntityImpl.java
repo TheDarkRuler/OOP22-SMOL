@@ -181,6 +181,7 @@ public class EntityImpl implements Entity {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Optional<GraphicComponent> getGraphicComp() {
         return this.graphicComp;
     }

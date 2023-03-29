@@ -16,7 +16,7 @@ import javafx.scene.image.Image;
 public class GraphicsDraw {
 
     private final GraphicsContext g;
-    private Map<String, Image> images;
+    private final Map<String, Image> images;
 
     /**
      * constructor that gets the graphicContext used to draw and stores the images.
@@ -52,9 +52,9 @@ public class GraphicsDraw {
      */
     public void drawSprite(final String imageName, final Entity entity, final GraphicComponent graphicComponent) {
         g.drawImage(images.get(imageName),
-            ((entity.getCurrentX() - graphicComponent.getWidth() / 2) * GameMap.SCREEN_PROP_X),
-            ((entity.getCurrentY() - graphicComponent.getHeight() / 2) * GameMap.SCREEN_PROP_Y),
-            (graphicComponent.getWidth() * GameMap.SCREEN_PROP_X),
-            (graphicComponent.getHeight() * GameMap.SCREEN_PROP_Y));
+            (entity.getCurrentX() - graphicComponent.getWidth() / 2) * GameMap.SCREEN_PROP_X,
+            (entity.getCurrentY() - graphicComponent.getHeight() / 2) * GameMap.SCREEN_PROP_Y,
+            graphicComponent.getWidth() * GameMap.SCREEN_PROP_X,
+            graphicComponent.getHeight() * GameMap.SCREEN_PROP_Y);
     }
 }

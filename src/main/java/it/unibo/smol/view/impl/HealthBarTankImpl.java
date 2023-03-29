@@ -22,9 +22,9 @@ public class HealthBarTankImpl implements HealthBarTank {
     private static final int BLUE_VALUE_RGB = 51;
     private static final int RED_VALUE_RGB = 0;
 
-    private Double centerWidth;
+    private final Double centerWidth;
     private Double currentLife;
-    private GameState gameState;
+    private final GameState gameState;
 
     /**
      * constructor that gets the gamestate and sets the centerWidth and the currentLife.

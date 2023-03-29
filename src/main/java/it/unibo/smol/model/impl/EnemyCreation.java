@@ -52,8 +52,6 @@ public class EnemyCreation {
         entitiesMap.put("Helmet_mole", Constant.DEF_RATE_HELMET + (temp * Constant.INC_RATE_HELMET));
         minTimeEnemySpawn -= temp * Constant.DEC_TIME_SPAWN;
         maxTimeEnemySpawn -= temp * Constant.DEC_TIME_SPAWN;
-        System.out.println(minTimeEnemySpawn);
-        System.out.println(maxTimeEnemySpawn);
     }
 
     /**
@@ -99,7 +97,6 @@ public class EnemyCreation {
                 final List<Double> weightList = new ArrayList<>(entitiesMap.values().stream().sorted().toList());
                 final Double randomDouble = Math.random();
 
-                System.out.println(weightList);
                 spawnEntity(entitiesMap.entrySet()
                     .stream()
                     .filter(s -> s.getValue().equals(weightList.stream().sorted()

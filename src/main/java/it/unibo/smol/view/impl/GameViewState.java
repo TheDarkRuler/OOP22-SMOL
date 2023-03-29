@@ -48,6 +48,7 @@ public class GameViewState implements WindowState {
     private MouseInputs mouseEventHandler;
     private Text score;
     private Rectangle healthBar;
+    private HealthBarTank healthBarData;
 
     /**
      * constructor made to get the gamseState.
@@ -158,7 +159,7 @@ public class GameViewState implements WindowState {
     }
 
     private void initializeHealthBar() {
-        HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
+        this.healthBarData = new HealthBarTankImpl(this.gameState);
         this.healthBar = new Rectangle(healthBarData.getCenter().getX(), 
                                         healthBarData.getCenter().getY(), 
                                         healthBarData.getHealthBarWidth(), 
@@ -179,8 +180,8 @@ public class GameViewState implements WindowState {
     }
 
     private Rectangle underHealthBar() {
-        HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
-        var underHealth = new Rectangle(healthBarData.getCenter().getX(), 
+        this.healthBarData = new HealthBarTankImpl(this.gameState);
+        final var underHealth = new Rectangle(healthBarData.getCenter().getX(), 
                                         healthBarData.getCenter().getY(), 
                                         healthBarData.getHealthBarWidth(), 
                                         healthBarData.getHealthBarHeight()
@@ -192,7 +193,7 @@ public class GameViewState implements WindowState {
     }
 
     private void updateHealthBar() {
-        HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
+        this.healthBarData = new HealthBarTankImpl(this.gameState);
         this.healthBar.setWidth(healthBarData.getHealthBarWidth() * healthBarData.updateHealthPercentage());
     }
 

@@ -14,8 +14,8 @@ import javafx.geometry.Point2D;
 public class PlantsCreation {
 
     private boolean validPosition;
-    private GameState gs;
-    private Random rand;
+    private final GameState gs;
+    private final Random rand;
 
     /**
      * constructor that starts the creation of plants and gets the gamestate.

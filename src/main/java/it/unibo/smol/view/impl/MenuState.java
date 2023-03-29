@@ -102,8 +102,8 @@ public class MenuState implements WindowState {
         btn.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X * 2);
         btn.setPrefHeight(GameMap.BORDER_WIDTH / 3);
         //Duration = 0.5 seconds
-        Duration duration = Duration.millis(MENU_ANIM_DURATION);
-        RotateTransition rotateTransition = new RotateTransition(duration, btn);
+        final Duration duration = Duration.millis(MENU_ANIM_DURATION);
+        final RotateTransition rotateTransition = new RotateTransition(duration, btn);
         rotateTransition.setByAngle(360);
         rotateTransition.play();
     }

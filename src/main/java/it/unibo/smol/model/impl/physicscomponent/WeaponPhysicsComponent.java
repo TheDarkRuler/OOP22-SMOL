@@ -48,16 +48,16 @@ public class WeaponPhysicsComponent extends PhysicsComponent {
             .stream()
             .filter(x -> x.getType().equals(Type.PLAYER))
             .findAny().get().getCurrentPosition();
-        final Point2D weaponLocation = setWeaponLocation(move, wRange, playerLocation);
+        final Point2D weaponLocation = updateWeaponLocation(move, wRange, playerLocation);
         super.setX(weaponLocation.getX());
         super.setY(weaponLocation.getY());
     }
 
-    private Point2D setWeaponLocation(final Point2D move, final double wRange, final Point2D playerLocation) {
+    private Point2D updateWeaponLocation(final Point2D move, final double wRange, final Point2D playerLocation) {
         final double r = wRange / 2;
-        double angle = Math.atan2(move.getY() - playerLocation.getY(), move.getX() - playerLocation.getX());
-        double tempX = r * Math.cos(angle);
-        double tempY = r * Math.sin(angle);
+        final double angle = Math.atan2(move.getY() - playerLocation.getY(), move.getX() - playerLocation.getX());
+        final double tempX = r * Math.cos(angle);
+        final double tempY = r * Math.sin(angle);
         return new Point2D(playerLocation.getX() + tempX, playerLocation.getY() + tempY);
     }
 

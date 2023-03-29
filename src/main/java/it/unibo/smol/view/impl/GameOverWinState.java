@@ -84,7 +84,7 @@ public class GameOverWinState implements WindowState {
                     Platform.exit();
                     System.exit(0);
                 });
-                score.setText("score: " + String.valueOf(this.finalScore));
+                score.setText("score: " + this.finalScore);
                 root.setOnKeyPressed(e -> {
                     if (e.getCode().equals(KeyCode.F11)) {
                         if (stage.isFullScreen()) {
@@ -114,7 +114,7 @@ public class GameOverWinState implements WindowState {
         btn.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X);
         btn.setPrefHeight(GameMap.BORDER_HEIGHT / 3 * GameMap.SCREEN_PROP_Y);
         //Duration = 0.5 seconds
-        RotateTransition rotateTransition = new RotateTransition(Duration.millis(BUTTON_ANIM_DURATION), btn);
+        final RotateTransition rotateTransition = new RotateTransition(Duration.millis(BUTTON_ANIM_DURATION), btn);
         rotateTransition.setByAngle(360);
         rotateTransition.play();
     }
