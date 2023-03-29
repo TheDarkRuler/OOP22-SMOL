@@ -50,8 +50,8 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     @Override
     public void handle(final MouseEvent event) {
         if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED) 
-            && !this.weaponIsSmashing && !this.weaponSmashed
-            && !MouseInputs.playerFreeze && !MouseInputs.playerStunned) {
+            && !this.weaponIsSmashing && !MouseInputs.playerFreeze && !MouseInputs.playerStunned) {
+
             this.weaponIsSmashing = true;
             this.animationTime.schedule(weaponExpands(), Constant.HOLD_TIME, TimeUnit.MILLISECONDS);
 

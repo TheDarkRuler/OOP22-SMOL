@@ -7,41 +7,40 @@
 }
 
 #box {
-    background-color: #82a43a;
-    -fx-background-color: #82a43a;
+    background-color: black;
+    -fx-background-color: black;
 }
 
-.button {
-    background-color: #893AA4;
+.button:hover {
+    background-color: red;
     font-stretch: extra-condensed;
     font-weight: bolder;
     font-size: x-large;
     text-decoration-style: wavy;
-    text-decoration-color: beige;
-    -fx-background-color: #893AA4;
+    color: black;
+    -fx-background-color: red;
     -fx-font-stretch: extra-condensed;
     -fx-font-weight: bolder;
     -fx-font-size: x-large;
     -fx-text-decoration-style: wavy;
-    -fx-text-decoration-color: beige;
+    -fx-color: black;
 }
 
-.button:hover {
-    background-color: #893AA4;
+.button {
+    background-color: gray;
     font-stretch: extra-condensed;
     font-weight: bolder;
     font-size: x-large;
     animation: pulse 5s infinite;
     text-decoration: underline overline;
     text-decoration-style: wavy;
-    text-decoration-color: beige;
-    -fx-background-color: green;
+    color: red;
+    -fx-background-color: gray;
     -fx-font-stretch: extra-condensed;
     -fx-font-weight: bolder;
     -fx-font-size: x-large;
     -fx-animation: pulse 5s infinite;
     -fx-text-decoration: underline overline;
     -fx-text-decoration-style: wavy;
-    -fx-text-decoration-color: beige;
+    -fx-color: red;
 }
-
