@@ -31,6 +31,8 @@ public final class LoadImgs {
     public static final String LIFE_PLANTS = "Life_plants.png";
     public static final String GROUND = "Ground.gif";
     public static final String BACKGROUND = "Background.png";
+    public static final String HAMMER = "hammer.png";
+
 
     private LoadImgs() throws UnsupportedEncodingException {
         throw new UnsupportedEncodingException("This is a utily class");
