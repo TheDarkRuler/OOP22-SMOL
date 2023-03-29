@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.smol.model.api.World;
+import it.unibo.smol.model.impl.EntityFactoryImpl;
 import it.unibo.smol.model.impl.WorldImpl;
 
 class WorldTest {
@@ -16,7 +17,9 @@ class WorldTest {
     @Test
     public void testInitialization() {
         var wd = this.world;
-        assertTrue(wd.getMoles().isEmpty());
+        var ef = new EntityFactoryImpl();
+        wd.addEntity(ef.createPlayer(0, 0, world));
+        assertTrue(!wd.getEntities().isEmpty());
 
     }
 
