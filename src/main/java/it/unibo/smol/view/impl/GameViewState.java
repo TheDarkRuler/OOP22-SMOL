@@ -8,10 +8,12 @@ import java.util.logging.Logger;
 
 import java.util.logging.Level;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.view.GameMap;
+import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.HealthBarTank;
 import it.unibo.smol.view.api.WindowState;
 import javafx.application.Platform;
@@ -19,6 +21,11 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -82,8 +89,9 @@ public class GameViewState implements WindowState {
         final var canvas = new Canvas(GameMap.WIDTH, GameMap.HEIGHT);
         this.gContext = canvas.getGraphicsContext2D();
         this.graphic = new GraphicsDraw(gContext);
-        root.setBackground(null);
-        scene.setFill(Color.GREEN);
+        root.setBackground(new Background(new BackgroundImage(LoadImgs.getSprites(LoadImgs.BACKGROUND),
+            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+            new BackgroundSize(GameMap.WIDTH, GameMap.HEIGHT, false, false, false, false))));
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
         scene.setOnMouseMoved(mouseEventHandler);

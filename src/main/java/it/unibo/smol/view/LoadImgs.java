@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.logging.Logger;
 
+import it.unibo.smol.common.Constant;
 import javafx.scene.image.Image;
 /**
  * Utility class for load images.
@@ -24,6 +25,7 @@ public final class LoadImgs {
     public static final String HELM_HIT_MOLE = "Hitted_Helmet_mole.gif";
     public static final String LIFE_PLANTS = "Life_plants.png";
     public static final String GROUND = "Ground.gif";
+    public static final String BACKGROUND = "Background.png";
 
     private LoadImgs() throws UnsupportedEncodingException {
         throw new UnsupportedEncodingException("This is a utily class");
@@ -39,7 +41,7 @@ public final class LoadImgs {
      */
     public static Image getSprites(final String filename) {
         Image image = null;
-        try (FileInputStream path = new FileInputStream("src/main/resources/images/" + filename);) {
+        try (FileInputStream path = new FileInputStream("src/main/resources/images/" + Constant.PIXEL_FOLDER + filename);) {
             image = new Image(path);
         } catch (IllegalArgumentException e) {
             Logger.getLogger(LoadImgs.class.getName()).info("Illegal Argument");

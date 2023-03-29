@@ -32,7 +32,6 @@ public class GraphicsDraw {
         images.put(LoadImgs.GROUND, LoadImgs.getSprites(LoadImgs.GROUND));
         images.put(LoadImgs.GROUND, LoadImgs.getSprites(LoadImgs.GROUND));
         images.put(LoadImgs.LIFE_PLANTS, LoadImgs.getSprites(LoadImgs.LIFE_PLANTS));
-    
     }
 
     public void drawSprite(final String imageName, final Entity entity, final GraphicComponent graphicComponent) {
