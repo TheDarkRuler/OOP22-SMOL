@@ -105,8 +105,10 @@ public class GameViewState implements WindowState {
         stage.setY(0);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        stage.setFullScreenExitHint("Be careful, Moles are coming for your vegetables" + 
+        " (F11 to enable and disable full screen)");
         stage.setFullScreen(true);
+        stage.setFullScreenExitHint("");
         stage.show();
     }
 
