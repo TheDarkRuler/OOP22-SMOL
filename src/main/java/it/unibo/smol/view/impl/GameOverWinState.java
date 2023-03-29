@@ -10,19 +10,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.unibo.smol.view.GameMap;
+import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -61,13 +61,10 @@ public class GameOverWinState implements WindowState {
                 final Scene scene = new Scene(root, GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT);
                 final Button restartGame = (Button) scene.lookup("#restartGame");
                 final Button closeGame = (Button) scene.lookup("#closeGame");
+                final Text score = (Text) scene.lookup("#score");
                 final VBox gameOverBox = (VBox) scene.lookup("#box");
-                try {
-                    Image moleCursour = new Image(new FileInputStream("src/main/resources/images/pixel_moles/Angry_mole.gif"));
-                    scene.setCursor(new ImageCursor(moleCursour, 50, 50));
-                } catch (FileNotFoundException e) {
-                    Logger.getLogger(MenuState.class.getName()).info("Illegal Argument");
-                }
+                //Image moleCursour = new Image(new FileInputStream("src/main/resources/images/pixel_moles/Angry_mole.gif"),Constant.ENEMY_WIDTH,Constant.ENEMY_HEIGHT,false, false);
+                scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.ANGRY_MOLE)));
                 gameOverBox.setSpacing(GameMap.BORDER_WIDTH / 3);
                 buttonManagement(restartGame);
                 buttonManagement(closeGame);
@@ -78,6 +75,7 @@ public class GameOverWinState implements WindowState {
                     Platform.exit();
                     System.exit(0);
                 });
+                score.setText("score: " + String.valueOf(this.finalScore));
                 root.setOnKeyPressed(e -> {
                     if (e.getCode().equals(KeyCode.F11)) {
                         if (stage.isFullScreen()) {
@@ -87,8 +85,10 @@ public class GameOverWinState implements WindowState {
                         }
                     }
                 });
+
                 stage.setTitle("GAME OVER :(");
                 stage.setScene(scene);
+                stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
                 stage.setFullScreen(true);
                 stage.show();
             } catch (MalformedURLException e) {

@@ -12,6 +12,7 @@ import java.net.URL;
 import it.unibo.smol.core.GameEngine;
 import it.unibo.smol.core.GameEngineImpl;
 import it.unibo.smol.view.GameMap;
+import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXMLLoader;
@@ -62,13 +63,7 @@ public class MenuState implements WindowState {
         final VBox menuBox = (VBox) scene.lookup("#box");
         final Text title = (Text) scene.lookup("#title");
         title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, GameMap.BORDER_WIDTH));
-        try {
-            Image hammer = new Image(new FileInputStream("src/main/resources/images/hammer.png"));
-            Cursor hammerCursor = new ImageCursor(hammer, 20, 20);
-            scene.setCursor(hammerCursor);
-        } catch (FileNotFoundException e) {
-            Logger.getLogger(MenuState.class.getName()).info("Illegal Argument");
-        }
+        scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER)));
         menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
         startGame.setOnMouseClicked(e -> {
             gameEngine.init(primaryStage);

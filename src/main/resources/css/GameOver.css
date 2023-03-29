@@ -44,3 +44,10 @@
     -fx-text-decoration-style: wavy;
     -fx-color: red;
 }
+
+#score {
+    color: white;
+    -fx-color: white;
+    -fx-text-inner-color: red;
+    -fx-fill: beige;
+}
