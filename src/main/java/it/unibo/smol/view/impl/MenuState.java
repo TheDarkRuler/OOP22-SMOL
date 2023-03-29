@@ -15,11 +15,13 @@ import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.WindowState;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -61,8 +63,9 @@ public class MenuState implements WindowState {
         final Text title = (Text) scene.lookup("#title");
         title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, GameMap.BORDER_WIDTH));
         try {
-            final Image hammer = new Image(new FileInputStream("src/main/resources/images/hammer.png"));
-            scene.setCursor(new ImageCursor(hammer, GameMap.BORDER_WIDTH, GameMap.BORDER_WIDTH));
+            Image hammer = new Image(new FileInputStream("src/main/resources/images/hammer.png"));
+            Cursor hammerCursor = new ImageCursor(hammer, 20, 20);
+            scene.setCursor(hammerCursor);
         } catch (FileNotFoundException e) {
             Logger.getLogger(MenuState.class.getName()).info("Illegal Argument");
         }

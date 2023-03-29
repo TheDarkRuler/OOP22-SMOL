@@ -14,11 +14,13 @@ import it.unibo.smol.view.api.WindowState;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -61,9 +63,8 @@ public class GameOverWinState implements WindowState {
                 final Button closeGame = (Button) scene.lookup("#closeGame");
                 final VBox gameOverBox = (VBox) scene.lookup("#box");
                 try {
-                    Image moleCursour = new Image(new FileInputStream("src/main/resources/images/Angry_mole.gif"));
-                    
-                    scene.setCursor(new ImageCursor(moleCursour));
+                    Image moleCursour = new Image(new FileInputStream("src/main/resources/images/pixel_moles/Angry_mole.gif"));
+                    scene.setCursor(new ImageCursor(moleCursour, 50, 50));
                 } catch (FileNotFoundException e) {
                     Logger.getLogger(MenuState.class.getName()).info("Illegal Argument");
                 }
