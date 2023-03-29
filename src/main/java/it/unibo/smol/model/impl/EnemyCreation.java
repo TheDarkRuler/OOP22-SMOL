@@ -19,8 +19,6 @@ import javafx.geometry.Point2D;
 */
 public class EnemyCreation {
 
-    
-
     private final GameState gameState;
     private final Map<String, Double> entitiesMap;
     private int minTimeEnemySpawn;
@@ -86,7 +84,6 @@ public class EnemyCreation {
         }
     }
 
-    
     /**
      * Timer that create moles with a certain delay (minTimeEnemySpawn and maxTimeEnemySpawn).
      */
@@ -110,8 +107,8 @@ public class EnemyCreation {
                         .findFirst().get()))
                     .findAny().get().getKey());
             }
-            
-        }, minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn), 
+
+        }, minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn),
         minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn));
     }
 
@@ -143,6 +140,9 @@ public class EnemyCreation {
         return rand.nextBoolean() ? first : second;
     }
 
+    /**
+     * stops the creation of enemies.
+     */
     public void stopCreation() {
         this.createEnemyTimer.cancel();
     }

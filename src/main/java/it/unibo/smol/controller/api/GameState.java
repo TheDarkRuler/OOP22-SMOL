@@ -52,11 +52,13 @@ public interface GameState {
 
     /**
      * sets the keyInput in gamestate.
+     * @param keyInputs
      */
     void setKeyInputs(KeyInputs keyInputs);
 
     /**
      * sets the mouseInputs in gamestate.
+     * @param mouseInputs
      */
     void setMouseInputs(MouseInputs mouseInputs);
 

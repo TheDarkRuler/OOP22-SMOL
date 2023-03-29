@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import it.unibo.smol.controller.impl.GameStateImpl;
 import it.unibo.smol.model.impl.WorldImpl;
-import it.unibo.smol.view.impl.GameOverWinState;
 import it.unibo.smol.view.impl.GameViewState;
 import it.unibo.smol.view.impl.WindowImpl;
 import javafx.stage.Stage;

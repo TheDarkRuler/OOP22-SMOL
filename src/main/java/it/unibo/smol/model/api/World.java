@@ -84,21 +84,25 @@ public interface World {
 
     /**
      * sets the keyInput in world.
+     * @param keyInputs
      */
     void setKeyInputs(KeyInputs keyInputs);
 
     /**
      * sets the mouseInputs in world.
+     *  @param mouseInputs
      */
     void setMouseInputs(MouseInputs mouseInputs);
 
     /**
      * gets the keyInput in world.
+     * @return the keyInput
      */
     KeyInputs getKeyInputs();
 
     /**
      * gets the mouseInputs in world.
+     * @return the mouseInput
      */
     MouseInputs getMouseInputs();
 
