@@ -16,7 +16,7 @@ public class EntityImpl implements Entity {
     private final Type type;
     private final Optional<InputComponent> inputComp;
     private final Optional<HealthComponent> healthComp;
-    private final GraphicComponent graphicComp;
+    private final Optional<GraphicComponent> graphicComp;
     private final PhysicsComponent physicsComp;
     private double currentX;
     private double currentY;
@@ -35,7 +35,7 @@ public class EntityImpl implements Entity {
      */
     public EntityImpl(final Type type, final Optional<InputComponent> inputComp,
             final Optional<HealthComponent> healthComp,
-            final GraphicComponent graphicComp, final PhysicsComponent physicsComp,
+            final Optional<GraphicComponent> graphicComp, final PhysicsComponent physicsComp,
             final double currentX, final double currentY, World w) {
         this.type = type;
         this.inputComp = inputComp;
@@ -46,7 +46,7 @@ public class EntityImpl implements Entity {
         this.currentY = currentY;
         this.world = w;
         physicsComp.setEntity(this);
-        graphicComp.setEntity(this);
+        graphicComp.ifPresent(x -> x.setEntity(this));
         inputComp.map(x -> x.getEnemyInput()).ifPresent(x -> x.setEntity(this));
     }
 
@@ -181,7 +181,7 @@ public class EntityImpl implements Entity {
     /**
      * {@inheritDoc}
      */
-    public GraphicComponent getGraphicComp() {
+    public Optional<GraphicComponent> getGraphicComp() {
         return this.graphicComp;
     }
 }

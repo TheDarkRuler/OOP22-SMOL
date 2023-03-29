@@ -50,12 +50,14 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     @Override
     public void handle(final MouseEvent event) {
         if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED) 
-            && !this.weaponIsSmashing && !MouseInputs.playerFreeze && !MouseInputs.playerStunned) {
+            && !this.weaponIsSmashing && !this.weaponSmashed
+            && !MouseInputs.playerFreeze && !MouseInputs.playerStunned) {
 
             this.weaponIsSmashing = true;
             this.animationTime.schedule(weaponExpands(), Constant.HOLD_TIME, TimeUnit.MILLISECONDS);
 
-        } else if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED) && !this.weaponSmashed
+        } else if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED) 
+            && !this.weaponSmashed && this.weaponIsSmashing
             && !MouseInputs.playerFreeze && !MouseInputs.playerStunned) {
 
             this.weaponSmashed = true;
@@ -64,7 +66,8 @@ public class MouseInputs implements EventHandler<MouseEvent> {
             this.weaponLocation = new Point2D(event.getX(), event.getY());
             freezeInputs(Constant.WEAPON_ATTACK_ANIM);
 
-        } else if (event.getEventType().equals(MouseEvent.MOUSE_MOVED) && !weaponSmashed && cursorOnScreen
+        } else if (event.getEventType().equals(MouseEvent.MOUSE_MOVED) 
+            && !this.weaponSmashed && this.cursorOnScreen
             && !MouseInputs.playerFreeze && !MouseInputs.playerStunned) {
             this.weaponLocation = new Point2D(event.getX(), event.getY());
 
@@ -72,7 +75,8 @@ public class MouseInputs implements EventHandler<MouseEvent> {
 
             this.cursorOnScreen = true;
 
-        } else if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED) && !weaponSmashed && cursorOnScreen
+        } else if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED) 
+            && !this.weaponSmashed && this.cursorOnScreen
             && !MouseInputs.playerFreeze && !MouseInputs.playerStunned) {
             this.weaponLocation = new Point2D(event.getX(), event.getY());
         }
