@@ -12,7 +12,7 @@ import javafx.geometry.Point2D;
  */
 public class EnemyInputComponent implements InputComponent {
 
-    private EnemyInput input;
+    private final EnemyInput input;
 
     /**
      * constructor to initialize the AI inputs for any enemy entities.

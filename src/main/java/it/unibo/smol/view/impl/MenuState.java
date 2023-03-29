@@ -78,7 +78,7 @@ public class MenuState implements WindowState {
             gameEngine.init(primaryStage);
         });
         gameOver.setOnMouseClicked(e -> {
-            new WindowImpl(new GameOverWinState()).launch(primaryStage);
+            new WindowImpl(new GameOverWinState(0)).launch(primaryStage);
         });
         quitGame.setOnMouseClicked(e -> {
             Platform.exit();
@@ -96,10 +96,9 @@ public class MenuState implements WindowState {
         primaryStage.centerOnScreen();
         primaryStage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
         primaryStage.show();
-        
     }
 
-    private void buttonManagement(Button btn) {
+    private void buttonManagement(final Button btn) {
         btn.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X * 2);
         btn.setPrefHeight(GameMap.BORDER_WIDTH / 3);
         //Duration = 0.5 seconds

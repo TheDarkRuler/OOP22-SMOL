@@ -112,7 +112,7 @@ public class GameStateImpl implements GameState {
             new Point2D(GameMap.WIDTH / 2, GameMap.MAP_HEIGHT + GameMap.BORDER_HEIGHT / 2)), this.world));
 
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
-        world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, (GameMap.HEIGHT / 2), this.world));
+        world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         new PlantsCreation(this);
         this.enemyCreator = new EnemyCreation(this);
     }
@@ -137,6 +137,7 @@ public class GameStateImpl implements GameState {
      * gets the entity factory in order to create entities.
      * @return the entity factory
      */
+    @Override
     public EntityFactory getEntityFactory() {
         return this.entityFactory;
     }
@@ -144,6 +145,7 @@ public class GameStateImpl implements GameState {
     /**
      * stops the enemyCreation Timer.
      */
+    @Override
     public void stopEnemyCreation() {
         this.enemyCreator.stopCreation();
     }

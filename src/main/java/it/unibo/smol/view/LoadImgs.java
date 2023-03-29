@@ -37,7 +37,9 @@ public final class LoadImgs {
     public static final String GROUND = "Ground.gif";
     /**background png. */
     public static final String BACKGROUND = "Background.png";
+    /**hammer image for the cursor. */
     public static final String HAMMER = "hammer.png";
+    /**icon for the game. */
     public static final String LOGO = "logo.png";
 
     private LoadImgs() throws UnsupportedEncodingException {

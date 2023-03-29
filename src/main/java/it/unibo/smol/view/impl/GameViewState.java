@@ -117,7 +117,7 @@ public class GameViewState implements WindowState {
         stage.setFullScreenExitHint("");
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
-            public void handle(WindowEvent e) {
+            public void handle(final WindowEvent e) {
              Platform.exit();
              System.exit(0);
             }

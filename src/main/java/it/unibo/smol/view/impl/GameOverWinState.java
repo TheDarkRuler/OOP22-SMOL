@@ -6,7 +6,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
@@ -27,20 +26,28 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * game over window impl.
+ */
 public class GameOverWinState implements WindowState {
+
+    private static final int BUTTON_ANIM_DURATION = 500;
     private static Logger logger = Logger.getLogger("gameOverLogger");
     private final int finalScore;
-    
+
+    /**
+     * gets the final score.
+     * @param currentScore
+     */
     public GameOverWinState(final int currentScore) {
         this.finalScore = currentScore;
     }
-    //TODO delete me on production
-    public GameOverWinState() {
-        this.finalScore = 23500;
-    }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void render(Stage stage) throws IOException {
+    public void render(final Stage stage) throws IOException {
         try {
             this.start(stage);
         } catch (IOException e) {
@@ -50,7 +57,7 @@ public class GameOverWinState implements WindowState {
     /**
      * This method generate game over with javafx.
      * 
-     * @param primaryStage stage were game over will be generated.
+     * @param stage stage were game over will be generated.
      * @throws IOException
      * @throws Exception Exception thrown if there is any problem, in particular usefull to detect problems with the fxml file.
      */
@@ -60,7 +67,8 @@ public class GameOverWinState implements WindowState {
                 URL url;
                 url = new File("src/main/resources/layouts/GameOver.fxml").toURI().toURL();
                 final Parent root = FXMLLoader.load(url);
-                final Scene scene = new Scene(root, GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y);
+                final Scene scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X,
+                    GameMap.HEIGHT * GameMap.SCREEN_PROP_Y);
                 final Button restartGame = (Button) scene.lookup("#restartGame");
                 final Button closeGame = (Button) scene.lookup("#closeGame");
                 final Text score = (Text) scene.lookup("#score");
@@ -86,7 +94,8 @@ public class GameOverWinState implements WindowState {
                         }
                     }
                 });
-                score.setFont(Font.font("wavy", FontWeight.BOLD, FontPosture.REGULAR, (GameMap.BORDER_WIDTH / 3) * GameMap.SCREEN_PROP_X));
+                score.setFont(Font.font("wavy", FontWeight.BOLD, FontPosture.REGULAR,
+                    (GameMap.BORDER_WIDTH / 3) * GameMap.SCREEN_PROP_X));
                 stage.setTitle("GAME OVER :(");
                 stage.setScene(scene);
                 stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -101,12 +110,11 @@ public class GameOverWinState implements WindowState {
         });
     }
 
-    private void buttonManagement(Button btn) {
-        btn.setPrefWidth(GameMap.BORDER_WIDTH*GameMap.SCREEN_PROP_X);
-        btn.setPrefHeight(GameMap.BORDER_HEIGHT / 3*GameMap.SCREEN_PROP_Y);
-        //Duration = 2.5 seconds
-        Duration duration = Duration.millis(500);
-        RotateTransition rotateTransition = new RotateTransition(duration, btn);
+    private void buttonManagement(final Button btn) {
+        btn.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X);
+        btn.setPrefHeight(GameMap.BORDER_HEIGHT / 3 * GameMap.SCREEN_PROP_Y);
+        //Duration = 0.5 seconds
+        RotateTransition rotateTransition = new RotateTransition(Duration.millis(BUTTON_ANIM_DURATION), btn);
         rotateTransition.setByAngle(360);
         rotateTransition.play();
     }

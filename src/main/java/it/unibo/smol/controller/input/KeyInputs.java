@@ -85,7 +85,7 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      * @return the movement Direction
      */
     public Optional<Directions> getMovement() {
-        var temp = movement.poll();
+        final var temp = movement.poll();
         return temp != null ? Optional.of(temp) : Optional.empty();
 
     }
