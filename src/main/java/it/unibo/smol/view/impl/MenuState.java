@@ -1,6 +1,8 @@
 package it.unibo.smol.view.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,10 +15,16 @@ import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.WindowState;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -50,7 +58,15 @@ public class MenuState implements WindowState {
         final Scene scene = new Scene(root, GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT);
         final Button startGame = (Button) scene.lookup("#start");
         final VBox menuBox = (VBox) scene.lookup("#box");
-        menuBox.setSpacing(GameMap.BORDER_WIDTH / 5);
+        final Text title = (Text) scene.lookup("#title");
+        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, GameMap.BORDER_WIDTH));
+        try {
+            final Image hammer = new Image(new FileInputStream("src/main/resources/images/hammer.png"));
+            scene.setCursor(new ImageCursor(hammer, GameMap.BORDER_WIDTH, GameMap.BORDER_WIDTH));
+        } catch (FileNotFoundException e) {
+            Logger.getLogger(MenuState.class.getName()).info("Illegal Argument");
+        }
+        menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
         startGame.setOnMouseClicked(e -> {
             gameEngine.init(primaryStage);
         });
