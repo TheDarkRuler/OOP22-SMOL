@@ -13,6 +13,7 @@ import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.HealthBarTank;
 import it.unibo.smol.view.api.WindowState;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -29,6 +30,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * Implementation of the main state, it renders the game.
@@ -108,6 +110,13 @@ public class GameViewState implements WindowState {
             " (F11 to enable and disable full screen)");
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+             Platform.exit();
+             System.exit(0);
+            }
+          });
         stage.show();
     }
 

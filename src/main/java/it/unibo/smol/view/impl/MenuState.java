@@ -13,6 +13,7 @@ import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
@@ -51,27 +52,43 @@ public class MenuState implements WindowState {
      * @throws Exception Exception thrown if there is any problem, in particular usefull to detect problems with the fxml file.
      */
     private void start(final Stage primaryStage) throws IOException {
-        //get fields initialization.
+        /*
+         * Get fields initialization.
+         */
         final URL url = new File("src/main/resources/layouts/Menu.fxml").toURI().toURL();
         final Parent root = FXMLLoader.load(url);
         final Scene scene = new Scene(root, GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT);
-        final Button startGame = (Button) scene.lookup("#start");
         final VBox menuBox = (VBox) scene.lookup("#box");
+        //children
         final Text title = (Text) scene.lookup("#title");
-        //set fields
+        final Button startGame = (Button) scene.lookup("#start");
+        final Button gameOver = (Button) scene.lookup("#gameOver");
+        final Button quitGame = (Button) scene.lookup("#quit");
+
+        /*
+         * Set fields.
+         */
         title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
         scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER)));
         menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
+        //buttons behaviour
         startGame.setOnMouseClicked(e -> {
             gameEngine.init(primaryStage);
         });
-        final Button gameOver = (Button) scene.lookup("#gameOver");
         gameOver.setOnMouseClicked(e -> {
             new WindowImpl(new GameOverWinState()).launch(primaryStage);
         });
-        //attatch fields
+        quitGame.setOnMouseClicked(e -> {
+            Platform.exit();
+            System.exit(0);
+        });
+
+        /*
+         * Fields attachment.
+         */
         buttonManagement(startGame);
         buttonManagement(gameOver);
+        buttonManagement(quitGame);
         primaryStage.setTitle("Start Menu :)");
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
@@ -80,7 +97,7 @@ public class MenuState implements WindowState {
     }
 
     private void buttonManagement(Button btn) {
-        btn.setPrefWidth(GameMap.BORDER_WIDTH);
+        btn.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X);
         btn.setPrefHeight(GameMap.BORDER_WIDTH / 3);
         //Duration = 2.5 seconds
         Duration duration = Duration.millis(500);
