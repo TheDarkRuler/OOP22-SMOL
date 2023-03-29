@@ -44,7 +44,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.PLAYER, 
         Optional.of(new PlayerInputComponent(w.getKeyInputs())),
         Optional.empty(),
-        new PlayerGraphicComponent(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT),
+        Optional.of(new PlayerGraphicComponent(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT)),
         new PlayerPhysicsComponent(new RectangleHB(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT,
             new Point2D(x, y))),
         x, y, w);
@@ -58,7 +58,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.HEALTH,
         Optional.empty(),
         Optional.of(new HealthComponent(Constant.HEALTH_HP)),
-        new LifePlantsGraphicComponent(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT),
+        Optional.of(new LifePlantsGraphicComponent(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT)),
         new LifePlantsPhysicsComponent(new RectangleHB(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT,
             new Point2D(x, y))),
         x, y, w);
@@ -72,7 +72,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.WEAPON,
         Optional.of(new WeaponInputComponent(w.getMouseInputs())),
         Optional.empty(),
-        new WeaponGraphicComponent(2*Constant.WEAPON_RADIUS, 2 * Constant.WEAPON_RADIUS),
+        Optional.of(new WeaponGraphicComponent(2*Constant.WEAPON_RADIUS, 2 * Constant.WEAPON_RADIUS)),
         new WeaponPhysicsComponent(new CircleHB(new Point2D(x, y), Constant.WEAPON_RADIUS)),
         x, y, w);
     }
@@ -85,7 +85,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.ENEMY, 
         Optional.of(new EnemyInputComponent(new EnemyBasicInput(w, initialPosition))),
         Optional.of(new HealthComponent(Constant.ENEMY_HP)), 
-        new BasicEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT), 
+        Optional.of(new BasicEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT)), 
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initialPosition), Constant.BASIC_ENEMY_SPEED),
         initialPosition.getX(), initialPosition.getY(), w);
@@ -99,7 +99,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.ENEMY,
         Optional.of(new EnemyInputComponent(new EnemyHelmetInput(w, initialPosition))),
         Optional.of(new HealthComponent(Constant.ENEMY_HELMET_HP)),
-        new HelmetEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT),
+        Optional.of(new HelmetEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT)),
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initialPosition), Constant.HELMET_ENEMY_SPEED),
         initialPosition.getX(), initialPosition.getY(), w);
@@ -113,7 +113,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.ENEMY,
         Optional.of(new EnemyInputComponent(new EnemyAngryInput(w, initalPosition))),
         Optional.of(new HealthComponent(Constant.ENEMY_HP)),
-        new AngryEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT),
+        Optional.of(new AngryEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT)),
         new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initalPosition), Constant.ANGRY_ENEMY_SPEED),
         initalPosition.getX(), initalPosition.getY(), w);
@@ -127,7 +127,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.ENEMY, 
         Optional.of(new EnemyInputComponent(new EnemyBombInput(w, initialPosition))),
         Optional.of(new HealthComponent(Constant.ENEMY_HP)), 
-        new BombEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT), 
+        Optional.of(new BombEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT)), 
         new BombEnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
         initialPosition), Constant.BOMB_ENEMY_SPEED),
         initialPosition.getX(), initialPosition.getY(), w);
@@ -141,7 +141,7 @@ public class EntityFactoryImpl implements EntityFactory {
         return new EntityImpl(Type.WALL,
         Optional.empty(),
         Optional.empty(),
-        new PlayerGraphicComponent(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT),
+        Optional.empty(),
         new WallPhysicsComponent(hitbox),
         hitbox.getCenter().getX(), hitbox.getCenter().getY(), w);
     }

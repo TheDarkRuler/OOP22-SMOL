@@ -16,7 +16,6 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -106,7 +105,7 @@ public class GameViewState implements WindowState {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setFullScreenExitHint("Be careful, Moles are coming for your vegetables" + 
-        " (F11 to enable and disable full screen)");
+            " (F11 to enable and disable full screen)");
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
         stage.show();
@@ -122,7 +121,10 @@ public class GameViewState implements WindowState {
             gContext.clearRect(0, 0, GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y);
             updateHealthBar();
             score.setText(Integer.toString(gameState.getScore()));
-            gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
+            gameState.getWorld().getEntities().stream()
+                .filter(x -> x.getGraphicComp().isPresent())
+                .map(x -> x.getGraphicComp())
+                .forEach(x -> x.orElseThrow().render(graphic));
         });
     }
 

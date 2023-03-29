@@ -82,7 +82,7 @@ public interface Entity {
      * Getter for Graphic component.
      * @return The GraphicComponent 
      */
-    GraphicComponent getGraphicComp();
+    Optional<GraphicComponent> getGraphicComp();
 
     /**
      * Update all the component of the object.
