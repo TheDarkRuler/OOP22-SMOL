@@ -117,6 +117,7 @@ public class GameViewState implements WindowState {
              System.exit(0);
             }
           });
+        stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
         stage.show();
     }
 

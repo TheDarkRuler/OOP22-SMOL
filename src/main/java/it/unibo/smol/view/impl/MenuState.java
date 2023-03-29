@@ -92,12 +92,13 @@ public class MenuState implements WindowState {
         primaryStage.setTitle("Start Menu :)");
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
+        primaryStage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
         primaryStage.show();
         
     }
 
     private void buttonManagement(Button btn) {
-        btn.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X);
+        btn.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X * 2);
         btn.setPrefHeight(GameMap.BORDER_WIDTH / 3);
         //Duration = 2.5 seconds
         Duration duration = Duration.millis(500);

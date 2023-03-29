@@ -90,6 +90,7 @@ public class GameOverWinState implements WindowState {
                 stage.setScene(scene);
                 stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
                 stage.setFullScreen(true);
+                stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
                 stage.show();
             } catch (MalformedURLException e) {
                 logger.log(Level.SEVERE, "badUrlOnGameOver::", e);
