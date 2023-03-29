@@ -44,3 +44,8 @@
     -fx-text-decoration-style: wavy;
     -fx-color: red;
 }
+
+#score {
+    fill: beige;
+    -fx-fill: beige;
+}

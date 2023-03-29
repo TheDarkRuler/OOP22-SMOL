@@ -1,8 +1,6 @@
 package it.unibo.smol.view.impl;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,15 +8,15 @@ import java.net.URL;
 import it.unibo.smol.core.GameEngine;
 import it.unibo.smol.core.GameEngineImpl;
 import it.unibo.smol.view.GameMap;
+import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -56,40 +54,53 @@ public class MenuState implements WindowState {
      * @throws Exception Exception thrown if there is any problem, in particular usefull to detect problems with the fxml file.
      */
     private void start(final Stage primaryStage) throws IOException {
+        /*
+         * Get fields initialization.
+         */
         final URL url = new File("src/main/resources/layouts/Menu.fxml").toURI().toURL();
         final Parent root = FXMLLoader.load(url);
         final Scene scene = new Scene(root, GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT);
-        final Button startGame = (Button) scene.lookup("#start");
         final VBox menuBox = (VBox) scene.lookup("#box");
+        //children
         final Text title = (Text) scene.lookup("#title");
-        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, GameMap.BORDER_WIDTH));
-        try {
-            Image hammer = new Image(new FileInputStream("src/main/resources/images/hammer.png"));
-            Cursor hammerCursor = new ImageCursor(hammer);
-            scene.setCursor(hammerCursor);
-        } catch (FileNotFoundException e) {
-            Logger.getLogger(MenuState.class.getName()).info("Illegal Argument");
-        }
+        final Button startGame = (Button) scene.lookup("#start");
+        final Button gameOver = (Button) scene.lookup("#gameOver");
+        final Button quitGame = (Button) scene.lookup("#quit");
+
+        /*
+         * Set fields.
+         */
+        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
+        scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER)));
         menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
+        //buttons behaviour
         startGame.setOnMouseClicked(e -> {
             gameEngine.init(primaryStage);
         });
-        final Button gameOver = (Button) scene.lookup("#gameOver");
         gameOver.setOnMouseClicked(e -> {
             new WindowImpl(new GameOverWinState()).launch(primaryStage);
-            //System.out.println("there is nothing there");
         });
+        quitGame.setOnMouseClicked(e -> {
+            Platform.exit();
+            System.exit(0);
+        });
+
+        /*
+         * Fields attachment.
+         */
         buttonManagement(startGame);
         buttonManagement(gameOver);
+        buttonManagement(quitGame);
         primaryStage.setTitle("Start Menu :)");
         primaryStage.setScene(scene);
-        primaryStage.setX(GameMap.WIDTH / 2 - GameMap.MAP_WIDTH / 2);
-        primaryStage.setY(GameMap.HEIGHT / 2 - GameMap.MAP_HEIGHT / 2);
+        primaryStage.centerOnScreen();
+        primaryStage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
         primaryStage.show();
+        
     }
 
-    private void buttonManagement(final Button btn) {
-        btn.setPrefWidth(GameMap.BORDER_WIDTH);
+    private void buttonManagement(Button btn) {
+        btn.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X * 2);
         btn.setPrefHeight(GameMap.BORDER_WIDTH / 3);
         //Duration = 0.5 seconds
         Duration duration = Duration.millis(MENU_ANIM_DURATION);
