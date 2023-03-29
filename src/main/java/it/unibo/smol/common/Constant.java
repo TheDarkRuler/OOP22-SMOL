@@ -2,31 +2,20 @@ package it.unibo.smol.common;
 
 import java.io.UnsupportedEncodingException;
 
-import javafx.stage.Screen;
-
 /**
  * Class for storing all the major constant value of the game.
  */
 public final class Constant {
 
-    private static double screenHeight = Screen.getPrimary().getBounds().getHeight();
-    private static double screenWidth = Screen.getPrimary().getBounds().getWidth();
-
-    /**name of the folder in which are the pixel sprites to use */
-    public static final String PIXEL_FOLDER = "pixel_moles/";
-
-    /**name of the folder in which are the pixel sprites to use */
-    public static final String VECTORIAL_FOLDER = "vectorial_moles/";
-
     /**-----------------------
      * PLAYER UTILITIES VALUES
      * -----------------------*/
     /**player width. */
-    public static final double PLAYER_WIDTH = screenWidth * 0.060;
+    public static final double PLAYER_WIDTH = 70;
     /**player height. */
-    public static final double PLAYER_HEIGHT = screenHeight * 0.060;
+    public static final double PLAYER_HEIGHT = 70;
     /**player movement speed. */
-    public static final double PLAYER_MOVSPD = screenWidth * 0.001;
+    public static final double PLAYER_MOVSPD = 1.5;
     /**player damage. */
     public static final int PLAYER_DMG = -1;
 
@@ -34,9 +23,9 @@ public final class Constant {
      * ENEMY UTILITIES VALUES
      * ----------------------*/
     /**enemy width. */
-    public static final double ENEMY_WIDTH = screenWidth * 0.060;
+    public static final double ENEMY_WIDTH = 70;
     /**enemy height. */
-    public static final double ENEMY_HEIGHT = screenHeight * 0.060;
+    public static final double ENEMY_HEIGHT = 70;
     /**enemy health point. */
     public static final int ENEMY_HP = 100;
     /**enemy with helmet health point. */
@@ -56,13 +45,13 @@ public final class Constant {
     /**Max time a Basic mole can spawn */
     public static final int BASIC_ENEMY_MAX_SPAWNS = 3;
     /**Speed of the Bomb mole */
-    public static final double BOMB_ENEMY_SPEED = screenWidth * 0.0005;
+    public static final double BOMB_ENEMY_SPEED = 1;
     /**Speed of the Helmet mole */
-    public static final double HELMET_ENEMY_SPEED = screenWidth * 0.0005;
+    public static final double HELMET_ENEMY_SPEED = 1;
     /**Speed of the Angry mole */
-    public static final double ANGRY_ENEMY_SPEED = screenWidth * 0.001;
+    public static final double ANGRY_ENEMY_SPEED = 1.5;
     /**Speed of the Basic mole */
-    public static final double BASIC_ENEMY_SPEED = screenWidth * 0.0005;
+    public static final double BASIC_ENEMY_SPEED = 1;
     /**Min time a enemy stays up */
     public static final int DEFAULT_MIN_TIME_UP = 1500;
     /**Max time a enemy stays up */
@@ -72,9 +61,9 @@ public final class Constant {
      * LIFEPLANTS UTILITIES VALUES 
      * ---------------------------*/
     /**lifeplant width. */
-    public static final double HEALTH_WIDTH = screenWidth * 0.100;
+    public static final double HEALTH_WIDTH = 160;
     /**lifeplant height. */
-    public static final double HEALTH_HEIGHT = screenWidth * 0.100;
+    public static final double HEALTH_HEIGHT = 160;
     /**lifeplant movement speed. */
     public static final double HEALTH_MOVSPD = 0.0;
     /**lifeplant health point. */
@@ -86,21 +75,21 @@ public final class Constant {
      * WEAPON UTILITIES VALUES 
      * -----------------------*/
     /**weapon radius. */
-    public static final double WEAPON_RADIUS = screenWidth * 0.015;
+    public static final double WEAPON_RADIUS = 24;
     /**weapon movement speed. */
     public static final double WEAPON_MOVSPD = 0.0;
     /**weapon damage. */
     public static final int WEAPON_DMG = -100;
     /**the increase rate of the weapon range. */
-    public static final double WEAPON_INC_RATE = screenWidth * 0.0015;
+    public static final double WEAPON_INC_RATE = 2.5;
     /**The basic weapon range. */
-    public static final double DEF_WEAPON_RANGE = screenWidth * 0.100;
+    public static final double DEF_WEAPON_RANGE = 160;
     /**the max weapon range. */
     public static final double WEAPON_MAX_RANGE = DEF_WEAPON_RANGE*4;
     /**the waiting time before the hammer start increasing range. */
-    public static final int HOLD_TIME = 300;
+    public static final int HOLD_TIME = 200;
     /**the waiting after the hammer get smashed. */
-    public static final int WEAPON_ATTACK_ANIM = 250;
+    public static final int WEAPON_ATTACK_ANIM = 350;
 
     /**----------------------
      * ENEMY SPAWN RATE VALUE 

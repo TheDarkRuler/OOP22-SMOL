@@ -1,9 +1,11 @@
 package it.unibo.smol.model.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
@@ -18,7 +20,7 @@ public class WorldImpl implements World {
     private static final Boolean OCCUPIED = true;
     private static final Boolean FREE = false;
     private static final int INC_RATE = 20;
-    private final List<Entity> entities;
+    private final ConcurrentLinkedDeque<Entity> entities;
     private final Map<Entity, Boolean> occupiedPlants;
     private int score;
     private KeyInputs keyInputs;
@@ -28,7 +30,7 @@ public class WorldImpl implements World {
      * constructor for game world.
      */
     public WorldImpl() {
-        this.entities = new ArrayList<>();
+        this.entities = new ConcurrentLinkedDeque<>();
         this.occupiedPlants = new HashMap<>();
         this.score = 0;
     }
@@ -69,8 +71,8 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public List<Entity> getEntities() {
-        return new ArrayList<>(this.entities); // no references
+    public ConcurrentLinkedDeque<Entity> getEntities() {
+        return new ConcurrentLinkedDeque<>(this.entities); // no references
     }
     /**
      * {@inheritDoc}
@@ -111,6 +113,13 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
+    public void addFirstEntity(final Entity entity) {
+        this.entities.addFirst(entity);
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void incScore(final int quantity) {
         this.score = this.score + quantity;
     } 
@@ -119,9 +128,9 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public Map<Entity, Boolean> occupiedPlants() {
+    public ConcurrentMap<Entity, Boolean> occupiedPlants() {
         updateLifePlants();
-        return new HashMap<>(this.occupiedPlants);
+        return new ConcurrentHashMap<>(this.occupiedPlants);
     }
 
     private void updateLifePlants() {

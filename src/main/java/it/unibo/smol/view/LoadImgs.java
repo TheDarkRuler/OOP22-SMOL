@@ -6,12 +6,17 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.logging.Logger;
 
-import it.unibo.smol.common.Constant;
 import javafx.scene.image.Image;
 /**
  * Utility class for load images.
  */
 public final class LoadImgs {
+
+    /**name of the folder in which are the pixel sprites to use */
+    private static final String PIXEL_FOLDER = "pixel_moles/";
+
+    /**name of the folder in which are the pixel sprites to use */
+    private static final String VECTORIAL_FOLDER = "vectorial_moles/";
   /**
    * file name of images.
    */
@@ -43,7 +48,7 @@ public final class LoadImgs {
      */
     public static Image getSprites(final String filename) {
         Image image = null;
-        try (FileInputStream path = new FileInputStream("src/main/resources/images/" + Constant.PIXEL_FOLDER + filename);) {
+        try (FileInputStream path = new FileInputStream("src/main/resources/images/" + LoadImgs.PIXEL_FOLDER + filename);) {
             image = new Image(path);
         } catch (IllegalArgumentException e) {
             Logger.getLogger(LoadImgs.class.getName()).info("Illegal Argument");

@@ -15,10 +15,13 @@ import it.unibo.smol.view.api.WindowState;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
@@ -58,7 +61,7 @@ public class GameOverWinState implements WindowState {
                 URL url;
                 url = new File("src/main/resources/layouts/GameOver.fxml").toURI().toURL();
                 final Parent root = FXMLLoader.load(url);
-                final Scene scene = new Scene(root, GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT);
+                final Scene scene = new Scene(root, GameMap.MAP_WIDTH*GameMap.SCREEN_PROP_X, GameMap.MAP_HEIGHT*GameMap.SCREEN_PROP_Y);
                 final Button restartGame = (Button) scene.lookup("#restartGame");
                 final Button closeGame = (Button) scene.lookup("#closeGame");
                 final Text score = (Text) scene.lookup("#score");
@@ -100,8 +103,8 @@ public class GameOverWinState implements WindowState {
     }
 
     private void buttonManagement(Button btn) {
-        btn.setPrefWidth(GameMap.BORDER_WIDTH);
-        btn.setPrefHeight(GameMap.BORDER_WIDTH / 3);
+        btn.setPrefWidth(GameMap.BORDER_WIDTH*GameMap.SCREEN_PROP_X);
+        btn.setPrefHeight(GameMap.BORDER_HEIGHT / 3*GameMap.SCREEN_PROP_Y);
         //Duration = 2.5 seconds
         Duration duration = Duration.millis(500);
         RotateTransition rotateTransition = new RotateTransition(duration, btn);

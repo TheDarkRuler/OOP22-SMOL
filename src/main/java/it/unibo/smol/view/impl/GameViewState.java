@@ -1,14 +1,10 @@
 package it.unibo.smol.view.impl;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.security.Key;
 import java.util.logging.Logger;
 
 import java.util.logging.Level;
 
-import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
@@ -47,7 +43,6 @@ public class GameViewState implements WindowState {
     private final GameState gameState;
     private KeyInputs keyEventHandler;
     private MouseInputs mouseEventHandler;
-    private Canvas canvas;
     private Text score;
     private Rectangle healthBar;
 
@@ -84,14 +79,15 @@ public class GameViewState implements WindowState {
         setKeyInputs();
         setMouseInputs();
         final var root = new Pane();
-        final var scene = new Scene(root, GameMap.WIDTH,
-            GameMap.HEIGHT, Color.BLACK);
-        final var canvas = new Canvas(GameMap.WIDTH, GameMap.HEIGHT);
+        final var scene = new Scene(root, GameMap.WIDTH*GameMap.SCREEN_PROP_X,
+            GameMap.HEIGHT*GameMap.SCREEN_PROP_Y, Color.BLACK);
+        final var canvas = new Canvas(GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y);
         this.gContext = canvas.getGraphicsContext2D();
+        gContext.setImageSmoothing(false);
         this.graphic = new GraphicsDraw(gContext);
         root.setBackground(new Background(new BackgroundImage(LoadImgs.getSprites(LoadImgs.BACKGROUND),
             BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-            new BackgroundSize(GameMap.WIDTH, GameMap.HEIGHT, false, false, false, false))));
+            new BackgroundSize(GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y, false, false, false, false))));
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
         scene.setOnMouseMoved(mouseEventHandler);
@@ -121,7 +117,7 @@ public class GameViewState implements WindowState {
      */
     public void repaint(final Stage stage) throws IOException {
         Platform.runLater(() -> {
-            gContext.clearRect(0, 0, GameMap.WIDTH, GameMap.HEIGHT);
+            gContext.clearRect(0, 0, GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y);
             updateHealthBar();
             score.setText(Integer.toString(gameState.getScore()));
             gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
@@ -153,18 +149,13 @@ public class GameViewState implements WindowState {
     }
 
     private void initializeScore() {
-        score = new Text(GameMap.WIDTH - GameMap.BORDER_WIDTH, GameMap.BORDER_WIDTH / 4, Integer.toString(gameState.getScore()));
-        //final File fontPath = new File("src/main/resources/font/ShortBaby-Mg2w.ttf");
-        //Font customFont = Font.loadFont("src/main/resources/font/ShortBaby-Mg2w.ttf", 10.0);
-        score.setFont(Font.font("Impact", FontWeight.BOLD, 18));
+        score = new Text((GameMap.MAP_WIDTH-GameMap.BORDER_WIDTH)*GameMap.SCREEN_PROP_X, GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 3, Integer.toString(gameState.getScore()));
+        score.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, 18));
         score.setFill(Color.WHITE);
         score.setTextAlignment(TextAlignment.RIGHT);
-        score.setScaleX(5);
-        score.setScaleY(5);
+        score.setScaleX(3);
+        score.setScaleY(3);
         score.setVisible(true);
-
-
-        
     }
 
     private Rectangle underHealthBar() {
