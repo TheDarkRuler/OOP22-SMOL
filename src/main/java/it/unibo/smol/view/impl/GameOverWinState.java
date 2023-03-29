@@ -56,7 +56,7 @@ public class GameOverWinState implements WindowState {
                 URL url;
                 url = new File("src/main/resources/layouts/GameOver.fxml").toURI().toURL();
                 final Parent root = FXMLLoader.load(url);
-                final Scene scene = new Scene(root, GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT);
+                final Scene scene = new Scene(root, GameMap.MAP_WIDTH*GameMap.SCREEN_PROP_X, GameMap.MAP_HEIGHT*GameMap.SCREEN_PROP_Y);
                 final Button restartGame = (Button) scene.lookup("#restartGame");
                 final Button closeGame = (Button) scene.lookup("#closeGame");
                 final VBox gameOverBox = (VBox) scene.lookup("#box");
@@ -66,7 +66,7 @@ public class GameOverWinState implements WindowState {
                 } catch (FileNotFoundException e) {
                     Logger.getLogger(MenuState.class.getName()).info("Illegal Argument");
                 }
-                gameOverBox.setSpacing(GameMap.BORDER_WIDTH / 3);
+                gameOverBox.setSpacing(GameMap.BORDER_HEIGHT / 3 *GameMap.SCREEN_PROP_Y);
                 buttonManagement(restartGame);
                 buttonManagement(closeGame);
                 restartGame.setOnMouseClicked(e -> {
@@ -98,8 +98,8 @@ public class GameOverWinState implements WindowState {
     }
 
     private void buttonManagement(Button btn) {
-        btn.setPrefWidth(GameMap.BORDER_WIDTH);
-        btn.setPrefHeight(GameMap.BORDER_WIDTH / 3);
+        btn.setPrefWidth(GameMap.BORDER_WIDTH*GameMap.SCREEN_PROP_X);
+        btn.setPrefHeight(GameMap.BORDER_HEIGHT / 3*GameMap.SCREEN_PROP_Y);
         //Duration = 2.5 seconds
         Duration duration = Duration.millis(500);
         RotateTransition rotateTransition = new RotateTransition(duration, btn);
