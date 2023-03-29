@@ -18,7 +18,7 @@ public class HealthBarTankImpl implements HealthBarTank {
     //proportion variable
     private static final int CENTER_WIDTH_PROPORTION = 2;
     private static final int CENTER_HEIGHT_PROPORTION = 4;
-    private static final int WIDTH_PROPORTION = 2;
+    private static final int WIDTH_PROPORTION = 3;
     private static final int HEIGHT_PROPORTION = 10;
     private static final int BORDER_PROPORTION = 35;
     /* public static final double CENTER_WIDTH_PROPORTION = Double.valueOf(GameMap.BORDER_WIDTH / 2);
@@ -46,7 +46,7 @@ public class HealthBarTankImpl implements HealthBarTank {
 
     @Override
     public Double getHealthBarHeight() {
-       return Double.valueOf(GameMap.BORDER_WIDTH / HEIGHT_PROPORTION) * GameMap.SCREEN_PROP_Y;
+       return Double.valueOf(GameMap.BORDER_HEIGHT / HEIGHT_PROPORTION) * GameMap.SCREEN_PROP_Y;
     }
 
     @Override

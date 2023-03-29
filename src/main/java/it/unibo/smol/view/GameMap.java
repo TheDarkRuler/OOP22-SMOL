@@ -15,12 +15,12 @@ public final class GameMap {
     /**
      * Height of the screen.
      */
-    public static final double HEIGHT = 90;
+    public static final double HEIGHT = 900;
 
     /**
      * Width of the screen.
      */
-    public static final double WIDTH = 160;
+    public static final double WIDTH = 1600;
 
     public static final double SCREEN_PROP_X =  screenWidth / WIDTH ;
 

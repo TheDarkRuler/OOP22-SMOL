@@ -2,6 +2,7 @@ package it.unibo.smol.model.api;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
@@ -28,7 +29,7 @@ public interface World {
     /**
      * @return all entities.
      */
-    List<Entity> getEntities();
+    ConcurrentLinkedDeque<Entity> getEntities();
 
     /**
      * @param thisEntity entity to remove from the list of entities.
@@ -54,6 +55,11 @@ public interface World {
      * @param thisEntity is the entity to add to the list of entities.
      */
     void addEntity(Entity thisEntity);
+
+    /**
+     * @param thisEntity is the entity to add to the list of entities.
+     */
+    void addFirstEntity(Entity thisEntity);
 
     /**
      * increments game current game score.

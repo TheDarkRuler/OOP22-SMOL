@@ -1,13 +1,10 @@
 package it.unibo.smol.view.impl;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.logging.Logger;
 
 import java.util.logging.Level;
 
-import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
@@ -39,7 +36,6 @@ public class GameViewState implements WindowState {
     private final GameState gameState;
     private KeyInputs keyEventHandler;
     private MouseInputs mouseEventHandler;
-    private Canvas canvas;
     private Text score;
     private Rectangle healthBar;
 
@@ -76,10 +72,11 @@ public class GameViewState implements WindowState {
         setKeyInputs();
         setMouseInputs();
         final var root = new Pane();
-        final var scene = new Scene(root, GameMap.WIDTH,
-            GameMap.HEIGHT, Color.BLACK);
+        final var scene = new Scene(root, GameMap.WIDTH*GameMap.SCREEN_PROP_X,
+            GameMap.HEIGHT*GameMap.SCREEN_PROP_Y, Color.BLACK);
         final var canvas = new Canvas(GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y);
         this.gContext = canvas.getGraphicsContext2D();
+        gContext.setImageSmoothing(false);
         this.graphic = new GraphicsDraw(gContext);
         root.setBackground(null);
         scene.setFill(Color.GREEN);
@@ -143,18 +140,13 @@ public class GameViewState implements WindowState {
     }
 
     private void initializeScore() {
-        score = new Text((GameMap.MAP_WIDTH-GameMap.BORDER_WIDTH)*GameMap.SCREEN_PROP_X, GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 4, Integer.toString(gameState.getScore()));
-        //final File fontPath = new File("src/main/resources/font/ShortBaby-Mg2w.ttf");
-        //Font customFont = Font.loadFont("src/main/resources/font/ShortBaby-Mg2w.ttf", 10.0);
-        score.setFont(Font.font("Impact", FontWeight.BOLD, 18));
+        score = new Text((GameMap.MAP_WIDTH-GameMap.BORDER_WIDTH)*GameMap.SCREEN_PROP_X, GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 3, Integer.toString(gameState.getScore()));
+        score.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, 18));
         score.setFill(Color.WHITE);
         score.setTextAlignment(TextAlignment.RIGHT);
-        score.setScaleX(2);
-        score.setScaleY(2);
+        score.setScaleX(3);
+        score.setScaleY(3);
         score.setVisible(true);
-
-
-        
     }
 
     private Rectangle underHealthBar() {

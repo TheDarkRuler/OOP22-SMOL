@@ -37,10 +37,6 @@ public class GraphicsDraw {
     }
 
     public void drawSprite(final String imageName, final Entity entity, final GraphicComponent graphicComponent) {
-        System.out.println("Proporzioni x: "+GameMap.SCREEN_PROP_X);
-        System.out.println("Proporzioni y: "+GameMap.SCREEN_PROP_Y);
-        System.out.println(imageName);
-        System.out.println("\t\t^"+entity.getType());
         g.drawImage(images.get(imageName),
             ((entity.getCurrentX() - graphicComponent.getWidth() / 2)*GameMap.SCREEN_PROP_X),
             ((entity.getCurrentY() - graphicComponent.getHeight() / 2)*GameMap.SCREEN_PROP_Y),
