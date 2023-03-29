@@ -1,7 +1,7 @@
 package it.unibo.smol.controller.input;
 
+import java.util.LinkedList;
 import java.util.Optional;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import it.unibo.smol.common.Directions;
 import javafx.event.EventHandler;
@@ -16,7 +16,7 @@ public class KeyInputs implements EventHandler<KeyEvent> {
     /**
      * Direction of the player.
      */
-    private static Queue<Directions> movement = new PriorityQueue<>();
+    private static Queue<Directions> movement = new LinkedList<>();
     private final Stage stage;
 
     public KeyInputs(final Stage stage) {
@@ -81,11 +81,9 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      * @return the movement Direction
      */
     public Optional<Directions> getMovement() {
-        if (!movement.isEmpty()) {
-            var temp = movement.poll();
-            return temp!=null ? Optional.of(temp) : Optional.empty();
-        }
-        return Optional.empty();
+        var temp = movement.poll();
+        return temp!=null ? Optional.of(temp) : Optional.empty();
+
     }
 
     /**
@@ -93,6 +91,6 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      * @param newMovement
      */
     public static void setMovement(final Directions newMovement) {
-        KeyInputs.movement.add(newMovement);
+        KeyInputs.movement.offer(newMovement);
     }
 }

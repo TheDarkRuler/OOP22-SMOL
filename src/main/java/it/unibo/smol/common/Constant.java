@@ -16,7 +16,7 @@ public final class Constant {
     public static final String PIXEL_FOLDER = "pixel_moles/";
 
     /**name of the folder in which are the pixel sprites to use */
-    private static final String VECTORIAL_FOLDER = "vectorial_moles/";
+    public static final String VECTORIAL_FOLDER = "vectorial_moles/";
 
     /**-----------------------
      * PLAYER UTILITIES VALUES
