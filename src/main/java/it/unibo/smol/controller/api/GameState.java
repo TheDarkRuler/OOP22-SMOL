@@ -84,5 +84,5 @@ public interface GameState {
      * Getter for ScoreLocalStorage.
      * @return the ScoreLocalStorage
      */
-    ScoreLocalStorage getScoreLocalStorage();
+    Optional<ScoreLocalStorage> getScoreLocalStorage();
 }

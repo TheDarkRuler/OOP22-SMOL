@@ -36,7 +36,7 @@ public class GameStateImpl implements GameState {
         this.world = new WorldImpl(world);
         this.entityFactory = new EntityFactoryImpl();
         this.enemyCreator = new EnemyCreation(Optional.of(this));
-        this.scoreStorage = new ScoreLocalStorage(this);
+        this.scoreStorage = new ScoreLocalStorage(Optional.of(this));
     }
 
     /**
@@ -46,7 +46,7 @@ public class GameStateImpl implements GameState {
     public GameStateImpl(final GameState gameState) {
         this.world = gameState.getWorld().orElseThrow();
         this.entityFactory = new EntityFactoryImpl();
-        this.scoreStorage = new ScoreLocalStorage(gameState);
+        this.scoreStorage = new ScoreLocalStorage(Optional.of(gameState));
     }
 
     /**
@@ -167,8 +167,8 @@ public class GameStateImpl implements GameState {
      * {@inheritDoc}
      */
     @Override
-    public ScoreLocalStorage getScoreLocalStorage() {
-        return this.scoreStorage;
+    public Optional<ScoreLocalStorage> getScoreLocalStorage() {
+        return Optional.of(this.scoreStorage);
     }
 
 }

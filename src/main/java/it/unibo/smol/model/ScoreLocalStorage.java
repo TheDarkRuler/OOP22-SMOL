@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import it.unibo.smol.controller.api.GameState;
@@ -21,8 +22,8 @@ public class ScoreLocalStorage {
      * Constructors for create the score file if doesn't exist.
      * @param gameState
      */
-    public ScoreLocalStorage(final GameState gameState) {
-        this.gameState = gameState;
+    public ScoreLocalStorage(final Optional<GameState> gameState) {
+        this.gameState = gameState.orElseThrow();
         this.scoreFile = new File("ScoreFile.txt");
     }
  

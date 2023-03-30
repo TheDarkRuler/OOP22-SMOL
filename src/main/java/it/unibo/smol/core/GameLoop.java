@@ -53,7 +53,7 @@ public class GameLoop extends Thread {
         pastTime = System.nanoTime();
 
         gameState.initGame();
-        if (gameState.getScoreLocalStorage().getScoreFile().exists()) {
+        if (gameState.getScoreLocalStorage().orElseThrow().getScoreFile().exists()) {
             gameState.notifyRead();
         }
         do {

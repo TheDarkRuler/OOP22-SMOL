@@ -19,7 +19,7 @@ public class KeyInputs implements EventHandler<KeyEvent> {
     /**
      * Direction of the player.
      */
-    private Queue<Directions> movement = new LinkedList<>();
+    private final Queue<Directions> movement = new LinkedList<>();
     private static Logger logger = Logger.getLogger("keyInputLogger");
     private final Stage stage;
     private boolean playerFreeze;
