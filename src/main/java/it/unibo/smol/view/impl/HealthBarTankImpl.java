@@ -2,6 +2,7 @@ package it.unibo.smol.view.impl;
 
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
+import it.unibo.smol.controller.impl.GameStateImpl;
 import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.api.HealthBarTank;
 import javafx.geometry.Point2D;
@@ -33,7 +34,7 @@ public class HealthBarTankImpl implements HealthBarTank {
     public HealthBarTankImpl(final GameState gameState) {
         this.centerWidth = Double.valueOf(GameMap.BORDER_WIDTH / CENTER_WIDTH_PROPORTION) * GameMap.SCREEN_PROP_X;
         this.currentLife = Double.valueOf(0);
-        this.gameState = gameState;
+        this.gameState = new GameStateImpl(gameState);
     }
 
     /**

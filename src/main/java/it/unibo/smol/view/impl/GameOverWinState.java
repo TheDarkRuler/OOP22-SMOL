@@ -17,7 +17,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -37,6 +36,7 @@ public class GameOverWinState implements WindowState {
 
     /**
      * gets the final score.
+     * 
      * @param currentScore
      */
     public GameOverWinState(final int currentScore) {
@@ -54,12 +54,14 @@ public class GameOverWinState implements WindowState {
             logger.log(Level.SEVERE, "GameOverStateError::", e);
         }
     }
+
     /**
      * This method generate game over with javafx.
      * 
      * @param stage stage were game over will be generated.
      * @throws IOException
-     * @throws Exception Exception thrown if there is any problem, in particular usefull to detect problems with the fxml file.
+     * @throws Exception   Exception thrown if there is any problem, in particular
+     *                     usefull to detect problems with the fxml file.
      */
     private void start(final Stage stage) throws IOException {
         Platform.runLater(() -> {
@@ -67,8 +69,8 @@ public class GameOverWinState implements WindowState {
                 URL url;
                 url = new File("src/main/resources/layouts/GameOver.fxml").toURI().toURL();
                 final Parent root = FXMLLoader.load(url);
-                final Scene scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X,
-                    GameMap.HEIGHT * GameMap.SCREEN_PROP_Y);
+                final Scene scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
+                        GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
                 final Button restartGame = (Button) scene.lookup("#restartGame");
                 final Button closeGame = (Button) scene.lookup("#closeGame");
                 final Text score = (Text) scene.lookup("#score");
@@ -82,7 +84,7 @@ public class GameOverWinState implements WindowState {
                 });
                 closeGame.setOnMouseClicked(e -> {
                     Platform.exit();
-                    System.exit(0);
+                    Runtime.getRuntime().exit(0);
                 });
                 score.setText("score: " + String.valueOf(this.finalScore));
                 root.setOnKeyPressed(e -> {
@@ -95,11 +97,11 @@ public class GameOverWinState implements WindowState {
                     }
                 });
                 score.setFont(Font.font("wavy", FontWeight.BOLD, FontPosture.REGULAR,
-                    (GameMap.BORDER_WIDTH / 3) * GameMap.SCREEN_PROP_X));
+                        (GameMap.BORDER_WIDTH / 3) * GameMap.SCREEN_PROP_X));
                 stage.setTitle("GAME OVER :(");
                 stage.setScene(scene);
-                stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
                 stage.setFullScreen(true);
+                stage.setResizable(false);
                 stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
                 stage.show();
             } catch (MalformedURLException e) {
@@ -113,7 +115,7 @@ public class GameOverWinState implements WindowState {
     private void buttonManagement(final Button btn) {
         btn.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X);
         btn.setPrefHeight(GameMap.BORDER_HEIGHT / 3 * GameMap.SCREEN_PROP_Y);
-        //Duration = 0.5 seconds
+        // Duration = 0.5 seconds
         RotateTransition rotateTransition = new RotateTransition(Duration.millis(BUTTON_ANIM_DURATION), btn);
         rotateTransition.setByAngle(360);
         rotateTransition.play();
