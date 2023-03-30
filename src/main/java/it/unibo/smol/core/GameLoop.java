@@ -53,6 +53,9 @@ public class GameLoop extends Thread {
         pastTime = System.nanoTime();
 
         gameState.initGame();
+        if (gameState.getScoreLocalStorage().getScoreFile().exists()) {
+            gameState.notifyRead();
+        }
         do {
             now = System.nanoTime();
 
@@ -67,12 +70,15 @@ public class GameLoop extends Thread {
             } /*
             if (timer >= 1000000000) {
                 System.out.println("FPS: "+ drawCount);
-                System.out.println(gameState.getScore());
+                //System.out.println(gameState.getScore());
                 drawCount=0;
                 timer=0;
             }*/
         } while (!gameState.isGameOver());
         gameState.stopEnemyCreation();
+
+        gameState.notifyWrite();
+
         new WindowImpl(new GameOverWinState(gameState.getScore())).launch(view);
     }
 
