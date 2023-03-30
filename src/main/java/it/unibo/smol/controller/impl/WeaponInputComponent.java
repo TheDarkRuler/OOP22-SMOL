@@ -18,8 +18,8 @@ public class WeaponInputComponent implements InputComponent {
      * constructor to initialize mouse inputs for weapon entity.
      * @param mouse
      */
-    public WeaponInputComponent(final MouseInputs mouse) {
-        this.mouse = mouse;
+    public WeaponInputComponent(final Optional<MouseInputs> mouse) {
+        this.mouse = mouse.orElseThrow();
     }
 
     /**

@@ -1,8 +1,11 @@
 package it.unibo.smol.controller.input;
 
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import it.unibo.smol.common.Directions;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -16,15 +19,17 @@ public class KeyInputs implements EventHandler<KeyEvent> {
     /**
      * Direction of the player.
      */
-    private static Queue<Directions> movement = new LinkedList<>();
+    private Queue<Directions> movement = new LinkedList<>();
+    private static Logger logger = Logger.getLogger("keyInputLogger");
     private final Stage stage;
+    private MouseInputs mouseInputs;
 
     /**
      * sets the game Stage in order to apply changes to it.
      * @param stage
      */
-    public KeyInputs(final Stage stage) {
-        this.stage = stage;
+    public KeyInputs(final Optional<Stage> stage) {
+        this.stage = stage.orElseThrow();
     }
 
     /**
@@ -43,36 +48,36 @@ public class KeyInputs implements EventHandler<KeyEvent> {
                 }
             }
 
-            if (!MouseInputs.isPlayerFreezed() && !MouseInputs.isPlayerStunned()) {
+            if (!mouseInputs.isPlayerFreezed() && !mouseInputs.isPlayerStunned()) {
             switch (event.getCode()) {
                 case W:
-                    KeyInputs.setMovement(Directions.UP);
+                    this.setMovement(Directions.UP);
                     break;
                 case A:
-                    KeyInputs.setMovement(Directions.LEFT);
+                    this.setMovement(Directions.LEFT);
                     break;
                 case S:
-                    KeyInputs.setMovement(Directions.DOWN);
+                    this.setMovement(Directions.DOWN);
                     break;
                 case D:
-                    KeyInputs.setMovement(Directions.RIGHT);
+                    this.setMovement(Directions.RIGHT);
                     break;
                 default:
                     break;
                 }
             }
 
-        } else if (event.getEventType().equals(KeyEvent.KEY_RELEASED) && !MouseInputs.isPlayerFreezed()
-            && !MouseInputs.isPlayerStunned()) {
+        } else if (event.getEventType().equals(KeyEvent.KEY_RELEASED) && !mouseInputs.isPlayerFreezed()
+            && !mouseInputs.isPlayerStunned()) {
 
             switch (event.getCode()) {
                 case W:
                 case S:
-                    KeyInputs.setMovement(Directions.STAY_Y);
+                    this.setMovement(Directions.STAY_Y);
                     break;
                 case A:
                 case D:
-                    KeyInputs.setMovement(Directions.STAY_X);
+                    this.setMovement(Directions.STAY_X);
                     break; 
                 default:
                     break;
@@ -94,7 +99,19 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      * sets movement with the new paramenter letting the two input files communicate.
      * @param newMovement
      */
-    public static void setMovement(final Directions newMovement) {
-        KeyInputs.movement.offer(newMovement);
+    public void setMovement(final Directions newMovement) {
+        try {
+            movement.offer(newMovement);
+        } catch (NoSuchElementException e) {
+            logger.log(Level.FINE, "KeyInputError::", e);
+        }
+    }
+
+    /**
+     * sets the mouseInput.
+     * @param mouseInputs
+     */
+    public void setMouseInputs(final Optional<MouseInputs> mouseInputs) {
+        this.mouseInputs = mouseInputs.orElseThrow();
     }
 }

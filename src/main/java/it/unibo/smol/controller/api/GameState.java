@@ -1,6 +1,7 @@
 package it.unibo.smol.controller.api;
 
 import java.util.Map;
+import java.util.Optional;
 
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
@@ -43,13 +44,13 @@ public interface GameState {
      * sets the keyInput in gamestate.
      * @param keyInputs
      */
-    void setKeyInputs(KeyInputs keyInputs);
+    void setKeyInputs(Optional<KeyInputs> keyInputs);
 
     /**
      * sets the mouseInputs in gamestate.
      * @param mouseInputs
      */
-    void setMouseInputs(MouseInputs mouseInputs);
+    void setMouseInputs(Optional<MouseInputs> mouseInputs);
 
     /**
      * gets the entity factory for the entities creation.

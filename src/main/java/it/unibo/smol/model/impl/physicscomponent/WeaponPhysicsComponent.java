@@ -43,7 +43,7 @@ public class WeaponPhysicsComponent extends PhysicsComponent {
      */
     @Override
     public void receiveMovement(final Point2D move, final World world) {
-        final double wRange = world.getMouseInputs().getWeaponRange();
+        final double wRange = world.getMouseInputs().orElseThrow().getWeaponRange();
         final Point2D playerLocation = world.getEntities()
             .stream()
             .filter(x -> x.getType().equals(Type.PLAYER))

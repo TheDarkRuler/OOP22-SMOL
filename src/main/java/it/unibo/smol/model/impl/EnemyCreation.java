@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,8 +31,8 @@ public class EnemyCreation {
      * Constructor.
      * @param gameState
      */
-    public EnemyCreation(final GameState gameState) {
-        this.gameState = gameState;
+    public EnemyCreation(final Optional<GameState> gameState) {
+        this.gameState = gameState.orElseThrow();
         this.entitiesMap = new HashMap<>(Map.of("Mole", Constant.DEF_RATE_BASIC,
                                                 "Helmet_mole", Constant.DEF_RATE_HELMET,
                                                 "Angry_mole", Constant.DEF_RATE_ANGRY,
@@ -114,7 +115,7 @@ public class EnemyCreation {
      * @return the initial position
      */
     private Point2D initialEnemyPosition() {
-        if (new Random().nextBoolean()) {
+        if (rand.nextBoolean()) {
             return new Point2D(randomBetweenTwo(GameMap.BORDER_WIDTH / 2,
                 GameMap.BORDER_WIDTH / 2 + GameMap.MAP_WIDTH),
                 GameMap.BORDER_HEIGHT / 2 + rand

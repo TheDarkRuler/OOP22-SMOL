@@ -1,6 +1,7 @@
 package it.unibo.smol.controller.impl;
 
 import java.util.Map;
+import java.util.Optional;
 
 import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.api.GameState;
@@ -98,14 +99,14 @@ public class GameStateImpl implements GameState {
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         new PlantsCreation(this);
-        this.enemyCreator = new EnemyCreation(this);
+        this.enemyCreator = new EnemyCreation(Optional.of(this));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setKeyInputs(final KeyInputs keyInputs) {
+    public void setKeyInputs(final Optional<KeyInputs> keyInputs) {
         this.world.setKeyInputs(keyInputs);
     }
 
@@ -113,7 +114,7 @@ public class GameStateImpl implements GameState {
      * {@inheritDoc}
      */
     @Override
-    public void setMouseInputs(final MouseInputs mouseInputs) {
+    public void setMouseInputs(final Optional<MouseInputs> mouseInputs) {
         this.world.setMouseInputs(mouseInputs);
     }
 

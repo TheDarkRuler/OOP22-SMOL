@@ -2,7 +2,7 @@ package it.unibo.smol.view.impl;
 
 import java.io.IOException;
 import java.util.logging.Logger;
-
+import java.util.Optional;
 import java.util.logging.Level;
 
 import it.unibo.smol.controller.api.GameState;
@@ -83,8 +83,10 @@ public class GameViewState implements WindowState {
     }
 
     private void start(final Stage stage) throws IOException {
-        keyEventHandler = new KeyInputs(stage);
+        keyEventHandler = new KeyInputs(Optional.of(stage));
         mouseEventHandler = new MouseInputs();
+        keyEventHandler.setMouseInputs(Optional.of(mouseEventHandler));
+        mouseEventHandler.setKeyInputs(Optional.of(keyEventHandler));
         setKeyInputs();
         setMouseInputs();
         final var root = new Pane();
@@ -150,14 +152,14 @@ public class GameViewState implements WindowState {
      * sets the keyInput in gamestate.
      */
     public void setKeyInputs() {
-        this.gameState.setKeyInputs(this.keyEventHandler);
+        this.gameState.setKeyInputs(Optional.of(this.keyEventHandler));
     }
 
     /**
      * sets the mouseInputs in gamestate.
      */
     public void setMouseInputs() {
-        this.gameState.setMouseInputs(this.mouseEventHandler);
+        this.gameState.setMouseInputs(Optional.of(this.mouseEventHandler));
     }
 
     private void initializeHealthBar() {

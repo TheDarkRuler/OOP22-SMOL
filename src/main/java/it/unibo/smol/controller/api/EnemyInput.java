@@ -58,7 +58,7 @@ public class EnemyInput {
         this.maxTimesCanSpawn = maxTimesCanSpawn;
         this.enemyPosition = initialEnemyPosition;
         this.enemyNextPosition = enemySetsPosition(rand.nextInt(4)).get();
-        this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, this, movSpeed);
+        this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, Optional.of(this), movSpeed);
     }
 
     /**
@@ -314,6 +314,6 @@ public class EnemyInput {
      * @param millisec
      */
     public void freezeMouseInputs(final int millisec) {
-        this.getWorld().getMouseInputs().freezeInputsFromBomb(millisec);
+        this.getWorld().getMouseInputs().orElseThrow().freezeInputsFromBomb(millisec);
     }
 }
