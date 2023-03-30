@@ -8,7 +8,6 @@ import javafx.geometry.Point2D;
  * Abstract class rappresenting the template of the Physics component for the {@link Entity}.
  */
 public abstract class PhysicsComponent {
-    
     private double movementSpeed;
     private double x, y;
     private final HitBox hitBox;

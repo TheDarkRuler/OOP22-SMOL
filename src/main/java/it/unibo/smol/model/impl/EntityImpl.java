@@ -18,9 +18,9 @@ public class EntityImpl implements Entity {
     private final Optional<HealthComponent> healthComp;
     private final Optional<GraphicComponent> graphicComp;
     private final PhysicsComponent physicsComp;
+    private final World world;
     private double currentX;
     private double currentY;
-    private World world;
 
     /**
      * Constructor for creating entities utilizing the entity factory.

@@ -7,14 +7,11 @@ import it.unibo.smol.model.impl.WorldImpl;
 import it.unibo.smol.view.impl.GameViewState;
 import it.unibo.smol.view.impl.WindowImpl;
 import javafx.stage.Stage;
-
 /**
  * This class is the engine of the game.
  * The purpose of the engine is to control the {@link GameLoop} thread
  */
 public class GameEngineImpl implements GameEngine {
-
-    private GameLoop gameLoop;
 
     /**
      * {@inheritDoc}
@@ -23,7 +20,7 @@ public class GameEngineImpl implements GameEngine {
     public void init(final Stage primaryStage) {
         final var gs = new GameStateImpl(new WorldImpl());
         final var gv = new GameViewState(gs);
-        gameLoop = new GameLoop(gs, gv, Optional.of(primaryStage));
+        final GameLoop gameLoop = new GameLoop(gs, gv, Optional.of(primaryStage));
         new WindowImpl(gv).launch(primaryStage);
         gameLoop.start();
     }
