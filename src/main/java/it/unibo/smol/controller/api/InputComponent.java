@@ -34,5 +34,5 @@ public interface InputComponent {
      * gets the enemyInput.
      * @return enemyinput
      */
-    EnemyInput getEnemyInput();
+    Optional<EnemyInput> getEnemyInput();
 }

@@ -59,8 +59,8 @@ public class WeaponInputComponent implements InputComponent {
      * {@inheritDoc}
      */
     @Override
-    public EnemyInput getEnemyInput() {
+    public Optional<EnemyInput> getEnemyInput() {
         //this component will not use this method.
-        return null;
+        return Optional.empty();
     }
 }
