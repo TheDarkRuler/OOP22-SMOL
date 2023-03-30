@@ -54,6 +54,7 @@ public class GameViewState implements WindowState {
 
     /**
      * constructor made to get the gamseState.
+     * 
      * @param gameState
      */
     public GameViewState(final GameState gameState) {
@@ -87,16 +88,16 @@ public class GameViewState implements WindowState {
         setKeyInputs();
         setMouseInputs();
         final var root = new Pane();
-        final var scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X,
-            GameMap.HEIGHT * GameMap.SCREEN_PROP_Y, Color.BLACK);
+        final var scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
+                GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1, Color.BLACK);
         final var canvas = new Canvas(GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y);
         this.gContext = canvas.getGraphicsContext2D();
         gContext.setImageSmoothing(false);
         this.graphic = new GraphicsDraw(gContext);
         root.setBackground(new Background(new BackgroundImage(LoadImgs.getSprites(LoadImgs.BACKGROUND),
-            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-            new BackgroundSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y,
-            false, false, false, false))));
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y,
+                        false, false, false, false))));
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
         scene.setOnMouseMoved(mouseEventHandler);
@@ -120,16 +121,17 @@ public class GameViewState implements WindowState {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(final WindowEvent e) {
-             Platform.exit();
-             System.exit(0);
+                Platform.exit();
+                Runtime.getRuntime().exit(0);
             }
-          });
+        });
         stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
         stage.show();
     }
 
     /**
      * Repaint the graphic aspect of the view.
+     * 
      * @param stage The stage where the game is running
      * @throws IOException Exception if the stage can't be rendered.
      */
@@ -139,9 +141,9 @@ public class GameViewState implements WindowState {
             updateHealthBar();
             score.setText(Integer.toString(gameState.getScore()));
             gameState.getWorld().getEntities().stream()
-                .filter(x -> x.getGraphicComp().isPresent())
-                .map(x -> x.getGraphicComp())
-                .forEach(x -> x.orElseThrow().render(graphic));
+                    .filter(x -> x.getGraphicComp().isPresent())
+                    .map(x -> x.getGraphicComp())
+                    .forEach(x -> x.orElseThrow().render(graphic));
         });
     }
 
@@ -171,7 +173,7 @@ public class GameViewState implements WindowState {
 
     private void initializeScore() {
         score = new Text((GameMap.MAP_WIDTH - GameMap.BORDER_WIDTH) * GameMap.SCREEN_PROP_X,
-            GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 3, Integer.toString(gameState.getScore()));
+                GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 3, Integer.toString(gameState.getScore()));
         score.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, SCORE_SIZE));
         score.setFill(Color.WHITE);
         score.setTextAlignment(TextAlignment.RIGHT);
@@ -199,4 +201,3 @@ public class GameViewState implements WindowState {
     }
 
 }
-

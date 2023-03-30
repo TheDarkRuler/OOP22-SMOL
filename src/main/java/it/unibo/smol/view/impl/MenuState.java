@@ -17,6 +17,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -51,7 +52,8 @@ public class MenuState implements WindowState {
      * 
      * @param primaryStage stage were menu will be generated.
      * @throws IOException
-     * @throws Exception Exception thrown if there is any problem, in particular usefull to detect problems with the fxml file.
+     * @throws Exception   Exception thrown if there is any problem, in particular
+     *                     usefull to detect problems with the fxml file.
      */
     private void start(final Stage primaryStage) throws IOException {
         /*
@@ -59,9 +61,10 @@ public class MenuState implements WindowState {
          */
         final URL url = new File("src/main/resources/layouts/Menu.fxml").toURI().toURL();
         final Parent root = FXMLLoader.load(url);
-        final Scene scene = new Scene(root, GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT);
+        final Scene scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
+                GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         final VBox menuBox = (VBox) scene.lookup("#box");
-        //children
+        // children
         final Text title = (Text) scene.lookup("#title");
         final Button startGame = (Button) scene.lookup("#start");
         final Button gameOver = (Button) scene.lookup("#gameOver");
@@ -70,10 +73,11 @@ public class MenuState implements WindowState {
         /*
          * Set fields.
          */
-        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
+        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR,
+                GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
         scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER)));
         menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
-        //buttons behaviour
+        // buttons behaviour
         startGame.setOnMouseClicked(e -> {
             gameEngine.init(primaryStage);
         });
@@ -82,7 +86,16 @@ public class MenuState implements WindowState {
         });
         quitGame.setOnMouseClicked(e -> {
             Platform.exit();
-            System.exit(0);
+            Runtime.getRuntime().exit(0);
+        });
+        root.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.F11)) {
+                if (primaryStage.isFullScreen()) {
+                    primaryStage.setFullScreen(false);
+                } else {
+                    primaryStage.setFullScreen(true);
+                }
+            }
         });
 
         /*
@@ -91,10 +104,13 @@ public class MenuState implements WindowState {
         buttonManagement(startGame);
         buttonManagement(gameOver);
         buttonManagement(quitGame);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Start Menu :)");
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
         primaryStage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
+        primaryStage.setFullScreenExitHint("");
+        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 
