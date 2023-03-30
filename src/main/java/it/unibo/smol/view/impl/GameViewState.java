@@ -44,6 +44,7 @@ public class GameViewState implements WindowState {
     private KeyInputs keyEventHandler;
     private MouseInputs mouseEventHandler;
     private Text score;
+    private Text record;
     private Rectangle healthBar;
 
 
@@ -98,9 +99,11 @@ public class GameViewState implements WindowState {
         root.getChildren().add(canvas);
         initializeHealthBar();
         initializeScore();
+        initializeRecord();
         root.getChildren().add(underHealthBar());
         root.getChildren().add(healthBar);
         root.getChildren().add(score);
+        root.getChildren().add(record);
         stage.setX(0);
         stage.setY(0);
         stage.setScene(scene);
@@ -122,6 +125,7 @@ public class GameViewState implements WindowState {
             gContext.clearRect(0, 0, GameMap.WIDTH*GameMap.SCREEN_PROP_X, GameMap.HEIGHT*GameMap.SCREEN_PROP_Y);
             updateHealthBar();
             score.setText(Integer.toString(gameState.getScore()));
+            record.setText(Integer.toString(gameState.getRecord()));
             gameState.getWorld().getEntities().stream().map(x -> x.getGraphicComp()).forEach(x -> x.render(graphic));
         });
     }
@@ -176,6 +180,16 @@ public class GameViewState implements WindowState {
     private void updateHealthBar() {
         HealthBarTank healthBarData = new HealthBarTankImpl(this.gameState);
         this.healthBar.setWidth(healthBarData.getHealthBarWidth() * healthBarData.updateHealthPercentage());
+    }
+
+    private void initializeRecord() {
+        record = new Text((GameMap.MAP_WIDTH-GameMap.BORDER_WIDTH*3)*GameMap.SCREEN_PROP_X, GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 3, Integer.toString(gameState.getRecord()));
+        record.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, 18));
+        record.setFill(Color.WHITE);
+        record.setTextAlignment(TextAlignment.LEFT);
+        record.setScaleX(3);
+        record.setScaleY(3);
+        record.setVisible(true);
     }
 
 }
