@@ -65,24 +65,8 @@ public class GameStateImpl implements GameState {
      * {@inheritDoc}
      */
     @Override
-    public void incScore(final int quantity) {
-        this.world.incScore(quantity);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public int getScore() {
         return this.world.getScore();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void notifyDeath() {
-        // TODO Auto-generated method stub
     }
 
     /**
@@ -134,8 +118,7 @@ public class GameStateImpl implements GameState {
     }
 
     /**
-     * gets the entity factory in order to create entities.
-     * @return the entity factory
+     * {@inheritDoc}
      */
     @Override
     public EntityFactory getEntityFactory() {

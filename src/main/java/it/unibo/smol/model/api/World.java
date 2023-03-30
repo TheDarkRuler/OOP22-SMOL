@@ -47,11 +47,6 @@ public interface World {
     void updateWorld();
 
     /**
-     * @return difficulty increment.
-     */
-    int diffIncrement();
-
-    /**
      * @param thisEntity is the entity to add to the list of entities.
      */
     void addEntity(Entity thisEntity);

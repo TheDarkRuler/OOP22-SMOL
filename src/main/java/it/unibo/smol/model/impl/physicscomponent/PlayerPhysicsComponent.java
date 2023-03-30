@@ -64,20 +64,6 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     /**
      * {@inheritDoc}
      */
-    /*public void setX(final double x) {
-        super.setX(super.getEntity().getCurrentX() + x);
-    }*/
-
-    /**
-     * {@inheritDoc}
-     */
-    /*public void setY(final double y) {
-        super.setY(super.getEntity().getCurrentY() + y);
-    }*/
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void receiveMovement(final Point2D move, final World world) {
         //This component doesn't use this method

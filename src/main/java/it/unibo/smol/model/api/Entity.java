@@ -49,12 +49,6 @@ public interface Entity {
     void setY(double y);
 
     /**
-     * Set the current World.
-     * @param w the World to set
-     */
-    void setWorld(World w);
-
-    /**
      * Getter for the field type.
      * @return the {@link Type} of the entity
      */
@@ -85,7 +79,7 @@ public interface Entity {
     Optional<GraphicComponent> getGraphicComp();
 
     /**
-     * Update all the component of the object.
+     * Update all the component of the Entity.
      */
     void update();
 

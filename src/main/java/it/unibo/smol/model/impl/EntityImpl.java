@@ -80,6 +80,7 @@ public class EntityImpl implements Entity {
     public double getCurrentY() {
         return currentY;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -116,14 +117,6 @@ public class EntityImpl implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public void setWorld(final World w) {
-        this.world = w;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Type getType() {
         return type;
     }
@@ -148,6 +141,22 @@ public class EntityImpl implements Entity {
      * {@inheritDoc}
      */
     @Override
+    public Optional<InputComponent> getInputComp() {
+        return this.inputComp;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<GraphicComponent> getGraphicComp() {
+        return this.graphicComp;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void update() {
         if (inputComp.isPresent()) {
             final InputComponent inputCompPresent = inputComp.orElseThrow();
@@ -162,27 +171,10 @@ public class EntityImpl implements Entity {
                 this.setY(this.currentY + physicsComp.getY());
             }
             physicsComp.updateHitbox(currentX, currentY);
-            //System.out.println("Entity "+this.type+" move to x:"+(int)this.currentX+" y:"+(int)this.currentY);
         }
         physicsComp.checkCollision();
         if (healthComp.isPresent() && healthComp.get().isDead()) {
             this.getWorld().remove(this);
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Optional<InputComponent> getInputComp() {
-        return this.inputComp;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Optional<GraphicComponent> getGraphicComp() {
-        return this.graphicComp;
     }
 }

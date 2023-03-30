@@ -1,8 +1,5 @@
 package it.unibo.smol.model.api;
 
-import java.util.List;
-import java.util.Optional;
-
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 import javafx.geometry.Point2D;
@@ -11,9 +8,7 @@ import javafx.geometry.Point2D;
  * Abstract class rappresenting the template of the Physics component for the {@link Entity}.
  */
 public abstract class PhysicsComponent {
-    /**
-     * The field rappresenting the movement speed.
-     */
+    
     private double movementSpeed;
     private double x, y;
     private final HitBox hitBox;
@@ -49,18 +44,6 @@ public abstract class PhysicsComponent {
         } else {
             throw new IllegalStateException("Entity should be linked to his component");
         }
-    }
-
-    /**
-     * Check the collision with the given list of Entities.
-     * @param list the given list of Entities
-     * @return {@code Empty} if there isn't a collision; Otherwise the Entity that collide with 
-     */
-    public Optional<Entity> checkCollision(final List<Entity> list) {
-        return list.stream()
-            .filter(x -> !this.equals(x.getPhysicsComp()))
-            .filter(x -> hitBox.isColliding(x.getPhysicsComp().getHitBox()))
-            .findAny();
     }
 
     /**

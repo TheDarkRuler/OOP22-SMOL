@@ -77,7 +77,7 @@ public class GameLoop extends Thread {
     }
 
     /**
-     * Update the logic and check the end condition of the Game.
+     * Update the logic of the Game.
      */
     public void update() {
         gameState.getWorld().updateWorld();
