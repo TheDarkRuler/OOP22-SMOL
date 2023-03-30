@@ -68,7 +68,7 @@ public class HealthBarTankImpl implements HealthBarTank {
     @Override
     public Double updateHealthPercentage() {
         this.currentLife = Double.valueOf(0);
-        gameState.getWorld().getLifePlants().forEach(x -> {
+        gameState.getWorld().orElseThrow().getLifePlants().forEach(x -> {
 
             if (x.getHealthComp().isPresent()) {
                 currentLife = currentLife + x.getHealthComp().get().getCurrentHealth();

@@ -17,7 +17,7 @@ public interface GameState {
      * Get the current world.
      * @return game world
      */
-    World getWorld();
+    Optional<World> getWorld();
 
     /**
      * @return if game is Over or not.

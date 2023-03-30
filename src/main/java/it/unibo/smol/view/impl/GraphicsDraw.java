@@ -2,6 +2,7 @@ package it.unibo.smol.view.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.view.GameMap;
@@ -22,8 +23,8 @@ public class GraphicsDraw {
      * constructor that gets the graphicContext used to draw and stores the images.
      * @param g
      */
-    public GraphicsDraw(final GraphicsContext g) {
-        this.g = g;
+    public GraphicsDraw(final Optional<GraphicsContext> g) {
+        this.g = g.orElseThrow();
         this.images = new HashMap<>();
         storeImages();
     }

@@ -1,5 +1,6 @@
 package it.unibo.smol.model.impl.physicscomponent;
 
+import java.util.Optional;
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
@@ -20,7 +21,7 @@ public class EnemyPhysicsComponent extends PhysicsComponent {
      * @param movSpeed
      */
     public EnemyPhysicsComponent(final HitBox hitBox, final double movSpeed) {
-        super(movSpeed, hitBox);
+        super(movSpeed, Optional.of(hitBox));
     }
 
     /**
@@ -29,9 +30,9 @@ public class EnemyPhysicsComponent extends PhysicsComponent {
     @Override
     protected void collisonEvent(final Entity entityCollided) {
         if (entityCollided.getType() == Type.WEAPON) {
-            super.getEntity().getHealthComp().orElseThrow().setHealth(Constant.WEAPON_DMG);
-            if (super.getEntity().getHealthComp().orElseThrow().isDead()) {
-                super.getEntity().getWorld().incScore(Constant.ENEMY_SCORE);
+            super.getEntity().orElseThrow().getHealthComp().orElseThrow().setHealth(Constant.WEAPON_DMG);
+            if (super.getEntity().orElseThrow().getHealthComp().orElseThrow().isDead()) {
+                super.getEntity().orElseThrow().getWorld().orElseThrow().incScore(Constant.ENEMY_SCORE);
             }
         }
     }

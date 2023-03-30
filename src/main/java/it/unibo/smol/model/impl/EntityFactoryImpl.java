@@ -45,9 +45,9 @@ public class EntityFactoryImpl implements EntityFactory {
         Optional.of(new PlayerInputComponent(w.getKeyInputs())),
         Optional.empty(),
         Optional.of(new PlayerGraphicComponent(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT)),
-        new PlayerPhysicsComponent(new RectangleHB(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT,
-            new Point2D(x, y))),
-        x, y, w);
+        Optional.of(new PlayerPhysicsComponent(new RectangleHB(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT,
+            new Point2D(x, y)))),
+        x, y, Optional.of(w));
     }
 
     /**
@@ -59,9 +59,9 @@ public class EntityFactoryImpl implements EntityFactory {
         Optional.empty(),
         Optional.of(new HealthComponent(Constant.HEALTH_HP)),
         Optional.of(new LifePlantsGraphicComponent(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT)),
-        new LifePlantsPhysicsComponent(new RectangleHB(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT,
-            new Point2D(x, y))),
-        x, y, w);
+        Optional.of(new LifePlantsPhysicsComponent(new RectangleHB(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT,
+            new Point2D(x, y)))),
+        x, y, Optional.of(w));
     }
 
     /**
@@ -73,8 +73,8 @@ public class EntityFactoryImpl implements EntityFactory {
         Optional.of(new WeaponInputComponent(w.getMouseInputs())),
         Optional.empty(),
         Optional.of(new WeaponGraphicComponent(2 * Constant.WEAPON_RADIUS, 2 * Constant.WEAPON_RADIUS)),
-        new WeaponPhysicsComponent(new CircleHB(new Point2D(x, y), Constant.WEAPON_RADIUS)),
-        x, y, w);
+        Optional.of(new WeaponPhysicsComponent(new CircleHB(new Point2D(x, y), Constant.WEAPON_RADIUS))),
+        x, y, Optional.of(w));
     }
 
     /**
@@ -83,12 +83,12 @@ public class EntityFactoryImpl implements EntityFactory {
     @Override
     public Entity createBasicEnemy(final Point2D initialPosition, final World w) {
         return new EntityImpl(Type.ENEMY, 
-        Optional.of(new EnemyInputComponent(new EnemyBasicInput(w, initialPosition))),
+        Optional.of(new EnemyInputComponent(Optional.of(new EnemyBasicInput(Optional.of(w), initialPosition)))),
         Optional.of(new HealthComponent(Constant.ENEMY_HP)), 
         Optional.of(new BasicEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT)), 
-        new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
-        initialPosition), Constant.BASIC_ENEMY_SPEED),
-        initialPosition.getX(), initialPosition.getY(), w);
+        Optional.of(new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
+        initialPosition), Constant.BASIC_ENEMY_SPEED)),
+        initialPosition.getX(), initialPosition.getY(), Optional.of(w));
     }
 
     /**
@@ -97,12 +97,12 @@ public class EntityFactoryImpl implements EntityFactory {
     @Override
     public Entity createHelmetEnemy(final Point2D initialPosition, final World w) {
         return new EntityImpl(Type.ENEMY,
-        Optional.of(new EnemyInputComponent(new EnemyHelmetInput(w, initialPosition))),
+        Optional.of(new EnemyInputComponent(Optional.of(new EnemyHelmetInput(Optional.of(w), initialPosition)))),
         Optional.of(new HealthComponent(Constant.ENEMY_HELMET_HP)),
         Optional.of(new HelmetEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT)),
-        new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
-        initialPosition), Constant.HELMET_ENEMY_SPEED),
-        initialPosition.getX(), initialPosition.getY(), w);
+        Optional.of(new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
+        initialPosition), Constant.HELMET_ENEMY_SPEED)),
+        initialPosition.getX(), initialPosition.getY(), Optional.of(w));
     }
 
     /**
@@ -111,12 +111,12 @@ public class EntityFactoryImpl implements EntityFactory {
     @Override
     public Entity createAngryEnemy(final Point2D initalPosition, final World w) {
         return new EntityImpl(Type.ENEMY,
-        Optional.of(new EnemyInputComponent(new EnemyAngryInput(w, initalPosition))),
+        Optional.of(new EnemyInputComponent(Optional.of(new EnemyAngryInput(Optional.of(w), initalPosition)))),
         Optional.of(new HealthComponent(Constant.ENEMY_HP)),
         Optional.of(new AngryEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT)),
-        new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
-        initalPosition), Constant.ANGRY_ENEMY_SPEED),
-        initalPosition.getX(), initalPosition.getY(), w);
+        Optional.of(new EnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
+        initalPosition), Constant.ANGRY_ENEMY_SPEED)),
+        initalPosition.getX(), initalPosition.getY(), Optional.of(w));
     }
 
     /**
@@ -125,12 +125,12 @@ public class EntityFactoryImpl implements EntityFactory {
     @Override
     public Entity createBombEnemy(final Point2D initialPosition, final World w) {
         return new EntityImpl(Type.ENEMY, 
-        Optional.of(new EnemyInputComponent(new EnemyBombInput(w, initialPosition))),
+        Optional.of(new EnemyInputComponent(Optional.of(new EnemyBombInput(Optional.of(w), initialPosition)))),
         Optional.of(new HealthComponent(Constant.ENEMY_HP)), 
         Optional.of(new BombEnemyGraphicComponent(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT)), 
-        new BombEnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
-        initialPosition), Constant.BOMB_ENEMY_SPEED),
-        initialPosition.getX(), initialPosition.getY(), w);
+        Optional.of(new BombEnemyPhysicsComponent(new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT,
+        initialPosition), Constant.BOMB_ENEMY_SPEED)),
+        initialPosition.getX(), initialPosition.getY(), Optional.of(w));
     }
 
     /**
@@ -142,7 +142,7 @@ public class EntityFactoryImpl implements EntityFactory {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
-        new WallPhysicsComponent(hitbox),
-        hitbox.getCenter().getX(), hitbox.getCenter().getY(), w);
+        Optional.of(new WallPhysicsComponent(hitbox)),
+        hitbox.getCenter().getX(), hitbox.getCenter().getY(), Optional.of(w));
     }
 }

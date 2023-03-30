@@ -57,8 +57,8 @@ public class GameViewState implements WindowState {
      * 
      * @param gameState
      */
-    public GameViewState(final GameState gameState) {
-        this.gameState = gameState;
+    public GameViewState(final Optional<GameState> gameState) {
+        this.gameState = gameState.orElseThrow();
     }
 
     /**
@@ -83,10 +83,9 @@ public class GameViewState implements WindowState {
     }
 
     private void start(final Stage stage) throws IOException {
-        keyEventHandler = new KeyInputs(Optional.of(stage));
-        mouseEventHandler = new MouseInputs();
-        keyEventHandler.setMouseInputs(Optional.of(mouseEventHandler));
-        mouseEventHandler.setKeyInputs(Optional.of(keyEventHandler));
+        this.keyEventHandler = new KeyInputs(Optional.of(stage));
+        this.mouseEventHandler = new MouseInputs(Optional.of(keyEventHandler));
+
         setKeyInputs();
         setMouseInputs();
         final var root = new Pane();
@@ -94,8 +93,8 @@ public class GameViewState implements WindowState {
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1, Color.BLACK);
         final var canvas = new Canvas(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         this.gContext = canvas.getGraphicsContext2D();
-        gContext.setImageSmoothing(false);
-        this.graphic = new GraphicsDraw(gContext);
+        this.gContext.setImageSmoothing(false);
+        this.graphic = new GraphicsDraw(Optional.of(gContext));
         root.setBackground(new Background(new BackgroundImage(LoadImgs.getSprites(LoadImgs.BACKGROUND),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 new BackgroundSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1,
@@ -141,7 +140,7 @@ public class GameViewState implements WindowState {
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
             updateHealthBar();
             score.setText(Integer.toString(gameState.getScore()));
-            gameState.getWorld().getEntities().stream()
+            gameState.getWorld().orElseThrow().getEntities().stream()
                     .filter(x -> x.getGraphicComp().isPresent())
                     .map(x -> x.getGraphicComp())
                     .forEach(x -> x.orElseThrow().render(graphic));

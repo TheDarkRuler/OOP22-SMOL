@@ -18,9 +18,9 @@ import javafx.scene.input.MouseEvent;
 public class MouseInputs implements EventHandler<MouseEvent> {
 
     private final ScheduledExecutorService animationTime;
+    private final KeyInputs keyInputs;
     private boolean playerFreeze;
     private boolean playerStunned;
-    private KeyInputs keyInputs;
     private boolean weaponSmashed;
     private boolean weaponIsSmashing;
     private boolean cursorOnScreen;
@@ -31,17 +31,22 @@ public class MouseInputs implements EventHandler<MouseEvent> {
 
     /**
      * constructor that sets the default values.
+     * @param keyInputs
      */
-    public MouseInputs() {
+    public MouseInputs(final Optional<KeyInputs> keyInputs) {
         this.weaponSmashed = false;
         this.weaponHits = false;
         this.weaponIsSmashing = false;
         this.cursorOnScreen = false;
         this.playerStunned = false;
+        this.playerFreeze = false;
         this.weaponRange = 0;
         this.weaponIncrease = 0;
         this.animationTime = Executors.newSingleThreadScheduledExecutor();
         this.weaponLocation = new Point2D(GameMap.WIDTH / 2, GameMap.HEIGHT / 2);
+        this.keyInputs = keyInputs.orElseThrow();
+        this.keyInputs.setPlayerFreezed(playerFreeze);
+        this.keyInputs.serPlayerStunned(playerStunned);
     }
 
     /**
@@ -153,6 +158,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         keyInputs.setMovement(Directions.STAY_X);
         keyInputs.setMovement(Directions.STAY_Y);
         this.playerStunned = true;
+        this.keyInputs.serPlayerStunned(playerStunned);
     }
 
     /**
@@ -162,6 +168,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         keyInputs.setMovement(Directions.STAY_X);
         keyInputs.setMovement(Directions.STAY_Y);
         this.playerFreeze = true;
+        this.keyInputs.setPlayerFreezed(playerFreeze);
     }
 
     /**
@@ -171,6 +178,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         keyInputs.setMovement(Directions.STAY_X);
         keyInputs.setMovement(Directions.STAY_Y);
         this.playerStunned = false;
+        this.keyInputs.serPlayerStunned(playerStunned);
         this.weaponSmashed = false;
         this.weaponIsSmashing = false;
     }
@@ -182,6 +190,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         keyInputs.setMovement(Directions.STAY_X);
         keyInputs.setMovement(Directions.STAY_Y);
         this.playerFreeze = false;
+        this.keyInputs.setPlayerFreezed(playerFreeze);
         this.weaponSmashed = false;
         this.weaponIsSmashing = false;
     }
@@ -230,29 +239,4 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         }
         return false;
     }
-
-    /**
-     * returns if the player status is going to let the two input files communicate.
-     * @return if the player is freezed
-     */
-    public boolean isPlayerFreezed() {
-        return this.playerFreeze;
-    }
-
-    /**
-     * returns if the player status is going to let the two input files communicate.
-     * @return if the player is stunned
-     */
-    public boolean isPlayerStunned() {
-        return this.playerStunned;
-    }
-
-    /**
-     * sets the keyInput.
-     * @param keyInputs
-     */
-    public void setKeyInputs(final Optional<KeyInputs> keyInputs) {
-        this.keyInputs = keyInputs.orElseThrow();
-    }
-
 }

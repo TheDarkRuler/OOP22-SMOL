@@ -35,19 +35,19 @@ public class EntityImpl implements Entity {
      */
     public EntityImpl(final Type type, final Optional<InputComponent> inputComp,
             final Optional<HealthComponent> healthComp,
-            final Optional<GraphicComponent> graphicComp, final PhysicsComponent physicsComp,
-            final double currentX, final double currentY, final World w) {
+            final Optional<GraphicComponent> graphicComp, final Optional<PhysicsComponent> physicsComp,
+            final double currentX, final double currentY, final Optional<World> w) {
         this.type = type;
         this.inputComp = inputComp;
         this.healthComp = healthComp;
         this.graphicComp = graphicComp;
-        this.physicsComp = physicsComp;
+        this.physicsComp = physicsComp.orElseThrow(null);
         this.currentX = currentX;
         this.currentY = currentY;
-        this.world = w;
-        physicsComp.setEntity(this);
-        graphicComp.ifPresent(x -> x.setEntity(this));
-        inputComp.ifPresent(x -> x.getEnemyInput().ifPresent(a -> a.setEntity(this)));
+        this.world = w.orElseThrow();
+        physicsComp.orElseThrow().setEntity(Optional.of(this));
+        graphicComp.ifPresent(x -> x.setEntity(Optional.of(this)));
+        inputComp.ifPresent(x -> x.getEnemyInput().ifPresent(a -> a.setEntity(Optional.of(this))));
     }
 
     /**
@@ -61,8 +61,8 @@ public class EntityImpl implements Entity {
         this.graphicComp = null;
         this.currentX = entity.getCurrentX();
         this.currentY = entity.getCurrentY();
-        this.world = entity.getWorld();
-        this.physicsComp = entity.getPhysicsComp();
+        this.world = entity.getWorld().orElseThrow();
+        this.physicsComp = entity.getPhysicsComp().orElseThrow();
     }
 
     /**
@@ -93,8 +93,8 @@ public class EntityImpl implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public World getWorld() {
-        return world;
+    public Optional<World> getWorld() {
+        return Optional.of(world);
     }
 
     /**
@@ -133,8 +133,8 @@ public class EntityImpl implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public PhysicsComponent getPhysicsComp() {
-        return physicsComp;
+    public Optional<PhysicsComponent> getPhysicsComp() {
+        return Optional.of(physicsComp);
     }
 
     /**
@@ -174,7 +174,7 @@ public class EntityImpl implements Entity {
         }
         physicsComp.checkCollision();
         if (healthComp.isPresent() && healthComp.get().isDead()) {
-            this.getWorld().remove(this);
+            this.getWorld().orElseThrow().remove(this);
         }
     }
 }

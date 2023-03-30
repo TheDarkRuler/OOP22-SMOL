@@ -22,7 +22,8 @@ public class KeyInputs implements EventHandler<KeyEvent> {
     private Queue<Directions> movement = new LinkedList<>();
     private static Logger logger = Logger.getLogger("keyInputLogger");
     private final Stage stage;
-    private MouseInputs mouseInputs;
+    private boolean playerFreeze;
+    private boolean playerStunned;
 
     /**
      * sets the game Stage in order to apply changes to it.
@@ -48,7 +49,7 @@ public class KeyInputs implements EventHandler<KeyEvent> {
                 }
             }
 
-            if (!mouseInputs.isPlayerFreezed() && !mouseInputs.isPlayerStunned()) {
+            if (!this.playerFreeze && !this.playerStunned) {
             switch (event.getCode()) {
                 case W:
                     this.setMovement(Directions.UP);
@@ -67,8 +68,8 @@ public class KeyInputs implements EventHandler<KeyEvent> {
                 }
             }
 
-        } else if (event.getEventType().equals(KeyEvent.KEY_RELEASED) && !mouseInputs.isPlayerFreezed()
-            && !mouseInputs.isPlayerStunned()) {
+        } else if (event.getEventType().equals(KeyEvent.KEY_RELEASED) && !this.playerFreeze
+            && !this.playerStunned) {
 
             switch (event.getCode()) {
                 case W:
@@ -108,10 +109,18 @@ public class KeyInputs implements EventHandler<KeyEvent> {
     }
 
     /**
-     * sets the mouseInput.
-     * @param mouseInputs
+     * sets if the player is freezed.
+     * @param playerFreeze
      */
-    public void setMouseInputs(final Optional<MouseInputs> mouseInputs) {
-        this.mouseInputs = mouseInputs.orElseThrow();
+    public void setPlayerFreezed(final boolean playerFreeze) {
+        this.playerFreeze = playerFreeze;
+    }
+
+    /**
+     * sets if the player is stunned.
+     * @param playerStunned
+     */
+    public void serPlayerStunned(final boolean playerStunned) {
+        this.playerStunned = playerStunned;
     }
 }

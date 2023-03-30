@@ -36,9 +36,9 @@ public class GameLoop extends Thread {
      * @param gv the visual rappresentation of the game
      * @param view The stage of the current view
      */
-    public GameLoop(final GameState gameState, final GameViewState gv, final Optional<Stage> view) {
-        this.gameState = gameState;
-        this.gv = gv;
+    public GameLoop(final Optional<GameState> gameState, final Optional<GameViewState> gv, final Optional<Stage> view) {
+        this.gameState = gameState.orElseThrow();
+        this.gv = gv.orElseThrow();
         this.view = view.orElseThrow();
     }
 
@@ -80,7 +80,7 @@ public class GameLoop extends Thread {
      * Update the logic of the Game.
      */
     public void update() {
-        gameState.getWorld().updateWorld();
+        gameState.getWorld().orElseThrow().updateWorld();
     }
 
     /**

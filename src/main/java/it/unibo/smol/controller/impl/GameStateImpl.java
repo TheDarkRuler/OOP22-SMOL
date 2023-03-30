@@ -33,6 +33,7 @@ public class GameStateImpl implements GameState {
     public GameStateImpl(final World world) {
         this.world = new WorldImpl(world);
         this.entityFactory = new EntityFactoryImpl();
+        this.enemyCreator = new EnemyCreation(Optional.of(this));
     }
 
     /**
@@ -40,7 +41,7 @@ public class GameStateImpl implements GameState {
      * @param gameState the game state that we want to copy
      */
     public GameStateImpl(final GameState gameState) {
-        this.world = gameState.getWorld();
+        this.world = gameState.getWorld().orElseThrow();
         this.entityFactory = new EntityFactoryImpl();
     }
 
@@ -48,8 +49,8 @@ public class GameStateImpl implements GameState {
      * {@inheritDoc}
      */
     @Override
-    public World getWorld() {
-        return this.world;
+    public Optional<World> getWorld() {
+        return Optional.of(this.world);
     }
 
     /**
@@ -75,7 +76,7 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public Map<Entity, Boolean> occupiedPlants() {
-        return getWorld().occupiedPlants();
+        return getWorld().orElseThrow().occupiedPlants();
     }
 
     /**
@@ -98,8 +99,8 @@ public class GameStateImpl implements GameState {
 
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
-        new PlantsCreation(this);
-        this.enemyCreator = new EnemyCreation(Optional.of(this));
+        new PlantsCreation(Optional.of(this));
+        this.enemyCreator.startCreation();
     }
 
     /**

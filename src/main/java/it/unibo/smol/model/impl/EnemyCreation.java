@@ -20,11 +20,12 @@ import javafx.geometry.Point2D;
 */
 public class EnemyCreation {
 
+    private static final Random RANDOM = new Random();
+
     private final GameState gameState;
     private final Map<String, Double> entitiesMap;
     private int minTimeEnemySpawn;
     private int maxTimeEnemySpawn;
-    private final Random rand;
     private final Timer createEnemyTimer;
 
     /**
@@ -40,8 +41,6 @@ public class EnemyCreation {
         this.minTimeEnemySpawn = Constant.DEF_MIN_TIME_SPAWN;
         this.maxTimeEnemySpawn = Constant.DEF_MAX_TIME_SPAWN;
         this.createEnemyTimer = new Timer();
-        this.rand = new Random();
-        creationTimer();
     }
 
     /**
@@ -63,20 +62,24 @@ public class EnemyCreation {
         //System.out.println(enemyName);
         switch (enemyName) {
             case "Mole":
-                gameState.getWorld()
-                    .addEntity(gameState.getEntityFactory().createBasicEnemy(initialEnemyPosition(), gameState.getWorld()));
+                gameState.getWorld().orElseThrow()
+                    .addEntity(gameState.getEntityFactory()
+                        .createBasicEnemy(initialEnemyPosition(), gameState.getWorld().orElseThrow()));
                 break;
             case "Helmet_mole":
-                gameState.getWorld()
-                    .addEntity(gameState.getEntityFactory().createHelmetEnemy(initialEnemyPosition(), gameState.getWorld()));
+                gameState.getWorld().orElseThrow()
+                    .addEntity(gameState.getEntityFactory()
+                        .createHelmetEnemy(initialEnemyPosition(), gameState.getWorld().orElseThrow()));
                 break;
             case "Angry_mole":
-                gameState.getWorld()
-                    .addEntity(gameState.getEntityFactory().createAngryEnemy(initialEnemyPosition(), gameState.getWorld()));
+                gameState.getWorld().orElseThrow()
+                    .addEntity(gameState.getEntityFactory()
+                        .createAngryEnemy(initialEnemyPosition(), gameState.getWorld().orElseThrow()));
                 break;
             case "Bomb_mole":
-                gameState.getWorld()
-                    .addEntity(gameState.getEntityFactory().createBombEnemy(initialEnemyPosition(), gameState.getWorld()));
+                gameState.getWorld().orElseThrow()
+                    .addEntity(gameState.getEntityFactory()
+                        .createBombEnemy(initialEnemyPosition(), gameState.getWorld().orElseThrow()));
                 break;
             default:
                 break;
@@ -106,8 +109,8 @@ public class EnemyCreation {
                     .findAny().get().getKey());
             }
 
-        }, minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn),
-        minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn));
+        }, minTimeEnemySpawn + RANDOM.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn),
+        minTimeEnemySpawn + RANDOM.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn));
     }
 
     /**
@@ -115,13 +118,13 @@ public class EnemyCreation {
      * @return the initial position
      */
     private Point2D initialEnemyPosition() {
-        if (rand.nextBoolean()) {
+        if (RANDOM.nextBoolean()) {
             return new Point2D(randomBetweenTwo(GameMap.BORDER_WIDTH / 2,
                 GameMap.BORDER_WIDTH / 2 + GameMap.MAP_WIDTH),
-                GameMap.BORDER_HEIGHT / 2 + rand
+                GameMap.BORDER_HEIGHT / 2 + RANDOM
                     .nextDouble(GameMap.MAP_HEIGHT - GameMap.BORDER_HEIGHT / 2));
         } else {
-            return new Point2D(GameMap.BORDER_WIDTH / 2 + rand
+            return new Point2D(GameMap.BORDER_WIDTH / 2 + RANDOM
             .nextDouble(GameMap.MAP_WIDTH - GameMap.BORDER_WIDTH / 2),
                 randomBetweenTwo(GameMap.BORDER_HEIGHT / 2,
                 GameMap.BORDER_HEIGHT / 2 + GameMap.MAP_HEIGHT));
@@ -135,7 +138,7 @@ public class EnemyCreation {
      * @return one of the two given parameter
      */
     private double randomBetweenTwo(final double first, final double second) {
-        return rand.nextBoolean() ? first : second;
+        return RANDOM.nextBoolean() ? first : second;
     }
 
     /**
@@ -143,5 +146,12 @@ public class EnemyCreation {
      */
     public void stopCreation() {
         this.createEnemyTimer.cancel();
+    }
+
+    /**
+     * starts the creation of the enemies.
+     */
+    public void startCreation() {
+        creationTimer();
     }
 }
