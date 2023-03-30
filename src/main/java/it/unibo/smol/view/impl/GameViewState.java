@@ -90,13 +90,13 @@ public class GameViewState implements WindowState {
         final var root = new Pane();
         final var scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1, Color.BLACK);
-        final var canvas = new Canvas(GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y);
+        final var canvas = new Canvas(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         this.gContext = canvas.getGraphicsContext2D();
         gContext.setImageSmoothing(false);
         this.graphic = new GraphicsDraw(gContext);
         root.setBackground(new Background(new BackgroundImage(LoadImgs.getSprites(LoadImgs.BACKGROUND),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                new BackgroundSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y,
+                new BackgroundSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1,
                         false, false, false, false))));
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
@@ -111,8 +111,6 @@ public class GameViewState implements WindowState {
         root.getChildren().add(underHealthBar());
         root.getChildren().add(healthBar);
         root.getChildren().add(score);
-        stage.setX(0);
-        stage.setY(0);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setFullScreenExitHint(INIT_MESSAGE);
@@ -137,7 +135,8 @@ public class GameViewState implements WindowState {
      */
     public void repaint(final Stage stage) throws IOException {
         Platform.runLater(() -> {
-            gContext.clearRect(0, 0, GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y);
+            gContext.clearRect(0, 0, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
+                GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
             updateHealthBar();
             score.setText(Integer.toString(gameState.getScore()));
             gameState.getWorld().getEntities().stream()

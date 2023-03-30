@@ -47,7 +47,7 @@ public class EntityImpl implements Entity {
         this.world = w;
         physicsComp.setEntity(this);
         graphicComp.ifPresent(x -> x.setEntity(this));
-        inputComp.map(x -> x.getEnemyInput()).ifPresent(x -> x.setEntity(this));
+        inputComp.ifPresent(x -> x.getEnemyInput().ifPresent(a -> a.setEntity(this)));
     }
 
     /**

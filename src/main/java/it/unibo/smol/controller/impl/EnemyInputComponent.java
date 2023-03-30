@@ -58,7 +58,7 @@ public class EnemyInputComponent implements InputComponent {
      * {@inheritDoc}
      */
     @Override
-    public EnemyInput getEnemyInput() {
-        return this.input;
+    public Optional<EnemyInput> getEnemyInput() {
+        return Optional.of(this.input);
     }
 }
