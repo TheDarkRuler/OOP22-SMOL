@@ -37,6 +37,8 @@ import javafx.stage.WindowEvent;
  */
 public class GameViewState implements WindowState {
 
+    private static final String INIT_MESSAGE = "Be careful, Moles are coming for your greens" 
+        + "\n (F11 to enable and disable full screen)";
     private static Logger logger = Logger.getLogger("myLog");
     private static final int SCORE_SIZE = 18;
 
@@ -112,8 +114,7 @@ public class GameViewState implements WindowState {
         stage.setY(0);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setFullScreenExitHint("Be careful, Moles are coming for your vegetables" 
-            + " (F11 to enable and disable full screen)");
+        stage.setFullScreenExitHint(INIT_MESSAGE);
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
