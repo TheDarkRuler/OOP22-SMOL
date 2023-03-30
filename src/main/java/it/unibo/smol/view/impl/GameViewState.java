@@ -143,8 +143,8 @@ public class GameViewState implements WindowState {
             gContext.clearRect(0, 0, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
             updateHealthBar();
-            score.setText(Integer.toString(gameState.getScore()));
-            record.setText("Record:" + Integer.toString(gameState.getRecord()));
+            score.setText("Score: " + Integer.toString(gameState.getScore()));
+            record.setText("Record: " + Integer.toString(gameState.getRecord()));
             gameState.getWorld().orElseThrow().getEntities().stream()
                     .filter(x -> x.getGraphicComp().isPresent())
                     .map(x -> x.getGraphicComp())
@@ -177,7 +177,7 @@ public class GameViewState implements WindowState {
     }
 
     private void initializeScore() {
-        score = new Text((GameMap.MAP_WIDTH - GameMap.BORDER_WIDTH) * GameMap.SCREEN_PROP_X,
+        score = new Text((GameMap.MAP_WIDTH - GameMap.BORDER_WIDTH * 2) * GameMap.SCREEN_PROP_X,
                 GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 3, Integer.toString(gameState.getScore()));
         score.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, SCORE_SIZE));
         score.setFill(Color.WHITE);
@@ -206,7 +206,7 @@ public class GameViewState implements WindowState {
     }
 
     private void initializeRecord() {
-        record = new Text(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X,
+        record = new Text(GameMap.BORDER_WIDTH * 2 * GameMap.SCREEN_PROP_X,
             (GameMap.HEIGHT - GameMap.BORDER_HEIGHT / 3) * GameMap.SCREEN_PROP_Y,
             "Record:" + Integer.toString(gameState.getRecord()));
         record.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, SCORE_SIZE));
