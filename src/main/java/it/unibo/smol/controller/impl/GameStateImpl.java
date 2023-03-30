@@ -7,6 +7,7 @@ import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
+import it.unibo.smol.model.ScoreLocalStorage;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.EntityFactory;
@@ -25,6 +26,7 @@ public class GameStateImpl implements GameState {
     private final World world;
     private final EntityFactory entityFactory;
     private EnemyCreation enemyCreator;
+    private final ScoreLocalStorage scoreStorage;
 
     /**
      * Constructor.
@@ -34,6 +36,7 @@ public class GameStateImpl implements GameState {
         this.world = new WorldImpl(world);
         this.entityFactory = new EntityFactoryImpl();
         this.enemyCreator = new EnemyCreation(Optional.of(this));
+        this.scoreStorage = new ScoreLocalStorage(this);
     }
 
     /**
@@ -43,6 +46,7 @@ public class GameStateImpl implements GameState {
     public GameStateImpl(final GameState gameState) {
         this.world = gameState.getWorld().orElseThrow();
         this.entityFactory = new EntityFactoryImpl();
+        this.scoreStorage = new ScoreLocalStorage(gameState);
     }
 
     /**
@@ -133,6 +137,38 @@ public class GameStateImpl implements GameState {
     @Override
     public void stopEnemyCreation() {
         this.enemyCreator.stopCreation();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getRecord() {
+        return this.scoreStorage.getRecord();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void notifyWrite() {
+        this.scoreStorage.writeFile();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void notifyRead() {
+        this.scoreStorage.readFile();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ScoreLocalStorage getScoreLocalStorage() {
+        return this.scoreStorage;
     }
 
 }

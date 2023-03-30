@@ -27,7 +27,7 @@ public class BombEnemyPhysicsComponent extends EnemyPhysicsComponent {
         if (entityCollided.getType() == Type.WEAPON) {
             super.getEntity().orElseThrow().getInputComp().orElseThrow().freezeInput(Constant.BOMB_EXPLOSION);
             super.getEntity().orElseThrow().getHealthComp().orElseThrow().setHealth(Constant.WEAPON_DMG);
-            super.getEntity().orElseThrow().getWorld().orElseThrow().incScore(-2 * Constant.ENEMY_SCORE);
+            super.getEntity().orElseThrow().getWorld().orElseThrow().incScore(-Constant.ENEMY_SCORE);
         }
     }
 }

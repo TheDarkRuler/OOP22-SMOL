@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
+import it.unibo.smol.model.ScoreLocalStorage;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.EntityFactory;
 import it.unibo.smol.model.api.World;
@@ -63,4 +64,25 @@ public interface GameState {
      */
     void stopEnemyCreation();
 
+    /**
+     * Getter for record score.
+     * @return the record
+     */
+    int getRecord();
+
+    /**
+     * Notify the ScoreLocalStorage to write.
+     */
+    void notifyWrite();
+
+    /**
+     * Notify the ScoreLocalStorage to read.
+     */
+    void notifyRead();
+
+    /**
+     * Getter for ScoreLocalStorage.
+     * @return the ScoreLocalStorage
+     */
+    ScoreLocalStorage getScoreLocalStorage();
 }

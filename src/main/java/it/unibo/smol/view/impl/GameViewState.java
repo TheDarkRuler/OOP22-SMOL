@@ -49,6 +49,7 @@ public class GameViewState implements WindowState {
     private KeyInputs keyEventHandler;
     private MouseInputs mouseEventHandler;
     private Text score;
+    private Text record;
     private Rectangle healthBar;
     private HealthBarTank healthBarData;
 
@@ -109,9 +110,12 @@ public class GameViewState implements WindowState {
         root.getChildren().add(canvas);
         initializeHealthBar();
         initializeScore();
+        initializeRecord();
         root.getChildren().add(underHealthBar());
         root.getChildren().add(healthBar);
         root.getChildren().add(score);
+        root.getChildren().add(record);
+        stage.setTitle("SMOL");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setFullScreenExitHint(INIT_MESSAGE);
@@ -140,6 +144,7 @@ public class GameViewState implements WindowState {
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
             updateHealthBar();
             score.setText(Integer.toString(gameState.getScore()));
+            record.setText("Record:"+Integer.toString(gameState.getRecord()));
             gameState.getWorld().orElseThrow().getEntities().stream()
                     .filter(x -> x.getGraphicComp().isPresent())
                     .map(x -> x.getGraphicComp())
@@ -198,6 +203,16 @@ public class GameViewState implements WindowState {
     private void updateHealthBar() {
         this.healthBarData = new HealthBarTankImpl(this.gameState);
         this.healthBar.setWidth(healthBarData.getHealthBarWidth() * healthBarData.updateHealthPercentage());
+    }
+
+    private void initializeRecord() {
+        record = new Text(GameMap.BORDER_WIDTH*GameMap.SCREEN_PROP_X, (GameMap.HEIGHT - GameMap.BORDER_HEIGHT / 3) * GameMap.SCREEN_PROP_Y, "Record:" +Integer.toString(gameState.getRecord()));
+        record.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, 18));
+        record.setFill(Color.WHITE);
+        record.setTextAlignment(TextAlignment.LEFT);
+        record.setScaleX(3);
+        record.setScaleY(3);
+        record.setVisible(true);
     }
 
 }
