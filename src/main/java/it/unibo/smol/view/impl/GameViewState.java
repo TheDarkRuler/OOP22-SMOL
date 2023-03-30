@@ -111,6 +111,7 @@ public class GameViewState implements WindowState {
         root.getChildren().add(underHealthBar());
         root.getChildren().add(healthBar);
         root.getChildren().add(score);
+        stage.setTitle("SMOL");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setFullScreenExitHint(INIT_MESSAGE);
