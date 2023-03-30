@@ -23,6 +23,7 @@ public class EnemyMoves {
      * @param from
      * @param to
      * @param enemyToMove
+     * @param movSpeed
      */
     public EnemyMoves(final Point2D from, final Point2D to, final EnemyInput enemyToMove, final double movSpeed) {
         this.from = from;

@@ -34,27 +34,27 @@ public final class Constant {
     public static final int ENEMY_DMG = -1;
     /**The time the player stay freeze when the bomb explode. */
     public static final int BOMB_EXPLOSION = 2000;
-    /**The amount of point for killing an enemy */
+    /**The amount of point for killing an enemy. */
     public static final int ENEMY_SCORE = 100;
-    /**Max time a Bomb mole can spawn */
+    /**Max time a Bomb mole can spawn. */
     public static final int BOMB_ENEMY_MAX_SPAWNS = 3;
-    /**Max time a Helmet mole can spawn */
+    /**Max time a Helmet mole can spawn. */
     public static final int HELMET_ENEMY_MAX_SPAWNS = 3;
-    /**Max time a Angry mole can spawn */
+    /**Max time a Angry mole can spawn. */
     public static final int ANGRY_ENEMY_MAX_SPAWNS = 2;
-    /**Max time a Basic mole can spawn */
+    /**Max time a Basic mole can spawn. */
     public static final int BASIC_ENEMY_MAX_SPAWNS = 3;
-    /**Speed of the Bomb mole */
+    /**Speed of the Bomb mole. */
     public static final double BOMB_ENEMY_SPEED = 1;
-    /**Speed of the Helmet mole */
+    /**Speed of the Helmet mole. */
     public static final double HELMET_ENEMY_SPEED = 1;
-    /**Speed of the Angry mole */
+    /**Speed of the Angry mole. */
     public static final double ANGRY_ENEMY_SPEED = 1.5;
-    /**Speed of the Basic mole */
+    /**Speed of the Basic mole. */
     public static final double BASIC_ENEMY_SPEED = 1;
-    /**Min time a enemy stays up */
+    /**Min time a enemy stays up. */
     public static final int DEFAULT_MIN_TIME_UP = 1500;
-    /**Max time a enemy stays up */
+    /**Max time a enemy stays up. */
     public static final int DEFAULT_MAX_TIME_UP = 2500;
 
     /**---------------------------
@@ -85,7 +85,7 @@ public final class Constant {
     /**The basic weapon range. */
     public static final double DEF_WEAPON_RANGE = 160;
     /**the max weapon range. */
-    public static final double WEAPON_MAX_RANGE = DEF_WEAPON_RANGE*4;
+    public static final double WEAPON_MAX_RANGE = DEF_WEAPON_RANGE * 4;
     /**the waiting time before the hammer start increasing range. */
     public static final int HOLD_TIME = 200;
     /**the waiting after the hammer get smashed. */
@@ -110,7 +110,7 @@ public final class Constant {
     public static final int DEC_TIME_SPAWN = 200; 
     /** Default max time of spawn.*/
     public static final int DEF_MAX_TIME_SPAWN = 3500;
-    /** Default minimum time of spawn*/
+    /** Default minimum time of spawn.*/
     public static final int DEF_MIN_TIME_SPAWN = 2500;
     /** Whenever the score reaches a multiple of this value the difficulty increase.*/
     public static final int INC_DIFFICULTY_PIVOT = 2000;

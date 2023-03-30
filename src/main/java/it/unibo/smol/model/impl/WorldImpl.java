@@ -19,7 +19,6 @@ import it.unibo.smol.model.Type;
 public class WorldImpl implements World {
     private static final Boolean OCCUPIED = true;
     private static final Boolean FREE = false;
-    private static final int INC_RATE = 20;
     private final ConcurrentLinkedDeque<Entity> entities;
     private final Map<Entity, Boolean> occupiedPlants;
     private int score;
@@ -94,13 +93,6 @@ public class WorldImpl implements World {
     @Override
     public int getScore() {
         return this.score;
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int diffIncrement() {
-        return getScore() / INC_RATE;
     }
     /**
      * {@inheritDoc}

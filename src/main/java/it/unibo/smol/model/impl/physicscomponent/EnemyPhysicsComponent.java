@@ -17,6 +17,7 @@ public class EnemyPhysicsComponent extends PhysicsComponent {
     /**
      * Constructor inherited by the super-class {@link PhysicsComponent}.
      * @param hitBox : See the super-Constructor
+     * @param movSpeed
      */
     public EnemyPhysicsComponent(final HitBox hitBox, final double movSpeed) {
         super(movSpeed, hitBox);

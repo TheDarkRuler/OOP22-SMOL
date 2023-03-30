@@ -1,26 +1,23 @@
 package it.unibo.smol.view.impl;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import java.net.URL;
-
 import it.unibo.smol.core.GameEngine;
 import it.unibo.smol.core.GameEngineImpl;
 import it.unibo.smol.view.GameMap;
+import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -33,8 +30,11 @@ import javafx.util.Duration;
  * Implementation of the menu state, it renders the menu.
  */
 public class MenuState implements WindowState {
+
     private static Logger logger = Logger.getLogger("menuLogger");
+    private static final int MENU_ANIM_DURATION = 500;
     private final GameEngine gameEngine = new GameEngineImpl();
+
     /**
      * {@inheritDoc}
      */
@@ -46,52 +46,80 @@ public class MenuState implements WindowState {
             logger.log(Level.SEVERE, "MenuStateError::", e);
         }
     }
+
     /**
      * This method generate the menu from a file FXML.
      * 
      * @param primaryStage stage were menu will be generated.
      * @throws IOException
-     * @throws Exception Exception thrown if there is any problem, in particular usefull to detect problems with the fxml file.
+     * @throws Exception   Exception thrown if there is any problem, in particular
+     *                     usefull to detect problems with the fxml file.
      */
     private void start(final Stage primaryStage) throws IOException {
+        /*
+         * Get fields initialization.
+         */
         final URL url = new File("src/main/resources/layouts/Menu.fxml").toURI().toURL();
         final Parent root = FXMLLoader.load(url);
-        final Scene scene = new Scene(root, GameMap.MAP_WIDTH, GameMap.MAP_HEIGHT);
-        final Button startGame = (Button) scene.lookup("#start");
+        final Scene scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
+                GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         final VBox menuBox = (VBox) scene.lookup("#box");
+        // children
         final Text title = (Text) scene.lookup("#title");
-        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, GameMap.BORDER_WIDTH));
-        try {
-            Image hammer = new Image(new FileInputStream("src/main/resources/images/hammer.png"));
-            Cursor hammerCursor = new ImageCursor(hammer, 20, 20);
-            scene.setCursor(hammerCursor);
-        } catch (FileNotFoundException e) {
-            Logger.getLogger(MenuState.class.getName()).info("Illegal Argument");
-        }
+        final Button startGame = (Button) scene.lookup("#start");
+        final Button gameOver = (Button) scene.lookup("#gameOver");
+        final Button quitGame = (Button) scene.lookup("#quit");
+
+        /*
+         * Set fields.
+         */
+        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR,
+                GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
+        scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER)));
         menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
+        // buttons behaviour
         startGame.setOnMouseClicked(e -> {
             gameEngine.init(primaryStage);
         });
-        final Button gameOver = (Button) scene.lookup("#gameOver");
         gameOver.setOnMouseClicked(e -> {
-            new WindowImpl(new GameOverWinState()).launch(primaryStage);
-            //System.out.println("there is nothing there");
+            new WindowImpl(new GameOverWinState(0)).launch(primaryStage);
         });
+        quitGame.setOnMouseClicked(e -> {
+            Platform.exit();
+            Runtime.getRuntime().exit(0);
+        });
+        root.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.F11)) {
+                if (primaryStage.isFullScreen()) {
+                    primaryStage.setFullScreen(false);
+                } else {
+                    primaryStage.setFullScreen(true);
+                }
+            }
+        });
+
+        /*
+         * Fields attachment.
+         */
         buttonManagement(startGame);
         buttonManagement(gameOver);
+        buttonManagement(quitGame);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Start Menu :)");
         primaryStage.setScene(scene);
-        primaryStage.setX(GameMap.WIDTH / 2 - GameMap.MAP_WIDTH / 2);
-        primaryStage.setY(GameMap.HEIGHT / 2 - GameMap.MAP_HEIGHT / 2);
+        primaryStage.centerOnScreen();
+        primaryStage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
+        primaryStage.setFullScreenExitHint("");
+        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 
-    private void buttonManagement(Button btn) {
-        btn.setPrefWidth(GameMap.BORDER_WIDTH);
+    private void buttonManagement(final Button btn) {
+        btn.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X * 2);
         btn.setPrefHeight(GameMap.BORDER_WIDTH / 3);
-        //Duration = 2.5 seconds
-        Duration duration = Duration.millis(500);
-        RotateTransition rotateTransition = new RotateTransition(duration, btn);
+        //Duration = 0.5 seconds
+        final Duration duration = Duration.millis(MENU_ANIM_DURATION);
+        final RotateTransition rotateTransition = new RotateTransition(duration, btn);
         rotateTransition.setByAngle(360);
         rotateTransition.play();
     }

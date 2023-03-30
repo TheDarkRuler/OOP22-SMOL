@@ -8,8 +8,9 @@
 
 <VBox fx:id="box" stylesheets="css/Menu.css" alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
       <children>
-      <Text id="title">SMOL</Text>
-      <Button fx:id="start" layoutX="457.0" layoutY="212.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="366.0" text="Start" />
-         <Button fx:id="gameOver" layoutX="457.0" layoutY="453.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="366.0" text="Impossible" />
+            <Text id="title">SMOL</Text>
+            <Button fx:id="start" text="START" />
+            <Button fx:id="gameOver" text="INSTRUCTIONS" />
+            <Button fx:id="quit" text="QUIT" />
       </children>
 </VBox>

@@ -38,7 +38,7 @@ public class LifePlantsGraphicComponent extends GraphicComponent {
     @Override
     public void updateAnimation() {
         if (super.getEntity() != null) {
-            if (super.getEntity().getHealthComp().get().getCurrentHealth() <= Constant.HEALTH_HP/2 ) {
+            if (super.getEntity().getHealthComp().get().getCurrentHealth() <= Constant.HEALTH_HP / 2) {
                 isHalfDead = true;
             } else {
                 isHalfDead = false;

@@ -43,6 +43,7 @@ public class EnemyInput {
      * @param maxTimesCanSpawn
      * @param world
      * @param initialEnemyPosition
+     * @param movSpeed
      */
     public EnemyInput(final int maxTimesCanSpawn, final World world,
         final Point2D initialEnemyPosition, final double movSpeed) {
@@ -158,6 +159,7 @@ public class EnemyInput {
 
     /**
      * allowes the enemy to stay up for a period of time.
+     * @return returns a runnable that runs after a period of time
      */
     protected Runnable enemyStaysUp() {
         return new Runnable() {
@@ -191,6 +193,7 @@ public class EnemyInput {
     /**
      * chooses a free plant for the enemy to go, if all plants are occupied
      * it goes in a random plant where there's already a enemy.
+     * @return the position of the plant in which the enemy will go
      */
     private Point2D enemyGoesOnPlants() {
         final Point2D temp;
@@ -306,6 +309,10 @@ public class EnemyInput {
         return enemyMovement.isEnemyUnderground();
     }
 
+    /**
+     * stunnes the enemy for a given period of time.
+     * @param millisec
+     */
     public void freezeMouseInputs(final int millisec) {
         this.getWorld().getMouseInputs().freezeInputsFromBomb(millisec);
     }

@@ -19,8 +19,6 @@ import javafx.geometry.Point2D;
 */
 public class EnemyCreation {
 
-    
-
     private final GameState gameState;
     private final Map<String, Double> entitiesMap;
     private int minTimeEnemySpawn;
@@ -54,8 +52,6 @@ public class EnemyCreation {
         entitiesMap.put("Helmet_mole", Constant.DEF_RATE_HELMET + (temp * Constant.INC_RATE_HELMET));
         minTimeEnemySpawn -= temp * Constant.DEC_TIME_SPAWN;
         maxTimeEnemySpawn -= temp * Constant.DEC_TIME_SPAWN;
-        System.out.println(minTimeEnemySpawn);
-        System.out.println(maxTimeEnemySpawn);
     }
 
     /**
@@ -86,7 +82,6 @@ public class EnemyCreation {
         }
     }
 
-    
     /**
      * Timer that create moles with a certain delay (minTimeEnemySpawn and maxTimeEnemySpawn).
      */
@@ -102,7 +97,6 @@ public class EnemyCreation {
                 final List<Double> weightList = new ArrayList<>(entitiesMap.values().stream().sorted().toList());
                 final Double randomDouble = Math.random();
 
-                System.out.println(weightList);
                 spawnEntity(entitiesMap.entrySet()
                     .stream()
                     .filter(s -> s.getValue().equals(weightList.stream().sorted()
@@ -110,8 +104,8 @@ public class EnemyCreation {
                         .findFirst().get()))
                     .findAny().get().getKey());
             }
-            
-        }, minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn), 
+
+        }, minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn),
         minTimeEnemySpawn + rand.nextInt(maxTimeEnemySpawn - minTimeEnemySpawn));
     }
 
@@ -143,6 +137,9 @@ public class EnemyCreation {
         return rand.nextBoolean() ? first : second;
     }
 
+    /**
+     * stops the creation of enemies.
+     */
     public void stopCreation() {
         this.createEnemyTimer.cancel();
     }

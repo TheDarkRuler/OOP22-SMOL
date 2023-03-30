@@ -19,6 +19,10 @@ public class KeyInputs implements EventHandler<KeyEvent> {
     private static Queue<Directions> movement = new LinkedList<>();
     private final Stage stage;
 
+    /**
+     * sets the game Stage in order to apply changes to it.
+     * @param stage
+     */
     public KeyInputs(final Stage stage) {
         this.stage = stage;
     }
@@ -81,8 +85,8 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      * @return the movement Direction
      */
     public Optional<Directions> getMovement() {
-        var temp = movement.poll();
-        return temp!=null ? Optional.of(temp) : Optional.empty();
+        final var temp = movement.poll();
+        return temp != null ? Optional.of(temp) : Optional.empty();
 
     }
 

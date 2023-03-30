@@ -16,8 +16,6 @@ import javafx.scene.input.MouseEvent;
  */
 public class MouseInputs implements EventHandler<MouseEvent> {
 
-    
-
     private static boolean playerFreeze;
     private static boolean playerStunned;
     private boolean weaponSmashed;
@@ -36,10 +34,10 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         this.weaponSmashed = false;
         this.weaponHits = false;
         this.weaponIsSmashing = false;
+        this.cursorOnScreen = false;
+        setPlayerStun(false);
         this.weaponRange = 0;
         this.weaponIncrease = 0;
-        this.cursorOnScreen = false;
-        MouseInputs.playerStunned = false;
         this.animationTime = Executors.newSingleThreadScheduledExecutor();
         this.weaponLocation = new Point2D(GameMap.WIDTH / 2, GameMap.HEIGHT / 2);
     }
@@ -143,7 +141,6 @@ public class MouseInputs implements EventHandler<MouseEvent> {
                 weaponRange = 0;
                 playerReleasedFromStun();
             }
-            
         };
     }
 
@@ -153,7 +150,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     private void playerGetStunned() {
         KeyInputs.setMovement(Directions.STAY_X);
         KeyInputs.setMovement(Directions.STAY_Y);
-        MouseInputs.playerStunned = true;
+        setPlayerStun(true);
     }
 
     /**
@@ -171,7 +168,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     private void playerReleasedFromStun() {
         KeyInputs.setMovement(Directions.STAY_X);
         KeyInputs.setMovement(Directions.STAY_Y);
-        MouseInputs.playerStunned = false;
+        setPlayerStun(false);
         this.weaponSmashed = false;
         this.weaponIsSmashing = false;
     }
@@ -209,7 +206,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
      * @return weaponLocation
      */
     public Point2D getWeaponLocation() {
-        return new Point2D(weaponLocation.getX()/GameMap.SCREEN_PROP_X, weaponLocation.getY()/GameMap.SCREEN_PROP_Y);
+        return new Point2D(weaponLocation.getX() / GameMap.SCREEN_PROP_X, weaponLocation.getY() / GameMap.SCREEN_PROP_Y);
     }
 
     /**
@@ -230,6 +227,14 @@ public class MouseInputs implements EventHandler<MouseEvent> {
             return true;
         }
         return false;
+    }
+
+    /**
+     * setter for the static variable player stun.
+     * @param value
+     */
+    private void setPlayerStun(final boolean value) {
+        MouseInputs.playerStunned = value;
     }
 
     /**

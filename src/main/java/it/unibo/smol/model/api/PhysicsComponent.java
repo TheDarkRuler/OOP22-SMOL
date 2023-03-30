@@ -1,8 +1,5 @@
 package it.unibo.smol.model.api;
 
-import java.util.List;
-import java.util.Optional;
-
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 import javafx.geometry.Point2D;
@@ -11,9 +8,7 @@ import javafx.geometry.Point2D;
  * Abstract class rappresenting the template of the Physics component for the {@link Entity}.
  */
 public abstract class PhysicsComponent {
-    /**
-     * The field rappresenting the movement speed.
-     */
+    
     private double movementSpeed;
     private double x, y;
     private final HitBox hitBox;
@@ -52,18 +47,6 @@ public abstract class PhysicsComponent {
     }
 
     /**
-     * Check the collision with the given list of Entities.
-     * @param list the given list of Entities
-     * @return {@code Empty} if there isn't a collision; Otherwise the Entity that collide with 
-     */
-    public Optional<Entity> checkCollision(final List<Entity> list) {
-        return list.stream()
-            .filter(x -> !this.equals(x.getPhysicsComp()))
-            .filter(x -> hitBox.isColliding(x.getPhysicsComp().getHitBox()))
-            .findAny();
-    }
-
-    /**
      * This method receive a {@link Directions} and translate it into actual movement.
      * @param move : the direction given
      */
@@ -72,6 +55,7 @@ public abstract class PhysicsComponent {
     /**
      * This method receive a {@link Point2D} and translate it into actual movement.
      * @param move : the coordinate given
+     * @param world
      */
     public abstract void receiveMovement(Point2D move, World world);
 
@@ -170,6 +154,11 @@ public abstract class PhysicsComponent {
         this.isRigid = isRigid;
     }
 
+    /**
+     * updates the hitbox of the enetities.
+     * @param x
+     * @param y
+     */
     public void updateHitbox(final double x, final double y) {
         this.hitBox.setCenter(new Point2D(x, y));
     }

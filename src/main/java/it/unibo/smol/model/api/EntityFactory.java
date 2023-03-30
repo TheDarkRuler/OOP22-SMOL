@@ -4,14 +4,14 @@ import it.unibo.smol.common.HitBox;
 import javafx.geometry.Point2D;
 
 /**
- *  A factory to create different instance of Entities.
+ *  Interface for implementing a factory that create different instance of Entities.
  */
 public interface EntityFactory {
 
     /**
      * create a basic enemy entities.
      * @param initialPosition the initial position of the enemy
-     * @param w the world where the entity create
+     * @param w the world where the entity get create
      * @return a entities that rappresent the basic enemy
      */
     Entity createBasicEnemy(Point2D initialPosition, World w);
@@ -20,7 +20,7 @@ public interface EntityFactory {
      * create a player entities.
      * @param x the x location where the entities spawn
      * @param y the y location where the entities spawn
-     * @param w
+     * @param w the world where the entity get create
      * @return a entities that rappresent the player character
      */
     Entity createPlayer(double x, double y, World w);
@@ -29,7 +29,7 @@ public interface EntityFactory {
      * create a lifeplants entities.
      * @param x the x location where the entities spawn
      * @param y the y location where the entities spawn
-     * @param w
+     * @param w the world where the entity get create
      * @return a entities that rappresent the health of the player
      */
     Entity createLifePlants(double x, double y, World w);
@@ -38,7 +38,7 @@ public interface EntityFactory {
      * create a weapon entities.
      * @param x the x location where the entities spawn
      * @param y the y location where the entities spawn
-     * @param w
+     * @param w the world where the entity get create
      * @return a entities that rappresent the weapon utilize by the player
      */
     Entity createWeapon(double x, double y, World w);
@@ -46,7 +46,7 @@ public interface EntityFactory {
     /**
      * create an elmet enemy entities.
      * @param initialPosition the initial position of the enemy
-     * @param w the world where the entity create
+     * @param w the world where the entity get create
      * @return a entities that rappresent the enemy with more HP
      */
     Entity createHelmetEnemy(Point2D initialPosition, World w);
@@ -54,7 +54,7 @@ public interface EntityFactory {
     /**
      * create an angry enemy entities.
      * @param initialPosition the initial position of the enemy
-     * @param w the world where the entity create
+     * @param w the world where the entity get create
      * @return a entities that rappresent the enemy with more movement speed
      */
     Entity createAngryEnemy(Point2D initialPosition, World w);
@@ -62,15 +62,15 @@ public interface EntityFactory {
     /**
      * create an Bomb enemy entities.
      * @param initialPosition the initial position of the enemy
-     * @param w the world where the entity create
+     * @param w the world where the entity get create
      * @return a entities that rappresent the enemy with more movement speed
      */
     Entity createBombEnemy(Point2D initialPosition, World w);
 
     /**
      * create a Wall entity.
-     * @param hitbox
-     * @param w
+     * @param hitBox the effective dimension of the wall
+     * @param w the world where the entity get create
      * @return a entities that rappresent a wall for boundingbox
      */
     Entity createWall(HitBox hitBox, World w);

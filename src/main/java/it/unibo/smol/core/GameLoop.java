@@ -22,13 +22,13 @@ public class GameLoop extends Thread {
     private long pastTime;
     private double delta;
 
-     private final GameState gameState;
-     private final GameViewState gv;
-     private final Stage view;
+    private final GameState gameState;
+    private final GameViewState gv;
+    private final Stage view;
 
     // ALL commented code is for FPS checking
-    long timer =0;
-    int drawCount=0;
+    /*long timer =0;
+    int drawCount=0;*/
 
     /**
      * Constructor for the GameLoop.
@@ -63,21 +63,21 @@ public class GameLoop extends Thread {
             if ((now - lastFrame) >= FPS_INTERVAL) {
                 repaint();
                 lastFrame = now;
-                drawCount++;
-            }
+                //drawCount++;
+            } /*
             if (timer >= 1000000000) {
                 System.out.println("FPS: "+ drawCount);
                 System.out.println(gameState.getScore());
                 drawCount=0;
                 timer=0;
-            }
+            }*/
         } while (!gameState.isGameOver());
         gameState.stopEnemyCreation();
         new WindowImpl(new GameOverWinState(gameState.getScore())).launch(view);
     }
 
     /**
-     * Update the logic and check the end condition of the Game.
+     * Update the logic of the Game.
      */
     public void update() {
         gameState.getWorld().updateWorld();
@@ -89,7 +89,7 @@ public class GameLoop extends Thread {
     private void repaint() {
             gv.render(view);
     }
-    
+
     /**
      *  Syncronize the {@link GameLoop} with the desired refresh rating ({@value #UPS}).
      * @param interval : the time span of the refresh rate expressed in nanosecond
@@ -99,7 +99,7 @@ public class GameLoop extends Thread {
     private boolean syncTime(final double interval) {
         final long currentTime = System.nanoTime();
         delta += (currentTime - pastTime) / interval;
-        timer += (currentTime - pastTime);
+        //timer += (currentTime - pastTime);
         pastTime = currentTime;
         if (delta >= 1) {
             delta--;
