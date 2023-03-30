@@ -143,7 +143,7 @@ public class GameViewState implements WindowState {
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
             updateHealthBar();
             score.setText(Integer.toString(gameState.getScore()));
-            record.setText(Integer.toString(gameState.getRecord()));
+            record.setText("Record:"+Integer.toString(gameState.getRecord()));
             gameState.getWorld().getEntities().stream()
                     .filter(x -> x.getGraphicComp().isPresent())
                     .map(x -> x.getGraphicComp())
@@ -205,7 +205,7 @@ public class GameViewState implements WindowState {
     }
 
     private void initializeRecord() {
-        record = new Text((GameMap.MAP_WIDTH-GameMap.BORDER_WIDTH*3)*GameMap.SCREEN_PROP_X, GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 3, Integer.toString(gameState.getRecord()));
+        record = new Text(GameMap.BORDER_WIDTH*GameMap.SCREEN_PROP_X, (GameMap.HEIGHT - GameMap.BORDER_HEIGHT / 3) * GameMap.SCREEN_PROP_Y, "Record:" +Integer.toString(gameState.getRecord()));
         record.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, 18));
         record.setFill(Color.WHITE);
         record.setTextAlignment(TextAlignment.LEFT);
