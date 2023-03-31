@@ -29,7 +29,7 @@ public class GameEngineImpl implements GameEngine {
      */
     @Override
     public void init(final Stage primaryStage) {
-        final KeyInputs keyEventHandler = new KeyInputs(Optional.of(primaryStage));
+        final KeyInputs keyEventHandler = new KeyInputs();
         final MouseInputs mouseEventHandler = new MouseInputs(Optional.of(keyEventHandler));
         final var world = new WorldImpl();
         world.setInputs(Optional.of(keyEventHandler), Optional.of(mouseEventHandler));
