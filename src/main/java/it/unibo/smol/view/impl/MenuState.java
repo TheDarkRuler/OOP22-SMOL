@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.URL;
+
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.core.GameEngine;
 import it.unibo.smol.core.GameEngineImpl;
 import it.unibo.smol.view.GameMap;
@@ -12,11 +14,16 @@ import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -34,6 +41,7 @@ public class MenuState implements WindowState {
     private static Logger logger = Logger.getLogger("menuLogger");
     private static final int MENU_ANIM_DURATION = 500;
     private final GameEngine gameEngine = new GameEngineImpl();
+    private String currentSkins = Constant.KEY_PIXEL_SKINS;
 
     /**
      * {@inheritDoc}
@@ -69,20 +77,22 @@ public class MenuState implements WindowState {
         final Button startGame = (Button) scene.lookup("#start");
         final Button gameOver = (Button) scene.lookup("#gameOver");
         final Button quitGame = (Button) scene.lookup("#quit");
+        final MenuButton dropDownMenu = (MenuButton) scene.lookup("#dropDown");
 
         /*
          * Set fields.
          */
         title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR,
                 GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
-        scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER)));
         menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
+
         // buttons behaviour
         startGame.setOnMouseClicked(e -> {
+            gameEngine.setSkin(currentSkins);
             gameEngine.init(primaryStage);
         });
         gameOver.setOnMouseClicked(e -> {
-            new WindowImpl(new GameOverWinState(0)).launch(primaryStage);
+            new WindowImpl(new GameOverWinState(0, Constant.KEY_PIXEL_SKINS)).launch(primaryStage);
         });
         quitGame.setOnMouseClicked(e -> {
             Platform.exit();
@@ -104,23 +114,50 @@ public class MenuState implements WindowState {
         buttonManagement(startGame);
         buttonManagement(gameOver);
         buttonManagement(quitGame);
+        dropDownMenuManagement(dropDownMenu);
+        scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER, this.currentSkins)));
         primaryStage.setResizable(false);
         primaryStage.setTitle("Start Menu :)");
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
-        primaryStage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
+        primaryStage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, this.currentSkins));
         primaryStage.setFullScreenExitHint("");
         primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 
     private void buttonManagement(final Button btn) {
-        btn.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X * 2);
-        btn.setPrefHeight(GameMap.BORDER_WIDTH / 3);
+        setButtonBaseSize(btn);
         //Duration = 0.5 seconds
         final Duration duration = Duration.millis(MENU_ANIM_DURATION);
         final RotateTransition rotateTransition = new RotateTransition(duration, btn);
         rotateTransition.setByAngle(360);
         rotateTransition.play();
+    }
+
+    private void dropDownMenuManagement(final MenuButton menuButton) {
+        setButtonBaseSize(menuButton);
+        final MenuItem pixel = new MenuItem(Constant.KEY_PIXEL_SKINS);
+        final MenuItem vectorial = new MenuItem(Constant.KEY_VECTORIAL_SKINS);
+        menuButton.getItems().addAll(pixel, vectorial);
+        pixel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                currentSkins = Constant.KEY_PIXEL_SKINS;
+                menuButton.setText(Constant.KEY_PIXEL_SKINS);
+            }
+        });
+        vectorial.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent event) {
+                currentSkins = Constant.KEY_VECTORIAL_SKINS;
+                menuButton.setText(Constant.KEY_VECTORIAL_SKINS);
+            }
+        });
+    }
+
+    private void setButtonBaseSize(final ButtonBase btnBase) {
+        btnBase.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X * 2);
+        btnBase.setPrefHeight(GameMap.BORDER_WIDTH / 3);
     }
 }

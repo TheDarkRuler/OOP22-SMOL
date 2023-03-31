@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import it.unibo.smol.common.Constant;
 import javafx.scene.image.Image;
 /**
  * Utility class for load images.
@@ -14,8 +15,8 @@ import javafx.scene.image.Image;
 public final class LoadImgs {
 
     /**name of the folders in which are the sprites to use. */
-    private static final Map<String, String> SKIN_FOLDER = new HashMap<>(Map.of("Pixel Skins", "pixel_moles/",
-        "Vectorial Skins", "vectorial_moles/"));
+    private static final Map<String, String> SKIN_FOLDER = new HashMap<>(Map.of(Constant.KEY_PIXEL_SKINS, "pixel_moles/",
+        Constant.KEY_VECTORIAL_SKINS, "vectorial_moles/"));
 
     /**basic mole gif. */
     public static final String MOLE = "mole1.gif";
@@ -49,15 +50,16 @@ public final class LoadImgs {
     /**
      * This method takes a file name as input and tries to return the image.
      * Create a file input stream with the filename 
-     * @param filename 
+     * @param filename
+     * @param folderName 
      * @return the image loaded from the input stream
      * @throws IOException
      * @throws FileNotFoundException
      */
-    public static Image getSprites(final String filename) {
+    public static Image getSprites(final String filename, final String folderName) {
         Image image = null;
         try (FileInputStream path = new FileInputStream("src/main/resources/images/" 
-            + LoadImgs.SKIN_FOLDER.get("Pixel Skins") + filename);) {
+            + LoadImgs.SKIN_FOLDER.get(folderName) + filename);) {
             image = new Image(path);
         } catch (IllegalArgumentException e) {
             Logger.getLogger(LoadImgs.class.getName()).info("Illegal Argument");

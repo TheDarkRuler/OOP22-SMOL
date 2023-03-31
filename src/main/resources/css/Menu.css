@@ -45,3 +45,18 @@
     -fx-text-decoration-color: beige;
 }
 
+#dropDown {
+    background-color: #893AA4;
+    font-stretch: extra-condensed;
+    font-weight: bolder;
+    font-size: x-large;
+    text-decoration-style: wavy;
+    text-decoration-color: beige;
+    -fx-background-color: #893AA4;
+    -fx-font-stretch: extra-condensed;
+    -fx-font-weight: bolder;
+    -fx-font-size: x-large;
+    -fx-text-decoration-style: wavy;
+    -fx-text-decoration-color: beige;
+}
+

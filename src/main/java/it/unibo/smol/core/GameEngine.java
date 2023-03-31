@@ -13,4 +13,9 @@ public interface GameEngine {
      */
     void init(Stage primaryStage);
 
+    /**
+     * This method set current skin folder.
+     * @param skinFolder selected skin folder
+     */
+    void setSkin(String skinFolder);
 }

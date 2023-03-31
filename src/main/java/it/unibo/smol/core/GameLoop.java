@@ -79,7 +79,7 @@ public class GameLoop extends Thread {
 
         gameState.notifyWrite();
 
-        new WindowImpl(new GameOverWinState(gameState.getScore())).launch(view);
+        new WindowImpl(new GameOverWinState(gameState.getScore(), gameState.getSkins())).launch(view);
     }
 
     /**

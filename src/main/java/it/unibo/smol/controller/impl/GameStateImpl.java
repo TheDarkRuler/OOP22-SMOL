@@ -3,6 +3,7 @@ package it.unibo.smol.controller.impl;
 import java.util.Map;
 import java.util.Optional;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
@@ -27,6 +28,7 @@ public class GameStateImpl implements GameState {
     private final EntityFactory entityFactory;
     private EnemyCreation enemyCreator;
     private final ScoreLocalStorage scoreStorage;
+    private String folderName;
 
     /**
      * Constructor.
@@ -37,6 +39,7 @@ public class GameStateImpl implements GameState {
         this.entityFactory = new EntityFactoryImpl();
         this.enemyCreator = new EnemyCreation(Optional.of(this));
         this.scoreStorage = new ScoreLocalStorage(Optional.of(this));
+        this.folderName = Constant.KEY_PIXEL_SKINS;
     }
 
     /**
@@ -47,6 +50,7 @@ public class GameStateImpl implements GameState {
         this.world = gameState.getWorld().orElseThrow();
         this.entityFactory = new EntityFactoryImpl();
         this.scoreStorage = new ScoreLocalStorage(Optional.of(gameState));
+        this.folderName = gameState.getSkins();
     }
 
     /**
@@ -169,6 +173,22 @@ public class GameStateImpl implements GameState {
     @Override
     public Optional<ScoreLocalStorage> getScoreLocalStorage() {
         return Optional.of(this.scoreStorage);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSkins(final String folderName) {
+        this.folderName = folderName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSkins() {
+        return this.folderName;
     }
 
 }

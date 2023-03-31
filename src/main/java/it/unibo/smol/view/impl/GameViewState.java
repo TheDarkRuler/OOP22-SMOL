@@ -95,8 +95,8 @@ public class GameViewState implements WindowState {
         final var canvas = new Canvas(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         this.gContext = canvas.getGraphicsContext2D();
         this.gContext.setImageSmoothing(false);
-        this.graphic = new GraphicsDraw(Optional.of(gContext));
-        root.setBackground(new Background(new BackgroundImage(LoadImgs.getSprites(LoadImgs.BACKGROUND),
+        this.graphic = new GraphicsDraw(Optional.of(gContext), gameState.getSkins());
+        root.setBackground(new Background(new BackgroundImage(LoadImgs.getSprites(LoadImgs.BACKGROUND, gameState.getSkins()),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 new BackgroundSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1,
                         false, false, false, false))));
@@ -128,7 +128,7 @@ public class GameViewState implements WindowState {
                 Runtime.getRuntime().exit(0);
             }
         });
-        stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
+        stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, gameState.getSkins()));
         stage.show();
     }
 

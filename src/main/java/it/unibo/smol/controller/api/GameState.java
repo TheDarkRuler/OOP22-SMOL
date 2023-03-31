@@ -85,4 +85,16 @@ public interface GameState {
      * @return the ScoreLocalStorage
      */
     Optional<ScoreLocalStorage> getScoreLocalStorage();
+
+    /**
+     * Set skin.
+     * @param folderName name of the folder skin
+     */
+    void setSkins(String folderName);
+
+    /**
+     * Get skins.
+     * @return name of the folder containing skins
+     */
+    String getSkins();
 }
