@@ -6,8 +6,6 @@ import java.util.Optional;
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.api.GameState;
-import it.unibo.smol.controller.input.KeyInputs;
-import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.model.ScoreLocalStorage;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
@@ -109,22 +107,6 @@ public class GameStateImpl implements GameState {
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         new PlantsCreation(Optional.of(this));
         this.enemyCreator.startCreation();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setKeyInputs(final Optional<KeyInputs> keyInputs) {
-        this.world.setKeyInputs(keyInputs);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMouseInputs(final Optional<MouseInputs> mouseInputs) {
-        this.world.setMouseInputs(mouseInputs);
     }
 
     /**

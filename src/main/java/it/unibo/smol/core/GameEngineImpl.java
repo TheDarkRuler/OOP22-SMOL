@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.impl.GameStateImpl;
+import it.unibo.smol.controller.input.KeyInputs;
+import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.model.impl.WorldImpl;
 import it.unibo.smol.view.impl.GameViewState;
 import it.unibo.smol.view.impl.WindowImpl;
@@ -27,9 +29,11 @@ public class GameEngineImpl implements GameEngine {
      */
     @Override
     public void init(final Stage primaryStage) {
-        final var gs = new GameStateImpl(new WorldImpl());
+        final KeyInputs keyEventHandler = new KeyInputs(Optional.of(primaryStage));
+        final MouseInputs mouseEventHandler = new MouseInputs(Optional.of(keyEventHandler));
+        final var gs = new GameStateImpl(new WorldImpl(Optional.of(keyEventHandler), Optional.of(mouseEventHandler)));
         gs.setSkins(skin);
-        final var gv = new GameViewState(Optional.of(gs));
+        final var gv = new GameViewState(Optional.of(gs), Optional.of(keyEventHandler), Optional.of(mouseEventHandler));
         final GameLoop gameLoop = new GameLoop(Optional.of(gs), Optional.of(gv), Optional.of(primaryStage));
         new WindowImpl(gv).launch(primaryStage);
         gameLoop.start();

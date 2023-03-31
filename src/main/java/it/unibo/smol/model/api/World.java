@@ -79,18 +79,6 @@ public interface World {
     void setPlantOccupied(Entity plant);
 
     /**
-     * sets the keyInput in world.
-     * @param keyInputs
-     */
-    void setKeyInputs(Optional<KeyInputs> keyInputs);
-
-    /**
-     * sets the mouseInputs in world.
-     *  @param mouseInputs
-     */
-    void setMouseInputs(Optional<MouseInputs> mouseInputs);
-
-    /**
      * gets the keyInput in world.
      * @return the keyInput
      */
