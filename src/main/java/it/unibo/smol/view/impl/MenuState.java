@@ -27,10 +27,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -74,20 +70,23 @@ public class MenuState implements WindowState {
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         final VBox menuBox = (VBox) scene.lookup("#box");
         // children
-        final Text title = (Text) scene.lookup("#title");
+        //final Text title = (Text) scene.lookup("#title");
         final Button startGame = (Button) scene.lookup("#start");
         final Button gameOver = (Button) scene.lookup("#gameOver");
         final Button quitGame = (Button) scene.lookup("#quit");
         final MenuButton dropDownMenu = (MenuButton) scene.lookup("#dropDown");
+        final ImageView title = (ImageView) scene.lookup("#boxImage");
 
         /*
          * Set fields.
          */
-        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR,
-                GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
+        /*title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR,
+                GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));*/
         menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
 
         // buttons behaviour
+        title.setFitWidth(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH * 3);
+        title.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT * 3);
         startGame.setOnMouseClicked(e -> {
             gameEngine.setSkin(currentSkins);
             gameEngine.init(primaryStage);

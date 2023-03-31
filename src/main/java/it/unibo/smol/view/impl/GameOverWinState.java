@@ -17,6 +17,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -80,10 +81,13 @@ public class GameOverWinState implements WindowState {
                 final Button closeGame = (Button) scene.lookup("#closeGame");
                 final Text score = (Text) scene.lookup("#score");
                 final VBox gameOverBox = (VBox) scene.lookup("#box");
+                final ImageView title = (ImageView) scene.lookup("#boxImage");
                 scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.ANGRY_MOLE, folderName)));
                 gameOverBox.setSpacing((GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X) / 3);
                 buttonManagement(restartGame);
                 buttonManagement(closeGame);
+                title.setFitWidth(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH * 3);
+                title.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT * 3);
                 restartGame.setOnMouseClicked(e -> {
                     new WindowImpl().launch(stage);
                 });

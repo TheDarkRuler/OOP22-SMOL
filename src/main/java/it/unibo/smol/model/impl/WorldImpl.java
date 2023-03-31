@@ -22,17 +22,21 @@ public class WorldImpl implements World {
     private static final Boolean FREE = false;
     private final ConcurrentLinkedDeque<Entity> entities;
     private final Map<Entity, Boolean> occupiedPlants;
+    private final Optional<KeyInputs> keyInputs;
+    private final Optional<MouseInputs> mouseInputs;
     private int score;
-    private Optional<KeyInputs> keyInputs;
-    private Optional<MouseInputs> mouseInputs;
 
     /**
      * constructor for game world.
+     * @param keyInputs
+     * @param mouseInputs
      */
-    public WorldImpl() {
+    public WorldImpl(final Optional<KeyInputs> keyInputs, final Optional<MouseInputs> mouseInputs) {
         this.entities = new ConcurrentLinkedDeque<>();
         this.occupiedPlants = new HashMap<>();
         this.score = 0;
+        this.mouseInputs = mouseInputs;
+        this.keyInputs = keyInputs;
     }
 
     /**
@@ -165,22 +169,6 @@ public class WorldImpl implements World {
         if (occupiedPlants.containsKey(plant)) {
             occupiedPlants.put(plant, OCCUPIED);
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setKeyInputs(final Optional<KeyInputs> keyInputs) {
-        this.keyInputs = keyInputs;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMouseInputs(final Optional<MouseInputs> mouseInputs) {
-        this.mouseInputs = mouseInputs;
     }
 
     /**
