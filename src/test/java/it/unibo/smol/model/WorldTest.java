@@ -6,10 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import it.unibo.smol.model.api.World;
 import it.unibo.smol.model.impl.WorldImpl;
 
 class WorldTest {
-
+    
     private final WorldImpl world = new WorldImpl();
 
     @Test
