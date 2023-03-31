@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBase;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -143,6 +144,7 @@ public class MenuState implements WindowState {
         final MenuItem vectorial = new MenuItem(Constant.KEY_VECTORIAL_SKINS);
         menuButton.getItems().addAll(pixel, vectorial);
         menuButton.getItems().forEach(item -> {
+            setDropDownImage(item);
             //TODO damoglie le immagini
             item.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -157,5 +159,12 @@ public class MenuState implements WindowState {
     private void setButtonBaseSize(final ButtonBase btnBase) {
         btnBase.setPrefWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X * 2);
         btnBase.setPrefHeight(GameMap.BORDER_WIDTH / 3);
+    }
+
+    private void setDropDownImage(final MenuItem menuItem) {
+        ImageView skinImage = new ImageView(LoadImgs.getSprites(LoadImgs.ANGRY_MOLE, menuItem.getText()));
+        skinImage.setFitWidth(GameMap.SCREEN_PROP_X * Constant.ENEMY_WIDTH / 2);
+        skinImage.setFitHeight(GameMap.SCREEN_PROP_Y * Constant.ENEMY_HEIGHT / 2);
+        menuItem.setGraphic(skinImage);
     }
 }
