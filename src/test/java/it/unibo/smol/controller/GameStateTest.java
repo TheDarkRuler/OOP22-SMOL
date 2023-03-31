@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.impl.GameStateImpl;
+import it.unibo.smol.controller.input.KeyInputs;
+import it.unibo.smol.controller.input.MouseInputs;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.World;
 import it.unibo.smol.model.impl.WorldImpl;
@@ -19,10 +21,10 @@ public class GameStateTest {
     
     @Test
     public void testInitialization() {
-        World w = new WorldImpl();
-        w.setKeyInputs(Optional.empty());
-        w.setMouseInputs(Optional.empty());
-        GameState gs = new GameStateImpl(w);
+        final World w = new WorldImpl();
+        final var KeyInputs = Optional.of(new KeyInputs());
+        w.setInputs(KeyInputs, Optional.of(new MouseInputs(KeyInputs)));
+        final GameState gs = new GameStateImpl(w);
 
         gs.initGame();        
         assertNotNull(gs.getWorld());
