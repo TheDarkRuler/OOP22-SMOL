@@ -31,7 +31,9 @@ public class GameEngineImpl implements GameEngine {
     public void init(final Stage primaryStage) {
         final KeyInputs keyEventHandler = new KeyInputs(Optional.of(primaryStage));
         final MouseInputs mouseEventHandler = new MouseInputs(Optional.of(keyEventHandler));
-        final var gs = new GameStateImpl(new WorldImpl(Optional.of(keyEventHandler), Optional.of(mouseEventHandler)));
+        final var world = new WorldImpl();
+        world.setInputs(Optional.of(keyEventHandler), Optional.of(mouseEventHandler));
+        final var gs = new GameStateImpl(world);
         gs.setSkins(skin);
         final var gv = new GameViewState(Optional.of(gs), Optional.of(keyEventHandler), Optional.of(mouseEventHandler));
         final GameLoop gameLoop = new GameLoop(Optional.of(gs), Optional.of(gv), Optional.of(primaryStage));
