@@ -12,13 +12,13 @@
 }
 
 .button {
-    background-color: #893AA4;
+    background-color: #996633;
     font-stretch: extra-condensed;
     font-weight: bolder;
     font-size: x-large;
     text-decoration-style: wavy;
     text-decoration-color: beige;
-    -fx-background-color: #893AA4;
+    -fx-background-color: #996633;
     -fx-font-stretch: extra-condensed;
     -fx-font-weight: bolder;
     -fx-font-size: x-large;
