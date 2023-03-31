@@ -50,12 +50,11 @@ public class GraphicsDraw {
     /**
      * draws an image from the previous stored images.
      * 
-     * @param imageName        the name of the image to draw
      * @param entity           the entity to draw
      * @param graphicComponent the graphic component of the entity to draw
      */
-    public void drawSprite(final String imageName, final Entity entity, final GraphicComponent graphicComponent) {
-        g.drawImage(images.get(imageName),
+    public void drawSprite(final Entity entity, final GraphicComponent graphicComponent) {
+        g.drawImage(images.get(graphicComponent.getImageName()),
                 (entity.getCurrentX() - graphicComponent.getWidth() / 2) * GameMap.SCREEN_PROP_X,
                 (entity.getCurrentY() - graphicComponent.getHeight() / 2) * GameMap.SCREEN_PROP_Y,
                 graphicComponent.getWidth() * GameMap.SCREEN_PROP_X,
