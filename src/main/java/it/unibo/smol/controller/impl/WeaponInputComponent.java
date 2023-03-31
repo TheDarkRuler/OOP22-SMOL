@@ -18,8 +18,8 @@ public class WeaponInputComponent implements InputComponent {
      * constructor to initialize mouse inputs for weapon entity.
      * @param mouse
      */
-    public WeaponInputComponent(final MouseInputs mouse) {
-        this.mouse = mouse;
+    public WeaponInputComponent(final Optional<MouseInputs> mouse) {
+        this.mouse = mouse.orElseThrow();
     }
 
     /**
@@ -59,8 +59,8 @@ public class WeaponInputComponent implements InputComponent {
      * {@inheritDoc}
      */
     @Override
-    public EnemyInput getEnemyInput() {
+    public Optional<EnemyInput> getEnemyInput() {
         //this component will not use this method.
-        return null;
+        return Optional.empty();
     }
 }

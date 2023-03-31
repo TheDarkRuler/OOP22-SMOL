@@ -1,14 +1,15 @@
 package it.unibo.smol.view.impl.graphiccomponent;
 
 import it.unibo.smol.view.LoadImgs;
+//import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.GraphicComponent;
 /**
  * The implementation of the {@link GraphicComponent} rappresenting the Player graphic.
  */
 public class PlayerGraphicComponent extends GraphicComponent {
 
-    private boolean moving;
-    private boolean attacking;
+    /*private boolean moving;
+    private boolean attacking;*/
 
     /**
      * Constructors inherited by the super-class {@link GraphicComponent}.
@@ -24,14 +25,14 @@ public class PlayerGraphicComponent extends GraphicComponent {
      */
     @Override
     public void setAnimation() {
-
-        if (moving) {
+        setImageName(LoadImgs.PLAYER);
+        /*if (moving) {
             setImageName(LoadImgs.PLAYER);
         } else if (attacking) {
             setImageName(LoadImgs.PLAYER);
         } else {
             setImageName(LoadImgs.PLAYER);
-        }
+        }*/
     }
 
     /**
@@ -39,9 +40,9 @@ public class PlayerGraphicComponent extends GraphicComponent {
      */
     @Override
     public void updateAnimation() {
-        if (super.getEntity() != null) {
-                if (super.getEntity().getPhysicsComp().getX() == 0 
-                    && super.getEntity().getPhysicsComp().getY() == 0) {
+        /*if (super.getEntity().isPresent()) {
+                if (super.getEntity().orElseThrow().getPhysicsComp().orElseThrow().getX() == 0 
+                    && super.getEntity().orElseThrow().getPhysicsComp().orElseThrow().getY() == 0) {
                     moving = false;
                 } else {
                     moving = true;
@@ -51,6 +52,6 @@ public class PlayerGraphicComponent extends GraphicComponent {
                 } else {
                     attacking = false;
                 }*/
-        }
+        //}
     }
 }

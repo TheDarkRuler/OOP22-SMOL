@@ -1,5 +1,6 @@
 package it.unibo.smol.model.impl.physicscomponent;
 
+import java.util.Optional;
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
@@ -18,7 +19,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
      * @param hitBox : See the super-Constructor
      */
     public PlayerPhysicsComponent(final HitBox hitBox) {
-        super(Constant.PLAYER_MOVSPD, hitBox);
+        super(Constant.PLAYER_MOVSPD, Optional.of(hitBox));
     }
 
     /**
@@ -60,20 +61,6 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
                 break;
         }
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    /*public void setX(final double x) {
-        super.setX(super.getEntity().getCurrentX() + x);
-    }*/
-
-    /**
-     * {@inheritDoc}
-     */
-    /*public void setY(final double y) {
-        super.setY(super.getEntity().getCurrentY() + y);
-    }*/
 
     /**
      * {@inheritDoc}

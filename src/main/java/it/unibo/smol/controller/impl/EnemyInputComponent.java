@@ -18,8 +18,8 @@ public class EnemyInputComponent implements InputComponent {
      * constructor to initialize the AI inputs for any enemy entities.
      * @param input
      */
-    public EnemyInputComponent(final EnemyInput input) {
-        this.input = input;
+    public EnemyInputComponent(final Optional<EnemyInput> input) {
+        this.input = input.orElseThrow();
     }
 
     /**
@@ -58,7 +58,7 @@ public class EnemyInputComponent implements InputComponent {
      * {@inheritDoc}
      */
     @Override
-    public EnemyInput getEnemyInput() {
-        return this.input;
+    public Optional<EnemyInput> getEnemyInput() {
+        return Optional.of(this.input);
     }
 }

@@ -1,9 +1,5 @@
 .label {
-    -fx-text-fill: red;
-}
-
-#myLabel {
-    -fx-text-fill: #00f;
+    -fx-text-fill: black;
 }
 
 #box {
@@ -12,36 +8,42 @@
 }
 
 .button {
-    background-color: #893AA4;
+    background-color: #965B21;
     font-stretch: extra-condensed;
     font-weight: bolder;
     font-size: x-large;
-    text-decoration-style: wavy;
-    text-decoration-color: beige;
-    -fx-background-color: #893AA4;
+    -fx-background-color: #965B21;
     -fx-font-stretch: extra-condensed;
     -fx-font-weight: bolder;
     -fx-font-size: x-large;
-    -fx-text-decoration-style: wavy;
-    -fx-text-decoration-color: beige;
+    -fx-text-fill: black;
 }
 
 .button:hover {
-    background-color: #893AA4;
+    background-color: green;
     font-stretch: extra-condensed;
     font-weight: bolder;
     font-size: x-large;
     animation: pulse 5s infinite;
-    text-decoration: underline overline;
-    text-decoration-style: wavy;
-    text-decoration-color: beige;
     -fx-background-color: green;
     -fx-font-stretch: extra-condensed;
     -fx-font-weight: bolder;
     -fx-font-size: x-large;
     -fx-animation: pulse 5s infinite;
-    -fx-text-decoration: underline overline;
-    -fx-text-decoration-style: wavy;
-    -fx-text-decoration-color: beige;
 }
 
+#dropDown {
+    background-color: #965B21;
+    font-stretch: extra-condensed;
+    font-weight: bolder;
+    font-size: x-large;
+    -fx-background-color: #965B21;
+    -fx-font-stretch: extra-condensed;
+    -fx-font-weight: bolder;
+    -fx-font-size: x-large;
+}
+
+.context-menu {
+    background-color: #A1764B;
+    -fx-background-color: #A1764B;
+}

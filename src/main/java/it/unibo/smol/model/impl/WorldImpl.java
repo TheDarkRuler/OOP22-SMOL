@@ -3,6 +3,7 @@ package it.unibo.smol.model.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ConcurrentMap;
@@ -19,20 +20,23 @@ import it.unibo.smol.model.Type;
 public class WorldImpl implements World {
     private static final Boolean OCCUPIED = true;
     private static final Boolean FREE = false;
-    private static final int INC_RATE = 20;
     private final ConcurrentLinkedDeque<Entity> entities;
     private final Map<Entity, Boolean> occupiedPlants;
+    private final Optional<KeyInputs> keyInputs;
+    private final Optional<MouseInputs> mouseInputs;
     private int score;
-    private KeyInputs keyInputs;
-    private MouseInputs mouseInputs;
 
     /**
      * constructor for game world.
+     * @param keyInputs
+     * @param mouseInputs
      */
-    public WorldImpl() {
+    public WorldImpl(final Optional<KeyInputs> keyInputs, final Optional<MouseInputs> mouseInputs) {
         this.entities = new ConcurrentLinkedDeque<>();
         this.occupiedPlants = new HashMap<>();
         this.score = 0;
+        this.mouseInputs = mouseInputs;
+        this.keyInputs = keyInputs;
     }
 
     /**
@@ -99,13 +103,6 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public int diffIncrement() {
-        return getScore() / INC_RATE;
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void addEntity(final Entity entity) {
         this.entities.add(entity);
     }
@@ -121,7 +118,9 @@ public class WorldImpl implements World {
      */
     @Override
     public void incScore(final int quantity) {
-        this.score = this.score + quantity;
+        if (this.score + quantity > 0) {
+            this.score = this.score + quantity;
+        }
     } 
 
     /**
@@ -176,23 +175,7 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void setKeyInputs(final KeyInputs keyInputs) {
-        this.keyInputs = keyInputs;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMouseInputs(final MouseInputs mouseInputs) {
-        this.mouseInputs = mouseInputs;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public KeyInputs getKeyInputs() {
+    public Optional<KeyInputs> getKeyInputs() {
         return this.keyInputs;
     }
 
@@ -200,7 +183,7 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public MouseInputs getMouseInputs() {
+    public Optional<MouseInputs> getMouseInputs() {
         return this.mouseInputs;
     }
 

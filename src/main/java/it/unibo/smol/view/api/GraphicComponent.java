@@ -1,5 +1,7 @@
 package it.unibo.smol.view.api;
 
+import java.util.Optional;
+
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.view.impl.GraphicsDraw;
 
@@ -28,7 +30,7 @@ public abstract class GraphicComponent {
      * @param graphicComponent
      */
     public GraphicComponent(final GraphicComponent graphicComponent) {
-        this.entity = graphicComponent.getEntity();
+        this.entity = graphicComponent.getEntity().orElseThrow();
         //this.graphic = graphicComponent.getGraphic();
         this.height = graphicComponent.getHeight();
         this.imageName = graphicComponent.getImageName();
@@ -58,7 +60,7 @@ public abstract class GraphicComponent {
      */
     public void render(final GraphicsDraw graphic) {
         this.update();
-        graphic.drawSprite(this.imageName, this.entity, this);
+        graphic.drawSprite(this.entity, this);
     }
 
     /**
@@ -81,16 +83,16 @@ public abstract class GraphicComponent {
     * Getter for thr entity field.
     * @return the entity that use this component
     */
-    public Entity getEntity() {
-        return entity;
+    public Optional<Entity> getEntity() {
+        return Optional.of(entity);
     }
 
     /**
      * Set the entity associated with this component.
      * @param entity the entity that use this component
      */
-    public void setEntity(final Entity entity) {
-        this.entity = entity;
+    public void setEntity(final Optional<Entity> entity) {
+        this.entity = entity.orElseThrow();
     }
 
     /**

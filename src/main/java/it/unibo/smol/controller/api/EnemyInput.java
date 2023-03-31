@@ -23,6 +23,8 @@ import javafx.geometry.Point2D;
  */
 public class EnemyInput {
 
+    private static final Random RANDOM = new Random();
+
     private final int minTimeUp;
     private final int maxTimeUp;
     private int enemySection;
@@ -34,7 +36,6 @@ public class EnemyInput {
     private final World world;
     private HitBox newPosHitBox;
     private boolean isNewPosViable;
-    private final Random rand;
     private Entity entity;
     private final ScheduledExecutorService enemyStaysUpTime;
 
@@ -45,7 +46,7 @@ public class EnemyInput {
      * @param initialEnemyPosition
      * @param movSpeed
      */
-    public EnemyInput(final int maxTimesCanSpawn, final World world,
+    public EnemyInput(final int maxTimesCanSpawn, final Optional<World> world,
         final Point2D initialEnemyPosition, final double movSpeed) {
 
         this.minTimeUp = Constant.DEFAULT_MIN_TIME_UP;
@@ -53,28 +54,27 @@ public class EnemyInput {
 
         this.isNewPosViable = true;
         this.enemyStaysUpTime = Executors.newSingleThreadScheduledExecutor();
-        this.rand = new Random();
-        this.world = world;
+        this.world = world.orElseThrow();
         this.maxTimesCanSpawn = maxTimesCanSpawn;
         this.enemyPosition = initialEnemyPosition;
-        this.enemyNextPosition = enemySetsPosition(rand.nextInt(4)).get();
-        this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, this, movSpeed);
+        this.enemyNextPosition = enemySetsPosition(RANDOM.nextInt(4)).orElseThrow();
+        this.enemyMovement = new EnemyMoves(enemyPosition, enemyNextPosition, Optional.of(this), movSpeed);
     }
 
     /**
      * sets the entity to move.
      * @param entity
      */
-    public void setEntity(final Entity entity) {
-        this.entity = entity;
+    public void setEntity(final Optional<Entity> entity) {
+        this.entity = entity.orElseThrow();
     }
 
     /**
      * gets the entityt to move.
      * @return entity
      */
-    public Entity getEntity() {
-        return this.entity;
+    public Optional<Entity> getEntity() {
+        return Optional.of(this.entity);
     }
 
     /**
@@ -83,7 +83,7 @@ public class EnemyInput {
      */
     private double enemyRandX() {
         return GameMap.BORDER_WIDTH / 2  + Constant.ENEMY_WIDTH / 2
-            + rand.nextDouble(GameMap.MAP_WIDTH / 2 - Constant.ENEMY_WIDTH); 
+            + RANDOM.nextDouble(GameMap.MAP_WIDTH / 2 - Constant.ENEMY_WIDTH); 
     }
 
     /**
@@ -92,7 +92,7 @@ public class EnemyInput {
      */
     private double enemyRandY() {
         return GameMap.BORDER_HEIGHT / 2 + Constant.ENEMY_HEIGHT / 2
-            + rand.nextDouble(GameMap.MAP_HEIGHT / 2 - Constant.ENEMY_HEIGHT);
+            + RANDOM.nextDouble(GameMap.MAP_HEIGHT / 2 - Constant.ENEMY_HEIGHT);
     }
 
     /**
@@ -129,7 +129,7 @@ public class EnemyInput {
             newPosHitBox = new RectangleHB(Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT, temp.get());
             this.world.getEntities().stream()
                 .forEach(a -> {
-                    if (newPosHitBox.isColliding(a.getPhysicsComp().getHitBox())) {
+                    if (newPosHitBox.isColliding(a.getPhysicsComp().orElseThrow().getHitBox().orElseThrow())) {
                         this.isNewPosViable = false;
                     }
                 });
@@ -151,7 +151,7 @@ public class EnemyInput {
     public void enemyIsUp() {
         if (enemyTimesSpawn < maxTimesCanSpawn) {
             //enemyStaysUpTimer();
-            this.enemyStaysUpTime.schedule(enemyStaysUp(), minTimeUp + rand.nextInt(maxTimeUp - minTimeUp),
+            this.enemyStaysUpTime.schedule(enemyStaysUp(), minTimeUp + RANDOM.nextInt(maxTimeUp - minTimeUp),
                 TimeUnit.MILLISECONDS);
             enemyTimesSpawn++;
         }
@@ -185,7 +185,7 @@ public class EnemyInput {
     protected Point2D enemySearchNextPos() {
         int temp = enemySection;
         while (temp == enemySection) {
-            temp = rand.nextInt(4);
+            temp = RANDOM.nextInt(4);
         }
         return enemySetsPosition(temp).get();
     }
@@ -314,6 +314,6 @@ public class EnemyInput {
      * @param millisec
      */
     public void freezeMouseInputs(final int millisec) {
-        this.getWorld().getMouseInputs().freezeInputsFromBomb(millisec);
+        this.getWorld().getMouseInputs().orElseThrow().freezeInputsFromBomb(millisec);
     }
 }

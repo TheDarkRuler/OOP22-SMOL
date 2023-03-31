@@ -1,5 +1,6 @@
 package it.unibo.smol.model.impl.physicscomponent;
 
+import java.util.Optional;
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
@@ -18,7 +19,7 @@ public class LifePlantsPhysicsComponent extends PhysicsComponent {
      * @param hitBox : See the super-Constructor
      */
     public LifePlantsPhysicsComponent(final HitBox hitBox) {
-        super(Constant.HEALTH_MOVSPD, hitBox);
+        super(Constant.HEALTH_MOVSPD, Optional.of(hitBox));
     }
 
     /**
@@ -27,13 +28,13 @@ public class LifePlantsPhysicsComponent extends PhysicsComponent {
     @Override
     protected void collisonEvent(final Entity entityCollided) {
         if (entityCollided.getType() == Type.ENEMY) {
-            super.getEntity().getHealthComp().orElseThrow().setHealth(Constant.ENEMY_DMG);
+            super.getEntity().orElseThrow().getHealthComp().orElseThrow().setHealth(Constant.ENEMY_DMG);
         } else if (entityCollided.getType() == Type.PLAYER) {
-            super.getEntity().getHealthComp().orElseThrow().setHealth(Constant.PLAYER_DMG);
+            super.getEntity().orElseThrow().getHealthComp().orElseThrow().setHealth(Constant.PLAYER_DMG);
         }
 
-        if (super.getEntity().getHealthComp().orElseThrow().isDead() && entityCollided.getType() == Type.ENEMY) {
-            entityCollided.getWorld().remove(entityCollided);
+        if (super.getEntity().orElseThrow().getHealthComp().orElseThrow().isDead() && entityCollided.getType() == Type.ENEMY) {
+            entityCollided.getWorld().orElseThrow().remove(entityCollided);
         }
     }
 

@@ -1,5 +1,7 @@
 package it.unibo.smol.controller.input;
 
+import java.util.Optional;
+
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.EnemyInput;
 
@@ -16,7 +18,7 @@ public class EnemyBombInput extends EnemyInput {
      * @param world
      * @param initialEnemyPosition
      */
-    public EnemyBombInput(final World world, final Point2D initialEnemyPosition) {
+    public EnemyBombInput(final Optional<World> world, final Point2D initialEnemyPosition) {
         super(Constant.BOMB_ENEMY_MAX_SPAWNS, world, initialEnemyPosition, Constant.BOMB_ENEMY_SPEED);
     }
 
@@ -33,7 +35,7 @@ public class EnemyBombInput extends EnemyInput {
                 if (getEnemyTimesSpawn() < Constant.BOMB_ENEMY_MAX_SPAWNS) {
                     setEnemyNextPosition(enemySearchNextPos());
                 } else {
-                    getWorld().remove(getEntity());
+                    getWorld().remove(getEntity().orElseThrow());
                 }
                 getEnemyMovement().positionUpdate(getEnemyPosition(), getEnemyNextPosition());
             }

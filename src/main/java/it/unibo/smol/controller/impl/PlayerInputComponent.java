@@ -18,8 +18,8 @@ public class PlayerInputComponent implements InputComponent {
      * constructor to initialize keyboard inputs for player entity.
      * @param input
      */
-    public PlayerInputComponent(final KeyInputs input) {
-        this.input = input;
+    public PlayerInputComponent(final Optional<KeyInputs> input) {
+        this.input = input.orElseThrow();
     }
 
     /**
@@ -58,8 +58,8 @@ public class PlayerInputComponent implements InputComponent {
      * {@inheritDoc}
      */
     @Override
-    public EnemyInput getEnemyInput() {
+    public Optional<EnemyInput> getEnemyInput() {
         //this component will not use this method.
-        return null;
+        return Optional.empty();
     }
 }

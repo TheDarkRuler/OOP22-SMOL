@@ -117,6 +117,14 @@ public final class Constant {
     /** The number of difficulty stage.*/
     public static final int DIFFICULTY_LIMIT = 5;
 
+    /**-----------------------
+     * SKIN FOLDER KEYS
+     * -----------------------*/
+    /**key of the pixel skins. */
+    public static final String KEY_PIXEL_SKINS = "Pixel Skins";
+    /**key of the vectorial skins. */
+    public static final String KEY_VECTORIAL_SKINS = "Vectorial Skins";
+
     private Constant() throws UnsupportedEncodingException {
         throw new UnsupportedEncodingException("This is a utility class");
     }

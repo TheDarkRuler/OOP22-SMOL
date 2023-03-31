@@ -34,7 +34,7 @@ public interface Entity {
      * Getter for the World. 
      * @return the World
      */
-    World getWorld();
+    Optional<World> getWorld();
 
     /**
      * Add the new x coordinate to the current X.
@@ -47,12 +47,6 @@ public interface Entity {
      * @param y : the new y to add in the object
      */
     void setY(double y);
-
-    /**
-     * Set the current World.
-     * @param w the World to set
-     */
-    void setWorld(World w);
 
     /**
      * Getter for the field type.
@@ -76,7 +70,7 @@ public interface Entity {
      * Getter for the PhysicsComponent.
      * @return The PhysicsComponent
      */
-    PhysicsComponent getPhysicsComp();
+    Optional<PhysicsComponent> getPhysicsComp();
 
     /**
      * Getter for Graphic component.
@@ -85,7 +79,7 @@ public interface Entity {
     Optional<GraphicComponent> getGraphicComp();
 
     /**
-     * Update all the component of the object.
+     * Update all the component of the Entity.
      */
     void update();
 

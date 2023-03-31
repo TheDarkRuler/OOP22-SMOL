@@ -1,9 +1,9 @@
 package it.unibo.smol.controller.api;
 
 import java.util.Map;
+import java.util.Optional;
 
-import it.unibo.smol.controller.input.KeyInputs;
-import it.unibo.smol.controller.input.MouseInputs;
+import it.unibo.smol.model.ScoreLocalStorage;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.EntityFactory;
 import it.unibo.smol.model.api.World;
@@ -16,7 +16,7 @@ public interface GameState {
      * Get the current world.
      * @return game world
      */
-    World getWorld();
+    Optional<World> getWorld();
 
     /**
      * @return if game is Over or not.
@@ -24,21 +24,10 @@ public interface GameState {
     boolean isGameOver();
 
     /**
-     * Notify the world to increase the score.
-     * @param quantity is the incremental value
-     */
-    void incScore(int quantity);
-
-    /**
      * Getter for the score.
      * @return the current score
      */
     int getScore();
-
-    /**
-     *  Notify the world to kill entities.
-     */
-    void notifyDeath();
 
     /**
      * @return a map of plants occupied.
@@ -51,18 +40,6 @@ public interface GameState {
     void initGame();
 
     /**
-     * sets the keyInput in gamestate.
-     * @param keyInputs
-     */
-    void setKeyInputs(KeyInputs keyInputs);
-
-    /**
-     * sets the mouseInputs in gamestate.
-     * @param mouseInputs
-     */
-    void setMouseInputs(MouseInputs mouseInputs);
-
-    /**
      * gets the entity factory for the entities creation.
      * @return the entity factory
      */
@@ -73,4 +50,37 @@ public interface GameState {
      */
     void stopEnemyCreation();
 
+    /**
+     * Getter for record score.
+     * @return the record
+     */
+    int getRecord();
+
+    /**
+     * Notify the ScoreLocalStorage to write.
+     */
+    void notifyWrite();
+
+    /**
+     * Notify the ScoreLocalStorage to read.
+     */
+    void notifyRead();
+
+    /**
+     * Getter for ScoreLocalStorage.
+     * @return the ScoreLocalStorage
+     */
+    Optional<ScoreLocalStorage> getScoreLocalStorage();
+
+    /**
+     * Set skin.
+     * @param folderName name of the folder skin
+     */
+    void setSkins(String folderName);
+
+    /**
+     * Get skins.
+     * @return name of the folder containing skins
+     */
+    String getSkins();
 }

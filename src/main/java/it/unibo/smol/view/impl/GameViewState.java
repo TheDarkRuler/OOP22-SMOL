@@ -2,7 +2,7 @@ package it.unibo.smol.view.impl;
 
 import java.io.IOException;
 import java.util.logging.Logger;
-
+import java.util.Optional;
 import java.util.logging.Level;
 
 import it.unibo.smol.controller.api.GameState;
@@ -42,23 +42,28 @@ public class GameViewState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
     private static final int SCORE_SIZE = 18;
 
+    private final GameState gameState;
+    private final KeyInputs keyEventHandler;
+    private final MouseInputs mouseEventHandler;
     private GraphicsDraw graphic;
     private GraphicsContext gContext;
     private boolean started;
-    private final GameState gameState;
-    private KeyInputs keyEventHandler;
-    private MouseInputs mouseEventHandler;
     private Text score;
+    private Text record;
     private Rectangle healthBar;
     private HealthBarTank healthBarData;
 
     /**
      * constructor made to get the gamseState.
-     * 
      * @param gameState
+     * @param keyInputs
+     * @param mouseInputs
      */
-    public GameViewState(final GameState gameState) {
-        this.gameState = gameState;
+    public GameViewState(final Optional<GameState> gameState,
+        final Optional<KeyInputs> keyInputs, final Optional<MouseInputs> mouseInputs) {
+        this.mouseEventHandler = mouseInputs.orElseThrow();
+        this.keyEventHandler = keyInputs.orElseThrow();
+        this.gameState = gameState.orElseThrow();
     }
 
     /**
@@ -83,20 +88,16 @@ public class GameViewState implements WindowState {
     }
 
     private void start(final Stage stage) throws IOException {
-        keyEventHandler = new KeyInputs(stage);
-        mouseEventHandler = new MouseInputs();
-        setKeyInputs();
-        setMouseInputs();
         final var root = new Pane();
         final var scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1, Color.BLACK);
-        final var canvas = new Canvas(GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y);
+        final var canvas = new Canvas(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         this.gContext = canvas.getGraphicsContext2D();
-        gContext.setImageSmoothing(false);
-        this.graphic = new GraphicsDraw(gContext);
-        root.setBackground(new Background(new BackgroundImage(LoadImgs.getSprites(LoadImgs.BACKGROUND),
+        this.gContext.setImageSmoothing(false);
+        this.graphic = new GraphicsDraw(Optional.of(gContext), gameState.getSkins());
+        root.setBackground(new Background(new BackgroundImage(LoadImgs.getSprites(LoadImgs.BACKGROUND, gameState.getSkins()),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                new BackgroundSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y,
+                new BackgroundSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1,
                         false, false, false, false))));
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
@@ -108,11 +109,12 @@ public class GameViewState implements WindowState {
         root.getChildren().add(canvas);
         initializeHealthBar();
         initializeScore();
+        initializeRecord();
         root.getChildren().add(underHealthBar());
         root.getChildren().add(healthBar);
         root.getChildren().add(score);
-        stage.setX(0);
-        stage.setY(0);
+        root.getChildren().add(record);
+        stage.setTitle("SMOL");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setFullScreenExitHint(INIT_MESSAGE);
@@ -125,7 +127,7 @@ public class GameViewState implements WindowState {
                 Runtime.getRuntime().exit(0);
             }
         });
-        stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
+        stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, gameState.getSkins()));
         stage.show();
     }
 
@@ -137,28 +139,16 @@ public class GameViewState implements WindowState {
      */
     public void repaint(final Stage stage) throws IOException {
         Platform.runLater(() -> {
-            gContext.clearRect(0, 0, GameMap.WIDTH * GameMap.SCREEN_PROP_X, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y);
+            gContext.clearRect(0, 0, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
+                GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
             updateHealthBar();
-            score.setText(Integer.toString(gameState.getScore()));
-            gameState.getWorld().getEntities().stream()
+            score.setText("Score: " + Integer.toString(gameState.getScore()));
+            record.setText("Record: " + Integer.toString(gameState.getRecord()));
+            gameState.getWorld().orElseThrow().getEntities().stream()
                     .filter(x -> x.getGraphicComp().isPresent())
                     .map(x -> x.getGraphicComp())
                     .forEach(x -> x.orElseThrow().render(graphic));
         });
-    }
-
-    /**
-     * sets the keyInput in gamestate.
-     */
-    public void setKeyInputs() {
-        this.gameState.setKeyInputs(this.keyEventHandler);
-    }
-
-    /**
-     * sets the mouseInputs in gamestate.
-     */
-    public void setMouseInputs() {
-        this.gameState.setMouseInputs(this.mouseEventHandler);
     }
 
     private void initializeHealthBar() {
@@ -172,7 +162,7 @@ public class GameViewState implements WindowState {
     }
 
     private void initializeScore() {
-        score = new Text((GameMap.MAP_WIDTH - GameMap.BORDER_WIDTH) * GameMap.SCREEN_PROP_X,
+        score = new Text((GameMap.MAP_WIDTH - GameMap.BORDER_WIDTH * 2) * GameMap.SCREEN_PROP_X,
                 GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 3, Integer.toString(gameState.getScore()));
         score.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, SCORE_SIZE));
         score.setFill(Color.WHITE);
@@ -198,6 +188,18 @@ public class GameViewState implements WindowState {
     private void updateHealthBar() {
         this.healthBarData = new HealthBarTankImpl(this.gameState);
         this.healthBar.setWidth(healthBarData.getHealthBarWidth() * healthBarData.updateHealthPercentage());
+    }
+
+    private void initializeRecord() {
+        record = new Text(GameMap.BORDER_WIDTH * 2 * GameMap.SCREEN_PROP_X,
+            (GameMap.HEIGHT - GameMap.BORDER_HEIGHT / 3) * GameMap.SCREEN_PROP_Y,
+            "Record:" + Integer.toString(gameState.getRecord()));
+        record.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, SCORE_SIZE));
+        record.setFill(Color.WHITE);
+        record.setTextAlignment(TextAlignment.LEFT);
+        record.setScaleX(3);
+        record.setScaleY(3);
+        record.setVisible(true);
     }
 
 }

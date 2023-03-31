@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
@@ -16,6 +17,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -31,16 +33,20 @@ import javafx.util.Duration;
 public class GameOverWinState implements WindowState {
 
     private static final int BUTTON_ANIM_DURATION = 500;
+
     private static Logger logger = Logger.getLogger("gameOverLogger");
     private final int finalScore;
+    private final String folderName;
 
     /**
      * gets the final score.
      * 
      * @param currentScore
+     * @param folderName
      */
-    public GameOverWinState(final int currentScore) {
+    public GameOverWinState(final int currentScore, final String folderName) {
         this.finalScore = currentScore;
+        this.folderName = folderName;
     }
 
     /**
@@ -75,10 +81,13 @@ public class GameOverWinState implements WindowState {
                 final Button closeGame = (Button) scene.lookup("#closeGame");
                 final Text score = (Text) scene.lookup("#score");
                 final VBox gameOverBox = (VBox) scene.lookup("#box");
-                scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.ANGRY_MOLE)));
+                final ImageView title = (ImageView) scene.lookup("#boxImage");
+                scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.ANGRY_MOLE, folderName)));
                 gameOverBox.setSpacing((GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X) / 3);
                 buttonManagement(restartGame);
                 buttonManagement(closeGame);
+                title.setFitWidth(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH * 3);
+                title.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT * 3);
                 restartGame.setOnMouseClicked(e -> {
                     new WindowImpl().launch(stage);
                 });
@@ -102,7 +111,7 @@ public class GameOverWinState implements WindowState {
                 stage.setScene(scene);
                 stage.setFullScreen(true);
                 stage.setResizable(false);
-                stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO));
+                stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, folderName));
                 stage.show();
             } catch (MalformedURLException e) {
                 logger.log(Level.SEVERE, "badUrlOnGameOver::", e);
