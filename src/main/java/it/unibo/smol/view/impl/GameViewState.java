@@ -17,6 +17,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -106,6 +108,11 @@ public class GameViewState implements WindowState {
         scene.setOnMouseReleased(mouseEventHandler);
         scene.setOnMouseDragged(mouseEventHandler);
         scene.setOnMouseEntered(mouseEventHandler);
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode().equals(KeyCode.F11)) {
+                stage.setFullScreen(!stage.isFullScreen());
+            }
+        });
         root.getChildren().add(canvas);
         initializeHealthBar();
         initializeScore();
