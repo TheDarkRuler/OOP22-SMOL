@@ -8,11 +8,11 @@
 }
 
 .button {
-    background-color: #996633;
+    background-color: #965B21;
     font-stretch: extra-condensed;
     font-weight: bolder;
     font-size: x-large;
-    -fx-background-color: #893AA4;
+    -fx-background-color: #965B21;
     -fx-font-stretch: extra-condensed;
     -fx-font-weight: bolder;
     -fx-font-size: x-large;
@@ -33,17 +33,17 @@
 }
 
 #dropDown {
-    background-color: #893AA4;
+    background-color: #965B21;
     font-stretch: extra-condensed;
     font-weight: bolder;
     font-size: x-large;
-    -fx-background-color: #893AA4;
+    -fx-background-color: #965B21;
     -fx-font-stretch: extra-condensed;
     -fx-font-weight: bolder;
     -fx-font-size: x-large;
 }
 
 .context-menu {
-    background-color: #893AA4;
-    -fx-background-color: #893AA4;
+    background-color: #A1764B;
+    -fx-background-color: #A1764B;
 }
