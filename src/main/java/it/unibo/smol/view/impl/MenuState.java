@@ -162,7 +162,7 @@ public class MenuState implements WindowState {
     }
 
     private void setDropDownImage(final MenuItem menuItem) {
-        ImageView skinImage = new ImageView(LoadImgs.getSprites(LoadImgs.ANGRY_MOLE, menuItem.getText()));
+        final ImageView skinImage = new ImageView(LoadImgs.getSprites(LoadImgs.ANGRY_MOLE, menuItem.getText()));
         skinImage.setFitWidth(GameMap.SCREEN_PROP_X * Constant.ENEMY_WIDTH / 2);
         skinImage.setFitHeight(GameMap.SCREEN_PROP_Y * Constant.ENEMY_HEIGHT / 2);
         menuItem.setGraphic(skinImage);
