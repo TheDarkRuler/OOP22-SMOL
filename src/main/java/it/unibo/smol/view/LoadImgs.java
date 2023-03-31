@@ -22,6 +22,10 @@ public final class LoadImgs {
     public static final String MOLE = "mole1.gif";
     /**player gif. */
     public static final String PLAYER = "player.gif";
+    /**player moving right gif. */
+    public static final String PLAYER_RIGHT = "player_right.gif";
+    /**player moving left gif. */
+    public static final String PLAYER_LEFT = "player_left.gif";
     /**Helmet mole gif. */
     public static final String HELM_MOLE = "Helmet_mole.gif";
     /**Bomb mole gif. */
