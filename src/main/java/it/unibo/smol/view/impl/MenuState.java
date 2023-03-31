@@ -93,7 +93,7 @@ public class MenuState implements WindowState {
             gameEngine.init(primaryStage);
         });
         gameOver.setOnMouseClicked(e -> {
-            new WindowImpl(new GameOverWinState(0, Constant.KEY_PIXEL_SKINS)).launch(primaryStage);
+            new WindowImpl(new InstructionsState()).launch(primaryStage);
         });
         quitGame.setOnMouseClicked(e -> {
             Platform.exit();
