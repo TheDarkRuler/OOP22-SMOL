@@ -136,23 +136,21 @@ public class MenuState implements WindowState {
     }
 
     private void dropDownMenuManagement(final MenuButton menuButton) {
+        menuButton.setText(Constant.KEY_PIXEL_SKINS);
+        menuButton.setStyle("-fx-mark-color: green");
         setButtonBaseSize(menuButton);
         final MenuItem pixel = new MenuItem(Constant.KEY_PIXEL_SKINS);
         final MenuItem vectorial = new MenuItem(Constant.KEY_VECTORIAL_SKINS);
         menuButton.getItems().addAll(pixel, vectorial);
-        pixel.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent event) {
-                currentSkins = Constant.KEY_PIXEL_SKINS;
-                menuButton.setText(Constant.KEY_PIXEL_SKINS);
-            }
-        });
-        vectorial.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent event) {
-                currentSkins = Constant.KEY_VECTORIAL_SKINS;
-                menuButton.setText(Constant.KEY_VECTORIAL_SKINS);
-            }
+        menuButton.getItems().forEach(item -> {
+            //TODO damoglie le immagini
+            item.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(final ActionEvent event) {
+                    currentSkins = item.getText();
+                    menuButton.setText(item.getText());
+                }
+            });
         });
     }
 

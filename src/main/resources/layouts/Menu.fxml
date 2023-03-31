@@ -13,6 +13,7 @@
             <Button fx:id="start" text="START" />
             <Button fx:id="gameOver" text="INSTRUCTIONS" />
             <Button fx:id="quit" text="QUIT" />
-            <MenuButton fx:id="dropDown" text="CHOOSE GRAPHIC" />
+            <MenuButton fx:id="dropDown" text="CHOOSE GRAPHIC">
+            </MenuButton>
       </children>
 </VBox>
