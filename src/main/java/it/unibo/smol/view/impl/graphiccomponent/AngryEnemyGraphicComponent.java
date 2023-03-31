@@ -38,7 +38,7 @@ public class AngryEnemyGraphicComponent extends GraphicComponent {
     @Override
     public void updateAnimation() {
         if (super.getEntity() != null) {
-            if (super.getEntity().getInputComp().orElseThrow().isHittable()) {
+            if (super.getEntity().orElseThrow().getInputComp().orElseThrow().isHittable()) {
                 moving = false;
             } else {
                 moving = true;

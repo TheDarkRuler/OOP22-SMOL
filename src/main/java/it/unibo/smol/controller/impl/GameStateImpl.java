@@ -1,11 +1,14 @@
 package it.unibo.smol.controller.impl;
 
 import java.util.Map;
+import java.util.Optional;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.hitbox.RectangleHB;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
+import it.unibo.smol.model.ScoreLocalStorage;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.EntityFactory;
@@ -24,6 +27,8 @@ public class GameStateImpl implements GameState {
     private final World world;
     private final EntityFactory entityFactory;
     private EnemyCreation enemyCreator;
+    private final ScoreLocalStorage scoreStorage;
+    private String folderName;
 
     /**
      * Constructor.
@@ -32,6 +37,9 @@ public class GameStateImpl implements GameState {
     public GameStateImpl(final World world) {
         this.world = new WorldImpl(world);
         this.entityFactory = new EntityFactoryImpl();
+        this.enemyCreator = new EnemyCreation(Optional.of(this));
+        this.scoreStorage = new ScoreLocalStorage(Optional.of(this));
+        this.folderName = Constant.KEY_PIXEL_SKINS;
     }
 
     /**
@@ -39,16 +47,18 @@ public class GameStateImpl implements GameState {
      * @param gameState the game state that we want to copy
      */
     public GameStateImpl(final GameState gameState) {
-        this.world = gameState.getWorld();
+        this.world = gameState.getWorld().orElseThrow();
         this.entityFactory = new EntityFactoryImpl();
+        this.scoreStorage = new ScoreLocalStorage(Optional.of(gameState));
+        this.folderName = gameState.getSkins();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public World getWorld() {
-        return this.world;
+    public Optional<World> getWorld() {
+        return Optional.of(this.world);
     }
 
     /**
@@ -74,7 +84,7 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public Map<Entity, Boolean> occupiedPlants() {
-        return getWorld().occupiedPlants();
+        return getWorld().orElseThrow().occupiedPlants();
     }
 
     /**
@@ -97,15 +107,15 @@ public class GameStateImpl implements GameState {
 
         world.addEntity(entityFactory.createPlayer(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
         world.addEntity(entityFactory.createWeapon(GameMap.WIDTH / 2, GameMap.HEIGHT / 2, this.world));
-        new PlantsCreation(this);
-        this.enemyCreator = new EnemyCreation(this);
+        new PlantsCreation(Optional.of(this));
+        this.enemyCreator.startCreation();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setKeyInputs(final KeyInputs keyInputs) {
+    public void setKeyInputs(final Optional<KeyInputs> keyInputs) {
         this.world.setKeyInputs(keyInputs);
     }
 
@@ -113,7 +123,7 @@ public class GameStateImpl implements GameState {
      * {@inheritDoc}
      */
     @Override
-    public void setMouseInputs(final MouseInputs mouseInputs) {
+    public void setMouseInputs(final Optional<MouseInputs> mouseInputs) {
         this.world.setMouseInputs(mouseInputs);
     }
 
@@ -131,6 +141,54 @@ public class GameStateImpl implements GameState {
     @Override
     public void stopEnemyCreation() {
         this.enemyCreator.stopCreation();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getRecord() {
+        return this.scoreStorage.getRecord();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void notifyWrite() {
+        this.scoreStorage.writeFile();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void notifyRead() {
+        this.scoreStorage.readFile();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<ScoreLocalStorage> getScoreLocalStorage() {
+        return Optional.of(this.scoreStorage);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSkins(final String folderName) {
+        this.folderName = folderName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSkins() {
+        return this.folderName;
     }
 
 }

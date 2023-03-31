@@ -2,6 +2,9 @@ package it.unibo.smol.controller.input;
 
 import it.unibo.smol.controller.api.EnemyInput;
 import it.unibo.smol.model.api.World;
+
+import java.util.Optional;
+
 import it.unibo.smol.common.Constant;
 import javafx.geometry.Point2D;
 
@@ -15,7 +18,7 @@ public class EnemyBasicInput extends EnemyInput {
      * @param world
      * @param initialEnemyPosition
      */
-    public EnemyBasicInput(final World world, final Point2D initialEnemyPosition) {
+    public EnemyBasicInput(final Optional<World> world, final Point2D initialEnemyPosition) {
         super(Constant.BASIC_ENEMY_MAX_SPAWNS, world, initialEnemyPosition, Constant.BASIC_ENEMY_SPEED);
     }
 }

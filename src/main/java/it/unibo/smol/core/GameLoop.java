@@ -36,9 +36,9 @@ public class GameLoop extends Thread {
      * @param gv the visual rappresentation of the game
      * @param view The stage of the current view
      */
-    public GameLoop(final GameState gameState, final GameViewState gv, final Optional<Stage> view) {
-        this.gameState = gameState;
-        this.gv = gv;
+    public GameLoop(final Optional<GameState> gameState, final Optional<GameViewState> gv, final Optional<Stage> view) {
+        this.gameState = gameState.orElseThrow();
+        this.gv = gv.orElseThrow();
         this.view = view.orElseThrow();
     }
 
@@ -53,6 +53,9 @@ public class GameLoop extends Thread {
         pastTime = System.nanoTime();
 
         gameState.initGame();
+        if (gameState.getScoreLocalStorage().orElseThrow().getScoreFile().exists()) {
+            gameState.notifyRead();
+        }
         do {
             now = System.nanoTime();
 
@@ -67,20 +70,23 @@ public class GameLoop extends Thread {
             } /*
             if (timer >= 1000000000) {
                 System.out.println("FPS: "+ drawCount);
-                System.out.println(gameState.getScore());
+                //System.out.println(gameState.getScore());
                 drawCount=0;
                 timer=0;
             }*/
         } while (!gameState.isGameOver());
         gameState.stopEnemyCreation();
-        new WindowImpl(new GameOverWinState(gameState.getScore())).launch(view);
+
+        gameState.notifyWrite();
+
+        new WindowImpl(new GameOverWinState(gameState.getScore(), gameState.getSkins())).launch(view);
     }
 
     /**
      * Update the logic of the Game.
      */
     public void update() {
-        gameState.getWorld().updateWorld();
+        gameState.getWorld().orElseThrow().updateWorld();
     }
 
     /**

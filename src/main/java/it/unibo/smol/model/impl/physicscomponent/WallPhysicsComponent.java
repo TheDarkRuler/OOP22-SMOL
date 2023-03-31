@@ -1,5 +1,6 @@
 package it.unibo.smol.model.impl.physicscomponent;
 
+import java.util.Optional;
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
@@ -18,7 +19,7 @@ public class WallPhysicsComponent extends PhysicsComponent {
      * @param hitBox : See the super-Constructor
      */
     public WallPhysicsComponent(final HitBox hitBox) {
-        super(Constant.HEALTH_MOVSPD, hitBox);
+        super(Constant.HEALTH_MOVSPD, Optional.of(hitBox));
     }
 
     @Override
@@ -37,8 +38,8 @@ public class WallPhysicsComponent extends PhysicsComponent {
     @Override
     protected void collisonEvent(final Entity entityCollided) {
         if (entityCollided.getType() == Type.PLAYER) {
-            entityCollided.setX(entityCollided.getCurrentX() - entityCollided.getPhysicsComp().getX());
-            entityCollided.setY(entityCollided.getCurrentY() - entityCollided.getPhysicsComp().getY());
+            entityCollided.setX(entityCollided.getCurrentX() - entityCollided.getPhysicsComp().orElseThrow().getX());
+            entityCollided.setY(entityCollided.getCurrentY() - entityCollided.getPhysicsComp().orElseThrow().getY());
         }
     }
 

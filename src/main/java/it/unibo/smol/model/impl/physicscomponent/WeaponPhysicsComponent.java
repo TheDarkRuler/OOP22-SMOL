@@ -1,5 +1,7 @@
 package it.unibo.smol.model.impl.physicscomponent;
 
+import java.util.Optional;
+
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
@@ -19,7 +21,7 @@ public class WeaponPhysicsComponent extends PhysicsComponent {
      * @param hitBox : See the super-Constructor
      */
     public WeaponPhysicsComponent(final HitBox hitBox) {
-        super(Constant.WEAPON_MOVSPD, hitBox);
+        super(Constant.WEAPON_MOVSPD, Optional.of(hitBox));
     }
 
     /**
@@ -43,7 +45,7 @@ public class WeaponPhysicsComponent extends PhysicsComponent {
      */
     @Override
     public void receiveMovement(final Point2D move, final World world) {
-        final double wRange = world.getMouseInputs().getWeaponRange();
+        final double wRange = world.getMouseInputs().orElseThrow().getWeaponRange();
         final Point2D playerLocation = world.getEntities()
             .stream()
             .filter(x -> x.getType().equals(Type.PLAYER))

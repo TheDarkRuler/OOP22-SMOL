@@ -34,7 +34,7 @@ public interface Entity {
      * Getter for the World. 
      * @return the World
      */
-    World getWorld();
+    Optional<World> getWorld();
 
     /**
      * Add the new x coordinate to the current X.
@@ -70,7 +70,7 @@ public interface Entity {
      * Getter for the PhysicsComponent.
      * @return The PhysicsComponent
      */
-    PhysicsComponent getPhysicsComp();
+    Optional<PhysicsComponent> getPhysicsComp();
 
     /**
      * Getter for Graphic component.

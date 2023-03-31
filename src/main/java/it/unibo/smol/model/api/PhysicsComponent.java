@@ -1,5 +1,7 @@
 package it.unibo.smol.model.api;
 
+import java.util.Optional;
+
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 import javafx.geometry.Point2D;
@@ -8,6 +10,7 @@ import javafx.geometry.Point2D;
  * Abstract class rappresenting the template of the Physics component for the {@link Entity}.
  */
 public abstract class PhysicsComponent {
+
     private double movementSpeed;
     private double x, y;
     private final HitBox hitBox;
@@ -19,9 +22,9 @@ public abstract class PhysicsComponent {
      * @param movementSpeed : the value that determine the speed of the entity
      * @param hitBox : the shape that rappresent the logic position of the entity
      */
-    public PhysicsComponent(final Double movementSpeed, final HitBox hitBox) {
+    public PhysicsComponent(final Double movementSpeed, final Optional<HitBox> hitBox) {
         this.movementSpeed = movementSpeed;
-        this.hitBox = hitBox;
+        this.hitBox = hitBox.orElseThrow();
         this.isRigid = true;
     }
 
@@ -30,14 +33,14 @@ public abstract class PhysicsComponent {
      */
     public void checkCollision() {
         if (this.entity != null) {
-            this.entity.getWorld().getEntities().stream()
+            this.entity.getWorld().orElseThrow().getEntities().stream()
             .map(x -> x.getPhysicsComp())
-            .filter(x -> !this.equals(x))
-            .filter(x -> hitBox.isColliding(x.getHitBox()))
+            .filter(x -> !this.equals(x.orElseThrow()))
+            .filter(x -> hitBox.isColliding(x.orElseThrow().getHitBox().orElseThrow()))
             .forEach(x -> {
-                    if (this.isRigid() && x.isRigid()) {
+                    if (this.isRigid() && x.orElseThrow().isRigid()) {
                         //System.out.println("Entity "+this.entity.getType()+" has collided with "+x.entity.getType());
-                        this.collisonEvent(x.getEntity());
+                        this.collisonEvent(x.orElseThrow().getEntity().orElseThrow());
                     }
                 });
         } else {
@@ -62,16 +65,16 @@ public abstract class PhysicsComponent {
      * Getter for the entity field.
      * @return The entity that use this component
      */
-    public Entity getEntity() {
-        return entity;
+    public Optional<Entity> getEntity() {
+        return Optional.of(this.entity);
     }
 
     /**
      * Set the entity associated with this component.
      * @param e : The entity that use this component
      */
-    public void setEntity(final Entity e) {
-        this.entity = e;
+    public void setEntity(final Optional<Entity> e) {
+        this.entity = e.orElseThrow();
     }
 
     /**
@@ -102,8 +105,8 @@ public abstract class PhysicsComponent {
      * Get the hitbox shape.
      * @return the hitbox
      */
-    public HitBox getHitBox() {
-        return this.hitBox;
+    public Optional<HitBox> getHitBox() {
+        return Optional.of(this.hitBox);
     }
 
     /**

@@ -43,13 +43,13 @@ public class HelmetEnemyGraphicComponent extends GraphicComponent {
     @Override
     public void updateAnimation() {
         if (super.getEntity() != null) {
-            if (super.getEntity().getInputComp().orElseThrow().isHittable()) {
+            if (super.getEntity().orElseThrow().getInputComp().orElseThrow().isHittable()) {
                 moving = false;
             } else {
                 moving = true;
             }
             //System.out.println(super.getEntity().getHealthComp().orElseThrow().getCurrentHealth());
-            if (super.getEntity().getHealthComp().orElseThrow().getCurrentHealth() < Constant.ENEMY_HELMET_HP) {
+            if (super.getEntity().orElseThrow().getHealthComp().orElseThrow().getCurrentHealth() < Constant.ENEMY_HELMET_HP) {
                 isHalfDead = true;
             }
         }

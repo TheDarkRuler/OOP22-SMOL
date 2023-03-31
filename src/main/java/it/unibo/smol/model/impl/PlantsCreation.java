@@ -1,5 +1,6 @@
 package it.unibo.smol.model.impl;
 
+import java.util.Optional;
 import java.util.Random;
 
 import it.unibo.smol.common.Constant;
@@ -21,8 +22,8 @@ public class PlantsCreation {
      * constructor that starts the creation of plants and gets the gamestate.
      * @param gs
      */
-    public PlantsCreation(final GameState gs) {
-        this.gs = gs;
+    public PlantsCreation(final Optional<GameState> gs) {
+        this.gs = gs.orElseThrow();
         this.validPosition = true;
         this.rand = new Random();
         createPlants();
@@ -35,15 +36,15 @@ public class PlantsCreation {
                 this.validPosition = true;
                 plantPosition = findPosition(i);
                 final var temp = new RectangleHB(Constant.HEALTH_WIDTH, Constant.HEALTH_HEIGHT, plantPosition);
-                gs.getWorld().getEntities().forEach(x -> {
-                    if (temp.isColliding(x.getPhysicsComp().getHitBox())) {
+                gs.getWorld().orElseThrow().getEntities().forEach(x -> {
+                    if (temp.isColliding(x.getPhysicsComp().orElseThrow().getHitBox().orElseThrow())) {
                         this.validPosition = false;
                     }
                 });
             } while (!this.validPosition);
-            gs.getWorld()
+            gs.getWorld().orElseThrow()
                 .addFirstEntity(gs.getEntityFactory()
-                    .createLifePlants(plantPosition.getX(), plantPosition.getY(), gs.getWorld()));
+                    .createLifePlants(plantPosition.getX(), plantPosition.getY(), gs.getWorld().orElseThrow()));
         }
     }
 

@@ -25,11 +25,11 @@ public class EnemyMoves {
      * @param enemyToMove
      * @param movSpeed
      */
-    public EnemyMoves(final Point2D from, final Point2D to, final EnemyInput enemyToMove, final double movSpeed) {
+    public EnemyMoves(final Point2D from, final Point2D to, final Optional<EnemyInput> enemyToMove, final double movSpeed) {
         this.from = from;
         this.to = to;
         this.movSpeed = movSpeed;
-        this.enemyToMove = enemyToMove;
+        this.enemyToMove = enemyToMove.orElseThrow();
         setMovementVariable();
         this.enemyIsUnder = true;
     }

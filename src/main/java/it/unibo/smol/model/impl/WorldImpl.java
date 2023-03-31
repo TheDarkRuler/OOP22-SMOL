@@ -3,6 +3,7 @@ package it.unibo.smol.model.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ConcurrentMap;
@@ -22,8 +23,8 @@ public class WorldImpl implements World {
     private final ConcurrentLinkedDeque<Entity> entities;
     private final Map<Entity, Boolean> occupiedPlants;
     private int score;
-    private KeyInputs keyInputs;
-    private MouseInputs mouseInputs;
+    private Optional<KeyInputs> keyInputs;
+    private Optional<MouseInputs> mouseInputs;
 
     /**
      * constructor for game world.
@@ -113,7 +114,9 @@ public class WorldImpl implements World {
      */
     @Override
     public void incScore(final int quantity) {
-        this.score = this.score + quantity;
+        if (this.score + quantity > 0) {
+            this.score = this.score + quantity;
+        }
     } 
 
     /**
@@ -168,7 +171,7 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void setKeyInputs(final KeyInputs keyInputs) {
+    public void setKeyInputs(final Optional<KeyInputs> keyInputs) {
         this.keyInputs = keyInputs;
     }
 
@@ -176,7 +179,7 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void setMouseInputs(final MouseInputs mouseInputs) {
+    public void setMouseInputs(final Optional<MouseInputs> mouseInputs) {
         this.mouseInputs = mouseInputs;
     }
 
@@ -184,7 +187,7 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public KeyInputs getKeyInputs() {
+    public Optional<KeyInputs> getKeyInputs() {
         return this.keyInputs;
     }
 
@@ -192,7 +195,7 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public MouseInputs getMouseInputs() {
+    public Optional<MouseInputs> getMouseInputs() {
         return this.mouseInputs;
     }
 
