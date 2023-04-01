@@ -45,6 +45,7 @@ public class GraphicsDraw {
         images.put(LoadImgs.W_TARGET, LoadImgs.getSprites(LoadImgs.W_TARGET, folderName));
         images.put(LoadImgs.GROUND, LoadImgs.getSprites(LoadImgs.GROUND, folderName));
         images.put(LoadImgs.LIFE_PLANTS, LoadImgs.getSprites(LoadImgs.LIFE_PLANTS, folderName));
+        images.put(LoadImgs.CHOPPED_PLANTS, LoadImgs.getSprites(LoadImgs.CHOPPED_PLANTS, folderName));
     }
 
     /**
