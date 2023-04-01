@@ -41,7 +41,7 @@ public class EntityImpl implements Entity {
         this.inputComp = inputComp;
         this.healthComp = healthComp;
         this.graphicComp = graphicComp;
-        this.physicsComp = physicsComp.orElseThrow(null);
+        this.physicsComp = physicsComp.orElseThrow();
         this.currentX = currentX;
         this.currentY = currentY;
         this.world = w.orElseThrow();
