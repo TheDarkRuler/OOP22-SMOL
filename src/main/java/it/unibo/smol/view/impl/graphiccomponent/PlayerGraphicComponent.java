@@ -44,8 +44,10 @@ public class PlayerGraphicComponent extends GraphicComponent {
     public void updateAnimation() {
         if (super.getEntity().isPresent()) {
             if (super.getEntity().orElseThrow().getPhysicsComp().orElseThrow().getX() > 0) {
+                this.moving_left = false;
                 this.moving_right = true;
             } else if (super.getEntity().orElseThrow().getPhysicsComp().orElseThrow().getX() < 0) {
+                this.moving_right = false;
                 this.moving_left = true;
             } else {
                 this.moving_left = false;
