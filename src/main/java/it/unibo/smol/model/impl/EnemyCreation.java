@@ -48,7 +48,6 @@ public class EnemyCreation {
      * Change the spawn rate of the enemies and the time spawn between two moles.
      */
     private void changeDifficulty() {
-        System.out.println(this.difficultyLevel);
         final int temp = gameState.getScore() / Constant.INC_DIFFICULTY_PIVOT;
         entitiesMap.put("Angry_mole", Constant.DEF_RATE_ANGRY + (temp * Constant.INC_RATE_ANGRY));
         entitiesMap.put("Helmet_mole", Constant.DEF_RATE_HELMET + (temp * Constant.INC_RATE_HELMET));
