@@ -4,7 +4,6 @@ import java.util.Optional;
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
-import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
 import it.unibo.smol.model.api.World;
@@ -23,14 +22,11 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
     }
 
     /**
-     * Whenever this entity collide with a Enemy {@link Type} entity, it takes knockBack.
+     * {@inheritDoc}
      */
     @Override
     protected void collisonEvent(final Entity entityCollided) {
-        if (entityCollided.getType() == Type.ENEMY) {
-            super.setX(0);
-            super.setY(0);
-        }
+        //This component doesn't use this method
     }
 
     /**
