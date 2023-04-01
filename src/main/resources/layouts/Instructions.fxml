@@ -53,9 +53,9 @@
         </VBox>
     </left>
     <center>
-        <VBox spacing="10" alignment="TOP_LEFT">
+        <VBox spacing="30" alignment="TOP_LEFT">
         <padding>
-            <Insets top="57" right="10" bottom="10" left="60"/>
+            <Insets top="57" right="10" bottom="10" left="90"/>
         </padding>
             <children>
                 <Text>HIT:</Text>
@@ -80,10 +80,41 @@
         </VBox>
     </center>
     <right>
-        
+        <VBox spacing="30" alignment="TOP_LEFT">
+        <padding>
+            <Insets top="57" right="600" bottom="10" left="10"/>
+        </padding>
+            <children>
+                <Text>ENEMIES:</Text>
+                <Text>Basic mole</Text>
+                <ImageView>
+                    <image>
+                        <Image url="images/pixel_moles/mole1.gif"/>
+                    </image>
+                </ImageView>
+                <Text id="title">Helmet mole (two hit for kill)</Text>
+                <ImageView>
+                    <image>
+                        <Image url="images/pixel_moles/Helmet_mole.gif"/>
+                    </image>
+                </ImageView>
+                <Text id="title">Angry mole (move faster in the plants)</Text>
+                <ImageView>
+                    <image>
+                        <Image url="images/pixel_moles/Angry_mole.gif"/>
+                    </image>
+                </ImageView>
+                <Text id="title">Bomb mole (stun player for some seconds)</Text>
+                <ImageView>
+                    <image>
+                        <Image url="images/pixel_moles/Bomb_mole.gif"/>
+                    </image>
+                </ImageView>
+            </children>
+        </VBox>
     </right>
     <bottom>
-        <VBox spacing="10" alignment="BOTTOM_RIGHT">
+        <VBox spacing="10" alignment="CENTER">
              <Button fx:id="menu" text="MENU"/>
         </VBox>
     </bottom>
