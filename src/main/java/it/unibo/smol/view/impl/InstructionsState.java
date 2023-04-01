@@ -2,29 +2,21 @@ package it.unibo.smol.view.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.annotation.Retention;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.unibo.smol.view.GameMap;
-import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 /**
  * A class for the instructions of the game.
@@ -37,7 +29,7 @@ public class InstructionsState implements WindowState {
      * {@inheritDoc}
      */
     @Override
-    public void render(Stage stage) throws IOException {
+    public void render(final Stage stage) throws IOException {
         try {
             this.start(stage);
         } catch (IOException e) {
@@ -65,8 +57,7 @@ public class InstructionsState implements WindowState {
          * Set fields.
          */
         title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR,
-                GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
-
+                GameMap.BORDER_WIDTH / 2 * GameMap.SCREEN_PROP_X));
         // buttons behaviour
         menu.setOnMouseClicked(e -> {
             new WindowImpl().launch(stage);
@@ -92,5 +83,4 @@ public class InstructionsState implements WindowState {
         stage.setFullScreen(true);
         stage.show();
     }
-    
 }
