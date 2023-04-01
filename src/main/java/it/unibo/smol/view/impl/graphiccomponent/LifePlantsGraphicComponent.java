@@ -1,5 +1,6 @@
 package it.unibo.smol.view.impl.graphiccomponent;
 
+import it.unibo.smol.common.Constant;
 //import it.unibo.smol.common.Constant;
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.GraphicComponent;
@@ -9,7 +10,7 @@ import it.unibo.smol.view.api.GraphicComponent;
  */
 public class LifePlantsGraphicComponent extends GraphicComponent {
 
-    //private boolean isHalfDead;
+    private boolean isHalfDead;
 
     /**
      * 
@@ -25,12 +26,11 @@ public class LifePlantsGraphicComponent extends GraphicComponent {
      */
     @Override
     public void setAnimation() {
-        /*if (isHalfDead) {
-            super.setImageName(LoadImgs.LIFE_PLANTS);
+        if (isHalfDead) {
+            super.setImageName(LoadImgs.CHOPPED_PLANTS);
         } else {
             super.setImageName(LoadImgs.LIFE_PLANTS);
-        }*/
-        super.setImageName(LoadImgs.LIFE_PLANTS);
+        }
     }
 
     /**
@@ -38,12 +38,12 @@ public class LifePlantsGraphicComponent extends GraphicComponent {
      */
     @Override
     public void updateAnimation() {
-        /*if (super.getEntity().isPresent()) {
+        if (super.getEntity().isPresent()) {
             if (super.getEntity().orElseThrow().getHealthComp().get().getCurrentHealth() <= Constant.HEALTH_HP / 2) {
                 isHalfDead = true;
             } else {
                 isHalfDead = false;
             }
-        }*/
+        }
     }
 }

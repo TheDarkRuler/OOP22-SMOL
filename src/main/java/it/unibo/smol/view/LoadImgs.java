@@ -38,6 +38,8 @@ public final class LoadImgs {
     public static final String HELM_HIT_MOLE = "Hitted_Helmet_mole.gif";
     /**plants png. */
     public static final String LIFE_PLANTS = "Life_plants.png";
+    /**chopped plants png */
+    public static final String CHOPPED_PLANTS = "Life_plants_chopped.png";
     /**ground gif. */
     public static final String GROUND = "Ground.gif";
     /**background png. */

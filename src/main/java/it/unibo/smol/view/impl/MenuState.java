@@ -26,6 +26,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -98,13 +99,9 @@ public class MenuState implements WindowState {
             Platform.exit();
             Runtime.getRuntime().exit(0);
         });
-        root.setOnKeyPressed(e -> {
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode().equals(KeyCode.F11)) {
-                if (primaryStage.isFullScreen()) {
-                    primaryStage.setFullScreen(false);
-                } else {
-                    primaryStage.setFullScreen(true);
-                }
+                primaryStage.setFullScreen(!primaryStage.isFullScreen());
             }
         });
 

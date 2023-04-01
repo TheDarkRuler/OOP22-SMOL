@@ -90,4 +90,11 @@ public interface World {
      */
     Optional<MouseInputs> getMouseInputs();
 
+    /**
+     * sets the inputs.
+     * @param keyInputs
+     * @param mouseInputs
+     */
+    void setInputs(Optional<KeyInputs> keyInputs, Optional<MouseInputs> mouseInputs);
+
 }
