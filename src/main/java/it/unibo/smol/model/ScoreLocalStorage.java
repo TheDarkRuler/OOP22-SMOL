@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -33,7 +34,7 @@ public class ScoreLocalStorage {
     public void writeFile() {
         try {
             if (gameState.getScore() > record) {
-                final PrintWriter printWriter = new PrintWriter(scoreFile);
+                final PrintWriter printWriter = new PrintWriter(scoreFile, StandardCharsets.UTF_8);
                 printWriter.print(gameState.getScore());
                 printWriter.close();
                 //System.out.println("record:" + record);
@@ -47,15 +48,13 @@ public class ScoreLocalStorage {
      * A method that read the score file and save the record.
      */
     public void readFile() {
-        try {
-            final BufferedReader reader = new BufferedReader(new FileReader(scoreFile));
+        try (BufferedReader reader = new BufferedReader(new FileReader(scoreFile, StandardCharsets.UTF_8));) {
             String character  = reader.readLine();
             while (character != null) {
                 record = Integer.parseInt(character);
                 //System.out.println("leggo:" + record);
                 character = reader.readLine();
             }
-            reader.close();
         } catch (IOException e) {
             Logger.getLogger(ScoreLocalStorage.class.getName()).info("IOException");
         }
