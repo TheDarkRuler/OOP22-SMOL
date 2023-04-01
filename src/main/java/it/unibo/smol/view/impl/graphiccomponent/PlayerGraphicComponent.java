@@ -8,8 +8,8 @@ import it.unibo.smol.view.api.GraphicComponent;
  */
 public class PlayerGraphicComponent extends GraphicComponent {
 
-    private boolean moving_left;
-    private boolean moving_right;
+    private boolean movingRight;
+    private boolean movingLeft;
 
     /**
      * Constructors inherited by the super-class {@link GraphicComponent}.
@@ -18,8 +18,8 @@ public class PlayerGraphicComponent extends GraphicComponent {
      */
     public PlayerGraphicComponent(final double width, final double height) {
         super(width, height);
-        this.moving_left = false;
-        this.moving_right = false;
+        this.movingLeft = false;
+        this.movingRight = false;
     }
 
     /**
@@ -28,9 +28,9 @@ public class PlayerGraphicComponent extends GraphicComponent {
     @Override
     public void setAnimation() {
         //setImageName(LoadImgs.PLAYER);
-        if (this.moving_left) {
+        if (this.movingLeft) {
             setImageName(LoadImgs.PLAYER_LEFT);
-        } else if (this.moving_right) {
+        } else if (this.movingRight) {
             setImageName(LoadImgs.PLAYER_RIGHT);
         } else {
             setImageName(LoadImgs.PLAYER);
@@ -44,14 +44,14 @@ public class PlayerGraphicComponent extends GraphicComponent {
     public void updateAnimation() {
         if (super.getEntity().isPresent()) {
             if (super.getEntity().orElseThrow().getPhysicsComp().orElseThrow().getX() > 0) {
-                this.moving_left = false;
-                this.moving_right = true;
+                this.movingLeft = false;
+                this.movingRight = true;
             } else if (super.getEntity().orElseThrow().getPhysicsComp().orElseThrow().getX() < 0) {
-                this.moving_right = false;
-                this.moving_left = true;
+                this.movingRight = false;
+                this.movingLeft = true;
             } else {
-                this.moving_left = false;
-                this.moving_right = false;
+                this.movingLeft = false;
+                this.movingRight = false;
             }
         }
     }
