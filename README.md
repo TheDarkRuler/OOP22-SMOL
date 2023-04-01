@@ -52,3 +52,4 @@ bradlew.bat run
 
 o in alternativa si può direttamente avviare il gioco con il file .jar messo a disposizione
 
+## Istruzioni 
