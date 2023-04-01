@@ -1,6 +1,6 @@
 # ProjectOOP : SMOL
 
-## Descrizione del progetto:
+## Descrizione del progetto
 
 Il gruppo si pone come obiettivo quello di realizzare un videogioco 2D con visuale dall’alto che prende spunto dal famoso “Schiaccia la Talpa”.
 L’obbiettivo del gioco è difendere i campi di ortaggi dalle talpe che invadono la mappa di gioco, schiacciandole con un martello.
@@ -38,7 +38,7 @@ bradlew.bat build
 ```
 
 ## Run
-Per avviare il gioco si può usare Gradle utilizzando:
+Per avviare il gioco si può utilizzare Gradle:
 - Su Linux o MacOS il comando:
 ```bash
 cd "OOP22-SMOL"
@@ -49,3 +49,6 @@ cd "OOP22-SMOL"
 cd "OOP22-SMOL"
 bradlew.bat run
 ```
+
+o in alternativa si può direttamente avviare il gioco con il file .jar messo a disposizione
+
