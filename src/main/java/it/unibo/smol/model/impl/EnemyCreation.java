@@ -24,9 +24,10 @@ public class EnemyCreation {
 
     private final GameState gameState;
     private final Map<String, Double> entitiesMap;
+    private Timer createEnemyTimer;
+    private int difficultyLevel;
     private int minTimeEnemySpawn;
     private int maxTimeEnemySpawn;
-    private final Timer createEnemyTimer;
 
     /**
      * Constructor.
@@ -40,18 +41,22 @@ public class EnemyCreation {
                                                 "Bomb_mole", Constant.DEF_RATE_BOMB));
         this.minTimeEnemySpawn = Constant.DEF_MIN_TIME_SPAWN;
         this.maxTimeEnemySpawn = Constant.DEF_MAX_TIME_SPAWN;
-        this.createEnemyTimer = new Timer();
+        this.difficultyLevel = 0;
     }
 
     /**
-     * Change the spawn rate of the enemies.
+     * Change the spawn rate of the enemies and the time spawn between two moles.
      */
     private void changeDifficulty() {
+        System.out.println(this.difficultyLevel);
         final int temp = gameState.getScore() / Constant.INC_DIFFICULTY_PIVOT;
         entitiesMap.put("Angry_mole", Constant.DEF_RATE_ANGRY + (temp * Constant.INC_RATE_ANGRY));
         entitiesMap.put("Helmet_mole", Constant.DEF_RATE_HELMET + (temp * Constant.INC_RATE_HELMET));
-        minTimeEnemySpawn -= temp * Constant.DEC_TIME_SPAWN;
-        maxTimeEnemySpawn -= temp * Constant.DEC_TIME_SPAWN;
+        minTimeEnemySpawn = Constant.DEF_MIN_TIME_SPAWN - temp * Constant.DEC_TIME_SPAWN;
+        maxTimeEnemySpawn = Constant.DEF_MAX_TIME_SPAWN - temp * Constant.DEC_TIME_SPAWN;
+        difficultyLevel++;
+        this.createEnemyTimer.cancel();
+        creationTimer();
     }
 
     /**
@@ -91,11 +96,13 @@ public class EnemyCreation {
      */
     private void creationTimer() {
 
+        this.createEnemyTimer = new Timer();
         this.createEnemyTimer.schedule(new TimerTask() {
 
             @Override
             public void run() {
-                if (gameState.getScore() / Constant.INC_DIFFICULTY_PIVOT <= Constant.DIFFICULTY_LIMIT) {
+                if (gameState.getScore() / Constant.INC_DIFFICULTY_PIVOT <= Constant.DIFFICULTY_LIMIT
+                    && difficultyLevel < gameState.getScore() / Constant.INC_DIFFICULTY_PIVOT) {
                     changeDifficulty();
                 }
                 final List<Double> weightList = new ArrayList<>(entitiesMap.values().stream().sorted().toList());
