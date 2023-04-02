@@ -11,7 +11,7 @@ public class AngryEnemyGraphicComponent extends GraphicComponent {
     private boolean moving;
 
     /**
-     * 
+     * Constructors inherited by the super-class {@link GraphicComponent}.
      * @param width
      * @param height
      */
@@ -29,7 +29,6 @@ public class AngryEnemyGraphicComponent extends GraphicComponent {
         } else {
             setImageName(LoadImgs.ANGRY_MOLE);
         }
-        //setImageName(LoadImgs.MOLE);
     }
 
     /**

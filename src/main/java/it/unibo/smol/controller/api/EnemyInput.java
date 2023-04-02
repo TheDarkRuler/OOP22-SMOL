@@ -150,7 +150,6 @@ public class EnemyInput {
      */
     public void enemyIsUp() {
         if (enemyTimesSpawn < maxTimesCanSpawn) {
-            //enemyStaysUpTimer();
             this.enemyStaysUpTime.schedule(enemyStaysUp(), minTimeUp + RANDOM.nextInt(maxTimeUp - minTimeUp),
                 TimeUnit.MILLISECONDS);
             enemyTimesSpawn++;

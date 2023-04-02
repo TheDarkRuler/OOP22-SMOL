@@ -12,7 +12,7 @@
     <children>
         <ImageView id="boxImage">
         <image>
-            <Image url="images/pixel_moles/GAME_OVER.gif"/>
+            <Image url="images/common/GAME_OVER.gif"/>
         </image>
         </ImageView>
         <Text fx:id="score">score not found</Text>

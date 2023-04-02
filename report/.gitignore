@@ -6,6 +6,7 @@
 *.out
 13-template.pdf
 *.aux
+*.pdf
 *.bbl
 *.blg
 bin/

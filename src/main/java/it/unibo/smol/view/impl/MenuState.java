@@ -1,10 +1,8 @@
 package it.unibo.smol.view.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.net.URL;
 
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.core.GameEngine;
@@ -34,7 +32,7 @@ import javafx.util.Duration;
 /**
  * Implementation of the menu state, it renders the menu.
  */
-public class MenuState implements WindowState {
+public final class MenuState implements WindowState {
 
     private static Logger logger = Logger.getLogger("menuLogger");
     private static final int MENU_ANIM_DURATION = 500;
@@ -79,13 +77,11 @@ public class MenuState implements WindowState {
         /*
          * Get fields initialization.
          */
-        final URL url = new File("src/main/resources/layouts/Menu.fxml").toURI().toURL();
-        final Parent root = FXMLLoader.load(url);
+        final Parent root = FXMLLoader.load(getClass().getResource("/layouts/Menu.fxml"));
         final Scene scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         final VBox menuBox = (VBox) scene.lookup("#box");
         // children
-        //final Text title = (Text) scene.lookup("#title");
         final Button startGame = (Button) scene.lookup("#start");
         final Button gameOver = (Button) scene.lookup("#gameOver");
         final Button quitGame = (Button) scene.lookup("#quit");
@@ -95,8 +91,6 @@ public class MenuState implements WindowState {
         /*
          * Set fields.
          */
-        /*title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR,
-                GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));*/
         menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
 
         // buttons behaviour
@@ -107,7 +101,7 @@ public class MenuState implements WindowState {
             gameEngine.init(primaryStage);
         });
         gameOver.setOnMouseClicked(e -> {
-            new WindowImpl(new GameOverWinState(0, this.currentSkins)).launch(primaryStage);
+            new WindowImpl(new InstructionsState()).launch(primaryStage);
         });
         quitGame.setOnMouseClicked(e -> {
             Platform.exit();
@@ -126,12 +120,12 @@ public class MenuState implements WindowState {
         buttonManagement(gameOver);
         buttonManagement(quitGame);
         dropDownMenuManagement(dropDownMenu);
-        scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER, this.currentSkins)));
+        scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER, Constant.KEY_COMMON_FOLDER)));
         primaryStage.setResizable(false);
         primaryStage.setTitle("Start Menu :)");
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
-        primaryStage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, this.currentSkins));
+        primaryStage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, Constant.KEY_COMMON_FOLDER));
         primaryStage.setFullScreenExitHint("");
         primaryStage.setFullScreen(true);
         primaryStage.show();

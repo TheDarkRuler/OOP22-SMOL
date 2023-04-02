@@ -1,7 +1,6 @@
 package it.unibo.smol.view.impl.graphiccomponent;
 
 import it.unibo.smol.view.LoadImgs;
-//import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.GraphicComponent;
 /**
  * The implementation of the {@link GraphicComponent} rappresenting the Player graphic.
@@ -27,7 +26,6 @@ public class PlayerGraphicComponent extends GraphicComponent {
      */
     @Override
     public void setAnimation() {
-        //setImageName(LoadImgs.PLAYER);
         if (this.movingLeft) {
             setImageName(LoadImgs.PLAYER_LEFT);
         } else if (this.movingRight) {
