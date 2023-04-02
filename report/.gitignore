@@ -9,6 +9,7 @@
 *.pdf
 *.bbl
 *.blg
+*.pdf
 bin/
 *.eps
 *.kate-swp
