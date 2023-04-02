@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.geometry.Insets?>
 
 <BorderPane fx:id="box" stylesheets="css/Instructions.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -80,10 +81,11 @@
         </VBox>
     </center>
     <right>
-        <VBox spacing="30" alignment="TOP_LEFT">
-        <padding>
-            <Insets top="57" right="600" bottom="10" left="10"/>
-        </padding>
+        <GridPane>
+            <VBox spacing="30" alignment="TOP_LEFT">
+            <padding>
+                <Insets top="57" right="600" bottom="10" left="10"/>
+            </padding>
             <children>
                 <Text>ENEMIES:</Text>
                 <Text>Basic mole</Text>
@@ -111,10 +113,40 @@
                     </image>
                 </ImageView>
             </children>
-        </VBox>
+            </VBox>
+            <VBox spacing="10" alignment="TOP_CENTER">
+            <padding>
+                <Insets top="80" right="10" bottom="10" left="100"/>
+            </padding>
+               <children>
+                    <Text>Life:</Text>
+                    <Text>Defend the plants from moles</Text>
+                    <ImageView>
+                    <image>
+                        <Image url="images/pixel_moles/Life_plants.png"/>
+                    </image>
+                    </ImageView>
+                    <Text>Moles eat the plants when they are on them (also the player remove life of plants)</Text>
+                    <ImageView>
+                    <image>
+                        <Image url="images/pixel_moles/Life_plants.png"/>
+                    </image>
+                    </ImageView>
+                    <Text>Pay attention to the health bar</Text>
+                    <ImageView>
+                    <image>
+                        <Image url="images/pixel_moles/Life_plants.png"/>
+                    </image>
+                    </ImageView>
+               </children>
+            </VBox>
+        </GridPane>
     </right>
     <bottom>
         <VBox spacing="10" alignment="CENTER">
+        <padding>
+            <Insets top="10" right="10" bottom="50" left="10"/>
+        </padding>
              <Button fx:id="menu" text="MENU"/>
         </VBox>
     </bottom>
