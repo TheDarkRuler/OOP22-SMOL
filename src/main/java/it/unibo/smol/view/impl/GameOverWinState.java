@@ -90,7 +90,7 @@ public class GameOverWinState implements WindowState {
                 title.setFitWidth(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH * 3);
                 title.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT * 3);
                 restartGame.setOnMouseClicked(e -> {
-                    new WindowImpl().launch(stage);
+                    new WindowImpl(new MenuState(this.folderName)).launch(stage);
                 });
                 closeGame.setOnMouseClicked(e -> {
                     Platform.exit();
