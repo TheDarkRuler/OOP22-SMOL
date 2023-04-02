@@ -8,9 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import it.unibo.smol.common.Directions;
 import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 /**
  * Class that creates an EventHandler for the keyboards events.
@@ -21,17 +19,8 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      */
     private final Queue<Directions> movement = new LinkedList<>();
     private static Logger logger = Logger.getLogger("keyInputLogger");
-    private final Stage stage;
     private boolean playerFreeze;
     private boolean playerStunned;
-
-    /**
-     * sets the game Stage in order to apply changes to it.
-     * @param stage
-     */
-    public KeyInputs(final Optional<Stage> stage) {
-        this.stage = stage.orElseThrow();
-    }
 
     /**
      * Handles the events, selecting everytime the right KeyEvent.
@@ -39,17 +28,8 @@ public class KeyInputs implements EventHandler<KeyEvent> {
     @Override
     public void handle(final KeyEvent event) {
 
-        if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
-
-            if (event.getCode().equals(KeyCode.F11)) {
-                if (stage.isFullScreen()) {
-                    stage.setFullScreen(false);
-                } else {
-                    stage.setFullScreen(true);
-                }
-            }
-
-            if (!this.playerFreeze && !this.playerStunned) {
+        if (event.getEventType().equals(KeyEvent.KEY_PRESSED) 
+            && !this.playerFreeze && !this.playerStunned) {
             switch (event.getCode()) {
                 case W:
                     this.setMovement(Directions.UP);
@@ -65,7 +45,6 @@ public class KeyInputs implements EventHandler<KeyEvent> {
                     break;
                 default:
                     break;
-                }
             }
 
         } else if (event.getEventType().equals(KeyEvent.KEY_RELEASED) && !this.playerFreeze

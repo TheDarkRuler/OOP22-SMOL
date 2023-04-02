@@ -8,8 +8,8 @@ import it.unibo.smol.view.api.GraphicComponent;
  */
 public class PlayerGraphicComponent extends GraphicComponent {
 
-    /*private boolean moving;
-    private boolean attacking;*/
+    private boolean movingRight;
+    private boolean movingLeft;
 
     /**
      * Constructors inherited by the super-class {@link GraphicComponent}.
@@ -18,6 +18,8 @@ public class PlayerGraphicComponent extends GraphicComponent {
      */
     public PlayerGraphicComponent(final double width, final double height) {
         super(width, height);
+        this.movingLeft = false;
+        this.movingRight = false;
     }
 
     /**
@@ -25,14 +27,14 @@ public class PlayerGraphicComponent extends GraphicComponent {
      */
     @Override
     public void setAnimation() {
-        setImageName(LoadImgs.PLAYER);
-        /*if (moving) {
-            setImageName(LoadImgs.PLAYER);
-        } else if (attacking) {
-            setImageName(LoadImgs.PLAYER);
+        //setImageName(LoadImgs.PLAYER);
+        if (this.movingLeft) {
+            setImageName(LoadImgs.PLAYER_LEFT);
+        } else if (this.movingRight) {
+            setImageName(LoadImgs.PLAYER_RIGHT);
         } else {
             setImageName(LoadImgs.PLAYER);
-        }*/
+        }
     }
 
     /**
@@ -40,18 +42,17 @@ public class PlayerGraphicComponent extends GraphicComponent {
      */
     @Override
     public void updateAnimation() {
-        /*if (super.getEntity().isPresent()) {
-                if (super.getEntity().orElseThrow().getPhysicsComp().orElseThrow().getX() == 0 
-                    && super.getEntity().orElseThrow().getPhysicsComp().orElseThrow().getY() == 0) {
-                    moving = false;
-                } else {
-                    moving = true;
-                }
-                /*if() {
-                    attacking = true;
-                } else {
-                    attacking = false;
-                }*/
-        //}
+        if (super.getEntity().isPresent()) {
+            if (super.getEntity().orElseThrow().getPhysicsComp().orElseThrow().getX() > 0) {
+                this.movingLeft = false;
+                this.movingRight = true;
+            } else if (super.getEntity().orElseThrow().getPhysicsComp().orElseThrow().getX() < 0) {
+                this.movingRight = false;
+                this.movingLeft = true;
+            } else {
+                this.movingLeft = false;
+                this.movingRight = false;
+            }
+        }
     }
 }

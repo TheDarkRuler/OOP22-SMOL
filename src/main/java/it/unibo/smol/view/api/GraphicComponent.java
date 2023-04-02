@@ -60,7 +60,7 @@ public abstract class GraphicComponent {
      */
     public void render(final GraphicsDraw graphic) {
         this.update();
-        graphic.drawSprite(this.imageName, this.entity, this);
+        graphic.drawSprite(this.entity, this);
     }
 
     /**

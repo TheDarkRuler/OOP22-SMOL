@@ -45,17 +45,19 @@ public class GraphicsDraw {
         images.put(LoadImgs.W_TARGET, LoadImgs.getSprites(LoadImgs.W_TARGET, folderName));
         images.put(LoadImgs.GROUND, LoadImgs.getSprites(LoadImgs.GROUND, folderName));
         images.put(LoadImgs.LIFE_PLANTS, LoadImgs.getSprites(LoadImgs.LIFE_PLANTS, folderName));
+        images.put(LoadImgs.PLAYER_LEFT, LoadImgs.getSprites(LoadImgs.PLAYER_LEFT, folderName));
+        images.put(LoadImgs.PLAYER_RIGHT, LoadImgs.getSprites(LoadImgs.PLAYER_RIGHT, folderName));
+        images.put(LoadImgs.CHOPPED_PLANTS, LoadImgs.getSprites(LoadImgs.CHOPPED_PLANTS, folderName));
     }
 
     /**
      * draws an image from the previous stored images.
      * 
-     * @param imageName        the name of the image to draw
      * @param entity           the entity to draw
      * @param graphicComponent the graphic component of the entity to draw
      */
-    public void drawSprite(final String imageName, final Entity entity, final GraphicComponent graphicComponent) {
-        g.drawImage(images.get(imageName),
+    public void drawSprite(final Entity entity, final GraphicComponent graphicComponent) {
+        g.drawImage(images.get(graphicComponent.getImageName()),
                 (entity.getCurrentX() - graphicComponent.getWidth() / 2) * GameMap.SCREEN_PROP_X,
                 (entity.getCurrentY() - graphicComponent.getHeight() / 2) * GameMap.SCREEN_PROP_Y,
                 graphicComponent.getWidth() * GameMap.SCREEN_PROP_X,

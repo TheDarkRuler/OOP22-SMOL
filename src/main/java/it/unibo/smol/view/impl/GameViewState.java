@@ -17,6 +17,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -42,12 +44,12 @@ public class GameViewState implements WindowState {
     private static Logger logger = Logger.getLogger("myLog");
     private static final int SCORE_SIZE = 18;
 
+    private final GameState gameState;
+    private final KeyInputs keyEventHandler;
+    private final MouseInputs mouseEventHandler;
     private GraphicsDraw graphic;
     private GraphicsContext gContext;
     private boolean started;
-    private final GameState gameState;
-    private KeyInputs keyEventHandler;
-    private MouseInputs mouseEventHandler;
     private Text score;
     private Text record;
     private Rectangle healthBar;
@@ -55,10 +57,14 @@ public class GameViewState implements WindowState {
 
     /**
      * constructor made to get the gamseState.
-     * 
      * @param gameState
+     * @param keyInputs
+     * @param mouseInputs
      */
-    public GameViewState(final Optional<GameState> gameState) {
+    public GameViewState(final Optional<GameState> gameState,
+        final Optional<KeyInputs> keyInputs, final Optional<MouseInputs> mouseInputs) {
+        this.mouseEventHandler = mouseInputs.orElseThrow();
+        this.keyEventHandler = keyInputs.orElseThrow();
         this.gameState = gameState.orElseThrow();
     }
 
@@ -84,11 +90,6 @@ public class GameViewState implements WindowState {
     }
 
     private void start(final Stage stage) throws IOException {
-        this.keyEventHandler = new KeyInputs(Optional.of(stage));
-        this.mouseEventHandler = new MouseInputs(Optional.of(keyEventHandler));
-
-        setKeyInputs();
-        setMouseInputs();
         final var root = new Pane();
         final var scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1, Color.BLACK);
@@ -107,6 +108,11 @@ public class GameViewState implements WindowState {
         scene.setOnMouseReleased(mouseEventHandler);
         scene.setOnMouseDragged(mouseEventHandler);
         scene.setOnMouseEntered(mouseEventHandler);
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode().equals(KeyCode.F11)) {
+                stage.setFullScreen(!stage.isFullScreen());
+            }
+        });
         root.getChildren().add(canvas);
         initializeHealthBar();
         initializeScore();
@@ -150,20 +156,6 @@ public class GameViewState implements WindowState {
                     .map(x -> x.getGraphicComp())
                     .forEach(x -> x.orElseThrow().render(graphic));
         });
-    }
-
-    /**
-     * sets the keyInput in gamestate.
-     */
-    public void setKeyInputs() {
-        this.gameState.setKeyInputs(Optional.of(this.keyEventHandler));
-    }
-
-    /**
-     * sets the mouseInputs in gamestate.
-     */
-    public void setMouseInputs() {
-        this.gameState.setMouseInputs(Optional.of(this.mouseEventHandler));
     }
 
     private void initializeHealthBar() {

@@ -26,11 +26,8 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -42,8 +39,22 @@ public class MenuState implements WindowState {
     private static Logger logger = Logger.getLogger("menuLogger");
     private static final int MENU_ANIM_DURATION = 500;
     private final GameEngine gameEngine = new GameEngineImpl();
-    private String currentSkins = Constant.KEY_PIXEL_SKINS;
+    private String currentSkins;
 
+    /**
+     * constructor that generate a menu state with a default skin value.
+     */
+    public MenuState() {
+        this.currentSkins = Constant.KEY_PIXEL_SKINS;
+    }
+
+    /**
+     * constructor that generate a menu state with a decided skin value.
+     * @param skins decided skin
+     */
+    public MenuState(final String skins) {
+        this.currentSkins = skins;
+    }
     /**
      * {@inheritDoc}
      */
@@ -74,20 +85,23 @@ public class MenuState implements WindowState {
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         final VBox menuBox = (VBox) scene.lookup("#box");
         // children
-        final Text title = (Text) scene.lookup("#title");
+        //final Text title = (Text) scene.lookup("#title");
         final Button startGame = (Button) scene.lookup("#start");
         final Button gameOver = (Button) scene.lookup("#gameOver");
         final Button quitGame = (Button) scene.lookup("#quit");
         final MenuButton dropDownMenu = (MenuButton) scene.lookup("#dropDown");
+        final ImageView title = (ImageView) scene.lookup("#boxImage");
 
         /*
          * Set fields.
          */
-        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR,
-                GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
+        /*title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR,
+                GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));*/
         menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
 
         // buttons behaviour
+        title.setFitWidth(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH * 3);
+        title.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT * 3);
         startGame.setOnMouseClicked(e -> {
             gameEngine.setSkin(currentSkins);
             gameEngine.init(primaryStage);
@@ -99,13 +113,9 @@ public class MenuState implements WindowState {
             Platform.exit();
             Runtime.getRuntime().exit(0);
         });
-        root.setOnKeyPressed(e -> {
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode().equals(KeyCode.F11)) {
-                if (primaryStage.isFullScreen()) {
-                    primaryStage.setFullScreen(false);
-                } else {
-                    primaryStage.setFullScreen(true);
-                }
+                primaryStage.setFullScreen(!primaryStage.isFullScreen());
             }
         });
 
@@ -137,7 +147,7 @@ public class MenuState implements WindowState {
     }
 
     private void dropDownMenuManagement(final MenuButton menuButton) {
-        menuButton.setText(Constant.KEY_PIXEL_SKINS);
+        menuButton.setText(this.currentSkins);
         menuButton.setStyle("-fx-mark-color: green");
         setButtonBaseSize(menuButton);
         final MenuItem pixel = new MenuItem(Constant.KEY_PIXEL_SKINS);

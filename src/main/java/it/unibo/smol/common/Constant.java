@@ -30,27 +30,27 @@ public final class Constant {
     public static final int ENEMY_HP = 100;
     /**enemy with helmet health point. */
     public static final int ENEMY_HELMET_HP = 200;
-    /**enemy damage. */
+    /**enemy damage to the lifeplants. */
     public static final int ENEMY_DMG = -1;
     /**The time the player stay freeze when the bomb explode. */
     public static final int BOMB_EXPLOSION = 2000;
     /**The amount of point for killing an enemy. */
     public static final int ENEMY_SCORE = 100;
-    /**Max time a Bomb mole can spawn. */
+    /**The number of times a bomb enemy comes out of the ground before leaving.*/
     public static final int BOMB_ENEMY_MAX_SPAWNS = 3;
-    /**Max time a Helmet mole can spawn. */
+    /**The number of times a helmet enemy comes out of the ground before attacking the lifeplants.*/
     public static final int HELMET_ENEMY_MAX_SPAWNS = 3;
-    /**Max time a Angry mole can spawn. */
+    /**The number of times a angry enemy comes out of the ground before attacking the lifeplants.*/
     public static final int ANGRY_ENEMY_MAX_SPAWNS = 2;
-    /**Max time a Basic mole can spawn. */
+    /**The number of times a basic enemy comes out of the ground before attacking the lifeplants.*/
     public static final int BASIC_ENEMY_MAX_SPAWNS = 3;
-    /**Speed of the Bomb mole. */
+    /**Speed of the Bomb enemy. */
     public static final double BOMB_ENEMY_SPEED = 1;
-    /**Speed of the Helmet mole. */
+    /**Speed of the Helmet enemy. */
     public static final double HELMET_ENEMY_SPEED = 1;
-    /**Speed of the Angry mole. */
+    /**Speed of the Angry enemy. */
     public static final double ANGRY_ENEMY_SPEED = 1.5;
-    /**Speed of the Basic mole. */
+    /**Speed of the Basic enemy. */
     public static final double BASIC_ENEMY_SPEED = 1;
     /**Min time a enemy stays up. */
     public static final int DEFAULT_MIN_TIME_UP = 1500;
@@ -68,7 +68,7 @@ public final class Constant {
     public static final double HEALTH_MOVSPD = 0.0;
     /**lifeplant health point. */
     public static final int HEALTH_HP = 1000;
-    /**number of plants present at spawn. */
+    /**number of plants present at the start of the game. */
     public static final int NUM_PLANTS = 4;
 
     /**-----------------------
@@ -117,9 +117,9 @@ public final class Constant {
     /** The number of difficulty stage.*/
     public static final int DIFFICULTY_LIMIT = 5;
 
-    /**-----------------------
+    /**----------------
      * SKIN FOLDER KEYS
-     * -----------------------*/
+     * ----------------*/
     /**key of the pixel skins. */
     public static final String KEY_PIXEL_SKINS = "Pixel Skins";
     /**key of the vectorial skins. */
