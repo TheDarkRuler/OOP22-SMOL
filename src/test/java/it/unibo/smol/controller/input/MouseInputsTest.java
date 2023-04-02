@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Test;
 import it.unibo.smol.common.Constant;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * tests the Mouse inputs class.
+ */
 public class MouseInputsTest {
 
     private MouseInputs mouseInputs;

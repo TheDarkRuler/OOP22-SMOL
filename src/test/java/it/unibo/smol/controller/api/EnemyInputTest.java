@@ -6,21 +6,30 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.smol.model.impl.WorldImpl;
 import javafx.geometry.Point2D;
 
+/**
+ * tests the Enemy Inputs class.
+ */
 public class EnemyInputTest {
 
     private static final int MIN_TIMES_ENEMY_CAN_SPAWN = 2;
+    private EnemyInput enemyInput;
+
+    @BeforeEach
+    public void initEnemyInput() {
+        enemyInput = new EnemyInput(MIN_TIMES_ENEMY_CAN_SPAWN, Optional.of(new WorldImpl()), new Point2D(0, 0), 0);
+    }
 
     /**
      * Tests  if the enemy spawns status is correct.
      */
     @Test
     public void enemySpawnStatus() {
-        final var enemyInput = new EnemyInput(MIN_TIMES_ENEMY_CAN_SPAWN, Optional.of(new WorldImpl()), new Point2D(0, 0), 0);
         assertTrue(enemyInput.isEnemyUnder());
         assertFalse(enemyInput.isEnemyOnPlant());
         enemyInput.setEnemyPosition(new Point2D(1, 1));
@@ -32,7 +41,6 @@ public class EnemyInputTest {
      */
     @Test
     public void enemyGetsUp() {
-        final var enemyInput = new EnemyInput(MIN_TIMES_ENEMY_CAN_SPAWN, Optional.of(new WorldImpl()), new Point2D(0, 0), 0);
         enemyInput.enemyIsUp();
         assertEquals(1, enemyInput.getEnemyTimesSpawn());
     }
