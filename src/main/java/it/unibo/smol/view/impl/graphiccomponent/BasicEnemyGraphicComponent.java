@@ -8,8 +8,9 @@ import it.unibo.smol.view.api.GraphicComponent;
 public class BasicEnemyGraphicComponent extends GraphicComponent {
 
     private boolean moving;
+
     /**
-     * 
+     * Constructors inherited by the super-class {@link GraphicComponent}.
      * @param width
      * @param height
      */
@@ -27,7 +28,6 @@ public class BasicEnemyGraphicComponent extends GraphicComponent {
         } else {
             setImageName(LoadImgs.MOLE);
         }
-        //setImageName(LoadImgs.MOLE);
     }
 
     /**

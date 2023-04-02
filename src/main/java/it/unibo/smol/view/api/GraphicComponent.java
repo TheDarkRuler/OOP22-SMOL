@@ -31,7 +31,6 @@ public abstract class GraphicComponent {
      */
     public GraphicComponent(final GraphicComponent graphicComponent) {
         this.entity = graphicComponent.getEntity().orElseThrow();
-        //this.graphic = graphicComponent.getGraphic();
         this.height = graphicComponent.getHeight();
         this.imageName = graphicComponent.getImageName();
         this.width = graphicComponent.getWidth();

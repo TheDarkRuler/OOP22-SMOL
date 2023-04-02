@@ -1,7 +1,6 @@
 package it.unibo.smol.view.impl.graphiccomponent;
 
 import it.unibo.smol.common.Constant;
-//import it.unibo.smol.common.Constant;
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.GraphicComponent;
 
@@ -13,7 +12,7 @@ public class LifePlantsGraphicComponent extends GraphicComponent {
     private boolean isHalfDead;
 
     /**
-     * 
+     * Constructors inherited by the super-class {@link GraphicComponent}.
      * @param width
      * @param height
      */

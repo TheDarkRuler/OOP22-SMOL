@@ -1,6 +1,5 @@
 package it.unibo.smol.view;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -15,7 +14,8 @@ import javafx.scene.image.Image;
 public final class LoadImgs {
 
     /**name of the folders in which are the sprites to use. */
-    private static final Map<String, String> SKIN_FOLDER = new HashMap<>(Map.of(Constant.KEY_PIXEL_SKINS, "pixel_moles/",
+    private static final Map<String, String> SKIN_FOLDER = new HashMap<>(Map.of(Constant.KEY_COMMON_FOLDER, "common/",
+        Constant.KEY_PIXEL_SKINS, "pixel_moles/",
         Constant.KEY_VECTORIAL_SKINS, "vectorial_moles/"));
 
     /**basic mole gif. */
@@ -64,7 +64,7 @@ public final class LoadImgs {
      */
     public static Image getSprites(final String filename, final String folderName) {
         Image image = null;
-        try (FileInputStream path = new FileInputStream("src/main/resources/images/" 
+        try (var path = ClassLoader.getSystemResourceAsStream("images/" 
             + LoadImgs.SKIN_FOLDER.get(folderName) + filename);) {
             image = new Image(path);
         } catch (IllegalArgumentException e) {

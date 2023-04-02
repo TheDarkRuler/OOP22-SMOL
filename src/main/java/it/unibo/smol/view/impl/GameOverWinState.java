@@ -1,12 +1,11 @@
 package it.unibo.smol.view.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
@@ -31,7 +30,7 @@ import javafx.util.Duration;
 /**
  * game over window impl.
  */
-public class GameOverWinState implements WindowState {
+public final class GameOverWinState implements WindowState {
 
     private static final int BUTTON_ANIM_DURATION = 500;
 
@@ -73,9 +72,7 @@ public class GameOverWinState implements WindowState {
     private void start(final Stage stage) throws IOException {
         Platform.runLater(() -> {
             try {
-                URL url;
-                url = new File("src/main/resources/layouts/GameOver.fxml").toURI().toURL();
-                final Parent root = FXMLLoader.load(url);
+                final Parent root = FXMLLoader.load(getClass().getResource("/layouts/GameOver.fxml"));
                 final Scene scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
                         GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
                 final Button restartGame = (Button) scene.lookup("#restartGame");
@@ -83,7 +80,7 @@ public class GameOverWinState implements WindowState {
                 final Text score = (Text) scene.lookup("#score");
                 final VBox gameOverBox = (VBox) scene.lookup("#box");
                 final ImageView title = (ImageView) scene.lookup("#boxImage");
-                scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.ANGRY_MOLE, folderName)));
+                scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER, Constant.KEY_COMMON_FOLDER)));
                 gameOverBox.setSpacing((GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X) / 3);
                 buttonManagement(restartGame);
                 buttonManagement(closeGame);
@@ -108,7 +105,7 @@ public class GameOverWinState implements WindowState {
                 stage.setScene(scene);
                 stage.setFullScreen(true);
                 stage.setResizable(false);
-                stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, folderName));
+                stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, Constant.KEY_COMMON_FOLDER));
                 stage.show();
             } catch (MalformedURLException e) {
                 logger.log(Level.SEVERE, "badUrlOnGameOver::", e);
