@@ -99,7 +99,7 @@ public class KeyInputs implements EventHandler<KeyEvent> {
      * sets if the player is stunned.
      * @param playerStunned
      */
-    public void serPlayerStunned(final boolean playerStunned) {
+    public void setPlayerStunned(final boolean playerStunned) {
         this.playerStunned = playerStunned;
     }
 }

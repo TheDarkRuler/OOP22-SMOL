@@ -1,5 +1,6 @@
 package it.unibo.smol.controller.input;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,11 +16,17 @@ public class MouseInputsTest {
 
     private MouseInputs mouseInputs;
 
+    /**
+     * creates new MouseInput everytime.
+     */
     @BeforeEach
     public void initMouseInput() {
         this.mouseInputs = new MouseInputs(Optional.of(new KeyInputs()));
     }
     
+    /**
+     * tests if the variable cursorOnScreen sets true when the cursor enter the screen.
+     */
     @Test
     public void cursorOnScreen() {
         assertFalse(mouseInputs.isCursorOnScreen());
@@ -31,6 +38,9 @@ public class MouseInputsTest {
         assertTrue(mouseInputs.isCursorOnScreen());
     }
 
+    /**
+     * tests if weaponSmashed is false before the weapon is smashing.
+     */
     @Test
     public void mouseSmashed() {
         final var weaponSmash = new MouseEvent(MouseEvent.MOUSE_RELEASED, 0, 0, 0, 0, null,
@@ -50,9 +60,12 @@ public class MouseInputsTest {
         
     }
 
+    /**
+     * tests if the weapon expands correctly.
+     */
     @Test
     public void weaponExpansion() {
         mouseInputs.setWeaponRange();
-        assertTrue(mouseInputs.getWeaponRange() == Constant.DEF_WEAPON_RANGE);
+        assertEquals(Constant.DEF_WEAPON_RANGE, mouseInputs.getWeaponRange());
     }
 }

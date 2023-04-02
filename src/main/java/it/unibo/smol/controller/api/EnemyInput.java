@@ -289,7 +289,7 @@ public class EnemyInput {
      * @return if the enmy is on a plant
      */
     public boolean isEnemyOnPlant() {
-        return enemyTimesSpawn <= maxTimesCanSpawn;
+        return enemyTimesSpawn >= maxTimesCanSpawn;
     }
 
     /**
