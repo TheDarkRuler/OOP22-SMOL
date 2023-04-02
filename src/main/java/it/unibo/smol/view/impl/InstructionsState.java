@@ -1,8 +1,6 @@
 package it.unibo.smol.view.impl;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +19,7 @@ import javafx.stage.Stage;
 /**
  * A class for the instructions of the game.
  */
-public class InstructionsState implements WindowState {
+public final class InstructionsState implements WindowState {
 
     private static Logger logger = Logger.getLogger("instructionsLogger");
 
@@ -46,8 +44,7 @@ public class InstructionsState implements WindowState {
         /*
          * Get fields initialization.
          */
-        final URL url = new File("src/main/resources/layouts/Instructions.fxml").toURI().toURL();
-        final Parent root = FXMLLoader.load(url);
+        final Parent root = FXMLLoader.load(getClass().getResource("/layouts/Instructions.fxml"));
         final Scene scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         // children

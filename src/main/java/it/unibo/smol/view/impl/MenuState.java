@@ -1,10 +1,8 @@
 package it.unibo.smol.view.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.net.URL;
 
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.core.GameEngine;
@@ -34,7 +32,7 @@ import javafx.util.Duration;
 /**
  * Implementation of the menu state, it renders the menu.
  */
-public class MenuState implements WindowState {
+public final class MenuState implements WindowState {
 
     private static Logger logger = Logger.getLogger("menuLogger");
     private static final int MENU_ANIM_DURATION = 500;
@@ -79,8 +77,7 @@ public class MenuState implements WindowState {
         /*
          * Get fields initialization.
          */
-        final URL url = new File("src/main/resources/layouts/Menu.fxml").toURI().toURL();
-        final Parent root = FXMLLoader.load(url);
+        final Parent root = FXMLLoader.load(getClass().getResource("/layouts/Menu.fxml"));
         final Scene scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         final VBox menuBox = (VBox) scene.lookup("#box");

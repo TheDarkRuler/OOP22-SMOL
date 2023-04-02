@@ -1,9 +1,7 @@
 package it.unibo.smol.view.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +29,7 @@ import javafx.util.Duration;
 /**
  * game over window impl.
  */
-public class GameOverWinState implements WindowState {
+public final class GameOverWinState implements WindowState {
 
     private static final int BUTTON_ANIM_DURATION = 500;
 
@@ -73,9 +71,7 @@ public class GameOverWinState implements WindowState {
     private void start(final Stage stage) throws IOException {
         Platform.runLater(() -> {
             try {
-                URL url;
-                url = new File("src/main/resources/layouts/GameOver.fxml").toURI().toURL();
-                final Parent root = FXMLLoader.load(url);
+                final Parent root = FXMLLoader.load(getClass().getResource("/layouts/GameOver.fxml"));
                 final Scene scene = new Scene(root, GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1,
                         GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
                 final Button restartGame = (Button) scene.lookup("#restartGame");
