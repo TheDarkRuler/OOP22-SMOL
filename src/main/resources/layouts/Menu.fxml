@@ -14,7 +14,7 @@
             <VBox alignment="CENTER">
             <ImageView id="boxImage">
                   <image>
-                        <Image url="images/pixel_moles/smolTitle.gif"/>
+                        <Image url="images/common/smolTitle.gif"/>
                   </image>
             </ImageView>
             <Button fx:id="start" text="START" />

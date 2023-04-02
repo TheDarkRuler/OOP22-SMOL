@@ -15,7 +15,8 @@ import javafx.scene.image.Image;
 public final class LoadImgs {
 
     /**name of the folders in which are the sprites to use. */
-    private static final Map<String, String> SKIN_FOLDER = new HashMap<>(Map.of(Constant.KEY_PIXEL_SKINS, "pixel_moles/",
+    private static final Map<String, String> SKIN_FOLDER = new HashMap<>(Map.of(Constant.KEY_COMMON_FOLDER, "common/",
+        Constant.KEY_PIXEL_SKINS, "pixel_moles/",
         Constant.KEY_VECTORIAL_SKINS, "vectorial_moles/"));
 
     /**basic mole gif. */
