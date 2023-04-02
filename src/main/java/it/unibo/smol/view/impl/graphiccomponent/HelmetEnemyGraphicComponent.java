@@ -12,7 +12,7 @@ public class HelmetEnemyGraphicComponent extends GraphicComponent {
     private boolean isHalfDead;
 
     /**
-     * 
+     * Constructors inherited by the super-class {@link GraphicComponent}.
      * @param width
      * @param height
      */
@@ -34,7 +34,6 @@ public class HelmetEnemyGraphicComponent extends GraphicComponent {
                 setImageName(LoadImgs.HELM_MOLE);
             }
         }
-        //setImageName(LoadImgs.MOLE);
     }
 
     /**
@@ -48,7 +47,6 @@ public class HelmetEnemyGraphicComponent extends GraphicComponent {
             } else {
                 moving = true;
             }
-            //System.out.println(super.getEntity().getHealthComp().orElseThrow().getCurrentHealth());
             if (super.getEntity().orElseThrow().getHealthComp().orElseThrow().getCurrentHealth() < Constant.ENEMY_HELMET_HP) {
                 isHalfDead = true;
             }

@@ -10,7 +10,7 @@ public class BombEnemyGraphicComponent extends GraphicComponent {
     private boolean moving;
 
     /**
-     * 
+     * Constructors inherited by the super-class {@link GraphicComponent}.
      * @param width
      * @param height
      */
@@ -28,7 +28,6 @@ public class BombEnemyGraphicComponent extends GraphicComponent {
         } else {
             setImageName(LoadImgs.BOMB_MOLE);
         }
-        //setImageName(LoadImgs.MOLE);
     }
 
     /**

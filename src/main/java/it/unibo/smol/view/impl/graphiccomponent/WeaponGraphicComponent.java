@@ -10,7 +10,7 @@ public class WeaponGraphicComponent extends GraphicComponent {
     //private boolean attacking;
 
     /**
-     * 
+     * Constructors inherited by the super-class {@link GraphicComponent}.
      * @param width
      * @param height
      */
@@ -19,7 +19,7 @@ public class WeaponGraphicComponent extends GraphicComponent {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void setAnimation() {
@@ -27,14 +27,10 @@ public class WeaponGraphicComponent extends GraphicComponent {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void updateAnimation() {
-        /*if (attacking/*is Hammer SMashed == true ) {
-            attacking = true;
-        } else {
-            attacking = false;
-        }*/
+        //not used by this component.
     }
 }

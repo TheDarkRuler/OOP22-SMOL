@@ -82,7 +82,6 @@ public final class MenuState implements WindowState {
                 GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1);
         final VBox menuBox = (VBox) scene.lookup("#box");
         // children
-        //final Text title = (Text) scene.lookup("#title");
         final Button startGame = (Button) scene.lookup("#start");
         final Button gameOver = (Button) scene.lookup("#gameOver");
         final Button quitGame = (Button) scene.lookup("#quit");
@@ -92,8 +91,6 @@ public final class MenuState implements WindowState {
         /*
          * Set fields.
          */
-        /*title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR,
-                GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));*/
         menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
 
         // buttons behaviour
