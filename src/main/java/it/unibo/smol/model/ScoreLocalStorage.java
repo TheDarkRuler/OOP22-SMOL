@@ -17,7 +17,10 @@ import it.unibo.smol.controller.api.GameState;
 public class ScoreLocalStorage {
     private final GameState gameState;
     private int record;
+    private final File directory = new File(PATH);
     private final File scoreFile;
+    private static final String PATH = System.getProperty("user.home") + File.separator + "Smol";
+    private static final String FILE_NAME = PATH + File.separator + "ScoreFile.txt";
 
     /**
      * Constructors for create the score file if doesn't exist.
@@ -25,9 +28,16 @@ public class ScoreLocalStorage {
      */
     public ScoreLocalStorage(final Optional<GameState> gameState) {
         this.gameState = gameState.orElseThrow();
-        this.scoreFile = new File("ScoreFile.txt");
+        if (!directory.exists() && !this.directory.mkdir()) {
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                Logger.getLogger(ScoreLocalStorage.class.getName()).info("IOException mkdir");
+            }
+        }
+        this.scoreFile = new File(FILE_NAME);
     }
- 
+
     /**
      * A method that write the record in the score file.
      */
@@ -37,10 +47,9 @@ public class ScoreLocalStorage {
                 final PrintWriter printWriter = new PrintWriter(scoreFile, StandardCharsets.UTF_8);
                 printWriter.print(gameState.getScore());
                 printWriter.close();
-                //System.out.println("record:" + record);
             }
         } catch (IOException e) {
-            Logger.getLogger(ScoreLocalStorage.class.getName()).info("IOException");
+            Logger.getLogger(ScoreLocalStorage.class.getName()).info("IOException write");
         }
     }
 
@@ -52,11 +61,12 @@ public class ScoreLocalStorage {
             String character  = reader.readLine();
             while (character != null) {
                 record = Integer.parseInt(character);
-                //System.out.println("leggo:" + record);
                 character = reader.readLine();
             }
         } catch (IOException e) {
-            Logger.getLogger(ScoreLocalStorage.class.getName()).info("IOException");
+            Logger.getLogger(ScoreLocalStorage.class.getName()).info("IOException read");
+        } catch (NumberFormatException e) {
+            Logger.getLogger(ScoreLocalStorage.class.getName()).info("NumberFormatException in ScoreFile.txt");
         }
     }
 

@@ -15,4 +15,5 @@ bin/
 *.dvi
 *.fdb_latexmk
 *.fls
+*/report.pdf
 template.md
