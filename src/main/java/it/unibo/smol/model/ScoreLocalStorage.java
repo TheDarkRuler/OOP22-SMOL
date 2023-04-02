@@ -19,7 +19,7 @@ public class ScoreLocalStorage {
     private int record;
     private final File directory = new File(PATH);
     private final File scoreFile;
-    private static final String PATH = System.getProperty("user.home") + File.separator + "ScoreDirectory";
+    private static final String PATH = System.getProperty("user.home") + File.separator + "Smol";
     private static final String FILE_NAME = PATH + File.separator + "ScoreFile.txt";
 
     /**
