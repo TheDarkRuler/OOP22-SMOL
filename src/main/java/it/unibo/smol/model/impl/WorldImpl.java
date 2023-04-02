@@ -22,8 +22,8 @@ public class WorldImpl implements World {
     private static final Boolean FREE = false;
     private final ConcurrentLinkedDeque<Entity> entities;
     private final Map<Entity, Boolean> occupiedPlants;
-    private Optional<KeyInputs> keyInputs;
-    private Optional<MouseInputs> mouseInputs;
+    private KeyInputs keyInputs;
+    private MouseInputs mouseInputs;
     private int score;
 
     /**
@@ -43,8 +43,8 @@ public class WorldImpl implements World {
         this.entities = world.getEntities();
         this.score = world.getScore();
         this.occupiedPlants = world.occupiedPlants();
-        this.mouseInputs = world.getMouseInputs();
-        this.keyInputs = world.getKeyInputs();
+        this.mouseInputs = world.getMouseInputs().orElseThrow();
+        this.keyInputs = world.getKeyInputs().orElseThrow();
     }
     /**
      * {@inheritDoc}
@@ -172,7 +172,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Optional<KeyInputs> getKeyInputs() {
-        return this.keyInputs;
+        return Optional.of(this.keyInputs);
     }
 
     /**
@@ -180,7 +180,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Optional<MouseInputs> getMouseInputs() {
-        return this.mouseInputs;
+        return Optional.of(this.mouseInputs);
     }
 
     /**
@@ -188,8 +188,8 @@ public class WorldImpl implements World {
      */
     @Override
     public void setInputs(final Optional<KeyInputs> keyInputs, final Optional<MouseInputs> mouseInputs) {
-        this.mouseInputs = mouseInputs;
-        this.keyInputs = keyInputs;
+        this.mouseInputs = mouseInputs.orElseThrow();
+        this.keyInputs = keyInputs.orElseThrow();
     }
 
 }

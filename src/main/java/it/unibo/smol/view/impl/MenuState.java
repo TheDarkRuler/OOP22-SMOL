@@ -26,6 +26,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -38,8 +39,22 @@ public class MenuState implements WindowState {
     private static Logger logger = Logger.getLogger("menuLogger");
     private static final int MENU_ANIM_DURATION = 500;
     private final GameEngine gameEngine = new GameEngineImpl();
-    private String currentSkins = Constant.KEY_PIXEL_SKINS;
+    private String currentSkins;
 
+    /**
+     * constructor that generate a menu state with a default skin value.
+     */
+    public MenuState() {
+        this.currentSkins = Constant.KEY_PIXEL_SKINS;
+    }
+
+    /**
+     * constructor that generate a menu state with a decided skin value.
+     * @param skins decided skin
+     */
+    public MenuState(final String skins) {
+        this.currentSkins = skins;
+    }
     /**
      * {@inheritDoc}
      */
@@ -92,19 +107,15 @@ public class MenuState implements WindowState {
             gameEngine.init(primaryStage);
         });
         gameOver.setOnMouseClicked(e -> {
-            new WindowImpl(new GameOverWinState(0, Constant.KEY_PIXEL_SKINS)).launch(primaryStage);
+            new WindowImpl(new GameOverWinState(0, this.currentSkins)).launch(primaryStage);
         });
         quitGame.setOnMouseClicked(e -> {
             Platform.exit();
             Runtime.getRuntime().exit(0);
         });
-        root.setOnKeyPressed(e -> {
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode().equals(KeyCode.F11)) {
-                if (primaryStage.isFullScreen()) {
-                    primaryStage.setFullScreen(false);
-                } else {
-                    primaryStage.setFullScreen(true);
-                }
+                primaryStage.setFullScreen(!primaryStage.isFullScreen());
             }
         });
 
@@ -136,7 +147,7 @@ public class MenuState implements WindowState {
     }
 
     private void dropDownMenuManagement(final MenuButton menuButton) {
-        menuButton.setText(Constant.KEY_PIXEL_SKINS);
+        menuButton.setText(this.currentSkins);
         menuButton.setStyle("-fx-mark-color: green");
         setButtonBaseSize(menuButton);
         final MenuItem pixel = new MenuItem(Constant.KEY_PIXEL_SKINS);
