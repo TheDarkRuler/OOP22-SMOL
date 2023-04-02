@@ -129,13 +129,13 @@
                     <Text>Moles eat the plants when they are on them (also the player remove life of plants)</Text>
                     <ImageView>
                     <image>
-                        <Image url="images/pixel_moles/Life_plants.png"/>
+                        <Image url="images/pixel_moles/moleOnaCamp.png"/>
                     </image>
                     </ImageView>
                     <Text>Pay attention to the health bar</Text>
                     <ImageView>
                     <image>
-                        <Image url="images/pixel_moles/Life_plants.png"/>
+                        <Image url="images/pixel_moles/healthBar_instr.png"/>
                     </image>
                     </ImageView>
                </children>
