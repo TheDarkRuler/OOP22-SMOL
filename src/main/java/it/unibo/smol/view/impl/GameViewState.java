@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import java.util.Optional;
 import java.util.logging.Level;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.controller.api.GameState;
 import it.unibo.smol.controller.input.KeyInputs;
 import it.unibo.smol.controller.input.MouseInputs;
@@ -14,6 +15,7 @@ import it.unibo.smol.view.api.HealthBarTank;
 import it.unibo.smol.view.api.WindowState;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -101,6 +103,7 @@ public class GameViewState implements WindowState {
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 new BackgroundSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1,
                         false, false, false, false))));
+        scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER, Constant.KEY_COMMON_FOLDER)));
         scene.setOnKeyPressed(keyEventHandler);
         scene.setOnKeyReleased(keyEventHandler);
         scene.setOnMouseMoved(mouseEventHandler);
@@ -134,7 +137,7 @@ public class GameViewState implements WindowState {
                 Runtime.getRuntime().exit(0);
             }
         });
-        stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, gameState.getSkins()));
+        stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, Constant.KEY_COMMON_FOLDER));
         stage.show();
     }
 

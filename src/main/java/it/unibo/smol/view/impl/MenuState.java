@@ -120,12 +120,12 @@ public final class MenuState implements WindowState {
         buttonManagement(gameOver);
         buttonManagement(quitGame);
         dropDownMenuManagement(dropDownMenu);
-        scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER, this.currentSkins)));
+        scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER, Constant.KEY_COMMON_FOLDER)));
         primaryStage.setResizable(false);
         primaryStage.setTitle("Start Menu :)");
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
-        primaryStage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, this.currentSkins));
+        primaryStage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, Constant.KEY_COMMON_FOLDER));
         primaryStage.setFullScreenExitHint("");
         primaryStage.setFullScreen(true);
         primaryStage.show();

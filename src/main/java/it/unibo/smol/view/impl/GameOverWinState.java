@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.view.GameMap;
 import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
@@ -79,7 +80,7 @@ public final class GameOverWinState implements WindowState {
                 final Text score = (Text) scene.lookup("#score");
                 final VBox gameOverBox = (VBox) scene.lookup("#box");
                 final ImageView title = (ImageView) scene.lookup("#boxImage");
-                scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.ANGRY_MOLE, folderName)));
+                scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER, Constant.KEY_COMMON_FOLDER)));
                 gameOverBox.setSpacing((GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X) / 3);
                 buttonManagement(restartGame);
                 buttonManagement(closeGame);
@@ -104,7 +105,7 @@ public final class GameOverWinState implements WindowState {
                 stage.setScene(scene);
                 stage.setFullScreen(true);
                 stage.setResizable(false);
-                stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, folderName));
+                stage.getIcons().add(LoadImgs.getSprites(LoadImgs.LOGO, Constant.KEY_COMMON_FOLDER));
                 stage.show();
             } catch (MalformedURLException e) {
                 logger.log(Level.SEVERE, "badUrlOnGameOver::", e);
