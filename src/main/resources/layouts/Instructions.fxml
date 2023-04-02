@@ -22,7 +22,7 @@
     <left>
         <VBox spacing="10" alignment="CENTER">
         <padding>
-            <Insets top="10" right="10" bottom="10" left="50"/>
+            <Insets top="50" right="10" bottom="10" left="50"/>
         </padding>
             <children>
                 <Text>MOVEMENT:</Text>
@@ -56,7 +56,7 @@
     <center>
         <VBox spacing="30" alignment="TOP_LEFT">
         <padding>
-            <Insets top="57" right="10" bottom="10" left="90"/>
+            <Insets top="55" right="10" bottom="10" left="90"/>
         </padding>
             <children>
                 <Text>HIT:</Text>
@@ -114,12 +114,12 @@
                 </ImageView>
             </children>
             </VBox>
-            <VBox spacing="10" alignment="TOP_CENTER">
+            <VBox spacing="30" alignment="TOP_CENTER">
             <padding>
-                <Insets top="80" right="10" bottom="10" left="100"/>
+                <Insets top="60" right="10" bottom="10" left="100"/>
             </padding>
                <children>
-                    <Text>Life:</Text>
+                    <Text>LIFE:</Text>
                     <Text>Defend the plants from moles</Text>
                     <ImageView>
                     <image>
@@ -129,7 +129,7 @@
                     <Text>Moles eat the plants when they are on them (also the player remove life of plants)</Text>
                     <ImageView>
                     <image>
-                        <Image url="images/pixel_moles/moleOnaCamp.png"/>
+                        <Image url="images/pixel_moles/Life_plants_chopped.png"/>
                     </image>
                     </ImageView>
                     <Text>Pay attention to the health bar</Text>

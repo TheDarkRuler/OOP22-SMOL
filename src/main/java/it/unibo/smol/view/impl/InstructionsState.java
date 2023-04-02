@@ -72,9 +72,6 @@ public class InstructionsState implements WindowState {
             }
         });
 
-        /*
-         * Fields attachment.
-         */
         stage.setResizable(false);
         stage.setTitle("Instrucions");
         stage.setScene(scene);
