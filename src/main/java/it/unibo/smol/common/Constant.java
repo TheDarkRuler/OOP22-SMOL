@@ -124,7 +124,7 @@ public final class Constant {
     public static final String KEY_PIXEL_SKINS = "Pixel_Skins";
     /**key of the vectorial skins. */
     public static final String KEY_VECTORIAL_SKINS = "Vectorial_Skins";
-    /**key of the common images folder */
+    /**key of the common images folder. */
     public static final String KEY_COMMON_FOLDER = "Common_Skins";
 
     private Constant() throws UnsupportedEncodingException {
