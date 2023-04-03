@@ -177,8 +177,8 @@ public class GameViewState implements WindowState {
         score.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, SCORE_SIZE));
         score.setFill(Color.WHITE);
         score.setTextAlignment(TextAlignment.RIGHT);
-        score.setScaleX(3);
-        score.setScaleY(3);
+        score.setScaleX(3 * GameMap.SCREEN_PROP_X);
+        score.setScaleY(3 * GameMap.SCREEN_PROP_Y);
         score.setVisible(true);
     }
 
@@ -207,8 +207,8 @@ public class GameViewState implements WindowState {
         record.setFont(Font.font("Impact", FontWeight.EXTRA_BOLD, SCORE_SIZE));
         record.setFill(Color.WHITE);
         record.setTextAlignment(TextAlignment.LEFT);
-        record.setScaleX(3);
-        record.setScaleY(3);
+        record.setScaleX(3 * GameMap.SCREEN_PROP_X);
+        record.setScaleY(3 * GameMap.SCREEN_PROP_Y);
         record.setVisible(true);
     }
 
