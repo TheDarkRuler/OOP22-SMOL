@@ -15,37 +15,37 @@
 <BorderPane fx:id="box" stylesheets="css/Instructions.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
     <top>
-        <HBox spacing="10" alignment="CENTER">
+        <HBox alignment="CENTER">
             <Text id="title">INSTRUCTIONS</Text>
         </HBox>
     </top>
     <left>
         <VBox spacing="10" alignment="CENTER">
         <padding>
-            <Insets top="50" right="10" bottom="10" left="50"/>
+            <Insets top="50" right="10" bottom="10" left="10"/>
         </padding>
             <children>
                 <Text>MOVEMENT:</Text>
                 <Text>UP</Text>
-                <ImageView>
+                <ImageView id="WasdImage">
                     <image>
                         <Image url="images/common/Wasd.gif"/>
                     </image>
                 </ImageView>
                 <Text id="title">DOWN</Text>
-                <ImageView>
+                <ImageView id="waSdImage">
                     <image>
                         <Image url="images/common/wa_Sd.gif"/>
                     </image>
                 </ImageView>
                  <Text id="title">LEFT</Text>
-                <ImageView>
+                <ImageView id="wAsdImage">
                     <image>
                         <Image url="images/common/w_Asd.gif"/>
                     </image>
                 </ImageView>
                  <Text id="title">RIGHT</Text>
-                <ImageView>
+                <ImageView id="wasDImage">
                     <image>
                         <Image url="images/common/was_D.gif"/>
                     </image>
@@ -56,23 +56,23 @@
     <center>
         <VBox spacing="30" alignment="TOP_LEFT">
         <padding>
-            <Insets top="55" right="10" bottom="10" left="90"/>
+            <Insets top="55" right="10" bottom="10" left="10"/>
         </padding>
             <children>
                 <Text>HIT:</Text>
                 <Text>Move the hammer sight with your mouse and left click to hit</Text>
-                <ImageView>
+                <ImageView id="target">
                     <image>
                         <Image url="images/pixel_moles/weapon_target.png"/>
                     </image>
                 </ImageView>
                 <Text id="title">Keep it pressed to expand the range of the hammer</Text>
-                <ImageView>
+                <ImageView id="target1">
                     <image>
                         <Image url="images/common/instructions_sight1.png"/>
                     </image>
                 </ImageView>
-                <ImageView>
+                <ImageView id="target2">
                     <image>
                         <Image url="images/common/instructions_sight2.png"/>
                     </image>
@@ -82,7 +82,7 @@
     </center>
     <right>
         <GridPane>
-            <VBox spacing="30" alignment="TOP_LEFT">
+            <VBox id="centralBox" alignment="TOP_LEFT">
             <padding>
                 <Insets top="57" right="600" bottom="10" left="10"/>
             </padding>
@@ -122,7 +122,7 @@
             </VBox>
             <VBox spacing="30" alignment="TOP_CENTER">
             <padding>
-                <Insets top="60" right="10" bottom="10" left="100"/>
+                <Insets top="60" right="10" bottom="10" left="10"/>
             </padding>
                <children>
                     <Text>HEALTH:</Text>
@@ -139,7 +139,7 @@
                     </image>
                     </ImageView>
                     <Text>Pay attention to the health bar</Text>
-                    <ImageView>
+                    <ImageView id="health">
                     <image>
                         <Image url="images/common/healthBar_instr.png"/>
                     </image>
