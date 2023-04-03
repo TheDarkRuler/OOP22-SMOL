@@ -29,25 +29,25 @@
                 <Text>UP</Text>
                 <ImageView>
                     <image>
-                        <Image url="images/pixel_moles/Wasd.gif"/>
+                        <Image url="images/common/Wasd.gif"/>
                     </image>
                 </ImageView>
                 <Text id="title">DOWN</Text>
                 <ImageView>
                     <image>
-                        <Image url="images/pixel_moles/wa_Sd.gif"/>
+                        <Image url="images/common/wa_Sd.gif"/>
                     </image>
                 </ImageView>
                  <Text id="title">LEFT</Text>
                 <ImageView>
                     <image>
-                        <Image url="images/pixel_moles/w_Asd.gif"/>
+                        <Image url="images/common/w_Asd.gif"/>
                     </image>
                 </ImageView>
                  <Text id="title">RIGHT</Text>
                 <ImageView>
                     <image>
-                        <Image url="images/pixel_moles/was_D.gif"/>
+                        <Image url="images/common/was_D.gif"/>
                     </image>
                 </ImageView>
             </children>
@@ -60,21 +60,21 @@
         </padding>
             <children>
                 <Text>HIT:</Text>
-                <Text>Move the hammer sight with your mouse and left click for hit</Text>
+                <Text>Move the hammer sight with your mouse and left click to hit</Text>
                 <ImageView>
                     <image>
                         <Image url="images/pixel_moles/weapon_target.png"/>
                     </image>
                 </ImageView>
-                <Text id="title">Keep it pressed for expand the range of the hammer</Text>
+                <Text id="title">Keep it pressed to expand the range of the hammer</Text>
                 <ImageView>
                     <image>
-                        <Image url="images/pixel_moles/instructions_sight1.png"/>
+                        <Image url="images/common/instructions_sight1.png"/>
                     </image>
                 </ImageView>
                 <ImageView>
                     <image>
-                        <Image url="images/pixel_moles/instructions_sight2.png"/>
+                        <Image url="images/common/instructions_sight2.png"/>
                     </image>
                 </ImageView>
             </children>
@@ -94,22 +94,28 @@
                         <Image url="images/pixel_moles/mole1.gif"/>
                     </image>
                 </ImageView>
-                <Text id="title">Helmet mole (two hit for kill)</Text>
+                <Text id="title">Helmet mole (takes two hit to kill)</Text>
                 <ImageView>
                     <image>
                         <Image url="images/pixel_moles/Helmet_mole.gif"/>
                     </image>
                 </ImageView>
-                <Text id="title">Angry mole (move faster in the plants)</Text>
+                <Text id="title">Angry mole (move faster)</Text>
                 <ImageView>
                     <image>
                         <Image url="images/pixel_moles/Angry_mole.gif"/>
                     </image>
                 </ImageView>
-                <Text id="title">Bomb mole (stun player for some seconds)</Text>
+                <Text id="title">Bomb mole (stuns the player)</Text>
                 <ImageView>
                     <image>
                         <Image url="images/pixel_moles/Bomb_mole.gif"/>
+                    </image>
+                </ImageView>
+                <Text id="title">Each mole can not be hitted when underground</Text>
+                <ImageView>
+                    <image>
+                        <Image url="images/pixel_moles/Ground.gif"/>
                     </image>
                 </ImageView>
             </children>
@@ -119,14 +125,14 @@
                 <Insets top="60" right="10" bottom="10" left="100"/>
             </padding>
                <children>
-                    <Text>LIFE:</Text>
+                    <Text>HEALTH:</Text>
                     <Text>Defend the plants from moles</Text>
                     <ImageView>
                     <image>
                         <Image url="images/pixel_moles/Life_plants.png"/>
                     </image>
                     </ImageView>
-                    <Text>Moles eat the plants when they are on them (also the player remove life of plants)</Text>
+                    <Text>Moles eat the plants when they are on them (also the player does damage)</Text>
                     <ImageView>
                     <image>
                         <Image url="images/pixel_moles/Life_plants_chopped.png"/>
@@ -135,7 +141,7 @@
                     <Text>Pay attention to the health bar</Text>
                     <ImageView>
                     <image>
-                        <Image url="images/pixel_moles/healthBar_instr.png"/>
+                        <Image url="images/common/healthBar_instr.png"/>
                     </image>
                     </ImageView>
                </children>

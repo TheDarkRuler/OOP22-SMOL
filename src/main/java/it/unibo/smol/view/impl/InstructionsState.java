@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.unibo.smol.common.Constant;
 import it.unibo.smol.view.GameMap;
+import it.unibo.smol.view.LoadImgs;
 import it.unibo.smol.view.api.WindowState;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -59,16 +63,13 @@ public final class InstructionsState implements WindowState {
         menu.setOnMouseClicked(e -> {
             new WindowImpl().launch(stage);
         });
-        root.setOnKeyPressed(e -> {
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode().equals(KeyCode.F11)) {
-                if (stage.isFullScreen()) {
-                    stage.setFullScreen(false);
-                } else {
-                    stage.setFullScreen(true);
-                }
+                stage.setFullScreen(!stage.isFullScreen());
             }
         });
 
+        scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER, Constant.KEY_COMMON_FOLDER)));
         stage.setResizable(false);
         stage.setTitle("Instrucions");
         stage.setScene(scene);
