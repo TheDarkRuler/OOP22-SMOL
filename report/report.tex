@@ -56,7 +56,24 @@ Per arcade si intende una struttura di gioco ripetitiva in cui l'obbiettivo è a
 \end{itemize}
 %ANALISI E MODELLO DEL DOMINIO
 \section{Analisi e modello del dominio}
+In SMOL il sofware dovrà essere in grado di controllare le interazioni tra diverse tipologie di entità. Tra le entità saranno presenti:
+\begin{itemize}
+    \item Ortaggi: queste entità fungeranno come vita del giocatore ed a contatto con altre entità perderanno vita
+    \item Giocatore: questa entità sarà controllata attraverso la tastiera e permetterà di spostarsi all'interno della mappa.
+    \item Martello: questa entità sarà controllata attraverso il mouse che con una pressione prolungata permetterà di aumentare il proprio raggio di azione, mentre al rilascio se si troverà a contatto con le talpe gli toglierà vita
+    \item Talpe: questa entità fungerà da nemico principale del giocatore, spostandosi attraverso la mappa cercherà di mangiare gli ortaggi presenti ed in caso entri in contatto col giocatore gli bloccherà temporaneamente i movimenti.
+    \item Muri: impediranno al giocatore di uscire dai confini della mappa di gioco
+\end{itemize}
+Il sofware sarà responsabile anche della generazione iniziale degli ortaggi e la generazione delle talpe durante il resto della partita attraverso un sistema che incrementerà il numero di talpe generate nel tempo in base al punteggio corrente del giocatore.
+Gli elementi costitutivi del dominio sono sintetizzati in \Cref{img:analysisScheme}.
+Per rientrare nel monte ore richiesto non è stato possibile implementare una modalità di multiplayer locale, che sarà possibilmente implementata in futuro.
 
+\begin{figure}[H]
+\centering{}
+\includegraphics{img/analysisScheme}
+\caption{Schema UML dell'analisi del problema, con rappresentate le entità principali ed i rapporti fra loro}
+\label{img:analysisScheme}
+\end{figure}
 
 %------------------------------DESIGN------------------------------
 \chapter{Design}
