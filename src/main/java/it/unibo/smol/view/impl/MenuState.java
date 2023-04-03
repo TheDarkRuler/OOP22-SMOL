@@ -91,7 +91,7 @@ public final class MenuState implements WindowState {
         /*
          * Set fields.
          */
-        menuBox.setSpacing(GameMap.BORDER_WIDTH / 3);
+        menuBox.setSpacing(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_Y / 3);
 
         // buttons behaviour
         title.setFitWidth(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH * 3);
