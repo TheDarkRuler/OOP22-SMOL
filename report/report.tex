@@ -181,7 +181,25 @@ In \Cref{img:goodarch} è esemplificato il diagramma UML architetturale.
 \subsection*{Giovanni Paradisi}
 roba di Giovanni
 \subsection*{Mounir Samite}
-roba di Mounir
+\subsubsection*{Gestione delle finestre}
+\begin{figure}[h]
+\centering{}
+\includegraphics[width=1\textwidth]{img/WindowManagement.png}
+\caption{Schema UML della gestione delle finestre del gioco usando lo state pattern}
+\end{figure}
+\paragraph*{Problema} gestire le finestre del software, favorendo la modularità.
+\paragraph*{Soluzione} Il pattern State è utile per gestire le finestre in un videogioco con JavaFX poiché 
+consente di gestire lo stato di una finestra in modo dinamico e di cambiare facilmente lo stato della finestra a seconda delle esigenze 
+dell'applicazione. In un videogioco, ad esempio, ci possono essere diverse finestre con diverse funzionalità, come la finestra di gioco, 
+la finestra del menu, la finestra del game over e così via.
+\\
+Utilizzando il pattern State, si può creare una classe per ogni stato possibile della finestra e gestire i comportamenti specifici 
+di ogni stato all'interno della sua classe. In questo modo, si può garantire che la finestra si comporti
+ in modo corretto a seconda dello stato in cui si trova.
+ \\
+ In questo modo, è possibile cambiare lo stato della finestra in modo dinamico a seconda delle azioni dell'utente o del gioco stesso,
+  senza dover scrivere codice ripetitivo o complicato. 
+ Inoltre, questo approccio favorisce la modularità del codice, rendendolo più facile da mantenere e riutilizzare.
 
 
 %------------------------------SVILUPPO------------------------------
