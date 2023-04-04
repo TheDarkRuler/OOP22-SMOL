@@ -57,9 +57,8 @@ public abstract class PhysicsComponent {
     /**
      * This method receive a {@link Point2D} and translate it into actual movement.
      * @param move : the coordinate given
-     * @param world
      */
-    public abstract void receiveMovement(Point2D move, World world);
+    public abstract void receiveMovement(Point2D move);
 
     /**
      * Getter for the entity field.
