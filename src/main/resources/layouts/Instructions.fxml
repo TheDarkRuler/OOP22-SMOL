@@ -13,17 +13,13 @@
 <?import javafx.geometry.Insets?>
 
 <BorderPane fx:id="box" stylesheets="css/Instructions.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-
     <top>
-        <HBox alignment="CENTER">
+        <HBox id="hboxtitle" alignment="CENTER">
             <Text id="title">INSTRUCTIONS</Text>
         </HBox>
     </top>
     <left>
-        <VBox spacing="10" alignment="CENTER">
-        <padding>
-            <Insets top="50" right="10" bottom="10" left="10"/>
-        </padding>
+        <VBox  id="vboxleft" alignment="TOP_CENTER">
             <children>
                 <Text>MOVEMENT:</Text>
                 <Text>UP</Text>
@@ -54,10 +50,9 @@
         </VBox>
     </left>
     <center>
-        <VBox spacing="30" alignment="TOP_LEFT">
-        <padding>
-            <Insets top="55" right="10" bottom="10" left="10"/>
-        </padding>
+    <BorderPane>
+        <left>
+        <VBox  id="vboxcenter" alignment="TOP_CENTER">
             <children>
                 <Text>HIT:</Text>
                 <Text>Move the hammer sight with your mouse and left click to hit</Text>
@@ -79,13 +74,9 @@
                 </ImageView>
             </children>
         </VBox>
-    </center>
-    <right>
-        <GridPane>
-            <VBox id="centralBox" alignment="TOP_LEFT">
-            <padding>
-                <Insets top="57" right="600" bottom="10" left="10"/>
-            </padding>
+    </left>
+    <center>
+           <VBox id="boxenemies" alignment="TOP_LEFT">
             <children>
                 <Text>ENEMIES:</Text>
                 <Text>Basic mole</Text>
@@ -120,10 +111,11 @@
                 </ImageView>
             </children>
             </VBox>
-            <VBox spacing="30" alignment="TOP_CENTER">
-            <padding>
-                <Insets top="60" right="10" bottom="10" left="10"/>
-            </padding>
+    </center>
+    </BorderPane>
+    </center>
+    <right>
+            <VBox  id="boxlife" alignment="TOP_CENTER">
                <children>
                     <Text>HEALTH:</Text>
                     <Text>Defend the plants from moles</Text>
@@ -146,14 +138,10 @@
                     </ImageView>
                </children>
             </VBox>
-        </GridPane>
     </right>
     <bottom>
-        <VBox spacing="10" alignment="CENTER">
-        <padding>
-            <Insets top="10" right="10" bottom="50" left="10"/>
-        </padding>
+        <HBox  id="boxbutton" alignment="TOP_CENTER">
              <Button fx:id="menu" text="MENU"/>
-        </VBox>
+        </HBox>
     </bottom>
 </BorderPane>
