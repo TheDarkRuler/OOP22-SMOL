@@ -125,7 +125,35 @@ In \Cref{img:goodarch} è esemplificato il diagramma UML architetturale.
 \subsection*{Ettore Farinelli}
 roba di Ettore
 \subsection*{Marco Galeri}
-roba di Marco
+
+\subsubsection{Gestione delle Entità}
+
+\begin{figure}[H]
+\centering{}
+\includegraphics{img/EntityUML.pdf}
+\caption{Rappresentazione UML di una entità e i suoi componenti}
+\end{figure}
+
+\paragraph{Problema}
+    L'interfaccia \textsc{Entity} deve implementare numerosi comportamenti diversi, l'uso dell'ereditarietà porterebbe alla creazione di molteplici sottoclassi ed a possibili problemi di eredità multipla aumentando la complessità del codice. Inoltre la classe \textsc{Entity} incapsula diversi aspetti del gioco violando il \textit{Single Responsability Principle}.
+
+\paragraph{Soluzione}
+    Adottando l'\textit{Entity Component System}, ampiamente usato nell'ambito di Game Development, si ha una scissione dei vari aspetti di gioco in \textsc{components}. L'unione dei \textsc{components} quindi definisce il comportamento finale di ogni Entità. Con questo design che favorisce la composizione al posto dell'ereditarietà si ha un aumento di flessibilità del codice che viene suddiviso in classi più corte e meno complicate. Inoltre i componenti sono altamente riusabili rendendo plausibile la creazione di diverse tipologie di entità e lasciando libera la possibilità di aggiunte future.
+
+\subsubsection{Creazione delle Entità}
+
+\begin{figure}[H]
+\centering{}
+\includegraphics{EntityFactoryUML.pdf}
+\caption{Rappresentazione UML della creazione di una entità attraverso l'utilizzo del Factory method}
+\end{figure}
+
+\paragraph{Problema}
+    Date le molteplici tipologie di componenti che una Entità può avere, la creazione di un'Entità direttamente all'interno del mondo è possibile ma poco flessibile e funzionale. 
+    
+\paragraph{Soluzione}
+    Impiegando il \textit{Factory design pattern},  la creazione dell'entità viene esternalizzata in una classe. Con questa classe, \textsc{EntityFactory}, si possono creare dei set di componenti predefiniti da usare per istanziare ogni tipo di entità. Attraverso questo metodo si diminuisce notevolmente la duplicazione di codice, inoltre si rimuove la responsabilità di creazione delle entità dalla classe chiamante. 
+    
 \subsection*{Giovanni Paradisi}
 roba di Giovanni
 \subsection*{Mounir Samite}
