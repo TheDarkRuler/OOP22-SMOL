@@ -79,6 +79,21 @@ public interface Entity {
     Optional<GraphicComponent> getGraphicComp();
 
     /**
+     * Update the position of the entity based on the physicsComponent.
+     */
+    void updatePosition();
+
+    /**
+     * Process the input received by the inputComponent.
+     */
+    void processInput();
+
+    /**
+     * Check the status of the healthComponent.
+     */
+    void checkHealth();
+
+    /**
      * Update all the component of the Entity.
      */
     void update();
