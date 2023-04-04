@@ -29,10 +29,5 @@ public class BombEnemyPhysicsComponent extends EnemyPhysicsComponent {
             super.getEntity().orElseThrow().getHealthComp().orElseThrow().setHealth(Constant.WEAPON_DMG);
             super.getEntity().orElseThrow().getWorld().orElseThrow().incScore(-Constant.ENEMY_SCORE);
         }
-
-        if (entityCollided.getType() == Type.PLAYER) {
-            entityCollided.setX(entityCollided.getCurrentX() - entityCollided.getPhysicsComp().orElseThrow().getX());
-            entityCollided.setY(entityCollided.getCurrentY() - entityCollided.getPhysicsComp().orElseThrow().getY());
-        }
     }
 }
