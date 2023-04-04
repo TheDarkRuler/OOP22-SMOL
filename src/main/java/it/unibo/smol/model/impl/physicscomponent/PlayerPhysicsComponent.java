@@ -4,6 +4,7 @@ import java.util.Optional;
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
+import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
 import it.unibo.smol.model.api.World;
@@ -26,7 +27,11 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
      */
     @Override
     protected void collisonEvent(final Entity entityCollided) {
-        //This component doesn't use this method
+        if (entityCollided.getType() == Type.ENEMY || entityCollided.getType() == Type.WALL) {
+            final Entity entity = this.getEntity().orElseThrow();
+            entity.setX(entity.getCurrentX() - this.getX());
+            entity.setY(entity.getCurrentY() - this.getY());
+        }
     }
 
     /**
