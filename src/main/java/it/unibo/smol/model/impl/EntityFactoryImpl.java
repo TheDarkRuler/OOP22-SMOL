@@ -21,7 +21,7 @@ import it.unibo.smol.model.impl.physicscomponent.BombEnemyPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.EnemyPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.LifePlantsPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.PlayerPhysicsComponent;
-import it.unibo.smol.model.impl.physicscomponent.WallPhysicsComponent;
+import it.unibo.smol.model.impl.physicscomponent.EmptyPhysicsComponent;
 import it.unibo.smol.model.impl.physicscomponent.WeaponPhysicsComponent;
 import it.unibo.smol.view.impl.graphiccomponent.AngryEnemyGraphicComponent;
 import it.unibo.smol.view.impl.graphiccomponent.BasicEnemyGraphicComponent;
@@ -142,7 +142,7 @@ public class EntityFactoryImpl implements EntityFactory {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
-        Optional.of(new WallPhysicsComponent(hitbox)),
+        Optional.of(new EmptyPhysicsComponent(hitbox)),
         hitbox.getCenter().getX(), hitbox.getCenter().getY(), Optional.of(w));
     }
 }
