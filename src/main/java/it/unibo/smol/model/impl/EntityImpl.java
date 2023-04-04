@@ -51,21 +51,6 @@ public class EntityImpl implements Entity {
     }
 
     /**
-     * Copy constructor.
-     * @param entity
-     */
-    public EntityImpl(final Entity entity) {
-        this.type = entity.getType();
-        this.inputComp = entity.getInputComp();
-        this.healthComp = entity.getHealthComp();
-        this.graphicComp = null;
-        this.currentX = entity.getCurrentX();
-        this.currentY = entity.getCurrentY();
-        this.world = entity.getWorld().orElseThrow();
-        this.physicsComp = entity.getPhysicsComp().orElseThrow();
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -157,24 +142,48 @@ public class EntityImpl implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public void update() {
-        if (inputComp.isPresent()) {
-            final InputComponent inputCompPresent = inputComp.orElseThrow();
+    public void updatePosition() {
+        if (this.type.equals(Type.WEAPON) || this.type.equals(Type.ENEMY)) {
+            this.setX(physicsComp.getX());
+            this.setY(physicsComp.getY());
+        } else {
+            this.setX(this.currentX + physicsComp.getX());
+            this.setY(this.currentY + physicsComp.getY());
+        }
+        physicsComp.updateHitbox(currentX, currentY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void processInput() {
+        final InputComponent inputCompPresent = inputComp.orElseThrow();
             inputCompPresent.getDirection().ifPresent(x -> physicsComp.receiveMovement(x));
             inputCompPresent.getPosition().ifPresent(x -> physicsComp.receiveMovement(x, world));
             physicsComp.setRigid(inputCompPresent.isHittable());
-            if (this.type.equals(Type.WEAPON) || this.type.equals(Type.ENEMY)) {
-                this.setX(physicsComp.getX());
-                this.setY(physicsComp.getY());
-            } else {
-                this.setX(this.currentX + physicsComp.getX());
-                this.setY(this.currentY + physicsComp.getY());
-            }
-            physicsComp.updateHitbox(currentX, currentY);
-        }
-        physicsComp.checkCollision();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void checkHealth() {
         if (healthComp.isPresent() && healthComp.get().isDead()) {
             this.getWorld().orElseThrow().remove(this);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update() {
+        if (inputComp.isPresent()) {
+            processInput();
+            updatePosition();
+        }
+        physicsComp.checkCollision();
+        checkHealth();
     }
 }
