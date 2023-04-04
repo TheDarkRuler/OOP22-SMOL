@@ -56,22 +56,28 @@ Per arcade si intende una struttura di gioco ripetitiva in cui l'obbiettivo è a
 \end{itemize}
 %ANALISI E MODELLO DEL DOMINIO
 \section{Analisi e modello del dominio}
-In SMOL il sofware dovrà essere in grado di controllare le interazioni tra diverse tipologie di entità. Tra le entità saranno presenti:
+In SMOL il sofware dovrà essere in grado di controllare le interazioni tra diverse tipologie di entità. 
+Tra le entità saranno presenti:
 \begin{itemize}
     \item Ortaggi: queste entità fungeranno come vita del giocatore ed a contatto con altre entità perderanno vita
     \item Giocatore: questa entità sarà controllata attraverso la tastiera e permetterà di spostarsi all'interno della mappa.
-    \item Martello: questa entità sarà controllata attraverso il mouse che con una pressione prolungata permetterà di aumentare il proprio raggio di azione, mentre al rilascio se si troverà a contatto con le talpe gli toglierà vita
-    \item Talpe: questa entità fungerà da nemico principale del giocatore, spostandosi attraverso la mappa cercherà di mangiare gli ortaggi presenti ed in caso entri in contatto col giocatore gli bloccherà temporaneamente i movimenti.
-    \item Muri: impediranno al giocatore di uscire dai confini della mappa di gioco
+    \item Martello: questa entità sarà controllata attraverso il mouse che, con una pressione prolungata permetterà di aumentare 
+        il proprio raggio di azione, mentre al rilascio, se si troverà a contatto con le talpe, gli toglierà vita.
+    \item Talpe: questa entità fungerà da nemico principale del giocatore, spostandosi attraverso la mappa cercherà di mangiare 
+        gli ortaggi presenti ed in caso entri in contatto col giocatore gli bloccherà temporaneamente i movimenti.
+    \item Muri: impediranno al giocatore di uscire dai confini della mappa di gioco.
 \end{itemize}
-Il sofware sarà responsabile anche della generazione iniziale degli ortaggi e la generazione delle talpe durante il resto della partita attraverso un sistema che incrementerà il numero di talpe generate nel tempo in base al punteggio corrente del giocatore.
+Il sofware sarà responsabile anche della creazione iniziale degli ortaggi e la generazione delle talpe durante il resto della 
+partita attraverso un sistema che incrementerà in base al punteggio corrente del giocatore il numero di talpe generate nel tempo, 
+insieme alla probabilità di generare talpe più complicate da abbattere.
 Gli elementi costitutivi del dominio sono sintetizzati in \Cref{img:analysisScheme}.
-Per rientrare nel monte ore richiesto non è stato possibile implementare una modalità di multiplayer locale, che sarà possibilmente implementata in futuro.
+Per rientrare nel monte ore richiesto non è stato possibile implementare una modalità di multiplayer locale, 
+che sarà possibilmente implementata in futuro.
 
 \begin{figure}[H]
 \centering{}
 %\includegraphics{img/analysisScheme}
-\includegraphics{img/PlayerMovementUML.pdf}
+\includegraphics[scale = 0.5]{img/PlayerMovement.PNG}
 \caption{Schema UML dell'analisi del problema, con rappresentate le entità principali ed i rapporti fra loro}
 \label{img:analysisScheme}
 \end{figure}
@@ -123,14 +129,32 @@ In \Cref{img:goodarch} è esemplificato il diagramma UML architetturale.
 \section{Design dettagliato}
 
 \subsection*{Ettore Farinelli}
-roba di Ettore
+\subsubsection{Implementazione degli input del giocatore}
+\begin{figure}[h]
+\centering{}
+\includegraphics[scale = 0.5]{img/KeyInputsUML.PNG}
+\caption{Schema UML rappresentante il ricevimento degli input della classe KeyInputs.}
+\end{figure}
+\paragraph{Problema}
+    Un input inserito da tastiera deve essere elaborato e immagazzinato cosi da permettere al player di muoversi.
+\paragraph{Soluzione}
+    Ogni input inserito da tastiera viene ricevuto e in base al suo tipo viene inserita una \emph{Direction} all'interno di 
+    una coda che verrà successivamente svuotata un elemento alla volta dall'\emph{InputComponent} 
+    (in questo caso dal \emph{PlayerInputComponent}) ricevendo così le direzioni che verranno applicate all'entità 
+    stessa pemrettendole di muoversi nella mappa di gioco, Come da \Cref{img:PlayerMovement}.
+\begin{figure}[h]
+\centering{}
+\includegraphics[scale = 0.5]{img/PlayerMovement.PNG}
+\caption{Schema UML che rappresenta in che modo un input venga elaborato e ricevuto da un entità}
+\label{img:PlayerMovement}
+\end{figure}
 \subsection*{Marco Galeri}
 
 \subsubsection{Gestione delle Entità}
 
 \begin{figure}[H]
 \centering{}
-\includegraphics{img/EntityUML.pdf}
+%\includegraphics{img/EntityUML.pdf}
 \caption{Rappresentazione UML di una entità e i suoi componenti}
 \end{figure}
 
@@ -144,7 +168,7 @@ roba di Ettore
 
 \begin{figure}[H]
 \centering{}
-\includegraphics{EntityFactoryUML.pdf}
+%\includegraphics{EntityFactoryUML.pdf}
 \caption{Rappresentazione UML della creazione di una entità attraverso l'utilizzo del Factory method}
 \end{figure}
 
