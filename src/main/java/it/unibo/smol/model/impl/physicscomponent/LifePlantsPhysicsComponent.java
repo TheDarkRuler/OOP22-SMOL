@@ -2,13 +2,10 @@ package it.unibo.smol.model.impl.physicscomponent;
 
 import java.util.Optional;
 import it.unibo.smol.common.Constant;
-import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
-import it.unibo.smol.model.api.World;
-import javafx.geometry.Point2D;
 /**
  * The implementation of the {@link PhysicsComponent} rappresenting the Enemy behaviour.
  */
@@ -36,22 +33,6 @@ public class LifePlantsPhysicsComponent extends PhysicsComponent {
         if (super.getEntity().orElseThrow().getHealthComp().orElseThrow().isDead() && entityCollided.getType() == Type.ENEMY) {
             entityCollided.getWorld().orElseThrow().remove(entityCollided);
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void receiveMovement(final Directions move) {
-        //This component doesn't use this method
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void receiveMovement(final Point2D move, final World world) {
-        //This component doesn't use this method
     }
 
     /**

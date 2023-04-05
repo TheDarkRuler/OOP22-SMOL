@@ -160,7 +160,7 @@ public class EntityImpl implements Entity {
     public void processInput() {
         final InputComponent inputCompPresent = inputComp.orElseThrow();
             inputCompPresent.getDirection().ifPresent(x -> physicsComp.receiveMovement(x));
-            inputCompPresent.getPosition().ifPresent(x -> physicsComp.receiveMovement(x, world));
+            inputCompPresent.getPosition().ifPresent(x -> physicsComp.receiveMovement(x));
             physicsComp.setRigid(inputCompPresent.isHittable());
     }
 

@@ -21,6 +21,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -104,13 +105,8 @@ public class GameViewState implements WindowState {
                 new BackgroundSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.HEIGHT * GameMap.SCREEN_PROP_Y - 1,
                         false, false, false, false))));
         scene.setCursor(new ImageCursor(LoadImgs.getSprites(LoadImgs.HAMMER, Constant.KEY_COMMON_FOLDER)));
-        scene.setOnKeyPressed(keyEventHandler);
-        scene.setOnKeyReleased(keyEventHandler);
-        scene.setOnMouseMoved(mouseEventHandler);
-        scene.setOnMousePressed(mouseEventHandler);
-        scene.setOnMouseReleased(mouseEventHandler);
-        scene.setOnMouseDragged(mouseEventHandler);
-        scene.setOnMouseEntered(mouseEventHandler);
+        scene.addEventHandler(KeyEvent.ANY, keyEventHandler);
+        scene.addEventHandler(MouseEvent.ANY, mouseEventHandler);
         scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode().equals(KeyCode.F11)) {
                 stage.setFullScreen(!stage.isFullScreen());
