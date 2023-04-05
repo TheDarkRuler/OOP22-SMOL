@@ -71,7 +71,8 @@ public final class InstructionsState implements WindowState {
         final ImageView target1 = (ImageView) scene.lookup("#target1");
         final ImageView target2 = (ImageView) scene.lookup("#target2");
         final ImageView healthBar = (ImageView) scene.lookup("#health");
-        List<ImageView> list = new ArrayList<>(List.of((ImageView) scene.lookup("#WasdImage"),
+        final List<ImageView> list = new ArrayList<>(List.of(
+                                            (ImageView) scene.lookup("#WasdImage"),
                                             (ImageView) scene.lookup("#waSdImage"),
                                             (ImageView) scene.lookup("#wAsdImage"),
                                             (ImageView) scene.lookup("#wasDImage"),
@@ -79,21 +80,11 @@ public final class InstructionsState implements WindowState {
         /*
          * Set fields.
          */
+        vboxMovement.setPadding(new Insets(10, 10 * GameMap.SCREEN_PROP_X, 10, 100 * GameMap.SCREEN_PROP_X));
+        vboxEnemies.setPadding(new Insets(10, GameMap.HEIGHT / 2  * GameMap.SCREEN_PROP_X, 10, 10 * GameMap.SCREEN_PROP_X));
+        vboxLife.setPadding(new Insets(10, GameMap.HEIGHT / 2 * GameMap.SCREEN_PROP_X, 10, 10 * GameMap.SCREEN_PROP_X));
 
-        vboxMovement.setPadding(new Insets(10, 20, 30, 100));
-
-        //borderPane.setPadding(new Insets(10, 10, 10, 10));
-        borderPane.setPrefSize(GameMap.MAP_WIDTH * GameMap.SCREEN_PROP_X / 2, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y - 50);
-        borderPane.setMaxSize(GameMap.MAP_WIDTH * GameMap.SCREEN_PROP_X / 2, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y - 50);
-        borderPane.setMinSize(GameMap.MAP_WIDTH * GameMap.SCREEN_PROP_X / 2, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y - 50);
-        borderPane.autosize();
-
-        vboxHit.setPadding(new Insets(10, 10, 10, 10));
-
-        vboxEnemies.setPadding(new Insets(30, 100, 30, 10));
-
-        vboxLife.setPadding(new Insets(30, 300 * GameMap.SCREEN_PROP_X, 30, 10));
-
+        borderPaneLayoutSize(borderPane);
         vBoxLayoutSize(vboxMovement);
         vBoxLayoutSize(vboxHit);
         vBoxLayoutSize(vboxEnemies);
@@ -101,8 +92,10 @@ public final class InstructionsState implements WindowState {
         hBoxLayoutSize(boxTitle);
         hBoxLayoutSize(boxButton);
 
-        list.stream().forEach(l->l.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT));
-        list.stream().forEach(l->l.setFitWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X + 30));
+        //resize images
+        list.stream().forEach(l -> l.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT));
+        list.stream().forEach(l -> l.setFitWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
+
         target1.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT);
         target1.setFitWidth(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH * 2);
         target2.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT);
@@ -137,9 +130,9 @@ public final class InstructionsState implements WindowState {
      * @param hbox
      */
     private void hBoxLayoutSize(final HBox hbox) {
-        hbox.setPrefSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, 50);
-        hbox.setMaxSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, 50);
-        hbox.setMinSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, 50);
+        hbox.setPrefSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 2);
+        hbox.setMaxSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 2);
+        hbox.setMinSize(GameMap.WIDTH * GameMap.SCREEN_PROP_X - 1, GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y / 2);
         hbox.autosize();
     }
 
@@ -149,9 +142,16 @@ public final class InstructionsState implements WindowState {
      */
     private void vBoxLayoutSize(final VBox vbox) {
         vbox.setSpacing(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH / 4);
-        vbox.setPrefSize(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X, GameMap.MAP_HEIGHT *GameMap.SCREEN_PROP_Y - 50);
-        vbox.setMaxSize(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X, GameMap.MAP_HEIGHT *GameMap.SCREEN_PROP_Y - 50);
-        vbox.setMinSize(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X, GameMap.MAP_HEIGHT *GameMap.SCREEN_PROP_Y - 50);
+        vbox.setPrefSize(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y);
+        vbox.setMaxSize(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y);
+        vbox.setMinSize(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y);
         vbox.autosize();
+    }
+
+    private void borderPaneLayoutSize(final BorderPane pane) {
+        pane.setPrefSize(GameMap.MAP_WIDTH * GameMap.SCREEN_PROP_X / 2, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y);
+        pane.setMaxSize(GameMap.MAP_WIDTH * GameMap.SCREEN_PROP_X / 2, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y);
+        pane.setMinSize(GameMap.MAP_WIDTH * GameMap.SCREEN_PROP_X / 2, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y);
+        pane.autosize();
     }
 }

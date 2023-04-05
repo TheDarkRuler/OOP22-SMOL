@@ -19,7 +19,7 @@
         </HBox>
     </top>
     <left>
-        <VBox  id="vboxleft" alignment="TOP_CENTER">
+        <VBox id="vboxleft" alignment="TOP_CENTER">
             <children>
                 <Text>MOVEMENT:</Text>
                 <Text>UP</Text>
@@ -28,19 +28,19 @@
                         <Image url="images/common/Wasd.gif"/>
                     </image>
                 </ImageView>
-                <Text id="title">DOWN</Text>
+                <Text>DOWN</Text>
                 <ImageView id="waSdImage">
                     <image>
                         <Image url="images/common/wa_Sd.gif"/>
                     </image>
                 </ImageView>
-                 <Text id="title">LEFT</Text>
+                <Text>LEFT</Text>
                 <ImageView id="wAsdImage">
                     <image>
                         <Image url="images/common/w_Asd.gif"/>
                     </image>
                 </ImageView>
-                 <Text id="title">RIGHT</Text>
+                <Text>RIGHT</Text>
                 <ImageView id="wasDImage">
                     <image>
                         <Image url="images/common/was_D.gif"/>
@@ -52,30 +52,30 @@
     <center>
         <BorderPane id="borderpane">
             <left>
-            <VBox  id="vboxcenter" alignment="TOP_CENTER">
-                <children>
-                    <Text>HIT:</Text>
-                    <Text>Move the hammer sight with your mouse</Text> 
-                    <Text>and left click to hit</Text>
-                    <ImageView id="target">
-                        <image>
-                            <Image url="images/pixel_moles/weapon_target.png"/>
-                        </image>
-                    </ImageView>
-                    <Text>Keep it pressed to expand </Text>
-                    <Text>the range of the hammer</Text>
-                    <ImageView id="target1">
-                        <image>
-                            <Image url="images/common/instructions_sight1.png"/>
-                        </image>
-                    </ImageView>
-                    <ImageView id="target2">
-                        <image>
-                            <Image url="images/common/instructions_sight2.png"/>
-                        </image>
-                    </ImageView>
-                </children>
-            </VBox>
+                <VBox id="vboxcenter" alignment="TOP_CENTER">
+                    <children>
+                        <Text>HIT:</Text>
+                        <Text>Move the hammer sight with your mouse</Text> 
+                        <Text>and left click to hit</Text>
+                        <ImageView id="target">
+                            <image>
+                                <Image url="images/pixel_moles/weapon_target.png"/>
+                            </image>
+                        </ImageView>
+                        <Text>Keep it pressed to expand </Text>
+                        <Text>the range of the hammer</Text>
+                        <ImageView id="target1">
+                            <image>
+                                <Image url="images/common/instructions_sight1.png"/>
+                            </image>
+                        </ImageView>
+                        <ImageView id="target2">
+                            <image>
+                                <Image url="images/common/instructions_sight2.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </VBox>
             </left>
             <right>
                 <VBox id="boxenemies" alignment="TOP_CENTER">
@@ -87,63 +87,63 @@
                                 <Image url="images/pixel_moles/mole1.gif"/>
                             </image>
                         </ImageView>
-                        <Text id="title">Helmet mole (takes two hit to kill)</Text>
+                        <Text>Helmet mole (takes two hit to kill)</Text>
                         <ImageView>
                             <image>
                                 <Image url="images/pixel_moles/Helmet_mole.gif"/>
                             </image>
                         </ImageView>
-                        <Text id="title">Angry mole (move faster)</Text>
+                        <Text>Angry mole (move faster)</Text>
                         <ImageView>
                             <image>
                                 <Image url="images/pixel_moles/Angry_mole.gif"/>
                             </image>
                         </ImageView>
-                        <Text id="title">Bomb mole (stuns the player)</Text>
+                        <Text>Bomb mole (stuns the player)</Text>
                         <ImageView>
                             <image>
                                 <Image url="images/pixel_moles/Bomb_mole.gif"/>
                             </image>
                         </ImageView>
-                        <Text id="title">Each mole can not be hitted when underground</Text>
+                        <Text>Each mole can not be hitted when underground</Text>
                         <ImageView>
                             <image>
                                 <Image url="images/pixel_moles/Ground.gif"/>
                             </image>
                         </ImageView>
                     </children>
-                    </VBox>
+                </VBox>
             </right>
         </BorderPane>
     </center>
     <right>
-        <VBox  id="boxlife" alignment="TOP_CENTER">
+        <VBox id="boxlife" alignment="TOP_CENTER">
             <children>
                 <Text>HEALTH:</Text>
                 <Text>Defend the plants from moles</Text>
                 <ImageView>
-                <image>
-                    <Image url="images/pixel_moles/Life_plants.png"/>
-                </image>
+                    <image>
+                        <Image url="images/pixel_moles/Life_plants.png"/>
+                    </image>
                 </ImageView>
                 <Text>Moles eat the plants when they are on them</Text>
                 <Text>(also the player does damage)</Text>
                 <ImageView>
-                <image>
-                    <Image url="images/pixel_moles/Life_plants_chopped.png"/>
-                </image>
+                    <image>
+                        <Image url="images/pixel_moles/Life_plants_chopped.png"/>
+                    </image>
                 </ImageView>
                 <Text>Pay attention to the health bar</Text>
                 <ImageView id="health">
-                <image>
-                    <Image url="images/common/healthBar_instr.png"/>
-                </image>
+                    <image>
+                        <Image url="images/common/healthBar_instr.png"/>
+                    </image>
                 </ImageView>
             </children>
         </VBox>
     </right>
     <bottom>
-        <HBox  id="boxbutton" alignment="TOP_CENTER">
+        <HBox id="boxbutton" alignment="TOP_CENTER">
              <Button fx:id="menu" text="MENU"/>
         </HBox>
     </bottom>
