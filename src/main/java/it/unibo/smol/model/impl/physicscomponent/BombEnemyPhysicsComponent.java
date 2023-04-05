@@ -1,14 +1,17 @@
 package it.unibo.smol.model.impl.physicscomponent;
 
+import java.util.Optional;
+
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
+import it.unibo.smol.model.api.PhysicsComponent;
 
 /**
  * The implementation of the {@link PhysicsComponent} rappresenting the Bomb Enemy behaviour.
  */
-public class BombEnemyPhysicsComponent extends EnemyPhysicsComponent {
+public class BombEnemyPhysicsComponent extends PhysicsComponent {
 
     /**
      * Constructor inherited by the super-class {@link PhysicsComponent}.
@@ -16,7 +19,7 @@ public class BombEnemyPhysicsComponent extends EnemyPhysicsComponent {
      * @param movSpeed
      */
     public BombEnemyPhysicsComponent(final HitBox hitBox, final double movSpeed) {
-        super(hitBox, movSpeed);
+        super(movSpeed, Optional.of(hitBox));
     }
     /**
      * Whenever this entity collide with a Weapon {@link Type} entity, it takes 1 damage.
@@ -29,5 +32,13 @@ public class BombEnemyPhysicsComponent extends EnemyPhysicsComponent {
             super.getEntity().orElseThrow().getHealthComp().orElseThrow().setHealth(Constant.WEAPON_DMG);
             super.getEntity().orElseThrow().getWorld().orElseThrow().incScore(-Constant.ENEMY_SCORE);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PhysicsComponent makeCopy() {
+        return this;
     }
 }
