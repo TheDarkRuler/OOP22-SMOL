@@ -109,7 +109,7 @@ public class PhysicsTest {
         e2.getPhysicsComp().orElseThrow().checkCollision();
         e2.checkHealth();
         assertTrue(e2.getHealthComp().orElseThrow().isDead());
-
-        assertEquals(w.getEntities().size(), 1);
+        assertEquals(100, w.getScore());
+        assertEquals(1, w.getEntities().size());
     }
 }
