@@ -52,13 +52,32 @@ public abstract class PhysicsComponent {
      * This method receive a {@link Directions} and translate it into actual movement.
      * @param move : the direction given
      */
-    public abstract void receiveMovement(Directions move);
+    public void receiveMovement(final Directions move) {
+        switch (move) {
+            case UP -> setY(-movementSpeed);
+
+            case DOWN -> setY(+movementSpeed);
+
+            case LEFT -> setX(-movementSpeed);
+
+            case RIGHT -> setX(+movementSpeed);
+
+            case STAY_X -> setX(0);
+
+            case STAY_Y -> setY(0);
+
+            default -> { }
+        }
+    }
 
     /**
      * This method receive a {@link Point2D} and translate it into actual movement.
      * @param move : the coordinate given
      */
-    public abstract void receiveMovement(Point2D move);
+    public void receiveMovement(final Point2D move) {
+        x = move.getX();
+        y = move.getY();
+    }
 
     /**
      * Getter for the entity field.

@@ -2,12 +2,10 @@ package it.unibo.smol.model.impl.physicscomponent;
 
 import java.util.Optional;
 import it.unibo.smol.common.Constant;
-import it.unibo.smol.common.Directions;
 import it.unibo.smol.common.HitBox;
 import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
-import javafx.geometry.Point2D;
 
 /**
  * The implementation of the {@link PhysicsComponent} rappresenting the Enemy behaviour.
@@ -34,23 +32,6 @@ public class EnemyPhysicsComponent extends PhysicsComponent {
                 super.getEntity().orElseThrow().getWorld().orElseThrow().incScore(Constant.ENEMY_SCORE);
             }
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void receiveMovement(final Directions move) {
-        //This component doesn't use this method
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void receiveMovement(final Point2D move) {
-        super.setX(move.getX());
-        super.setY(move.getY());
     }
 
     /**
