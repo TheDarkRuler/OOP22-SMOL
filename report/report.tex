@@ -70,7 +70,7 @@ Tra le entità saranno presenti:
 Il sofware sarà responsabile anche della creazione iniziale degli ortaggi e la generazione delle talpe durante il resto della 
 partita attraverso un sistema che incrementerà in base al punteggio corrente del giocatore il numero di talpe generate nel tempo, 
 insieme alla probabilità di generare talpe più complicate da abbattere.
-Gli elementi costitutivi del dominio sono sintetizzati in \Cref{img:analysisScheme}.
+Gli elementi costitutivi del dominio sono sintetizzati in %\Cref{img:analysisScheme}.
 Per rientrare nel monte ore richiesto non è stato possibile implementare una modalità di multiplayer locale, 
 che sarà possibilmente implementata in futuro.
 
@@ -123,17 +123,17 @@ presenza di nuovi tipi di evento richiede invece in potenza aggiunte o rifinitur
 Questo è dovuto al fatto che nuovi Input rappresentano di fatto nuovi elementi della business
 logic, la cui alterazione od espansione inevitabilmente impatta il controller del progetto.
 
-In \Cref{img:goodarch} è esemplificato il diagramma UML architetturale.
+%In \Cref{img:goodarch} è esemplificato il diagramma UML architetturale.
 
 %DESIGN DETTAGLIATO%DESIGN DETTAGLIATO
 \section{Design dettagliato}
 
 \subsection*{Ettore Farinelli}
 \subsubsection{Implementazione degli input del giocatore}
-\begin{figure}[h]
+\begin{figure}[H]
 \centering{}
 \includegraphics[scale = 0.5]{img/KeyInputsUML.PNG}
-\caption{Schema UML rappresentante il ricevimento degli input della classe KeyInputs.}
+\caption{Schema UML rappresentante il ricevimento degli input della classe \emph{KeyInputs}.}
 \end{figure}
 \paragraph{Problema}
     Un input inserito da tastiera deve essere elaborato e immagazzinato cosi da permettere al player di muoversi.
@@ -141,13 +141,44 @@ In \Cref{img:goodarch} è esemplificato il diagramma UML architetturale.
     Ogni input inserito da tastiera viene ricevuto e passato alla classe \emph{KeyInputs} che lo filtra e in base al tipo  
     inserisce una \emph{Direction} all'interno di una coda che verrà successivamente svuotata un elemento alla volta 
     dall'\emph{InputComponent} (in questo caso dal \emph{PlayerInputComponent}) ricevendo così le direzioni che verranno 
-    applicate all'entità stessa pemrettendole di muoversi nella mappa di gioco, Come da \Cref{img:PlayerMovement}.
-\begin{figure}[h]
+    applicate all'entità stessa pemrettendole di muoversi nella mappa di gioco, Come da figura\ref{img:PlayerMovement}.
+\begin{figure}[H]
 \centering{}
 \includegraphics[scale = 0.5]{img/PlayerMovement.PNG}
-\caption{Schema UML che rappresenta in che modo un input venga elaborato e ricevuto da un entità}
+\caption{Schema UML che rappresenta in che modo un input venga elaborato e ricevuto da un entità.}
 \label{img:PlayerMovement}
 \end{figure}
+
+\subsubsection{Gestione del martello}
+\begin{figure}[H]
+\centering{}
+\includegraphics[scale = 0.5]{img/MouseInputsUML.PNG}
+\caption{Schema UML rappresentante il ricevimento degli input della classe \emph{MouseInputs}.}
+\end{figure}
+\paragraph{Problema}
+    Il martello dovrà avere una posizione risultante distante dal giocatore di una misura uguale al raggio della circonferenza 
+    di diamentro \textsc{weaponRange} e in una posizione presente nella retta tracciata dal centro del giocatore al cursore del mouse.
+    Inoltre quando il martello viene rilasciato dovrà bloccare gli input per permettere al player (virtualmente) di colpire con 
+    il martello la talpa su cui il bersaglio si trova.
+\paragraph{Soluzione}
+    Come per il problema degli input da tastiera, quelli da mouse vengono ricevuti e elaborati in maniera simile con una differenza
+    sostanziale. Infatti, \emph{MouseInputs} salva direttamente la posizione del cursore
+    quando viene mosso o rilasciato, che viene quindi ricevuta dall'\emph{InputComponent} e poi elaborata nel \emph{PhysicComponent} 
+    dove vengono quindi fatti tutti i calcoli \footnote{\url{https://github.com/TheDarkRuler/OOP22-SMOL/blob/757228125cb2531fccca35b35f7645ceba9d5ae9/src/main/java/it/unibo/smol/model/impl/physicscomponent/WeaponPhysicsComponent.java#L46-L51}} 
+    per trovare la effettiva posizione in cui il martello colpirà al rilascio \ref{img:MouseInputs}. Sempre al rilascio del tasto sinistro del mouse, 
+    per bloccare gli input da tastiera e da mouse inizialmente ho pensato di utilizzare dei metodi, e quindi campi, statici 
+    accessibili sia da \emph{MouseInputs} che da \emph{KeyInputs}, infine poi, a seguito di diverse migliorie 
+    ho optato per includere un campo di tipo \emph{KeyInputs} all'interno di \emph{MouseInputs} così da poter notificare il blocco 
+    degli input da una classe all'altra.
+\begin{figure}[H]
+\centering{}
+\includegraphics[scale = 0.5]{img/MouseInputs.PNG}
+\caption{Schema UML che rappresenta in che modo un input venga elaborato e ricevuto da un entità.}
+\label{img:MouseInputs}
+\end{figure}
+
+\subsubsection{Creazione AI talpe}
+
 \subsection*{Marco Galeri}
 
 \subsubsection{Gestione delle Entità}
