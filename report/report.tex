@@ -76,8 +76,7 @@ che sarà possibilmente implementata in futuro.
 
 \begin{figure}[H]
 \centering{}
-%\includegraphics{img/analysisScheme}
-\includegraphics[scale = 0.5]{img/PlayerMovement.PNG}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{img/AnalysisUML.png}
 \caption{Schema UML dell'analisi del problema, con rappresentate le entità principali ed i rapporti fra loro}
 \label{img:analysisScheme}
 \end{figure}
@@ -198,9 +197,9 @@ logic, la cui alterazione od espansione inevitabilmente impatta il controller de
 \subsubsection{Gestione delle Entità}
 
 \begin{figure}[H]
-\centering{}
-\includegraphics[scale=0.4]{img/EntityUML.png}
-\caption{Rappresentazione UML di una entità e i suoi componenti}
+\centering
+    \includegraphics[width=\textwidth,height=2\textheight,keepaspectratio]{img/EntityUML.png}
+    \caption{Rappresentazione UML di una entità e i suoi componenti}
 \end{figure}
 
 \paragraph{Problema}
@@ -213,7 +212,7 @@ logic, la cui alterazione od espansione inevitabilmente impatta il controller de
 
 \begin{figure}[H]
 \centering{}
-%\includegraphics{EntityFactoryUML.pdf}
+\includegraphics[width=0.75\textwidth,keepaspectratio]{img/EntityFactoryUML.png}
 \caption{Rappresentazione UML della creazione di una entità attraverso l'utilizzo del Factory method}
 \end{figure}
 
@@ -222,6 +221,39 @@ logic, la cui alterazione od espansione inevitabilmente impatta il controller de
     
 \paragraph{Soluzione}
     Impiegando il \textit{Factory design pattern},  la creazione dell'entità viene esternalizzata in una classe. Con questa classe, \textsc{EntityFactory}, si possono creare dei set di componenti predefiniti da usare per istanziare ogni tipo di entità. Attraverso questo metodo si diminuisce notevolmente la duplicazione di codice, inoltre si rimuove la responsabilità di creazione delle entità dalla classe chiamante. 
+
+\subsubsection{Gestione del movimento e risoluzione delle collisioni tra Entità}
+
+\begin{figure}[H]
+\centering{}
+\includegraphics[width=1\textwidth,keepaspectratio]{img/PhysicsComponentUML.png}
+\caption{Rappresentazione UML delle diverse interazioni tra Entità}
+\end{figure}
+
+\paragraph{Problema}
+\begin{itemize}
+    \item Entità diverse ricevono comandi di movimento differenti rendendo complicato creare una interfaccia generale che gestisca la fisica delle entità.
+    \item Le collisioni devono produrre eventi differenti in base alle tipologie di Entità che stanno collidendo.
+\end{itemize}
+
+\paragraph{Soluzione}
+    Utilizzando un \textit{Template method pattern} si ha la possibilità di definire una struttura generale della classe, lasciando alle sottoclassi la scelta di dettagli specifici. Questo riduce drasticamente la duplicazione di codice in quanto i metodi template \texttt{checkCollision()} e \texttt{receiveMovement()} vengono scritti unicamente nella classe madre. Inoltre tramite l'overload del metodo \texttt{receiveMovement()} viene generalizzata anche la funzione di movimento.
+    
+\subsubsection{Gestione di input multipli}
+
+\begin{figure}[H]
+\centering{}
+\includegraphics[width=\textwidth,keepaspectratio]{img/InputComponentUML.png}
+\caption{Rappresentazione UML della gestione degli InputComponent}
+\end{figure}
+
+\paragraph{Problema}
+\begin{itemize}
+    \item L'utilizzo di diverse implementazioni di input richiede la presenza di una interfaccia generale che li gestisca
+    \item L'implementazione di nuove periferiche di gioco può risultare scomodo e macchinoso
+\end{itemize}
+\paragraph{Soluzione}
+L'utilizzo di uno \textit{Strategy pattern} consente di isolare le diverse implementazioni di \textsc{InputComponent} randendole facilmente intercambiali e propense ad aggiunte future.
     
 \subsection*{Giovanni Paradisi}
 roba di Giovanni
@@ -260,7 +292,22 @@ un po di roba sul DVCS
 \subsection*{Ettore Farinelli}
 roba di Ettore
 \subsection*{Marco Galeri}
-roba di Marco
+
+Mi sono occupato di:
+\begin{itemize}
+    \item \emph{GameEngine} e \emph{GameLoop} (package smol.core)
+    \item \emph{Entity} ed \emph{EntityFactory} (package smol.model)
+    \item \emph{PhysicsComponent} e le sue sottoclassi (package smol.model)
+    \item \emph{HealthComponent} (package smol.model.impl)
+    \item \emph{InputComponent} (package smol.controller)
+    \item rendere la grafica proporzionale allo schermo (package smol.view.GameMap)
+\end{itemize}
+
+Ho inoltre contribuito a:
+\begin{itemize}
+    \item \emph{GameViewState} Aggiungendo il punteggio (package smol.view)
+\end{itemize}
+
 \subsection*{Giovanni Paradisi}
 roba di Giovanni
 \subsection*{Mounir Samite}
@@ -288,7 +335,15 @@ Invece per quanto riguarda il workflow è stata adottata la metodologia di DVCS 
 \subsection*{Ettore Farinelli}
 roba di Ettore
 \subsection*{Marco Galeri}
-roba di Marco
+
+Il GameLoop è stato realizzato ispirandosi al capitolo "GameLoop" presente in \emph{Game Programming Patterns}\footnote{\url{https://gameprogrammingpatterns.com/}} di Robert Nystrom.
+
+\subsubsection{Utilizzo di Stream}
+\begin{itemize}
+    \item Controllo delle collisioni: \url{https://github.com/TheDarkRuler/OOP22-SMOL/blob/757228125cb2531fccca35b35f7645ceba9d5ae9/src/main/java/it/unibo/smol/model/api/PhysicsComponent.java#L34-49}
+
+\end{itemize}
+
 \subsection*{Giovanni Paradisi}
 roba di Giovanni
 \subsection*{Mounir Samite}
