@@ -3,20 +3,19 @@ package it.unibo.smol.model.impl.physicscomponent;
 import java.util.Optional;
 import it.unibo.smol.common.Constant;
 import it.unibo.smol.common.HitBox;
-import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.Entity;
 import it.unibo.smol.model.api.PhysicsComponent;
 /**
- * The implementation of the {@link PhysicsComponent} rappresenting the Player behaviour.
+ * The implementation of the {@link PhysicsComponent} rappresenting a wall of the map.
  */
-public class PlayerPhysicsComponent extends PhysicsComponent {
+public class EmptyPhysicsComponent extends PhysicsComponent {
 
     /**
      * Constructor inherited by the super-class {@link PhysicsComponent}.
      * @param hitBox : See the super-Constructor
      */
-    public PlayerPhysicsComponent(final HitBox hitBox) {
-        super(Constant.PLAYER_MOVSPD, Optional.of(hitBox));
+    public EmptyPhysicsComponent(final HitBox hitBox) {
+        super(Constant.HEALTH_MOVSPD, Optional.of(hitBox));
     }
 
     /**
@@ -24,11 +23,7 @@ public class PlayerPhysicsComponent extends PhysicsComponent {
      */
     @Override
     protected void collisonEvent(final Entity entityCollided) {
-        if (entityCollided.getType() == Type.ENEMY || entityCollided.getType() == Type.WALL) {
-            final Entity entity = this.getEntity().orElseThrow();
-            entity.setX(entity.getCurrentX() - this.getX());
-            entity.setY(entity.getCurrentY() - this.getY());
-        }
+        //This component doesn't use this method
     }
 
     /**

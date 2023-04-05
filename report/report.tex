@@ -28,19 +28,53 @@
 
 %REQUISITI
 \section{Requisiti}
-
-Il software, commissionato dal gestore del centro di ricerca ``Aperture Laboratories Inc.''\footnote{\url{http://aperturescience.com/}}, mira alla costruzione di una intelligenza artificiale di nome GLaDOS (Genetic Lifeform and Disk Operating System).
+Il gruppo si pone come obiettivo quello di realizzare un videogioco 2D arcade con visuale dall’alto di nome "SMOL".
+Per arcade si intende una struttura di gioco ripetitiva in cui l'obbiettivo è accumulare più punti possibile.
 %
-Per intelligenza artificiale si intende un software in grado di assumere decisioni complesse in maniera semi autonoma sugli argomenti di sua competenza, a partire dai vincoli e dagli obiettivi datigli dall'utente.
 
 \subsubsection{Requisiti funzionali}
-
-
+\begin{itemize}
+    \item Il software dovrà essere in grado di gestire l'ambiente di gioco durante l'intera durata della partita elaborando le interazioni tra le diverse entità del gioco.
+    \item L’obbiettivo del gioco è difendere i campi di ortaggi dalle talpe che invadono la mappa, schiacciandole con un martello. I campi subiranno danni anche in caso 
+        il giocatore li attraversi.
+    \item Con il progredire dello score la difficoltà di gioco aumenterà, diminuendo il tempo tra la creazione di talpe e modificando la probabilità 
+        con cui si generano diversi tipi di talpa.
+    \item Durante la partita sarà possibile effetuare diverse operazioni:
+    \begin{itemize}
+        \item Il giocatore potrà muovere il personaggio, attraverso i tasti direzionali, all’interno della mappa.
+        \item Usando il mouse invece, controllerà la direzione del martello che attraverso una pressione prolungata potrà aumentare il raggio di azione.
+    \end{itemize}
+    \item Il gioco termina quando tutti gli ortaggi risultano distrutti.
+\end{itemize}
 \subsubsection{Requisiti non funzionali}
-
+\begin{itemize}
+    \item Si avrà la possibilità di cambiare l'aspetto grafico scegliendo tra quelli proposti nell'interfaccia del menù.
+    \item Il programma sarà in grado di salvare il miglior punteggio in locale.
+    \item Il gioco avrà una sezione in cui verrano visualizzate le istruzioni di gioco.
+    \item Implementazione di una pagina di game over che permette di tornare al menù senza chiudere l'applicazione e 
+        mantenendo lo stesso pacchetto grafico precedentemente utilizzato.
+\end{itemize}
 %ANALISI E MODELLO DEL DOMINIO
 \section{Analisi e modello del dominio}
+In SMOL il sofware dovrà essere in grado di controllare le interazioni tra diverse tipologie di entità. Tra le entità saranno presenti:
+\begin{itemize}
+    \item Ortaggi: queste entità fungeranno come vita del giocatore ed a contatto con altre entità perderanno vita
+    \item Giocatore: questa entità sarà controllata attraverso la tastiera e permetterà di spostarsi all'interno della mappa.
+    \item Martello: questa entità sarà controllata attraverso il mouse che con una pressione prolungata permetterà di aumentare il proprio raggio di azione, mentre al rilascio se si troverà a contatto con le talpe gli toglierà vita
+    \item Talpe: questa entità fungerà da nemico principale del giocatore, spostandosi attraverso la mappa cercherà di mangiare gli ortaggi presenti ed in caso entri in contatto col giocatore gli bloccherà temporaneamente i movimenti.
+    \item Muri: impediranno al giocatore di uscire dai confini della mappa di gioco
+\end{itemize}
+Il sofware sarà responsabile anche della generazione iniziale degli ortaggi e la generazione delle talpe durante il resto della partita attraverso un sistema che incrementerà il numero di talpe generate nel tempo in base al punteggio corrente del giocatore.
+Gli elementi costitutivi del dominio sono sintetizzati in \Cref{img:analysisScheme}.
+Per rientrare nel monte ore richiesto non è stato possibile implementare una modalità di multiplayer locale, che sarà possibilmente implementata in futuro.
 
+\begin{figure}[H]
+\centering{}
+%\includegraphics{img/analysisScheme}
+\includegraphics{img/PlayerMovementUML.pdf}
+\caption{Schema UML dell'analisi del problema, con rappresentate le entità principali ed i rapporti fra loro}
+\label{img:analysisScheme}
+\end{figure}
 
 %------------------------------DESIGN------------------------------
 \chapter{Design}
@@ -85,7 +119,7 @@ logic, la cui alterazione od espansione inevitabilmente impatta il controller de
 
 In \Cref{img:goodarch} è esemplificato il diagramma UML architetturale.
 
-%DESIGN DETTAGLIATO
+%DESIGN DETTAGLIATO%DESIGN DETTAGLIATO
 \section{Design dettagliato}
 
 \subsection*{Ettore Farinelli}
@@ -117,14 +151,25 @@ roba di Giovanni
 \subsection*{Mounir Samite}
 Mi sono occupato di:
 \begin{itemize}
-    \item Progettazione dell'utilizzo delle finestre con Window e WindowState con cui verranno renderizzate tutti i tipi di finestre come Menu, Gioco e Game Over (\textbf{package it.unibo.smol.view})
-    \item Implementazione del Menu di gioco nella classe MenuState (\textbf{package it.unibo.smol.view})
-    \item 
+    \item Progettazione dell'utilizzo delle finestre con \emph{Window} e \emph{WindowState} con cui verranno renderizzate tutti i tipi di finestre come Menu, Gioco e Game Over (\textbf{package it.unibo.smol.view});
+    \item Implementazione del Menu di gioco nella classe \emph{MenuState} (\textbf{package it.unibo.smol.view});
+    \item Implementazione del GameOver (fine gioco) nella classe \emph{GameOverWinState} (\textbf{package it.unibo.smol.view});
+    \item Progettazione del Mondo di gioco ovvero del contenitore di tutte le entità, degli input e dello score andando a gestire alcune loro funzionalità in \emph{WorldImpl} (\textbf{package it.unibo.smol.model});
+    \item Progettazione della barra della vita del player in \emph{HealthBarTankImpl} (\textbf{package it.unibo.smol.view}).
+\end{itemize}
+Ho inoltre contribuito a:
+\begin{itemize}
+    \item \emph{PlayerInputComponent} (\textbf{package it.unibo.smol.controller});
+    \item \emph{WeaponInputComponent} (\textbf{package it.unibo.smol.controller});
+    \item \emph{GameViewState} andando a gestire la barra della vita anche li (\textbf{package it.unibo.smol.view});
+    \item \emph{GameEngine} aggiungendo le skins (che in questo caso sono intese come diversi tipi di grafica) al gioco: vettoriale e pixelata per ora (\textbf{package it.unibo.smol.core}) 
 \end{itemize}
 
 %NOTE_DI_SVILUPPO
 \section{Note di sviluppo}
-
+Siamo partiti inizialmente con un'attenta analisi del dominio del gioco e di cosa potesse essere aggiunto, cercando di rendere il gioco adeguatamente estendibile.
+Dunque è stato fatto un UML generale per avere in mente il funzionamento del gioco e sono state definite tutte le principali interfacce.
+Invece per quanto riguarda il workflow è stata adottata la metodologia di DVCS semplice, spiegata a lezione, con pull e push.
 \subsection*{Ettore Farinelli}
 roba di Ettore
 \subsection*{Marco Galeri}
@@ -132,7 +177,14 @@ roba di Marco
 \subsection*{Giovanni Paradisi}
 roba di Giovanni
 \subsection*{Mounir Samite}
-roba di Mounir
+\subsubsection*{Utilizzo di Stream per gestione delle entità}
+\begin{itemize}
+    \item Prendere le talpe dalla lista di entità: \url{https://github.com/TheDarkRuler/OOP22-SMOL/blob/dac2df26a7ed60c955c6ea339cb908958a450955/src/main/java/it/unibo/smol/model/impl/WorldImpl.java#L49-L55}
+    \item Prendere le piante dalla lista di entità: \url{https://github.com/TheDarkRuler/OOP22-SMOL/blob/dac2df26a7ed60c955c6ea339cb908958a450955/src/main/java/it/unibo/smol/model/impl/WorldImpl.java#L63-L69}
+    \item Rileva il player dalla lista di entità: \url{https://github.com/TheDarkRuler/OOP22-SMOL/blob/dac2df26a7ed60c955c6ea339cb908958a450955/src/main/java/it/unibo/smol/model/impl/WorldImpl.java#L56-L62}
+\end{itemize}
+
+
 
 %------------------------------COMMENTI_FINALI------------------------------
 \chapter{Commenti finali}
@@ -156,9 +208,11 @@ roba di Mounir
 \textbf{opzionale}
 
 
+
 \appendix
 
 %------------------------------GUIDA------------------------------
+
 \chapter{Guida utente}
 
 

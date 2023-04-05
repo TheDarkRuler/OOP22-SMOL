@@ -9,10 +9,12 @@
 *.pdf
 *.bbl
 *.blg
+*.pdf
 bin/
 *.eps
 *.kate-swp
 *.dvi
+*report.pdf
 *.fdb_latexmk
 *.fls
 */report.pdf
