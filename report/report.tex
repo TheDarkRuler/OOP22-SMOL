@@ -180,7 +180,7 @@ logic, la cui alterazione od espansione inevitabilmente impatta il controller de
 \subsubsection{Creazione AI talpe}
 \begin{figure}[H]
 \centering{}
-\includegraphics[scale = 0.4]{img/EnemyInputs.PNG}
+\includegraphics[scale = 0.5]{img/EnemyInputs.PNG}
 \caption{Schema UML rappresentante lo schema di ereditarietà della classe EnemyInput.}
 \end{figure}
 
@@ -189,7 +189,10 @@ logic, la cui alterazione od espansione inevitabilmente impatta il controller de
     pseudo-casuale e che sia adattabile a 4 diversi tipi di entità. Inoltre essa deve effettivamente muoversi nella mappa 
     in maniera uniforme.
 \paragraph{Soluzione}
-    
+    Per creare un tipo di intelligenza artificiale che stimoli il più possibile il giocatore con movimenti casuali e variabili 
+    ho deciso di dare alle entità nemiche un tipo di movimento che divida la mappa di gioco in quattro quadranti e casualmente 
+    scelga uno dei quadranti dove, ancora una volta casualmente scelga una posizione in esso non occupata da altre entità, 
+    così che la posizione futura di una talpa sia prevedibile il meno possibile. 
 \subsection*{Marco Galeri}
 
 \subsubsection{Gestione delle Entità}
