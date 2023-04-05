@@ -24,7 +24,7 @@ class WorldTest {
         assertTrue(entities.isEmpty());
         final var plants = world.getLifePlants();
         //Check if the map of plants is empty at the start
-        assertEquals(0, plants.size());  
+        assertEquals(0, plants.size());
     }
 
     @Test

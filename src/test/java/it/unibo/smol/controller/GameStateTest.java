@@ -17,16 +17,19 @@ import it.unibo.smol.model.Type;
 import it.unibo.smol.model.api.World;
 import it.unibo.smol.model.impl.WorldImpl;
 
+/**
+ * Test for game state.
+ */
 public class GameStateTest {
-    
+
     @Test
-    public void testInitialization() {
+    void testInitialization() {
         final World w = new WorldImpl();
-        final var KeyInputs = Optional.of(new KeyInputs());
-        w.setInputs(KeyInputs, Optional.of(new MouseInputs(KeyInputs)));
+        final var keyInputs = Optional.of(new KeyInputs());
+        w.setInputs(keyInputs, Optional.of(new MouseInputs(keyInputs)));
         final GameState gs = new GameStateImpl(w);
 
-        gs.initGame();        
+        gs.initGame();
         assertNotNull(gs.getWorld());
         assertNotNull(gs.getEntityFactory());
         assertFalse(gs.getWorld().orElseThrow().getEntities().isEmpty());
@@ -38,7 +41,7 @@ public class GameStateTest {
         assertTrue(gs.getWorld().orElseThrow().getEntities().stream()
             .filter(x -> x.getType() == Type.WALL)
             .toList().size() == 4);
-        
+
         assertTrue(gs.getWorld().orElseThrow().getEntities().stream()
             .filter(x -> x.getType() == Type.HEALTH)
             .toList().size() == Constant.NUM_PLANTS);
