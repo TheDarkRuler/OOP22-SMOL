@@ -55,13 +55,15 @@
             <VBox  id="vboxcenter" alignment="TOP_CENTER">
                 <children>
                     <Text>HIT:</Text>
-                    <Text>Move the hammer sight with your mouse and left click to hit</Text>
+                    <Text>Move the hammer sight with your mouse</Text> 
+                    <Text>and left click to hit</Text>
                     <ImageView id="target">
                         <image>
                             <Image url="images/pixel_moles/weapon_target.png"/>
                         </image>
                     </ImageView>
-                    <Text id="title">Keep it pressed to expand the range of the hammer</Text>
+                    <Text>Keep it pressed to expand </Text>
+                    <Text>the range of the hammer</Text>
                     <ImageView id="target1">
                         <image>
                             <Image url="images/common/instructions_sight1.png"/>
