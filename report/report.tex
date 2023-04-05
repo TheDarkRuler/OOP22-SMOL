@@ -140,7 +140,7 @@ logic, la cui alterazione od espansione inevitabilmente impatta il controller de
     Ogni input inserito da tastiera viene ricevuto e passato alla classe \emph{KeyInputs} che lo filtra e in base al tipo  
     inserisce una \emph{Direction} all'interno di una coda che verrà successivamente svuotata un elemento alla volta 
     dall'\emph{InputComponent} (in questo caso dal \emph{PlayerInputComponent}) ricevendo così le direzioni che verranno 
-    applicate all'entità stessa pemrettendole di muoversi nella mappa di gioco, Come da figura\ref{img:PlayerMovement}.
+    applicate all'entità stessa permettendole di muoversi nella mappa di gioco, Come da figura\ref{img:PlayerMovement}.
 \begin{figure}[H]
 \centering{}
 \includegraphics[scale = 0.5]{img/PlayerMovement.PNG}
@@ -191,7 +191,21 @@ logic, la cui alterazione od espansione inevitabilmente impatta il controller de
     Per creare un tipo di intelligenza artificiale che stimoli il più possibile il giocatore con movimenti casuali e variabili 
     ho deciso di dare alle entità nemiche un tipo di movimento che divida la mappa di gioco in quattro quadranti e casualmente 
     scelga uno dei quadranti dove, ancora una volta casualmente scelga una posizione in esso non occupata da altre entità, 
-    così che la posizione futura di una talpa sia prevedibile il meno possibile. 
+    così che la posizione futura di una talpa sia prevedibile il meno possibile. Per il problema del movimento uniforme 
+    della talpa ho deciso di effetuare dei calcoli per trovare il giusto passo che essa deve fare per muoversi 
+    nell'asse delle ascisse e in quello delle ordinate \footnote{\url{https://github.com/TheDarkRuler/OOP22-SMOL/blob/3d89bb7d9ef1c36e091a01eed47fa5c9fcbe6486/src/main/java/it/unibo/smol/controller/input/EnemyMoves.java#L68-L70}}
+    che le viene applicato dall'\emph{InputComponent} attraverso l'\emph{Entity} permettendole di modificare a mano a mano la sua posizione.
+    Infine per la creazione degli input inizialmente ho creato una classe che veniva estesa da altre classi che definivano 
+    ognuno un tipo di talpa, in seguito rianalizzando il codice, ho notato di poter attuare il \emph{Factory Pattern}, dando così 
+    la possibilità di creare i 4 tipi di input attraverso una sola classe rendendo più comprensibile e intuitiva la creazione 
+    di input nella \emph{EntityFactory}, inoltre facilitando la possibile implementazione futura di un nuvo tipo di nemico.
+
+\subsubsection{Gestione delle collisioni}
+\begin{figure}[H]
+\centering{}
+\includegraphics[scale = 0.5]{img/HitBox.PNG}
+\caption{Schema UML rappresentante l'utilizzo del \emph{Visitor Pattern} per il controllo delle collisioni tra diverse forme.}
+\end{figure}
 \subsection*{Marco Galeri}
 
 \subsubsection{Gestione delle Entità}
