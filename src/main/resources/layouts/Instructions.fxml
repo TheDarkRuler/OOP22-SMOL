@@ -82,31 +82,31 @@
                     <children>
                         <Text>ENEMIES:</Text>
                         <Text>Basic mole</Text>
-                        <ImageView>
+                        <ImageView id="basicmole">
                             <image>
                                 <Image url="images/pixel_moles/mole1.gif"/>
                             </image>
                         </ImageView>
                         <Text>Helmet mole (takes two hit to kill)</Text>
-                        <ImageView>
+                        <ImageView id="hmole">
                             <image>
                                 <Image url="images/pixel_moles/Helmet_mole.gif"/>
                             </image>
                         </ImageView>
                         <Text>Angry mole (move faster)</Text>
-                        <ImageView>
+                        <ImageView id="amole">
                             <image>
                                 <Image url="images/pixel_moles/Angry_mole.gif"/>
                             </image>
                         </ImageView>
                         <Text>Bomb mole (stuns the player)</Text>
-                        <ImageView>
+                        <ImageView id="bmole">
                             <image>
                                 <Image url="images/pixel_moles/Bomb_mole.gif"/>
                             </image>
                         </ImageView>
                         <Text>Each mole can not be hitted when underground</Text>
-                        <ImageView>
+                        <ImageView id="ground">
                             <image>
                                 <Image url="images/pixel_moles/Ground.gif"/>
                             </image>
@@ -121,14 +121,14 @@
             <children>
                 <Text>HEALTH:</Text>
                 <Text>Defend the plants from moles</Text>
-                <ImageView>
+                <ImageView id="normalplants">
                     <image>
                         <Image url="images/pixel_moles/Life_plants.png"/>
                     </image>
                 </ImageView>
                 <Text>Moles eat the plants when they are on them</Text>
                 <Text>(also the player does damage)</Text>
-                <ImageView>
+                <ImageView id="choppedplants">
                     <image>
                         <Image url="images/pixel_moles/Life_plants_chopped.png"/>
                     </image>

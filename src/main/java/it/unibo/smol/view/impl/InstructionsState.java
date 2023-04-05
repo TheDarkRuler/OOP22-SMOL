@@ -71,18 +71,29 @@ public final class InstructionsState implements WindowState {
         final ImageView target1 = (ImageView) scene.lookup("#target1");
         final ImageView target2 = (ImageView) scene.lookup("#target2");
         final ImageView healthBar = (ImageView) scene.lookup("#health");
-        final List<ImageView> list = new ArrayList<>(List.of(
+        final List<ImageView> imagesList = new ArrayList<>(List.of(
                                             (ImageView) scene.lookup("#WasdImage"),
                                             (ImageView) scene.lookup("#waSdImage"),
                                             (ImageView) scene.lookup("#wAsdImage"),
                                             (ImageView) scene.lookup("#wasDImage"),
-                                            (ImageView) scene.lookup("#target")));
+                                            (ImageView) scene.lookup("#target"),
+                                            (ImageView) scene.lookup("#normalplants"),
+                                            (ImageView) scene.lookup("#choppedplants")));
+        final List<ImageView> enemiesList = new ArrayList<>(List.of(
+                                            (ImageView) scene.lookup("#basicmole"),
+                                            (ImageView) scene.lookup("#hmole"),
+                                            (ImageView) scene.lookup("#amole"),
+                                            (ImageView) scene.lookup("#bmole"),
+                                            (ImageView) scene.lookup("#ground")));
         /*
          * Set fields.
          */
-        vboxMovement.setPadding(new Insets(10, 10 * GameMap.SCREEN_PROP_X, 10, 100 * GameMap.SCREEN_PROP_X));
-        vboxEnemies.setPadding(new Insets(10, GameMap.HEIGHT / 2  * GameMap.SCREEN_PROP_X, 10, 10 * GameMap.SCREEN_PROP_X));
-        vboxLife.setPadding(new Insets(10, GameMap.HEIGHT / 2 * GameMap.SCREEN_PROP_X, 10, 10 * GameMap.SCREEN_PROP_X));
+        vboxMovement.setPadding(new Insets(10 * GameMap.SCREEN_PROP_Y, 10 * GameMap.SCREEN_PROP_X,
+                                        10 * GameMap.SCREEN_PROP_Y, 100 * GameMap.SCREEN_PROP_X));
+        vboxEnemies.setPadding(new Insets(10 * GameMap.SCREEN_PROP_Y, GameMap.HEIGHT / 2  * GameMap.SCREEN_PROP_X,
+                                        10 * GameMap.SCREEN_PROP_Y, 10 * GameMap.SCREEN_PROP_X));
+        vboxLife.setPadding(new Insets(10 * GameMap.SCREEN_PROP_Y, GameMap.HEIGHT / 2 * GameMap.SCREEN_PROP_X,
+                                        10 * GameMap.SCREEN_PROP_Y, 10 * GameMap.SCREEN_PROP_X));
 
         borderPaneLayoutSize(borderPane);
         vBoxLayoutSize(vboxMovement);
@@ -93,8 +104,11 @@ public final class InstructionsState implements WindowState {
         hBoxLayoutSize(boxButton);
 
         //resize images
-        list.stream().forEach(l -> l.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT));
-        list.stream().forEach(l -> l.setFitWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
+        imagesList.stream().forEach(l -> l.setFitHeight(GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_Y));
+        imagesList.stream().forEach(l -> l.setFitWidth(GameMap.BORDER_HEIGHT * GameMap.SCREEN_PROP_X));
+
+        enemiesList.stream().forEach(l -> l.setFitHeight(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_Y / 2));
+        enemiesList.stream().forEach(l -> l.setFitWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X / 2));
 
         target1.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT);
         target1.setFitWidth(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH * 2);
@@ -148,6 +162,10 @@ public final class InstructionsState implements WindowState {
         vbox.autosize();
     }
 
+    /**
+     * Set the size of the BorderPane with proportion.
+     * @param pane
+     */
     private void borderPaneLayoutSize(final BorderPane pane) {
         pane.setPrefSize(GameMap.MAP_WIDTH * GameMap.SCREEN_PROP_X / 2, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y);
         pane.setMaxSize(GameMap.MAP_WIDTH * GameMap.SCREEN_PROP_X / 2, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y);
