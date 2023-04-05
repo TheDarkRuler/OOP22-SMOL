@@ -76,7 +76,7 @@ che sarà possibilmente implementata in futuro.
 
 \begin{figure}[H]
 \centering{}
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{img/AnalysisUML.png}
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{img/AnalysisUML.png}
 \caption{Schema UML dell'analisi del problema, con rappresentate le entità principali ed i rapporti fra loro}
 \label{img:analysisScheme}
 \end{figure}
@@ -87,24 +87,24 @@ che sarà possibilmente implementata in futuro.
 %ARCHITETTURA
 \section{Architettura}
 
-L'architettura di GLaDOS segue il pattern architetturale MVC.
-%
-Più nello specifico, a livello architetturale, si è scelto di utilizzare MVC in forma ``ECB'', ossia ``entity-control-boundary''\footnote{
-Si fa presente che il pattern ECB effettivamente esiste in letteratura come ``istanza'' di MVC, e chi volesse può utilizzarlo come reificazione di MVC.
-}.
-%
-GLaDOS implementa l'interfaccia AI, ed è il controller del sistema.
-Essendo una intelligenza artificiale, è una classe attiva.
-%
-GLaDOS accetta la registrazione di Input ed Output, che fanno parte della ``view'' di MVC, e sono il ``boundary'' di ECB.
-Gli Input rappresentano delle nuove informazioni che vengono fornite all'IA, ad esempio delle modifiche nel valore di un sensore, oppure un comando da parte dell'operatore.
-Questi input infatti forniscono eventi.
-Ottenere un evento è un'operazione bloccante: chi la esegue resta in attesa di un effettivo evento.
-Di fatto, quindi, GLaDOS si configura come entità \textit{reattiva}.
-Ogni volta che c'è un cambio alla situazione del soggetto, GLaDOS notifica i suoi Output,
-informandoli su quale sia la situazione corrente.
-%
-Conseguentemente, GLaDOS è un ``observable'' per Output.
+%L'architettura di GLaDOS segue il pattern architetturale MVC.
+%%
+%Più nello specifico, a livello architetturale, si è scelto di utilizzare MVC in forma ``ECB'', ossia ``entity-control-boundary''\footnote{
+%Si fa presente che il pattern ECB effettivamente esiste in letteratura come ``istanza'' di MVC, e chi volesse può utilizzarlo come reificazione di MVC.
+%}.
+%%
+%GLaDOS implementa l'interfaccia AI, ed è il controller del sistema.
+%Essendo una intelligenza artificiale, è una classe attiva.
+%%
+%GLaDOS accetta la registrazione di Input ed Output, che fanno parte della ``view'' di MVC, e sono il ``boundary'' di ECB.
+%Gli Input rappresentano delle nuove informazioni che vengono fornite all'IA, ad esempio delle modifiche nel valore di un sensore, oppure un comando da parte dell'operatore.
+%Questi input infatti forniscono eventi.
+%Ottenere un evento è un'operazione bloccante: chi la esegue resta in attesa di un effettivo evento.
+%Di fatto, quindi, GLaDOS si configura come entità \textit{reattiva}.
+%Ogni volta che c'è un cambio alla situazione del soggetto, GLaDOS notifica i suoi Output,
+%informandoli su quale sia la situazione corrente.
+%%
+%Conseguentemente, GLaDOS è un ``observable'' per Output.
 
 \begin{figure}[h]
 \centering{}
@@ -113,14 +113,14 @@ Conseguentemente, GLaDOS è un ``observable'' per Output.
 \label{img:goodarch}
 \end{figure}
 
-Con questa architettura, possono essere aggiunti un numero arbitrario di input ed output
-all'intelligenza artificiale.
-%
-Ovviamente, mentre l'aggiunta di output è semplice e non richiede alcuna modifica all'IA, la
-presenza di nuovi tipi di evento richiede invece in potenza aggiunte o rifiniture a GLaDOS.
-%
-Questo è dovuto al fatto che nuovi Input rappresentano di fatto nuovi elementi della business
-logic, la cui alterazione od espansione inevitabilmente impatta il controller del progetto.
+%Con questa architettura, possono essere aggiunti un numero arbitrario di input ed output
+%all'intelligenza artificiale.
+%%
+%Ovviamente, mentre l'aggiunta di output è semplice e non richiede alcuna modifica all'IA, la
+%presenza di nuovi tipi di evento richiede invece in potenza aggiunte o rifiniture a GLaDOS.
+%%
+%Questo è dovuto al fatto che nuovi Input rappresentano di fatto nuovi elementi della business
+%logic, la cui alterazione od espansione inevitabilmente impatta il controller del progetto.
 
 %In \Cref{img:goodarch} è esemplificato il diagramma UML architetturale.
 
@@ -301,7 +301,10 @@ di ogni stato all'interno della sua classe. In questo modo, si può garantire ch
 
 %METODOLOGIA_DI_LAVORO
 \section{Metodologia di lavoro}
-un po di roba sul DVCS
+
+Siamo partiti inizialmente con un'attenta analisi del dominio del gioco e di cosa potesse essere aggiunto, cercando di rendere il gioco adeguatamente estendibile.
+Dunque è stato fatto un UML generale per avere in mente il funzionamento del gioco e sono state definite tutte le principali interfacce.
+Invece per quanto riguarda il workflow è stata adottata la metodologia di DVCS semplice, spiegata a lezione, con pull e push.
 
 \subsection*{Ettore Farinelli}
 roba di Ettore
@@ -343,9 +346,7 @@ Ho inoltre contribuito a:
 
 %NOTE_DI_SVILUPPO
 \section{Note di sviluppo}
-Siamo partiti inizialmente con un'attenta analisi del dominio del gioco e di cosa potesse essere aggiunto, cercando di rendere il gioco adeguatamente estendibile.
-Dunque è stato fatto un UML generale per avere in mente il funzionamento del gioco e sono state definite tutte le principali interfacce.
-Invece per quanto riguarda il workflow è stata adottata la metodologia di DVCS semplice, spiegata a lezione, con pull e push.
+
 \subsection*{Ettore Farinelli}
 roba di Ettore
 \subsection*{Marco Galeri}
@@ -383,14 +384,15 @@ roba di Giovanni
 %------------------------------COMMENTI_FINALI------------------------------
 \chapter{Commenti finali}
 
-un po de roba
-
 %AUTOVALUTAZIONE_E_LAVORI_FUTURI
 \section{Autovalutazione e lavori futuri}
 \subsection*{Ettore Farinelli}
 roba di Ettore
 \subsection*{Marco Galeri}
-Ho apprezzato molto la possibilità di realizzare un simile progetto, essendo la prima volta in cui ci cimentavamo in un progetto di questa portata le difficoltà non sono mancate ma siamo riusciti comunque a consegnare un programma di cui mi ritengo abbastanza soddisfatto. Questo progetto mi ha fatto realizzare quanto non sia scontato un buon lavoro di squadra. Comunque nonostante una partenza poco cooperativa nella fase di analisi e progettazione siamo riusciti a collaborare in modo efficiente nelle fasi successive. Detto ciò penso che il progetto abbia del potenziale ancora non espresso e spero di riuscire a migliorare in futuro.
+Ho apprezzato molto la possibilità di realizzare un simile progetto, essendo la prima volta in cui ci cimentavamo in un progetto di questa portata le difficoltà non sono mancate ma siamo riusciti comunque a consegnare un programma di cui mi ritengo abbastanza soddisfatto.
+ Questo progetto mi ha fatto realizzare quanto non sia scontato un buon lavoro di squadra.
+ Comunque nonostante una partenza poco cooperativa nella fase di analisi e progettazione siamo riusciti a collaborare in modo efficiente nelle fasi successive.
+ Detto ciò penso che il progetto abbia del potenziale e spero di riuscire a migliorare in futuro.
 \subsection*{Giovanni Paradisi}
 roba di Giovanni
 \subsection*{Mounir Samite}
@@ -401,14 +403,7 @@ Detto ciò, riconosco che una fase analisi e progettazione non sufficientemente 
 Nonostante questi problemi, sono soddisfatto del risultato finale del progetto. Abbiamo creato un software che superava le nostre aspettative. Tuttavia, credo che il processo sarebbe stato ancora più efficiente e produttivo se avessimo investito più tempo nella fase di analisi e progettazione.
 \\
 In futuro, cercherò di fare in modo che questi aspetti siano considerati in modo più approfondito fin dall'inizio del processo di sviluppo del software, in modo da massimizzare l'efficienza del nostro lavoro di squadra e ottenere risultati ancora migliori.
-%DIFFICOLTA(OPZIONALE)
-\section{Difficoltà incontrate e commenti per i docenti}
 
-\textbf{opzionale}
-
-
-
-\appendix
 
 %------------------------------GUIDA------------------------------
 
