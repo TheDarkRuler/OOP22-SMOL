@@ -138,10 +138,10 @@ In \Cref{img:goodarch} è esemplificato il diagramma UML architetturale.
 \paragraph{Problema}
     Un input inserito da tastiera deve essere elaborato e immagazzinato cosi da permettere al player di muoversi.
 \paragraph{Soluzione}
-    Ogni input inserito da tastiera viene ricevuto e in base al suo tipo viene inserita una \emph{Direction} all'interno di 
-    una coda che verrà successivamente svuotata un elemento alla volta dall'\emph{InputComponent} 
-    (in questo caso dal \emph{PlayerInputComponent}) ricevendo così le direzioni che verranno applicate all'entità 
-    stessa pemrettendole di muoversi nella mappa di gioco, Come da \Cref{img:PlayerMovement}.
+    Ogni input inserito da tastiera viene ricevuto e passato alla classe \emph{KeyInputs} che lo filtra e in base al tipo  
+    inserisce una \emph{Direction} all'interno di una coda che verrà successivamente svuotata un elemento alla volta 
+    dall'\emph{InputComponent} (in questo caso dal \emph{PlayerInputComponent}) ricevendo così le direzioni che verranno 
+    applicate all'entità stessa pemrettendole di muoversi nella mappa di gioco, Come da \Cref{img:PlayerMovement}.
 \begin{figure}[h]
 \centering{}
 \includegraphics[scale = 0.5]{img/PlayerMovement.PNG}
