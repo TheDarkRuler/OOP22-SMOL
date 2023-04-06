@@ -1,12 +1,15 @@
 package it.unibo.smol.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.smol.common.Constant;
@@ -22,40 +25,56 @@ import it.unibo.smol.model.impl.WorldImpl;
 /**
  * Test for game state.
  */
-public class GameStateTest {
+class GameStateTest {
+
+    final private World w = new WorldImpl();
+    final private Optional<KeyInputs> keyInputs = Optional.of(new KeyInputs());
+    private GameState gs;
+
+    @BeforeEach
+    public void initGameState() {
+       this.w.setInputs(keyInputs, Optional.of(new MouseInputs(keyInputs)));
+       this.gs = new GameStateImpl(this.w);
+    }
 
     @Test
     void testInitialization() {
-        final World w = new WorldImpl();
-        final var keyInputs = Optional.of(new KeyInputs());
-        w.setInputs(keyInputs, Optional.of(new MouseInputs(keyInputs)));
-        final GameState gs = new GameStateImpl(w);
+        this.gs.initGame();
+        assertNotNull(this.gs.getWorld());
+        assertNotNull(this.gs.getEntityFactory());
+        assertFalse(this.gs.getWorld().orElseThrow().getEntities().isEmpty());
 
-        gs.initGame();
-        assertNotNull(gs.getWorld());
-        assertNotNull(gs.getEntityFactory());
-        assertFalse(gs.getWorld().orElseThrow().getEntities().isEmpty());
-        assertNotNull(gs.getWorld().orElseThrow().getPlayer());
-        assertTrue(gs.getWorld().orElseThrow().getEntities().stream()
+        assertNotNull(this.gs.getWorld().orElseThrow().getPlayer());
+        //check if the weapon entity is present at the start
+        assertTrue(this.gs.getWorld().orElseThrow().getEntities().stream()
             .filter(x -> x.getType() == Type.WEAPON)
             .findAny().isPresent());
-
+        //check if the four walls are present at the start
         assertTrue(gs.getWorld().orElseThrow().getEntities().stream()
             .filter(x -> x.getType() == Type.WALL)
             .toList().size() == 4);
-
+        //check if the plants are present at the start
         assertTrue(gs.getWorld().orElseThrow().getEntities().stream()
             .filter(x -> x.getType() == Type.HEALTH)
             .toList().size() == Constant.NUM_PLANTS);
     }
 
     @Test
-    void testGameOver() {
-        final World w = new WorldImpl();
-        final var keyInputs = Optional.of(new KeyInputs());
-        w.setInputs(keyInputs, Optional.of(new MouseInputs(keyInputs)));
-        final GameState gs = new GameStateImpl(w);
+    void testScore() {
+        final var w2 = gs.getWorld().orElseThrow();
+        final int score = gs.getScore();
 
+        assertEquals(0, score);
+        //increase
+        w2.incScore(Constant.ENEMY_SCORE);
+        assertNotEquals(score, gs.getScore());
+        //decrease
+        w2.incScore(-Constant.ENEMY_SCORE);
+        assertEquals(score, gs.getScore());
+    }
+
+    @Test
+    void testGameOver() {
         var w2 = gs.getWorld().orElseThrow();
         List<Entity> plantList = w2.getLifePlants();
         plantList.forEach(x -> w2.remove(x));
