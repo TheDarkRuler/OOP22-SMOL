@@ -299,6 +299,28 @@ di ogni stato all'interno della sua classe. In questo modo, si può garantire ch
 %TESTING
 \section{Testing automatizzato}
 
+Per effettuare i test abbiamo utilizzato la libreria JUnit 5.9.1
+\\I test automatizzati che abbiamo effettuato sono:
+\begin{itemize}
+    \item \textbf{HitBoxTest}: in questa classe si testano le collisioni tra le diverse forme presenti nel gioco assicurandosi il corretto funzionamento.
+    
+    \item \textbf{EnemyInputTest}:
+    
+    \item \textbf{KeyInputsTest}:
+    
+    \item \textbf{MouseInputsTest}:
+    
+    \item \textbf{GameStateTest}: in questa classe si testa il sistema di punteggio, che dovrà aumentare e diminuire come previsto senza mai scendere sotto lo zero. Inoltre verrano testate l'inizializzazione del gioco, assicurandosi della creazione dei corretti elementi e la condizione di Game Over.
+    
+    \item \textbf{EntityTest}: in questa classe si controlla la corretta creazione delle entità controllando la presenza di componenti specifici per ogni tipologia.
+    
+    \item \textbf{HealthTest}: in questa classe vengono testate le funzionalità di aumento o perdita di vita e la condizione di morte delle Entità assicurandosi il corretto funzionamento.
+    
+    \item \textbf{PhysicsTest}: in questa classe vengono testate le interazioni tra le diverse entità assicurandosi il corretto funzionamento degli eventi scatenati da esse.
+    
+    \item \textbf{WorldTest}: in questa classe si controlla la corretta inizializzazione del mondo e si testano le funzioni di manipolazione della lista di Entità assicurandosi il corretto funzionamento.
+\end{itemize}
+
 %METODOLOGIA_DI_LAVORO
 \section{Metodologia di lavoro}
 
@@ -312,12 +334,12 @@ roba di Ettore
 
 Mi sono occupato di:
 \begin{itemize}
-    \item \emph{GameEngine} e \emph{GameLoop} (package smol.core)
-    \item \emph{Entity} ed \emph{EntityFactory} (package smol.model)
-    \item \emph{PhysicsComponent} e le sue sottoclassi (package smol.model)
-    \item \emph{HealthComponent} (package smol.model.impl)
-    \item \emph{InputComponent} (package smol.controller)
-    \item rendere la grafica proporzionale allo schermo (package smol.view.GameMap)
+    \item \emph{GameEngine} e \emph{GameLoop} (\textbf{package smol.core})
+    \item \emph{Entity} ed \emph{EntityFactory} (\textbf{package smol.model})
+    \item \emph{PhysicsComponent} e le sue sottoclassi (\textbf{package smol.model})
+    \item \emph{HealthComponent} (\textbf{package smol.model.impl})
+    \item \emph{InputComponent} (\textbf{package smol.controller})
+    \item rendere la grafica proporzionale allo schermo (\textbf{package smol.view.GameMap})
 \end{itemize}
 
 Ho inoltre contribuito a:
