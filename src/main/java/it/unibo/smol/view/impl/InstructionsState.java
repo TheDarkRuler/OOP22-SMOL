@@ -33,6 +33,9 @@ import javafx.stage.Stage;
 public final class InstructionsState implements WindowState {
 
     private static Logger logger = Logger.getLogger("instructionsLogger");
+    private static final int TITLE_SIZE = 50;
+    private static final int TEXT_SIZE = 20;
+    private static final int SPACING = 25;
 
     /**
      * {@inheritDoc}
@@ -71,6 +74,28 @@ public final class InstructionsState implements WindowState {
         final ImageView target1 = (ImageView) scene.lookup("#target1");
         final ImageView target2 = (ImageView) scene.lookup("#target2");
         final ImageView healthBar = (ImageView) scene.lookup("#health");
+        final List<Text> textList = new ArrayList<>(List.of(
+                                            (Text) scene.lookup("#movetitle"),
+                                            (Text) scene.lookup("#up"),
+                                            (Text) scene.lookup("#down"),
+                                            (Text) scene.lookup("#left"),
+                                            (Text) scene.lookup("#right"),
+                                            (Text) scene.lookup("#hititle"),
+                                            (Text) scene.lookup("#hit1line"),
+                                            (Text) scene.lookup("#hit2line"),
+                                            (Text) scene.lookup("#range1"),
+                                            (Text) scene.lookup("#range2"),
+                                            (Text) scene.lookup("#enemiestitle"),
+                                            (Text) scene.lookup("#tmole"),
+                                            (Text) scene.lookup("#thmole"),
+                                            (Text) scene.lookup("#tamole"),
+                                            (Text) scene.lookup("#tbmole"),
+                                            (Text) scene.lookup("#tground"),
+                                            (Text) scene.lookup("#healthtitle"),
+                                            (Text) scene.lookup("#tplants"),
+                                            (Text) scene.lookup("#thealth1"),
+                                            (Text) scene.lookup("#thealth2"),
+                                            (Text) scene.lookup("#tbar")));
         final List<ImageView> imagesList = new ArrayList<>(List.of(
                                             (ImageView) scene.lookup("#WasdImage"),
                                             (ImageView) scene.lookup("#waSdImage"),
@@ -89,7 +114,7 @@ public final class InstructionsState implements WindowState {
          * Set fields.
          */
         vboxMovement.setPadding(new Insets(10 * GameMap.SCREEN_PROP_Y, 10 * GameMap.SCREEN_PROP_X,
-                                        10 * GameMap.SCREEN_PROP_Y, 100 * GameMap.SCREEN_PROP_X));
+                                        10 * GameMap.SCREEN_PROP_Y, GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X));
         vboxEnemies.setPadding(new Insets(10 * GameMap.SCREEN_PROP_Y, GameMap.HEIGHT / 2  * GameMap.SCREEN_PROP_X,
                                         10 * GameMap.SCREEN_PROP_Y, 10 * GameMap.SCREEN_PROP_X));
         vboxLife.setPadding(new Insets(10 * GameMap.SCREEN_PROP_Y, GameMap.HEIGHT / 2 * GameMap.SCREEN_PROP_X,
@@ -110,15 +135,19 @@ public final class InstructionsState implements WindowState {
         enemiesList.stream().forEach(l -> l.setFitHeight(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_Y / 2));
         enemiesList.stream().forEach(l -> l.setFitWidth(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X / 2));
 
+        //images of the hammer
         target1.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT);
         target1.setFitWidth(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH * 2);
         target2.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT);
         target2.setFitWidth(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH * 3);
+        //health bar
         healthBar.setFitHeight(GameMap.SCREEN_PROP_Y * GameMap.BORDER_HEIGHT);
         healthBar.setFitWidth(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH * 3);
 
         title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR,
-                GameMap.BORDER_WIDTH / 2 * GameMap.SCREEN_PROP_X));
+                TITLE_SIZE * GameMap.SCREEN_PROP_X));
+        textList.stream().forEach(t -> t.setFont(Font.font("verdana", FontWeight.SEMI_BOLD, FontPosture.REGULAR,
+                TEXT_SIZE * GameMap.SCREEN_PROP_X)));
         // buttons behaviour
         menu.setOnMouseClicked(e -> {
             new WindowImpl().launch(stage);
@@ -155,7 +184,7 @@ public final class InstructionsState implements WindowState {
      * @param vbox
      */
     private void vBoxLayoutSize(final VBox vbox) {
-        vbox.setSpacing(GameMap.SCREEN_PROP_X * GameMap.BORDER_WIDTH / 4);
+        vbox.setSpacing(GameMap.SCREEN_PROP_X * SPACING);
         vbox.setPrefSize(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y);
         vbox.setMaxSize(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y);
         vbox.setMinSize(GameMap.BORDER_WIDTH * GameMap.SCREEN_PROP_X, GameMap.MAP_HEIGHT * GameMap.SCREEN_PROP_Y);
