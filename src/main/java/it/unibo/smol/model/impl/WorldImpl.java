@@ -114,7 +114,7 @@ public class WorldImpl implements World {
      */
     @Override
     public void incScore(final int quantity) {
-        if (this.score + quantity > 0) {
+        if (this.score + quantity >= 0) {
             this.score = this.score + quantity;
         }
     } 
