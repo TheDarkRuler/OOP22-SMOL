@@ -34,13 +34,14 @@ public abstract class PhysicsComponent {
     public void checkCollision() {
         if (this.entity != null) {
             this.entity.getWorld().orElseThrow().getEntities().stream()
-            .map(x -> x.getPhysicsComp())
-            .filter(x -> !this.equals(x.orElseThrow()))
-            .filter(x -> hitBox.isColliding(x.orElseThrow().getHitBox().orElseThrow()))
+            .filter(x -> x.getPhysicsComp().isPresent())
+            .map(x -> x.getPhysicsComp().orElseThrow())
+            .filter(x -> !this.equals(x))
+            .filter(x -> hitBox.isColliding(x.getHitBox().orElseThrow()))
             .forEach(x -> {
-                    if (this.isRigid() && x.orElseThrow().isRigid()) {
+                    if (this.isRigid() && x.isRigid()) {
                         //System.out.println("Entity "+this.entity.getType()+" has collided with "+x.entity.getType());
-                        this.collisonEvent(x.orElseThrow().getEntity().orElseThrow());
+                        this.collisonEvent(x.getEntity().orElseThrow());
                     }
                 });
         } else {
