@@ -340,8 +340,20 @@ Dunque è stato fatto un UML generale per avere in mente il funzionamento del gi
 Invece per quanto riguarda il workflow è stata adottata la metodologia di DVCS semplice, spiegata a lezione, con pull e push.
 
 \subsection*{Ettore Farinelli}
+Mi sono occupato di:
 \begin{itemize}
-    \item 
+    \item Gestione delle collisioni (\textbf{package smol.common, smol.common.hitbox}).
+    \item \emph{EnemyInput} e \emph{EnemyInputFactory} (\textbf{package smol.controller.api}).
+    \item Gestione degli input e movimento talpe (\textbf{package smol.controller.input}).
+    \item \emph{plantsCreation} (\textbf{package smol.model.impl}).
+    \item \emph{GraphicsDraw} e \emph{GameViewState} (\textbf{package smol.view.impl}).
+\end{itemize}
+
+Ho inoltre contribuito a:
+\begin{itemize}
+    \item \emph{EnemyCreation} (\textbf{package smol.model.impl}).
+    \item \emph{PhysicComponent} implementando il receiveMovement del \emph{WeaponPhysicsComponent} (\textbf{package smol.model}).
+    \item \emph{LoadImgs} aggiungendo la mappa per la scelta del pacchetto di skin (\textbf{package smol.view}).
 \end{itemize}
 \subsection*{Marco Galeri}
 
@@ -397,7 +409,16 @@ Ho inoltre contribuito a:
 \section{Note di sviluppo}
 
 \subsection*{Ettore Farinelli}
-roba di Ettore
+\subsubsection{Utilizzo di stream}
+\begin{itemize}
+    \item Scelta, di una talpa, della pianta su cui andare: 
+        \url{https://github.com/TheDarkRuler/OOP22-SMOL/blob/7c96b119ea8cc75403c5656491ac352c0466de73/src/main/java/it/unibo/smol/controller/api/EnemyInput.java#L197-L217}
+\end{itemize}
+
+\subsubsection{Utilizzo di Lambda Expressions}
+\begin{itemize}
+    \item \url{https://github.com/TheDarkRuler/OOP22-SMOL/blob/7c96b119ea8cc75403c5656491ac352c0466de73/src/main/java/it/unibo/smol/view/impl/GameViewState.java#L147}
+\end{itemize}
 \subsection*{Marco Galeri}
 
 Il GameLoop è stato realizzato ispirandosi al capitolo "GameLoop" presente in \emph{Game Programming Patterns}\footnote{\url{https://gameprogrammingpatterns.com/}} di Robert Nystrom.
