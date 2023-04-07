@@ -23,27 +23,27 @@ import javafx.geometry.Point2D;
 /**
  * Physics test for collision.
  */
-public class PhysicsTest {
-    private World w = new WorldImpl();
-    private final double x1 = 1, x2 = 3;
-    private final double y1 = 3, y2 = 3;
-    private final HitBox hb1 = new CircleHB(new Point2D(x1, y1), 5);
-    private final HitBox hb2 = new CircleHB(new Point2D(x2, y2), 5);
+class PhysicsTest {
+    private final World w = new WorldImpl();
+    private static final double X1 = 1, X2 = 3;
+    private static final double Y1 = 3, Y2 = 3;
+    private final HitBox hb1 = new CircleHB(new Point2D(X1, Y1), 5);
+    private final HitBox hb2 = new CircleHB(new Point2D(X2, Y2), 5);
 
     @Test
     void collisionEnemyPlants() {
-        Entity e = new EntityImpl(Type.HEALTH,
+        final Entity e = new EntityImpl(Type.HEALTH,
             Optional.empty(),
             Optional.of(new HealthComponent(1)),
             Optional.empty(),
             Optional.of(new LifePlantsPhysicsComponent(hb2)),
-            x2, y2, Optional.of(w));
-        Entity e2 = new EntityImpl(Type.ENEMY,
+            X2, Y2, Optional.of(w));
+        final Entity e2 = new EntityImpl(Type.ENEMY,
             Optional.empty(),
             Optional.empty(),
             Optional.empty(),
             Optional.of(new EnemyPhysicsComponent(hb1, 0)),
-            x1, y2, Optional.of(w));
+            X1, Y2, Optional.of(w));
         w.addEntity(e2);
         w.addEntity(e);
 
@@ -60,18 +60,18 @@ public class PhysicsTest {
     @Test
     void collisionPlayerPlants() {
 
-        Entity e = new EntityImpl(Type.HEALTH,
+        final Entity e = new EntityImpl(Type.HEALTH,
             Optional.empty(),
             Optional.of(new HealthComponent(1)),
             Optional.empty(),
             Optional.of(new LifePlantsPhysicsComponent(hb2)),
-            x2, y2, Optional.of(w));
-        Entity e2 = new EntityImpl(Type.PLAYER,
+            X2, Y2, Optional.of(w));
+        final Entity e2 = new EntityImpl(Type.PLAYER,
             Optional.empty(),
             Optional.empty(),
             Optional.empty(),
             Optional.of(new PlayerPhysicsComponent(hb1)),
-            x1, y2, Optional.of(w));
+            X1, Y2, Optional.of(w));
         w.addEntity(e2);
         w.addEntity(e);
 
@@ -87,18 +87,18 @@ public class PhysicsTest {
 
     @Test
     void collisionEnemyWeapon() {
-        Entity e = new EntityImpl(Type.WEAPON,
+        final Entity e = new EntityImpl(Type.WEAPON,
             Optional.empty(),
             Optional.empty(),
             Optional.empty(),
             Optional.of(new EmptyPhysicsComponent(hb2)),
-            x2, y2, Optional.of(w));
-        Entity e2 = new EntityImpl(Type.ENEMY,
+            X2, Y2, Optional.of(w));
+        final Entity e2 = new EntityImpl(Type.ENEMY,
             Optional.empty(),
             Optional.of(new HealthComponent(1)),
             Optional.empty(),
             Optional.of(new EnemyPhysicsComponent(hb1, 0)),
-            x1, y2, Optional.of(w));
+            X1, Y2, Optional.of(w));
         w.addEntity(e2);
         w.addEntity(e);
 

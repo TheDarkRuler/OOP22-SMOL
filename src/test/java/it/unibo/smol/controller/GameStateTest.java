@@ -27,8 +27,8 @@ import it.unibo.smol.model.impl.WorldImpl;
  */
 class GameStateTest {
 
-    final private World w = new WorldImpl();
-    final private Optional<KeyInputs> keyInputs = Optional.of(new KeyInputs());
+    private final World w = new WorldImpl();
+    private final Optional<KeyInputs> keyInputs = Optional.of(new KeyInputs());
     private GameState gs;
 
     @BeforeEach
@@ -50,13 +50,13 @@ class GameStateTest {
             .filter(x -> x.getType() == Type.WEAPON)
             .findAny().isPresent());
         //check if the four walls are present at the start
-        assertTrue(gs.getWorld().orElseThrow().getEntities().stream()
+        assertEquals(4, gs.getWorld().orElseThrow().getEntities().stream()
             .filter(x -> x.getType() == Type.WALL)
-            .toList().size() == 4);
+            .toList().size());
         //check if the plants are present at the start
-        assertTrue(gs.getWorld().orElseThrow().getEntities().stream()
+        assertEquals(Constant.NUM_PLANTS, gs.getWorld().orElseThrow().getEntities().stream()
             .filter(x -> x.getType() == Type.HEALTH)
-            .toList().size() == Constant.NUM_PLANTS);
+            .toList().size());
     }
 
     @Test
@@ -75,8 +75,8 @@ class GameStateTest {
 
     @Test
     void testGameOver() {
-        var w2 = gs.getWorld().orElseThrow();
-        List<Entity> plantList = w2.getLifePlants();
+        final var w2 = gs.getWorld().orElseThrow();
+        final List<Entity> plantList = w2.getLifePlants();
         plantList.forEach(x -> w2.remove(x));
 
         assertTrue(gs.isGameOver());

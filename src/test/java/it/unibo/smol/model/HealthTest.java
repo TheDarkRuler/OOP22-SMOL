@@ -11,42 +11,42 @@ import it.unibo.smol.model.impl.HealthComponent;
 /**
  * Test for Health.
  */
-public class HealthTest {
+class HealthTest {
 
-    private final int maxHealth = 10;
-    private HealthComponent health = new HealthComponent(maxHealth);
+    private static final int MAX_HEALTH = 10;
+    private final HealthComponent health = new HealthComponent(MAX_HEALTH);
 
     @Test
     void initializeHealthTest() {
-        assertEquals(maxHealth, health.getCurrentHealth()); 
+        assertEquals(MAX_HEALTH, health.getCurrentHealth()); 
         assertFalse(health.isDead()); 
     }
 
     @Test
     void decreaseHealthTest() {
         health.setHealth(-1);
-        assertNotEquals(maxHealth, health.getCurrentHealth());
-        assertEquals(maxHealth - 1, health.getCurrentHealth()); 
+        assertNotEquals(MAX_HEALTH, health.getCurrentHealth());
+        assertEquals(MAX_HEALTH - 1, health.getCurrentHealth()); 
         assertFalse(health.isDead()); 
     }
 
     @Test
     void increaseHealthTest() {
         health.setHealth(1);
-        assertNotEquals(maxHealth - 1, health.getCurrentHealth());
-        assertEquals(maxHealth, health.getCurrentHealth()); 
+        assertNotEquals(MAX_HEALTH - 1, health.getCurrentHealth());
+        assertEquals(MAX_HEALTH, health.getCurrentHealth()); 
         assertFalse(health.isDead()); 
     }
 
     @Test
     void maxHealthTest() {
     health.setHealth(1);
-        assertNotEquals(maxHealth + 1, health.getCurrentHealth());
+        assertNotEquals(MAX_HEALTH + 1, health.getCurrentHealth());
     }
 
     @Test
     void deathTest() {
-    health.setHealth(-maxHealth);
+    health.setHealth(-MAX_HEALTH);
         assertTrue(health.isDead());
     }
 }

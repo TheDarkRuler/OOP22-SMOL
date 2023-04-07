@@ -13,7 +13,7 @@ import javafx.geometry.Point2D;
 /**
  * test class for the enetities.
  */
-public class EntityTest {
+class EntityTest {
 
     private final WorldImpl world = new WorldImpl();
 
