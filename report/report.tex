@@ -86,45 +86,17 @@ che sarà possibilmente implementata in futuro.
 
 %ARCHITETTURA
 \section{Architettura}
-
-%L'architettura di GLaDOS segue il pattern architetturale MVC.
-%%
-%Più nello specifico, a livello architetturale, si è scelto di utilizzare MVC in forma ``ECB'', ossia ``entity-control-boundary''\footnote{
-%Si fa presente che il pattern ECB effettivamente esiste in letteratura come ``istanza'' di MVC, e chi volesse può utilizzarlo come reificazione di MVC.
-%}.
-%%
-%GLaDOS implementa l'interfaccia AI, ed è il controller del sistema.
-%Essendo una intelligenza artificiale, è una classe attiva.
-%%
-%GLaDOS accetta la registrazione di Input ed Output, che fanno parte della ``view'' di MVC, e sono il ``boundary'' di ECB.
-%Gli Input rappresentano delle nuove informazioni che vengono fornite all'IA, ad esempio delle modifiche nel valore di un sensore, oppure un comando da parte dell'operatore.
-%Questi input infatti forniscono eventi.
-%Ottenere un evento è un'operazione bloccante: chi la esegue resta in attesa di un effettivo evento.
-%Di fatto, quindi, GLaDOS si configura come entità \textit{reattiva}.
-%Ogni volta che c'è un cambio alla situazione del soggetto, GLaDOS notifica i suoi Output,
-%informandoli su quale sia la situazione corrente.
-%%
-%Conseguentemente, GLaDOS è un ``observable'' per Output.
+SMOL è stato progettato seguendo lo schema architetturale del \textsc{MVC} applicando però la struttura del \textsc{ECS} per la gestione 
+delle entità.
 
 \begin{figure}[h]
 \centering{}
 %\includegraphics[width=\textwidth]{img/arch}
-\caption{Schema UML architetturale di GLaDOS. L'interfaccia \texttt{GLaDOS} è il controller del sistema, mentre \texttt{Input} ed \texttt{Output} sono le interfacce che mappano la view (o, più correttamente in questo specifico esempio, il boundary). Un'eventuale interfaccia grafica interattiva dovrà implementarle entrambe.}
+\caption{Schema UML raffigurante l'architettura di SMOL.}
 \label{img:goodarch}
 \end{figure}
 
-%Con questa architettura, possono essere aggiunti un numero arbitrario di input ed output
-%all'intelligenza artificiale.
-%%
-%Ovviamente, mentre l'aggiunta di output è semplice e non richiede alcuna modifica all'IA, la
-%presenza di nuovi tipi di evento richiede invece in potenza aggiunte o rifiniture a GLaDOS.
-%%
-%Questo è dovuto al fatto che nuovi Input rappresentano di fatto nuovi elementi della business
-%logic, la cui alterazione od espansione inevitabilmente impatta il controller del progetto.
-
-%In \Cref{img:goodarch} è esemplificato il diagramma UML architetturale.
-
-%DESIGN DETTAGLIATO%DESIGN DETTAGLIATO
+%DESIGN DETTAGLIATO
 \section{Design dettagliato}
 
 \subsection*{Ettore Farinelli}
@@ -164,7 +136,7 @@ che sarà possibilmente implementata in futuro.
     sostanziale. Infatti, \emph{MouseInputs} salva direttamente la posizione del cursore
     quando viene mosso o rilasciato, che viene quindi ricevuta dall'\emph{InputComponent} e poi elaborata nel \emph{PhysicComponent} 
     dove vengono quindi fatti tutti i calcoli \footnote{\url{https://github.com/TheDarkRuler/OOP22-SMOL/blob/757228125cb2531fccca35b35f7645ceba9d5ae9/src/main/java/it/unibo/smol/model/impl/physicscomponent/WeaponPhysicsComponent.java#L46-L51}} 
-    per trovare la effettiva posizione in cui il martello colpirà al rilascio \ref{img:MouseInputs}. Sempre al rilascio del tasto sinistro del mouse, 
+    per trovare la effettiva posizione in cui il martello colpirà al rilascio\ref{img:MouseInputs}. Sempre al rilascio del tasto sinistro del mouse, 
     per bloccare gli input da tastiera e da mouse inizialmente ho pensato di utilizzare dei metodi, e quindi campi, statici 
     accessibili sia da \emph{MouseInputs} che da \emph{KeyInputs}, infine poi, a seguito di diverse migliorie 
     ho optato per includere un campo di tipo \emph{KeyInputs} all'interno di \emph{MouseInputs} così da poter notificare il blocco 
@@ -467,7 +439,7 @@ Il GameLoop è stato realizzato ispirandosi al capitolo "GameLoop" presente in \
 %AUTOVALUTAZIONE_E_LAVORI_FUTURI
 \section{Autovalutazione e lavori futuri}
 \subsection*{Ettore Farinelli}
-roba di Ettore
+Sono deicsamente soddisfatto del risultato ottenuto dal nostro lavor
 \subsection*{Marco Galeri}
 Ho apprezzato molto la possibilità di realizzare un simile progetto, essendo la prima volta in cui ci cimentavamo in un progetto di questa portata le difficoltà non sono mancate ma siamo riusciti comunque a consegnare un programma di cui mi ritengo abbastanza soddisfatto.
  Questo progetto mi ha fatto realizzare quanto non sia scontato un buon lavoro di squadra.
@@ -518,7 +490,4 @@ I comandi di gioco sono i seguenti:
     \end{itemize}
     \item Abbiamo preso ispirazione dal seguente sito per fare le animazioni dei bottoni nel \emph{MenuState} e \emph{GameOver}: \url{https://genuinecoder.com/javafx-animation-tutorial/}
 \end{itemize}
-\end{document}
-
-
 \end{document}
