@@ -11,13 +11,13 @@ import javafx.geometry.Point2D;
 /**
  * test for the hitboxes.
  */
-public class HitBoxTest {
+class HitBoxTest {
 
     /**
      * Tests if the method isColliding works for between Rect-Circle.
      */
     @Test
-    public void collisionEventRectCircle() {
+    void collisionEventRectCircle() {
         assertTrue(new RectangleHB(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT, new Point2D(0, 0))
             .isColliding(new CircleHB(new Point2D(0, 0), Constant.WEAPON_RADIUS)));
     }
@@ -26,7 +26,7 @@ public class HitBoxTest {
      * Tests if the method isColliding works for between Rect-Rect.
      */
     @Test
-    public void collisionEventRectRect() {
+    void collisionEventRectRect() {
         assertTrue(new RectangleHB(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT, new Point2D(0, 0))
             .isColliding(new RectangleHB(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT, new Point2D(0, 0))));
     }
@@ -35,7 +35,7 @@ public class HitBoxTest {
      * Tests if the method isColliding works for between Circle-Rect.
      */
     @Test
-    public void collisionEventCircleRect() {
+    void collisionEventCircleRect() {
         assertTrue(new CircleHB(new Point2D(0, 0), Constant.WEAPON_RADIUS)
             .isColliding(new RectangleHB(Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT, new Point2D(0, 0))));
     }
@@ -44,7 +44,7 @@ public class HitBoxTest {
      * Tests if the method isColliding works for between Circle-Circle.
      */
     @Test
-    public void collisionEventCircleCircle() {
+    void collisionEventCircleCircle() {
         assertTrue(new CircleHB(new Point2D(0, 0), Constant.WEAPON_RADIUS)
             .isColliding(new CircleHB(new Point2D(0, 0), Constant.WEAPON_RADIUS)));
     }

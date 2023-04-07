@@ -14,7 +14,7 @@ import javafx.scene.input.KeyEvent;
 /**
  * tests for the keyInputs.
  */
-public class KeyInputsTest {
+class KeyInputsTest {
 
     private KeyInputs keyInputs;
 
@@ -22,7 +22,7 @@ public class KeyInputsTest {
      * creates the keyInput before each test.
      */
     @BeforeEach
-    public void initKeyInputs() {
+    void initKeyInputs() {
         this.keyInputs = new KeyInputs();
     }
 
@@ -30,7 +30,7 @@ public class KeyInputsTest {
      * tests if the setMovement method actually insert a direction in the queue of movements.
      */
     @Test
-    public void testKeyPressed() {
+    void testKeyPressed() {
         keyInputs.setMovement(Directions.UP);
         assertEquals(Directions.UP, keyInputs.getMovement().orElseThrow());
     }
@@ -39,7 +39,7 @@ public class KeyInputsTest {
      * tests if the player actually gets stunned.
      */
     @Test
-    public void testPlayerStunned() {
+    void testPlayerStunned() {
         final var up = new KeyEvent(KeyEvent.KEY_PRESSED, null, null, KeyCode.W,
             false, false, false, false);
         keyInputs.setPlayerStunned(true);
@@ -53,7 +53,7 @@ public class KeyInputsTest {
      * tests if the player stoppes when a key is released.
      */
     @Test
-    public void testKeyReleased() {
+    void testKeyReleased() {
         final var upReleased = new KeyEvent(KeyEvent.KEY_RELEASED, null, null, KeyCode.W,
             false, false, false, false);
         keyInputs.handle(upReleased);

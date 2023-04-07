@@ -15,7 +15,7 @@ import javafx.geometry.Point2D;
 /**
  * tests the Enemy Inputs class.
  */
-public class EnemyInputTest {
+class EnemyInputTest {
 
     private static final int MIN_TIMES_ENEMY_CAN_SPAWN = 2;
     private EnemyInput enemyInput;
@@ -24,7 +24,7 @@ public class EnemyInputTest {
      * creates the enemyInput for each test.
      */
     @BeforeEach
-    public void initEnemyInput() {
+    void initEnemyInput() {
         enemyInput = new EnemyInput(MIN_TIMES_ENEMY_CAN_SPAWN, Optional.of(new WorldImpl()), new Point2D(0, 0), 0);
     }
 
@@ -32,7 +32,7 @@ public class EnemyInputTest {
      * Tests  if the enemy spawns status is correct.
      */
     @Test
-    public void enemySpawnStatus() {
+    void enemySpawnStatus() {
         assertTrue(enemyInput.isEnemyUnder());
         assertFalse(enemyInput.isEnemyOnPlant());
         enemyInput.setEnemyPosition(new Point2D(1, 1));
@@ -43,7 +43,7 @@ public class EnemyInputTest {
      * tests if the variable enemyTimesSpawn increase correctly.
      */
     @Test
-    public void enemyGetsUp() {
+    void enemyGetsUp() {
         enemyInput.enemyIsUp();
         assertEquals(1, enemyInput.getEnemyTimesSpawn());
     }
