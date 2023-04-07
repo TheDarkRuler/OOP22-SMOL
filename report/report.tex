@@ -206,6 +206,14 @@ che sarà possibilmente implementata in futuro.
 \includegraphics[scale = 0.5]{img/HitBox.PNG}
 \caption{Schema UML rappresentante l'utilizzo del \emph{Visitor Pattern} per il controllo delle collisioni tra diverse forme.}
 \end{figure}
+
+\paragraph{Problema}
+    L'oggetto su cui viene chiamato il metodo \textsc{isColliding} ha bisogno di conoscere di che tipo di HitBox è il parametro 
+    che gli viene passato.
+\paragraph{Soluzione}
+    Per la soluzione di questo problema ho deciso di implementare il pattern \emph{Visitor} permettendo così di facilitare una possibile 
+    implementazione futura di una nuova HitBox di forma diversa, in quanto il controllo della collisione viene affidato all'oggetto 
+    che viene passato alla chiamata del metodo, evitando cosi controlli manuali riguardanti lo stato del parametro.
 \subsection*{Marco Galeri}
 
 \subsubsection{Gestione delle Entità}
@@ -304,7 +312,7 @@ Per effettuare i test abbiamo utilizzato la libreria JUnit 5.9.1
 \begin{itemize}
     \item \textbf{HitBoxTest}: in questa classe si testano le collisioni tra le diverse forme presenti nel gioco assicurandosi il corretto funzionamento.
     
-    \item \textbf{EnemyInputTest}:
+    \item \textbf{EnemyInputTest}: 
     
     \item \textbf{KeyInputsTest}:
     
