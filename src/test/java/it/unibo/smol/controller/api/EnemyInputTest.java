@@ -21,18 +21,11 @@ class EnemyInputTest {
     private EnemyInput enemyInput;
 
     /**
-     * creates the enemyInput for each test.
-     */
-    @BeforeEach
-    void initEnemyInput() {
-        enemyInput = new EnemyInput(MIN_TIMES_ENEMY_CAN_SPAWN, Optional.of(new WorldImpl()), new Point2D(0, 0), 0);
-    }
-
-    /**
      * Tests  if the enemy spawns status is correct.
      */
     @Test
     void enemySpawnStatus() {
+        enemyInput = new EnemyInput(MIN_TIMES_ENEMY_CAN_SPAWN, Optional.of(new WorldImpl()), new Point2D(0, 0), 0);
         assertTrue(enemyInput.isEnemyUnder());
         assertFalse(enemyInput.isEnemyOnPlant());
         enemyInput.setEnemyPosition(new Point2D(1, 1));
@@ -44,6 +37,7 @@ class EnemyInputTest {
      */
     @Test
     void enemyGetsUp() {
+        enemyInput = new EnemyInput(MIN_TIMES_ENEMY_CAN_SPAWN, Optional.of(new WorldImpl()), new Point2D(0, 0), 0);
         enemyInput.enemyIsUp();
         assertEquals(1, enemyInput.getEnemyTimesSpawn());
     }

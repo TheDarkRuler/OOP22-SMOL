@@ -20,18 +20,11 @@ class MouseInputsTest {
     private MouseInputs mouseInputs;
 
     /**
-     * creates new MouseInput everytime.
-     */
-    @BeforeEach
-    void initMouseInput() {
-        this.mouseInputs = new MouseInputs(Optional.of(new KeyInputs()));
-    }
-
-    /**
      * tests if the variable cursorOnScreen sets true when the cursor enter the screen.
      */
     @Test
     void cursorOnScreen() {
+        this.mouseInputs = new MouseInputs(Optional.of(new KeyInputs()));
         assertFalse(mouseInputs.isCursorOnScreen());
         final var cursorOnScreen = new MouseEvent(MouseEvent.MOUSE_ENTERED, 0, 0, 0, 0, null,
             0, false, false, false, false, false,
@@ -46,6 +39,7 @@ class MouseInputsTest {
      */
     @Test
     void mouseSmashed() {
+        this.mouseInputs = new MouseInputs(Optional.of(new KeyInputs()));
         final var weaponSmash = new MouseEvent(MouseEvent.MOUSE_RELEASED, 0, 0, 0, 0, null,
             0, false, false, false, false, false,
             false, false, false, false, false,
@@ -67,6 +61,7 @@ class MouseInputsTest {
      */
     @Test
     void weaponExpansion() {
+        this.mouseInputs = new MouseInputs(Optional.of(new KeyInputs()));
         mouseInputs.setWeaponRange();
         assertEquals(Constant.DEF_WEAPON_RANGE, mouseInputs.getWeaponRange());
     }

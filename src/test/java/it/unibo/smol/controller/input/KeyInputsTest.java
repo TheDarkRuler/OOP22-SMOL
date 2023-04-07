@@ -19,18 +19,11 @@ class KeyInputsTest {
     private KeyInputs keyInputs;
 
     /**
-     * creates the keyInput before each test.
-     */
-    @BeforeEach
-    void initKeyInputs() {
-        this.keyInputs = new KeyInputs();
-    }
-
-    /**
      * tests if the setMovement method actually insert a direction in the queue of movements.
      */
     @Test
     void testKeyPressed() {
+        this.keyInputs = new KeyInputs();
         keyInputs.setMovement(Directions.UP);
         assertEquals(Directions.UP, keyInputs.getMovement().orElseThrow());
     }
@@ -40,6 +33,7 @@ class KeyInputsTest {
      */
     @Test
     void testPlayerStunned() {
+        this.keyInputs = new KeyInputs();
         final var up = new KeyEvent(KeyEvent.KEY_PRESSED, null, null, KeyCode.W,
             false, false, false, false);
         keyInputs.setPlayerStunned(true);
@@ -54,6 +48,7 @@ class KeyInputsTest {
      */
     @Test
     void testKeyReleased() {
+        this.keyInputs = new KeyInputs();
         final var upReleased = new KeyEvent(KeyEvent.KEY_RELEASED, null, null, KeyCode.W,
             false, false, false, false);
         keyInputs.handle(upReleased);
