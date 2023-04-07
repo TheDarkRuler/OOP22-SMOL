@@ -15,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 /**
  * tests the Mouse inputs class.
  */
-public class MouseInputsTest {
+class MouseInputsTest {
 
     private MouseInputs mouseInputs;
 
@@ -23,7 +23,7 @@ public class MouseInputsTest {
      * creates new MouseInput everytime.
      */
     @BeforeEach
-    public void initMouseInput() {
+    void initMouseInput() {
         this.mouseInputs = new MouseInputs(Optional.of(new KeyInputs()));
     }
 
@@ -31,7 +31,7 @@ public class MouseInputsTest {
      * tests if the variable cursorOnScreen sets true when the cursor enter the screen.
      */
     @Test
-    public void cursorOnScreen() {
+    void cursorOnScreen() {
         assertFalse(mouseInputs.isCursorOnScreen());
         final var cursorOnScreen = new MouseEvent(MouseEvent.MOUSE_ENTERED, 0, 0, 0, 0, null,
             0, false, false, false, false, false,
@@ -45,7 +45,7 @@ public class MouseInputsTest {
      * tests if weaponSmashed is false before the weapon is smashing.
      */
     @Test
-    public void mouseSmashed() {
+    void mouseSmashed() {
         final var weaponSmash = new MouseEvent(MouseEvent.MOUSE_RELEASED, 0, 0, 0, 0, null,
             0, false, false, false, false, false,
             false, false, false, false, false,
@@ -66,7 +66,7 @@ public class MouseInputsTest {
      * tests if the weapon expands correctly.
      */
     @Test
-    public void weaponExpansion() {
+    void weaponExpansion() {
         mouseInputs.setWeaponRange();
         assertEquals(Constant.DEF_WEAPON_RANGE, mouseInputs.getWeaponRange());
     }
