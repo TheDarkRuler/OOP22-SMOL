@@ -312,11 +312,14 @@ Per effettuare i test abbiamo utilizzato la libreria JUnit 5.9.1
 \begin{itemize}
     \item \textbf{HitBoxTest}: in questa classe si testano le collisioni tra le diverse forme presenti nel gioco assicurandosi il corretto funzionamento.
     
-    \item \textbf{EnemyInputTest}: 
+    \item \textbf{EnemyInputTest}: in questa classe si verifica se, alla creazione di un EnemyInput, le variabili vengono correttamente 
+        inizializzate e se \emph{EnemyTimesSpawn} incrementa.
     
-    \item \textbf{KeyInputsTest}:
+    \item \textbf{KeyInputsTest}: in questa classe si controlla che, quando viene premuto o rilasciato un tasto, vengono correttamente 
+        inserite le \emph{Direction} nella coda assicurandosi invece che non vengano aggiunti elementi in caso il player risulti bloccato. 
     
-    \item \textbf{MouseInputsTest}:
+    \item \textbf{MouseInputsTest}: in questa classe si controlla che tutte le variabili della classe \emph{MouseInputs}  
+        assumono correttamente determinati valori quando necessario.
     
     \item \textbf{GameStateTest}: in questa classe si testa il sistema di punteggio, che dovrà aumentare e diminuire come previsto senza mai scendere sotto lo zero. Inoltre verrano testate l'inizializzazione del gioco, assicurandosi della creazione dei corretti elementi e la condizione di Game Over.
     
@@ -337,7 +340,9 @@ Dunque è stato fatto un UML generale per avere in mente il funzionamento del gi
 Invece per quanto riguarda il workflow è stata adottata la metodologia di DVCS semplice, spiegata a lezione, con pull e push.
 
 \subsection*{Ettore Farinelli}
-roba di Ettore
+\begin{itemize}
+    \item 
+\end{itemize}
 \subsection*{Marco Galeri}
 
 Mi sono occupato di:
