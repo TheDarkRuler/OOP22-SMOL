@@ -20,6 +20,9 @@ public class EnemyInputTest {
     private static final int MIN_TIMES_ENEMY_CAN_SPAWN = 2;
     private EnemyInput enemyInput;
 
+    /**
+     * creates the enemyInput for each test.
+     */
     @BeforeEach
     public void initEnemyInput() {
         enemyInput = new EnemyInput(MIN_TIMES_ENEMY_CAN_SPAWN, Optional.of(new WorldImpl()), new Point2D(0, 0), 0);
