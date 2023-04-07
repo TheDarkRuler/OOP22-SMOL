@@ -12,7 +12,7 @@ import javafx.geometry.Point2D;
  * test for the hitboxes.
  */
 public class HitBoxTest {
-    
+
     /**
      * Tests if the method isColliding works for between Rect-Circle.
      */

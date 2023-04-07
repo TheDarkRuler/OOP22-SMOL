@@ -26,7 +26,7 @@ public class MouseInputsTest {
     public void initMouseInput() {
         this.mouseInputs = new MouseInputs(Optional.of(new KeyInputs()));
     }
-    
+
     /**
      * tests if the variable cursorOnScreen sets true when the cursor enter the screen.
      */
@@ -60,7 +60,6 @@ public class MouseInputsTest {
         mouseInputs.handle(weaponIsSmashing);
         mouseInputs.handle(weaponSmash);
         assertTrue(mouseInputs.isWeaponSmashed());
-        
     }
 
     /**

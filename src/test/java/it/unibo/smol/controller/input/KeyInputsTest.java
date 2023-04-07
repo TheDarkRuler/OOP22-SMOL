@@ -12,12 +12,15 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
- * tests for the keyInputs
+ * tests for the keyInputs.
  */
 public class KeyInputsTest {
 
     private KeyInputs keyInputs;
 
+    /**
+     * creates the keyInput before each test.
+     */
     @BeforeEach
     public void initKeyInputs() {
         this.keyInputs = new KeyInputs();
@@ -56,5 +59,5 @@ public class KeyInputsTest {
         keyInputs.handle(upReleased);
         assertEquals(Directions.STAY_Y, keyInputs.getMovement().orElseThrow());
     }
-    
+
 }
