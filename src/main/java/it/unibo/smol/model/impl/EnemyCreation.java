@@ -30,7 +30,7 @@ public class EnemyCreation {
     private int maxTimeEnemySpawn;
 
     /**
-     * Constructor.
+     * Constructor for EnemyCreation.
      * @param gameState
      */
     public EnemyCreation(final Optional<GameState> gameState) {
@@ -63,7 +63,6 @@ public class EnemyCreation {
      * @param enemyName : the name of the enemy
      */
     private void spawnEntity(final String enemyName) {
-        //System.out.println(enemyName);
         switch (enemyName) {
             case "Mole":
                 gameState.getWorld().orElseThrow()

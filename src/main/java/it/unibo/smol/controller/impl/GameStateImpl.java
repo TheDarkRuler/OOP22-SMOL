@@ -29,7 +29,7 @@ public class GameStateImpl implements GameState {
     private String folderName;
 
     /**
-     * Constructor.
+     * Constructor for GameState. 
      * @param world
      */
     public GameStateImpl(final World world) {

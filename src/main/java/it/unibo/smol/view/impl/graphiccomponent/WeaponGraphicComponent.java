@@ -7,8 +7,6 @@ import it.unibo.smol.view.api.GraphicComponent;
  */
 public class WeaponGraphicComponent extends GraphicComponent {
 
-    //private boolean attacking;
-
     /**
      * Constructors inherited by the super-class {@link GraphicComponent}.
      * @param width
