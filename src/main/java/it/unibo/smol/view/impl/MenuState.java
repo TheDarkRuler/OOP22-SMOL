@@ -149,7 +149,6 @@ public final class MenuState implements WindowState {
         menuButton.getItems().addAll(pixel, vectorial);
         menuButton.getItems().forEach(item -> {
             setDropDownImage(item);
-            //TODO damoglie le immagini
             item.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(final ActionEvent event) {

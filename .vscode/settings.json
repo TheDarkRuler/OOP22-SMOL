@@ -2,5 +2,6 @@
     "java.compile.nullAnalysis.mode": "automatic",
     "java.project.sourcePaths": [
         "src/test"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
