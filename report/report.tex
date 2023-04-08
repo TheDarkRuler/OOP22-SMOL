@@ -304,6 +304,18 @@ di ogni stato all'interno della sua classe. In questo modo, si può garantire ch
   senza dover scrivere codice ripetitivo o complicato. 
  Inoltre, questo approccio favorisce la modularità del codice, rendendolo più facile da mantenere e riutilizzare.
 
+\subsubsection*{Mondo di gioco}
+\begin{figure}[h]
+\centering{}
+\includegraphics[width=0.50\textwidth]{img/GameWorld.png}
+\caption{Schema UML della gestione del funzionamento del mondo di gioco}
+\end{figure}
+ \paragraph*{Problema} serve un contenitore per le entità e le componenti del gioco, che possa aggiornare lo stato di questi ultimi.
+ \paragraph*{Soluzione} la classe \emph{World} fa da contenitore, in particolare ha il compito di dividere i tipi di entità in base al \emph{type} e di aggiornare lo stato delle entità.
+ \begin{itemize}
+    \item Per ritornare le entità usa dei semplici getter che cercano di ritornare delle copie dove è possibile.
+    \item Per aggiornare le entità è stato usato una sorta di Iterator Pattern in cui tutte le entità vengono iterate con un \emph{forEach} e aggiornate con il loro metodo interno \emph{update()} per poi essere passate al GameLoop attraverso il GameState: il GameLoop andrà ad aggiornare lo stato delle entità "FPS"\footnote[2]{FPS è una costante nel GameLoop che servirà per decidere quante volte si aggiorna al secondo il gioco ed è anche un indicatore classico nei videogiochi che indica i fotogrammi per secondo} volte al secondo.
+ \end{itemize}
 
 %------------------------------SVILUPPO------------------------------
 \chapter{Sviluppo}
