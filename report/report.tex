@@ -86,14 +86,34 @@ che sarà possibilmente implementata in futuro.
 
 %ARCHITETTURA
 \section{Architettura}
-SMOL è stato progettato seguendo lo schema architetturale del \textsc{MVC} applicando però la struttura del \textsc{ECS} per la gestione 
-delle entità.
+SMOL è stato progettato seguendo lo schema architetturale del \textsc{MVC} applicando però la struttura dell'\textsc{EC} 
+(\emph{Entity Component}) per l'organizzazione dell'entità.
+\\
+L'utilizzo di component associati alle entità, permette di semplificare e suddividere quest'ultime permettendo di aggevolarne 
+la gestione utilizzando un solo metodo di \emph{update} per aggiornare tutti i component semplificandone la gestione. 
+Applicando l'\textsc{EC} al \emph{Model} dell'applicazione, si avrà che ogni elemento risulterà essere un entità che fungerà 
+da "metodo di comunicazione" per i propri component permettendo ad essi di comunicare tra loro indirettamente, evitando così ripetizione 
+di codice e permettendo di aggiungere facilmente qualsiasi tipo di oggetto al gioco facendolo passare come entità e ponendo 
+opzionali i vari component.
+\\
+Per quanto riguarda il patter architetturale \emph{Model-View-Controller}, le varie parti sono già visivamente suddivise 
+in diverse cartelle a livello di codice, ma vengono principalmente rappresentate da:
+\begin{itemize}
+    \item \textbf{Model:} L'interfaccia \emph{World} assume il principale ruolo di model all'interno del programma 
+        contenendo la maggior parte degli oggetti generali dell'applicazione.
+    \item \textbf{View:} Questo ruolo è principalmente occupato dall'interfaccia WindowState che viene implementata 
+        da tutte le diverse scene del gioco, inoltre risulta avere un ruolo molto importante anche \emph{GraphicsDraw} e 
+        \emph{LoadImgs} che hanno il ruolo di contenere tutte le immagini e successivamente disegnarle.
+    \item \textbf{Controller:} A ricoprire questo ruolo troviamo l'interfaccia \emph{GameState}.
+\end{itemize}
+Le diverse modalità che permettono di comunicare alle varie parti che caratterizzano il modello \textsc{MVC} sono 
+rappresentati qui sotto\ref{img:ArchitecturalUML}.
 
 \begin{figure}[h]
 \centering{}
-%\includegraphics[width=\textwidth]{img/arch}
+\includegraphics[width=\textwidth]{img/ArchitecturalUML.png}
 \caption{Schema UML raffigurante l'architettura di SMOL.}
-\label{img:goodarch}
+\label{img:ArchitecturalUML}
 \end{figure}
 
 %DESIGN DETTAGLIATO
