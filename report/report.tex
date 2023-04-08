@@ -250,7 +250,39 @@ delle entità.
 L'utilizzo di uno \textit{Strategy pattern} consente di isolare le diverse implementazioni di \textsc{InputComponent} randendole facilmente intercambiali e propense ad aggiunte future.
     
 \subsection*{Giovanni Paradisi}
-roba di Giovanni
+
+\subsubsection{Gestione della grafica delle entità}
+\begin{figure}[H]
+\centering{}
+\includegraphics[width=\textwidth,keepaspectratio]{img/GraphicComponentUML.png}
+\caption{Rappresentazione UML dei GraphicComponent}
+\end{figure}
+
+\paragraph{Problema}
+\begin{itemize}
+    \item Gestire le diverse immagini delle entità in base al loro comportamento senza dover riscrivere più volte il codice in comune.
+\end{itemize}
+\paragraph{Soluzione}
+Grazie all'uso del \textit{Template method pattern} si definiscono dei metodi template
+come \texttt{setAnimation()} e \texttt{updateAnimation()} nella classe astratta e implementati nelle sottoclassi in modo da soddisfare le singole esigenze, mantenendo il codice privo di ripezioni.
+
+\subsubsection{Generazione delle Entità Ostili}
+
+\begin{figure}[H]
+\centering{}
+\includegraphics[width=\textwidth,keepaspectratio]{img/EnemyCreationUML.png}
+\caption{Rappresentazione UML di EnemyCreation}
+\end{figure}
+
+\paragraph{Problema}
+\begin{itemize}
+    \item Gestire la generazione continua e progressiva di entità nemiche.
+\end{itemize}
+
+\paragraph{Soluzione}
+Viene creato un timer con un intervallo di tempo (tmin e tmax) tra i quali estrae il delay per la creazione delle entità, e una mappa che associa ad ogni nemico una percentuale di spawn.
+Con l`avanzamento del punteggio di gioco cambiano sia il delay che la percentuale dell'entità più complesse aumentando così la difficoltà di gioco in modo progressivo.
+
 \subsection*{Mounir Samite}
 \subsubsection*{Gestione delle finestre}
 \begin{figure}[h]
