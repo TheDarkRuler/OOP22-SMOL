@@ -54,7 +54,7 @@ o in alternativa si può direttamente avviare il gioco con il file .jar messo a 
 
 ## Istruzioni
 
-All’avvio dell’applicazione l’utente si ritrover`a nel menu di gioco composto
+All’avvio dell’applicazione l’utente si ritroverà nel menu di gioco composto
 da diversi bottoni:
 ```
 - Start: per avviare la partita.
@@ -73,6 +73,6 @@ I comandi di gioco sono i seguenti:
 - D: Movimento verso destra
 - Movimento del mouse: Spostamento del mirino.
 - LMB (tasto sinistro mouse): Colpo del martello (a seguito di una
-pressione prolungata di questo tasto il raggio di azione dell’arma sar`a
+pressione prolungata di questo tasto il raggio di azione dell’arma sarà
 maggiore).
 ```
