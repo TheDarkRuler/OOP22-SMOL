@@ -52,4 +52,27 @@ bradlew.bat run
 
 o in alternativa si può direttamente avviare il gioco con il file .jar messo a disposizione
 
-## Istruzioni 
+## Istruzioni
+
+All’avvio dell’applicazione l’utente si ritrover`a nel menu di gioco composto
+da diversi bottoni:
+```
+- Start: per avviare la partita.
+- Instructions: per visionare le istruzioni di gioco in un’altra schermata
+(compresa di bottone menu per tornare nella scena iniziale).
+- Quit: per chiudere la finistra.
+- ListBox: per la scelta della grafica di gioco.
+```
+
+I comandi di gioco sono i seguenti:
+```
+- F11: Attiva/disattiva la visuale a tutto schermo.
+- W: Movimento verso l’alto.
+- A: Movimento verso sinistra.
+- S: Movimento verso il basso.
+- D: Movimento verso destra
+- Movimento del mouse: Spostamento del mirino.
+- LMB (tasto sinistro mouse): Colpo del martello (a seguito di una
+pressione prolungata di questo tasto il raggio di azione dell’arma sar`a
+maggiore).
+```
