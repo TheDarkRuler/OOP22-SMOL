@@ -98,7 +98,7 @@ public class CircleHB implements HitBox {
     }
 
     /**
-     * generla Colliding check.
+     * generic Colliding check.
      * @param hitBox
      * @return if the given shape collides with this shape
      */

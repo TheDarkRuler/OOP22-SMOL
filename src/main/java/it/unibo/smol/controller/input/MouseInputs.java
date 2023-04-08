@@ -196,7 +196,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
     }
 
     /**
-     * checks if the weapon is max range and if not increase the range og hit.
+     * checks if the weapon is max range and if not increase the range of hit.
      */
     public void setWeaponRange() {
         if (Constant.DEF_WEAPON_RANGE + weaponRange <= Constant.WEAPON_MAX_RANGE) {
