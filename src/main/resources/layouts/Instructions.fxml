@@ -13,141 +13,138 @@
 <?import javafx.geometry.Insets?>
 
 <BorderPane fx:id="box" stylesheets="css/Instructions.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-
     <top>
-        <HBox spacing="10" alignment="CENTER">
+        <HBox id="hboxtitle" alignment="CENTER">
             <Text id="title">INSTRUCTIONS</Text>
         </HBox>
     </top>
     <left>
-        <VBox spacing="10" alignment="CENTER">
-        <padding>
-            <Insets top="50" right="10" bottom="10" left="50"/>
-        </padding>
+        <VBox id="vboxleft" alignment="TOP_CENTER">
             <children>
-                <Text>MOVEMENT:</Text>
-                <Text>UP</Text>
-                <ImageView>
+                <Text id="movetitle">MOVEMENT:</Text>
+                <Text id="up">UP</Text>
+                <ImageView id="WasdImage">
                     <image>
-                        <Image url="images/pixel_moles/Wasd.gif"/>
+                        <Image url="images/common/Wasd.gif"/>
                     </image>
                 </ImageView>
-                <Text id="title">DOWN</Text>
-                <ImageView>
+                <Text id="down">DOWN</Text>
+                <ImageView id="waSdImage">
                     <image>
-                        <Image url="images/pixel_moles/wa_Sd.gif"/>
+                        <Image url="images/common/wa_Sd.gif"/>
                     </image>
                 </ImageView>
-                 <Text id="title">LEFT</Text>
-                <ImageView>
+                <Text id="left">LEFT</Text>
+                <ImageView id="wAsdImage">
                     <image>
-                        <Image url="images/pixel_moles/w_Asd.gif"/>
+                        <Image url="images/common/w_Asd.gif"/>
                     </image>
                 </ImageView>
-                 <Text id="title">RIGHT</Text>
-                <ImageView>
+                <Text id="right">RIGHT</Text>
+                <ImageView id="wasDImage">
                     <image>
-                        <Image url="images/pixel_moles/was_D.gif"/>
+                        <Image url="images/common/was_D.gif"/>
                     </image>
                 </ImageView>
             </children>
         </VBox>
     </left>
     <center>
-        <VBox spacing="30" alignment="TOP_LEFT">
-        <padding>
-            <Insets top="55" right="10" bottom="10" left="90"/>
-        </padding>
-            <children>
-                <Text>HIT:</Text>
-                <Text>Move the hammer sight with your mouse and left click for hit</Text>
-                <ImageView>
-                    <image>
-                        <Image url="images/pixel_moles/weapon_target.png"/>
-                    </image>
-                </ImageView>
-                <Text id="title">Keep it pressed for expand the range of the hammer</Text>
-                <ImageView>
-                    <image>
-                        <Image url="images/pixel_moles/instructions_sight1.png"/>
-                    </image>
-                </ImageView>
-                <ImageView>
-                    <image>
-                        <Image url="images/pixel_moles/instructions_sight2.png"/>
-                    </image>
-                </ImageView>
-            </children>
-        </VBox>
+        <BorderPane id="borderpane">
+            <left>
+                <VBox id="vboxcenter" alignment="TOP_CENTER">
+                    <children>
+                        <Text id="hititle">HIT:</Text>
+                        <Text id="hit1line">Move the hammer sight with your mouse</Text> 
+                        <Text id="hit2line">and left click to hit</Text>
+                        <ImageView id="target">
+                            <image>
+                                <Image url="images/pixel_moles/weapon_target.png"/>
+                            </image>
+                        </ImageView>
+                        <Text id="range1">Keep it pressed to expand </Text>
+                        <Text id="range2">the range of the hammer</Text>
+                        <ImageView id="target1">
+                            <image>
+                                <Image url="images/common/instructions_sight1.png"/>
+                            </image>
+                        </ImageView>
+                        <ImageView id="target2">
+                            <image>
+                                <Image url="images/common/instructions_sight2.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </VBox>
+            </left>
+            <right>
+                <VBox id="boxenemies" alignment="TOP_CENTER">
+                    <children>
+                        <Text id="enemiestitle">ENEMIES:</Text>
+                        <Text id="tmole">Basic mole</Text>
+                        <ImageView id="basicmole">
+                            <image>
+                                <Image url="images/pixel_moles/mole1.gif"/>
+                            </image>
+                        </ImageView>
+                        <Text id="thmole">Helmet mole (takes two hit to kill)</Text>
+                        <ImageView id="hmole">
+                            <image>
+                                <Image url="images/pixel_moles/Helmet_mole.gif"/>
+                            </image>
+                        </ImageView>
+                        <Text id="tamole">Angry mole (move faster)</Text>
+                        <ImageView id="amole">
+                            <image>
+                                <Image url="images/pixel_moles/Angry_mole.gif"/>
+                            </image>
+                        </ImageView>
+                        <Text id="tbmole">Bomb mole (stuns the player)</Text>
+                        <ImageView id="bmole">
+                            <image>
+                                <Image url="images/pixel_moles/Bomb_mole.gif"/>
+                            </image>
+                        </ImageView>
+                        <Text id="tground">Each mole can not be hitted when underground</Text>
+                        <ImageView id="ground">
+                            <image>
+                                <Image url="images/pixel_moles/Ground.gif"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </VBox>
+            </right>
+        </BorderPane>
     </center>
     <right>
-        <GridPane>
-            <VBox spacing="30" alignment="TOP_LEFT">
-            <padding>
-                <Insets top="57" right="600" bottom="10" left="10"/>
-            </padding>
+        <VBox id="boxlife" alignment="TOP_CENTER">
             <children>
-                <Text>ENEMIES:</Text>
-                <Text>Basic mole</Text>
-                <ImageView>
-                    <image>
-                        <Image url="images/pixel_moles/mole1.gif"/>
-                    </image>
-                </ImageView>
-                <Text id="title">Helmet mole (two hit for kill)</Text>
-                <ImageView>
-                    <image>
-                        <Image url="images/pixel_moles/Helmet_mole.gif"/>
-                    </image>
-                </ImageView>
-                <Text id="title">Angry mole (move faster in the plants)</Text>
-                <ImageView>
-                    <image>
-                        <Image url="images/pixel_moles/Angry_mole.gif"/>
-                    </image>
-                </ImageView>
-                <Text id="title">Bomb mole (stun player for some seconds)</Text>
-                <ImageView>
-                    <image>
-                        <Image url="images/pixel_moles/Bomb_mole.gif"/>
-                    </image>
-                </ImageView>
-            </children>
-            </VBox>
-            <VBox spacing="30" alignment="TOP_CENTER">
-            <padding>
-                <Insets top="60" right="10" bottom="10" left="100"/>
-            </padding>
-               <children>
-                    <Text>LIFE:</Text>
-                    <Text>Defend the plants from moles</Text>
-                    <ImageView>
+                <Text id="healthtitle">HEALTH:</Text>
+                <Text id="tplants">Defend the plants from moles</Text>
+                <ImageView id="normalplants">
                     <image>
                         <Image url="images/pixel_moles/Life_plants.png"/>
                     </image>
-                    </ImageView>
-                    <Text>Moles eat the plants when they are on them (also the player remove life of plants)</Text>
-                    <ImageView>
+                </ImageView>
+                <Text id="thealth1">Moles eat the plants when they are on them</Text>
+                <Text id="thealth2">(also the player does damage)</Text>
+                <ImageView id="choppedplants">
                     <image>
                         <Image url="images/pixel_moles/Life_plants_chopped.png"/>
                     </image>
-                    </ImageView>
-                    <Text>Pay attention to the health bar</Text>
-                    <ImageView>
+                </ImageView>
+                <Text id="tbar">Pay attention to the health bar</Text>
+                <ImageView id="health">
                     <image>
-                        <Image url="images/pixel_moles/healthBar_instr.png"/>
+                        <Image url="images/common/healthBar_instr.png"/>
                     </image>
-                    </ImageView>
-               </children>
-            </VBox>
-        </GridPane>
+                </ImageView>
+            </children>
+        </VBox>
     </right>
     <bottom>
-        <VBox spacing="10" alignment="CENTER">
-        <padding>
-            <Insets top="10" right="10" bottom="50" left="10"/>
-        </padding>
+        <HBox id="boxbutton" alignment="TOP_CENTER">
              <Button fx:id="menu" text="MENU"/>
-        </VBox>
+        </HBox>
     </bottom>
 </BorderPane>

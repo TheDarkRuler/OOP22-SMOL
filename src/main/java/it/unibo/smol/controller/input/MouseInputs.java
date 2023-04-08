@@ -46,7 +46,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         this.weaponLocation = new Point2D(GameMap.WIDTH / 2, GameMap.HEIGHT / 2);
         this.keyInputs = keyInputs.orElseThrow();
         this.keyInputs.setPlayerFreezed(playerFreeze);
-        this.keyInputs.serPlayerStunned(playerStunned);
+        this.keyInputs.setPlayerStunned(playerStunned);
     }
 
     /**
@@ -158,7 +158,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         keyInputs.setMovement(Directions.STAY_X);
         keyInputs.setMovement(Directions.STAY_Y);
         this.playerStunned = true;
-        this.keyInputs.serPlayerStunned(playerStunned);
+        this.keyInputs.setPlayerStunned(playerStunned);
     }
 
     /**
@@ -178,7 +178,7 @@ public class MouseInputs implements EventHandler<MouseEvent> {
         keyInputs.setMovement(Directions.STAY_X);
         keyInputs.setMovement(Directions.STAY_Y);
         this.playerStunned = false;
-        this.keyInputs.serPlayerStunned(playerStunned);
+        this.keyInputs.setPlayerStunned(playerStunned);
         this.weaponSmashed = false;
         this.weaponIsSmashing = false;
     }
