@@ -34,7 +34,7 @@ Se invece usi Windows
 
 ```ps
 cd "OOP22-SMOL"
-bradlew.bat build
+gradlew.bat build
 ```
 
 ## Run
@@ -47,7 +47,7 @@ cd "OOP22-SMOL"
 - Su Windows il comando:
 ```ps
 cd "OOP22-SMOL"
-bradlew.bat run
+gradlew.bat run
 ```
 
 o in alternativa si può direttamente avviare il gioco con il file .jar messo a disposizione
