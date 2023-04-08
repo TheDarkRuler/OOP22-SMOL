@@ -105,7 +105,7 @@
                                 <Image url="images/pixel_moles/Bomb_mole.gif"/>
                             </image>
                         </ImageView>
-                        <Text id="tground">Each mole can not be hitted when underground</Text>
+                        <Text id="tground">Each mole can not be hit when underground</Text>
                         <ImageView id="ground">
                             <image>
                                 <Image url="images/pixel_moles/Ground.gif"/>
